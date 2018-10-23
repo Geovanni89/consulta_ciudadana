@@ -23,6 +23,7 @@ class sitio extends CI_Controller {
     {
         parent::__construct();
         $this->load->helper('url');
+        $this->load->model('M_prueba');
     }
 
     
@@ -33,7 +34,9 @@ class sitio extends CI_Controller {
 
 	public function test()
 	{
-		$this->load->view('test');
+		$prueba = new M_prueba();
+		$datos['prueba'] = $prueba->datos_tabla();
+		$this->load->view('test',$datos);
 	}
 
 	public function login()
