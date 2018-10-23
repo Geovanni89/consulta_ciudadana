@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Sitio extends CI_Controller {
+class sitio extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -34,5 +34,10 @@ class Sitio extends CI_Controller {
 	public function test()
 	{
 		$this->load->view('test');
+	}
+
+	public function login()
+	{
+		$this->load->view('login');
 	}
 }
