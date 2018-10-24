@@ -72,7 +72,7 @@
 								</ul>
 								<div class="entry-content">
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, asperiores quod est tenetur in. Eligendi, deserunt, blanditiis est quisquam doloribus voluptate id aperiam ea ipsum magni aut perspiciatis rem voluptatibus officia eos rerum deleniti quae nihil facilis repellat atque vitae voluptatem libero at eveniet veritatis ab facere.</p>
-									<button class="btn btn-success">Apoyar</button>
+									<a href="javascript:" onclick="propuesta_simple();" class="btn btn-success">Apoyar</a>
 								</div>
 							</div>
 
@@ -90,7 +90,7 @@
 								</ul>
 								<div class="entry-content">
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, asperiores quod est tenetur in. Eligendi, deserunt, blanditiis est quisquam doloribus voluptate id aperiam ea ipsum magni aut perspiciatis rem voluptatibus officia eos rerum deleniti quae nihil facilis repellat atque vitae voluptatem libero at eveniet veritatis ab facere.</p>
-									<button class="btn btn-success">Apoyar</button>
+									<a href="javascript:" onclick="propuesta_simple();" class="btn btn-success">Apoyar</a>
 								</div>
 							</div>
 
@@ -108,7 +108,7 @@
 								</ul>
 								<div class="entry-content">
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, asperiores quod est tenetur in. Eligendi, deserunt, blanditiis est quisquam doloribus voluptate id aperiam ea ipsum magni aut perspiciatis rem voluptatibus officia eos rerum deleniti quae nihil facilis repellat atque vitae voluptatem libero at eveniet veritatis ab facere.</p>
-									<button class="btn btn-success">Apoyar</button>
+									<a href="javascript:" onclick="propuesta_simple();" class="btn btn-success">Apoyar</a>
 								</div>
 							</div>
 
@@ -121,7 +121,7 @@
 					<!-- Sidebar
 					============================================= -->
 					<div class="sidebar nobottommargin col_last clearfix">
-						<button class="btn btn-success">Crear una propuesta</button>
+						<a href="<?=base_url();?>Sitio/form_propuesta" class="btn btn-success">Crear una propuesta</a>
 						<br>
 						<div class="sidebar-widgets-wrap">							
 
@@ -195,6 +195,20 @@
 	<!-- Footer Scripts
 	============================================= -->
 	<script src="<?=base_url();?>public/js/functions.js"></script>
+	<script type="text/javascript">
+		function propuesta_simple() {
+			$.post('<?=base_url();?>C_propuestas/propuesta_sim', function(resp){
+				$('#posts').addClass('animated fadeOut')
+				.empty()
+				.html(resp)
+				.addClass('fadeIn')
+				.removeClass('fadeOut');
+				SEMICOLON.widget.tabs();
+				SEMICOLON.widget.loadFlexSlider();
+
+			});
+		}		
+	</script>
 
 
 </body>

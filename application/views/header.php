@@ -21,7 +21,7 @@
 
 				<ul>
 					<li><a href="<?=base_url();?>"><div>Inicio</div></a></li>
-					<li class="current"><a href="javascript:"><div>Propuestas</div></a></li>
+					<li class="current"><a href="<?=base_url();?>Sitio/propuestas"><div>Propuestas</div></a></li>
 					<li><a href="index.html"><div>Votaciones</div></a></li>
 					<li><a href="#"><div>Entrar</div></a></li>								
 					<li><a href="index.html"><div>Registro</div></a></li>
