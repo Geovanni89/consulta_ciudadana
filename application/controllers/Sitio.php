@@ -32,6 +32,11 @@ class sitio extends CI_Controller {
 		$this->load->view('index');
 	}
 
+	public function propuestas()
+	{
+		$this->load->view('propuestas');
+	}
+
 	public function test()
 	{
 		$prueba = new M_prueba();

@@ -1028,7 +1028,7 @@ body.top-search-open .dark #header-wrap:not(.not-dark) #top-search a,
 }
 
 .dark #copyrights {
-	background-color: rgba(0,0,0,0.2);
+	background-color: rgba(172,168,162,1);
 	color: rgba(255,255,255,0.25);
 	text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
 }
