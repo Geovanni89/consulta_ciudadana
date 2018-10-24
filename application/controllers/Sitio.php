@@ -84,6 +84,16 @@ class Sitio extends CI_Controller {
 		}else $this->load->view('index_mod');
 	}
 
+	public function propuestas()
+	{
+		$this->load->view('propuestas');
+	}
+
+	public function form_propuesta()
+	{
+		$this->load->view('form_propuesta');
+	}
+
 	public function test()
 	{
 		$prueba = new M_prueba();

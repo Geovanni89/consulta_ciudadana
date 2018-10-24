@@ -4916,10 +4916,10 @@ body.device-touch.device-xs .portfolio-notitle .portfolio-overlay { display: non
 }
 
 .entry-meta li:before {
-	content: '/';
+	content: '.';
 	display: inline-block;
 	margin-right: 10px;
-	opacity: 0.5
+	opacity: 0.9
 }
 
 .entry-meta li i {
