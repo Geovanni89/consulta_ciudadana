@@ -1,9 +1,4 @@
 <?php if (!defined('BASEPATH')) exit('No permitir el acceso directo al script');
-/*
-    2015-09-27
-        -Se modifica la función clave_permiso.
-        -Se agregan las opciones de seguridad para el módulo de profesores
- */
 
 class Class_seguridad {
 
@@ -11,7 +6,37 @@ class Class_seguridad {
     {
         $CI =& get_instance();
         $CI->load->helper('url');
-        $CI->load->model('Model_seguridad');
+        $CI->load->model('M_seguridad');
+    }
+
+    function iniciar_sesion($usuario,$contrasenia,$codigo='')
+    {
+        $cod = 500;
+        if( !empty($usuario) && !empty($contrasenia) )
+        {
+            if(true)    //  En caso de requerir un captcha o proceso de verificación
+            {
+                $ms = new M_seguridad();
+                $where['u.correo'] = $usuario;
+                $where['u.contrasenia'] = sha1($contrasenia);
+                $qu = $ms->consulta_existe_usuario($where);
+                
+                if($qu != false)
+                {
+                    if($qu->num_rows() > 0)
+                    {
+                        $du = $qu->row();
+                        $_SESSION[PREFIJO.'_id_usuario'] = $du->id_usuario;                       
+                        $_SESSION[PREFIJO.'_correo'] = $du->correo;
+                        $_SESSION[PREFIJO.'_id_rol'] = $du->id_rol;
+                        $_SESSION[PREFIJO.'_nombre'] = $du->nombre.' '.$du->apellido_paterno.' '.$du->apellido_materno ;
+                        $cod = 0;
+                    }else $cod = 101;
+                }else $cod = 500;
+            }else $cod = 102;
+        }else $cod = 100;
+
+        return $cod;
     }
 
     function pintar_menu($id_usuario)
