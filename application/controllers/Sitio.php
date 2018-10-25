@@ -69,7 +69,7 @@ class Sitio extends CI_Controller {
 					break;
 				case 2:
 					//	Ciudadano
-					$this->load->view('index_mod');
+					$this->load->view('index');
 					break;
 				case 3:
 					//	Administrador
@@ -77,11 +77,11 @@ class Sitio extends CI_Controller {
 					break;
 				
 				default:
-					$this->load->view('index_mod');
+					$this->load->view('index');
 					break;
 			}
 
-		}else $this->load->view('index_mod');
+		}else $this->load->view('index');
 	}
 
 	public function propuestas()

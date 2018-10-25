@@ -84,7 +84,7 @@
 							<li current><a href="javascript:" data-href="#home"><div>Inicio</div></a></li>
 							<li><a href="<?=base_url();?>sitio/propuestas"><div>Propuestas</div></a></li>
 							<li><a href="#" data-href="#section-work"><div>Votaciones</div></a></li>
-							<li><a href="#" data-href="#section-team"><div>Entrar</div></a></li>
+							<li><a href="<?=base_url();?>Sitio/login""><div>Entrar</div></a></li>
 							<li><a href="#" data-href="#section-services"><div>Registro</div></a></li>
 						</ul>
 
