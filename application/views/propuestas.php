@@ -20,7 +20,7 @@
 
 	<!-- Document Title
 	============================================= -->
-	<title>Blog | Canvas</title>
+	<title>Participación Ciudadana | Propuestas</title>
 
 </head>
 
@@ -207,7 +207,9 @@
 				SEMICOLON.widget.loadFlexSlider();
 
 			});
-		}		
+		}
+
+			
 	</script>
 
 
