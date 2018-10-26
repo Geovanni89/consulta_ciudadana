@@ -16,6 +16,7 @@
 	<link rel="stylesheet" href="<?=base_url();?>public/css/magnific-popup.css" type="text/css" />
 
 	<link rel="stylesheet" href="<?=base_url();?>public/css/components/radio-checkbox.css" type="text/css" />
+	<link rel="stylesheet" href="<?=base_url();?>public/css/components/bs-filestyle.css" type="text/css" />
 
 	<link rel="stylesheet" href="<?=base_url();?>public/css/responsive.css" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -60,7 +61,7 @@
 
 						<h3>Recomendaciones para crear una propuesta</h3>
 
-						<form id="capturaPropuesta" method="post" action="#">
+						<form id="formPropuesta" method="POST" action="<?=base_url();?>C_propuestas/captura_propuesta">
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="sel_sect">Selecciona el Sector</label>
@@ -80,15 +81,18 @@
 							<div class="form-group">
 								<label for="titulo">Titulo propuesta</label>
 								<input type="text" class="form-control" id="titulo" name="titulo" placeholder="1234 Main St" required>
+								<div class="show-error-msg|"></div>
 							</div>
 							<div class="form-group">
 								<label for="descripcion">Resumen de la propuesta</label>
 								<small id="descnHelp" class="form-text text-muted">(Máximo 200 caracteres)</small>
 								<textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+								<div class="show-error-msg|"></div>
 							</div>
 							<div class="form-group">
 								<label for="video_url">Enlace video externo</label>
 								<input type="url" class="form-control" id="video_url" name="video_url" placeholder="Url" required>
+								<div class="show-error-msg|"></div>
 							</div>
 							<div class="form-group">
 								<label for="ambito_med">Ámbito de actuación</label>
@@ -100,12 +104,14 @@
 							<div class="form-group">
 								<small id="resumenHelp" class="form-text text-muted">Seleccione el municipio y coloque un punto</small>
 								<select class="form-control" id="id_municipio" name="id_municipio">
-									<option>1</option>
-									<option>2</option>									
+									<option>Seleccionar</option>
+									<?php echo $select; ?>
 								</select>
 							</div>
 							<div class="form-group">
 								<h1>MAPA</h1>
+								<input type="hidden" id="punto_x" name="punto_x" value="21.0371254">
+								<input type="hidden" id="punto_y" name="punto_y" value="-89.6311864">
 							</div>
 							<div class="form-group">
 								<label for="sel_integra">Integrar propuestas</label>
@@ -119,10 +125,10 @@
 							</div>
 							<div class="form-group">
 								<div>
-									<input id="acepta_terminos" class="checkbox-style" name="acepta_terminos" type="checkbox">
+									<input id="acepta_terminos" class="checkbox-style" name="acepta_terminos" type="checkbox" required>
 									<label for="acepta_terminos" class="checkbox-style-3-label checkbox-small">Acepto la Política de privacidad y las condiciones de uso</label>
 								</div>
-								<input type="submit" class="btn btn-success">Crear propuesta</button>
+								<input type="submit" class="btn btn-success" value="Crear propuesta" />
 							</div>
 						</form>
 
@@ -153,13 +159,15 @@
 	<script src="<?=base_url();?>public/js/jquery.js"></script>
 	<script src="<?=base_url();?>public/js/plugins.js"></script>
 
+	<!-- Bootstrap File Upload Plugin -->
+	<script src="<?=base_url();?>public/js/components/bs-filestyle.js"></script>
+
 	<!-- Footer Scripts
 	============================================= -->
 	<script src="<?=base_url();?>public/js/functions.js"></script>
 	<script>
 
-
-		$("#capturaPropuesta").validate({
+		$('#formPropuesta').validate({
 			rules: {				
 				titulo: {
 					required: true,
@@ -169,7 +177,6 @@
 				descripcion: "required",
 				video_url: "required",				
 				id_municipio: "required",
-				acepta_terminos: "required"
 			},
 			messages: {
 				titulo: {
@@ -179,17 +186,33 @@
 				},
 				descripcion: "Campo requerido",
 				video_url: "Campo requerido",				
-				id_municipio: "Campo requerido",
-				acepta_terminos: "Campo requerido"
+				id_municipio: "Campo requerido",				
 
+			},
+			submitHandler: function(form) {
+				envia_form();
 			}
 		});
 
-		$.validator.setDefaults({
-			submitHandler: function() {
-				alert("submitted!");
-			}
-		});
+		function envia_form() {			
+			var form =  $('#formPropuesta').serialize();
+			var metodo = $('#formPropuesta').attr('method');
+			var uri = $('#formPropuesta').attr('action');
+
+			$.ajax({
+				type: metodo,
+				url: uri,
+				data: form,
+				success: function(data) {
+					console.log(data);
+				},
+				fail: function() {
+				    console.log( "error" );
+				 }
+
+
+			})
+		}
 	</script>
 
 </body>
