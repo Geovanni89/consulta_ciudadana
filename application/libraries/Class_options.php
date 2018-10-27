@@ -28,8 +28,8 @@ class Class_options {
             $query = $query->result();
             foreach ($query as $e)
             {
-                $selected = ($e->id == $seleccionado) ? 'selected':'';
-                $select .= '<option value="'.$e->id.'" '.$selected.'>'.$e->grado_estudio.'</option>';
+                $selected = ($e->iIdGradoEstudio == $seleccionado) ? 'selected':'';
+                $select .= '<option value="'.$e->iIdGradoEstudio.'" '.$selected.'>'.$e->vGradoEstudio.'</option>';
             }
         }
 
@@ -54,8 +54,8 @@ class Class_options {
             $query = $query->result();
             foreach ($query as $e)
             {
-                $selected = ($e->id == $seleccionado) ? 'selected':'';
-                $select .= '<option value="'.$e->id.'" '.$selected.'>'.$e->ocupacion.'</option>';
+                $selected = ($e->iIdOcupacion == $seleccionado) ? 'selected':'';
+                $select .= '<option value="'.$e->iIdOcupacion.'" '.$selected.'>'.$e->vOcupacion.'</option>';
             }
         }
 

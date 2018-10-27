@@ -59,8 +59,8 @@
 							<li><a href="#" data-href="#section-services"><div>Services</div></a></li>
 							<li><a href="#" data-href="#section-pricing"><div>Pricing</div></a></li>
 							<li><a href="blog.html"><div>Blog</div></a></li>
-							<li><a href="#" onclick="Cargar('#content','<?=base_url();?>/Sitio/login');" data-offset="60"><div>Entrar</div></a></li>
-							<li><a href="#" data-href="#section-contact"><div>Registro</div></a></li>
+							<li><a href="<?=base_url();?>Sitio/login" ><div>Entrar</div></a></li>
+							<li><a href="<?=base_url();?>Sitio/registrarse" ><div>Registro</div></a></li>
 						</ul>
 
 						<!-- Top Search

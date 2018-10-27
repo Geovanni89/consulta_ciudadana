@@ -10,9 +10,9 @@ class M_catalogos extends CI_Model {
 
 	public function datos_grados_estudio($where='')
 	{
-		$this->db->select('id,grado_estudio');
-		$this->db->from('grados_estudio');
-		$this->db->where('activo',1);
+		$this->db->select('iIdGradoEstudio, vGradoEstudio');
+		$this->db->from('GradoEstudio');
+		$this->db->where('iActivo',1);
 
 		if($where != '') $this->db->where($where);
 
@@ -23,9 +23,10 @@ class M_catalogos extends CI_Model {
 
 	public function datos_ocupaciones($where='')
 	{
-		$this->db->select('id,ocupacion');
-		$this->db->from('ocupaciones_sinco_2011');
-		$this->db->where('activo',1);
+		$this->db->select('iIdOcupacion,vOcupacion');
+		$this->db->from('Ocupacion');
+		$this->db->where('iActivo',1);
+		$this->db->order_by('vOcupacion');
 
 		if($where != '') $this->db->where($where);
 

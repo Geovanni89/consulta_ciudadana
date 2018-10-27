@@ -17,8 +17,8 @@ class Class_seguridad {
             if(true)    //  En caso de requerir un captcha o proceso de verificación
             {
                 $ms = new M_seguridad();
-                $where['u.correo'] = $usuario;
-                $where['u.contrasenia'] = sha1($contrasenia);
+                $where['u.vCorreo'] = $usuario;
+                $where['u.vContrasenia'] = sha1($contrasenia);
                 $qu = $ms->consulta_existe_usuario($where);
                 
                 if($qu != false)
@@ -26,10 +26,10 @@ class Class_seguridad {
                     if($qu->num_rows() > 0)
                     {
                         $du = $qu->row();
-                        $_SESSION[PREFIJO.'_id_usuario'] = $du->id_usuario;                       
-                        $_SESSION[PREFIJO.'_correo'] = $du->correo;
-                        $_SESSION[PREFIJO.'_id_rol'] = $du->id_rol;
-                        $_SESSION[PREFIJO.'_nombre'] = $du->nombre.' '.$du->apellido_paterno.' '.$du->apellido_materno ;
+                        $_SESSION[PREFIJO.'_idusuario'] = $du->idusuario;
+                        $_SESSION[PREFIJO.'_correo'] = $du->vCorreo;
+                        $_SESSION[PREFIJO.'_idrol'] = $du->idrol;
+                        $_SESSION[PREFIJO.'_nombre'] = $du->vNombre.' '.$du->vApellidoPaterno.' '.$du->vApellidoMaterno ;
                         $cod = 0;
                     }else $cod = 101;
                 }else $cod = 500;
@@ -39,22 +39,58 @@ class Class_seguridad {
         return $cod;
     }
 
-    function pintar_menu($id_usuario)
+    function pintar_menu($idusuario)
     {
-        $cadena = '';
+        $str = '';
         $id_permiso_ant = 0;
-        $modseguridad =  new Model_seguridad();
-        $menu = $modseguridad->traer_menu_sistema($id_usuario, 0);
-        if($menu != false)
+        $modseguridad =  new M_seguridad();
+        $menu = $modseguridad->traer_menu_sistema($idusuario, 0);
+        if($menu)
         {
-            $menu = $menu->result();
+            if($menu->num_rows () > 0)
+            {
+                $menu = $menu->result();
+                
+                $str = '<nav class="sidebar-nav">
+                            <ul id="sidebarnav">';
+                foreach ($menu as $padre)
+                {
+                    $submenu = $modseguridad->traer_menu_sistema($idusuario, $padre->iIdPermiso);
+                    if($submenu != false && $submenu->num_rows() > 0)
+                    {
+                        $submenu = $submenu->result();                        
+                        $str .=  '<li class="sidebar-item">
+                                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-Car-Wheel"></i><span class="hide-menu">'.$padre->vPermiso.'</span></a>
+                                                <ul aria-expanded="false" class="collapse  first-level">
+                                        ';
+                        foreach ($submenu as $hijo)
+                        {
+                            $str .=  '<li class="sidebar-item"><a href="index.html" class="sidebar-link"><i class="mdi mdi-adjust"></i><span class="hide-menu">'.$hijo->vPermiso.'</span></a></li>';
+                        }
+                                
+                        $str .= '   </ul>
+                                </li>';
+                    }
+                    else
+                    {
+                         $str .= '<li class="sidebar-item">
+                                <a class="sidebar-link  waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-Car-Wheel"></i><span class="hide-menu">'.$padre->vPermiso.'</span></a>
+                            </li>';
+                    }
+                }
+
+                $str .= '   </ul>
+                        </nav>';
+
+            }
+            
             /*$cadena .= '<li class="active expanding">
                             <a class="active" href="../../html/dashboards/dashboard.html" class="active">
                                 <div class="gui-icon"><i class="md md-home"></i></div>
                                 <span class="title">Inicio</span>
                             </a>
                         </li>';*/
-            foreach($menu as $padre)
+            /*foreach($menu as $padre)
             {
                 $submenu = $modseguridad->traer_menu_sistema($id_usuario,$padre->permisoid);
                 $onclick = '';
@@ -83,9 +119,9 @@ class Class_seguridad {
                 }
 
                 $cadena .= '  </li>'.PHP_EOL;
-            }
+            }*/
         }
-        return $cadena;
+        return $str;
     }
     
     function pintar_submenu($id_usuario, $opciones, $ruta)

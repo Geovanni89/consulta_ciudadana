@@ -1,155 +1,227 @@
-<?php echo sha1('neo-alpha'); ?>
-<div class="content-wrap">
+<?php echo SHA1('neo-alpha');?>
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
 
-	<div class="container clearfix">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="author" content="SemiColonWeb" />
 
-		<div class="tabs divcenter nobottommargin clearfix" id="tab-login-register" style="max-width: 500px;">
+	<!-- Stylesheets
+	============================================= -->
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700|Crete+Round:400i" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="<?=base_url();?>public/css/bootstrap.css" type="text/css" />
+	<link rel="stylesheet" href="<?=base_url();?>public/css/style.css" type="text/css" />
+	<link rel="stylesheet" href="<?=base_url();?>public/css/swiper.css" type="text/css" />
+	<link rel="stylesheet" href="<?=base_url();?>public/css/dark.css" type="text/css" />
+	<link rel="stylesheet" href="<?=base_url();?>public/css/font-icons.css" type="text/css" />
+	<link rel="stylesheet" href="<?=base_url();?>public/css/animate.css" type="text/css" />
+	<link rel="stylesheet" href="<?=base_url();?>public/css/magnific-popup.css" type="text/css" />
 
-			<ul class="tab-nav tab-nav2 center clearfix">
-				<li class="inline-block"><a href="#tab-login">Ingreso</a></li>
-				<li class="inline-block"><a href="#tab-register">Registro</a></li>
-			</ul>
+	<link rel="stylesheet" href="<?=base_url();?>public/css/responsive.css" type="text/css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-			<div class="tab-container">
+	<!-- Document Title
+	============================================= -->
+	<title>Participación Ciudadana</title>
 
-				<div class="tab-content clearfix" id="tab-login">
-					<div class="card nobottommargin">
-						<div class="card-body" style="padding: 40px;">
-							<form id="login-form" name="login-form" class="nobottommargin" method="post" action="<?=base_url();?>Sitio/loguearse" onsubmit="Iniciar_sesion(this,event)">
+</head>
 
-								<h3>Ingrese a su cuenta</h3>
+<body class="stretched" data-loader="2" data-animation-in="fadeIn" data-speed-in="1500" data-animation-out="fadeOut" data-speed-out="800">
 
-								<div class="col_full">
-									<label for="login-form-username">Correo electrónico:</label>
-									<input type="text" id="correo" name="correo" value="" class="form-control" />
-								</div>
+	<!-- Document Wrapper
+	============================================= -->
+	<div id="wrapper" class="clearfix">
 
-								<div class="col_full">
-									<label for="login-form-password">Contraseña:</label>
-									<input type="password" id="contrasenia" name="contrasenia" value="" class="form-control" />
-								</div>
+		<div id="home" class="page-section" style="position:absolute;top:0;left:0;width:100%;height:200px;z-index:-2;"></div>
 
-								<div class="col_full nobottommargin">
-									<button class="button button-3d button-black nomargin" id="login-form-submit" name="login-form-submit" value="login">Iniciar sesión</button>
-									<a href="#" class="fright">¿Olvidó su contraseña?</a>
-								</div>
+		
+		<!-- Header
+		============================================= -->
+		<header id="header" class="full-header">
 
-							</form>
-						</div>
-					</div>
-				</div>
+			<div id="header-wrap">
 
-				<div class="tab-content clearfix" id="tab-register">
-					<div class="card nobottommargin">
-						<div class="card-body" style="padding: 40px;">
-							<h3>Regístrate ahora</h3>
+				<div class="container clearfix">
 
-							<form id="register-form" name="register-form" class="nobottommargin" action="#" method="post">
+					<div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
 
-								<div class="col_full">
-									<label for="register-form-name">Nombre:</label>
-									<input type="text" id="nombre" name="nombre" value="" class="form-control" />
-								</div>
+					<!-- Logo
+					============================================= -->
+					<div id="logo">
+						<!--
+						<a href="index.html" class="standard-logo" data-dark-logo="images/logo-dark.png"><img src="public/images/logo.png" alt="Canvas Logo"></a>
+						<a href="index.html" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img src="public/images/logo@2x.png" alt="Canvas Logo"></a>
+					-->
+					</div><!-- #logo end -->
 
-								<div class="col_full">
-									<label for="register-form-name">Apellido paterno:</label>
-									<input type="text" id="apellido_paterno" name="apellido_paterno" value="" class="form-control" />
-								</div>
+					<!-- Primary Navigation
+					============================================= -->
+					<nav id="primary-menu">
 
-								<div class="col_full">
-									<label for="register-form-name">Apellido materno:</label>
-									<input type="text" id="apellido_materno" name="apellido_materno" value="" class="form-control" />
-								</div>
+						<ul class="one-page-menu" data-easing="easeInOutExpo" data-speed="1500">
+							<li current><a href="javascript:" data-href="#home"><div>Inicio</div></a></li>
+							<li><a href="<?=base_url();?>sitio/propuestas"><div>Propuestas</div></a></li>
+							<li><a href="#" data-href="#section-work"><div>Votaciones</div></a></li>
+							<li><a href="<?=base_url();?>Sitio/login""><div>Entrar</div></a></li>
+							<li><a href="<?=base_url();?>Sitio/registrarse"><div>Registro</div></a></li>
+						</ul>
 
-								<div class="col_full">
-									<label for="register-form-name">Correo electrónico:</label>
-									<input type="text" id="correo" name="correo" value="" class="form-control" />
-								</div>
+					</nav><!-- #primary-menu end -->
 
-								<div class="col_full">
-									<label for="register-form-email">Fecha de nacimiento:</label>
-									<input type="text" id="fecha_nacimiento" name="fecha_nacimiento" value="" class="form-control" />
-								</div>
-
-								<div class="col_full">
-									<label for="register-form-username">Genero:</label>
-									<select name="genero" id="genero" class="form-control">
-										<option value="0">Seleccione un género</option>
-										<option value="1">Hombre</option>
-										<option value="2">Mujer</option>
-										<option value="3">Otro</option>
-									</select>
-								</div>
-
-								<div class="col_full">
-									<label for="register-form-phone">Código postal:</label>
-									<input type="text" id="codigo_postal" name="codigo_postal" value="" class="form-control" />
-								</div>
-
-								<div class="col_full">
-									<label for="register-form-phone">Colonia:</label>
-									<input type="text" id="asentamiento" name="asentamiento" value="" class="form-control" />
-								</div>
-
-								<div class="col_full">
-									<label for="register-form-password">Localidad:</label>
-									<input type="password" id="id_localidad" name="id_localidad" value="" class="form-control" />
-								</div>
-
-								<div class="col_full">
-									<label for="register-form-repassword">Municipio:</label>
-									<input type="password" id="id_municipio" name="id_municipio" value="" class="form-control" />
-								</div>
-
-								<div class="col_full">
-									<label for="register-form-repassword">Nivel de estudio:</label>
-									<select name="id_grado_estudio" id="id_grado_estudio" class="form-control">
-										<?php echo $op_grados_estudio; ?>
-									</select>
-								</div>
-
-								<div class="col_full">
-									<label for="register-form-repassword">Ocupación:</label>
-									<select name="id_ocupacion" id="id_ocupacion" class="form-control">
-										<?php echo $op_ocupaciones; ?>
-									</select>
-								</div>
-
-								<div class="col_full nobottommargin">
-									<button class="button button-3d button-black nomargin" id="register-form-submit" name="register-form-submit" value="register">Registrarse</button>
-								</div>
-
-							</form>
-						</div>
-					</div>
 				</div>
 
 			</div>
 
-		</div>
+		</header><!-- #header end -->
 
-	</div>
+		<div class="clear"></div>
+
+		<!-- Content
+		============================================= -->
+		<section id="content">
+
+			<div class="content-wrap">
+
+				<div class="container clearfix">
+
+					<div class="tabs divcenter nobottommargin clearfix" id="tab-login-register" style="max-width: 500px;">
+
+						<div class="card nobottommargin">
+							<div class="card-body" style="padding: 40px;">
+								<form id="login-form" name="login-form" class="nobottommargin" method="post" action="" onsubmit="">
+
+									<h3>Ingrese a su cuenta</h3>
+
+									<div class="col_full" id="#divcorreo">
+										<label for="login-form-username">Correo electrónico:</label>
+										<input type="text" id="correo" name="correo" value="" class="form-control"/>
+									</div>
+
+									<div class="col_full">
+										<label for="login-form-password">Contraseña:</label>
+										<input type="password" id="contrasenia" name="contrasenia" value="" class="form-control" />
+									</div>
+
+									<div class="col_full nobottommargin">
+										<button class="button button-3d button-black nomargin" id="login-form-submit" name="login-form-submit" value="login">Iniciar sesión</button>
+										<a href="#" onclick="" class="fright">¿Olvidó su contraseña?</a>
+									</div>
+
+								</form>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+		<!-- Footer
+		============================================= -->
+		<footer id="footer" class="dark">
+
+			<!-- Copyrights
+			============================================= -->
+			<div id="copyrights">
+
+				<div class="container clearfix">
+
+					<div class="col_third_fourth">
+						<div class="col_one_third">
+							
+						</div>
+						<div class="col_one_third">
+							<img src="<?=base_url();?>img/logo_yucatan.png">
+						</div>						
+					</div>					
+
+				</div>
+
+			</div><!-- #copyrights end -->
+
+		</footer><!-- #footer end -->
+
+	</div><!-- #wrapper end -->
+
+	<!-- Go To Top
+	============================================= -->
+	<div id="gotoTop" class="icon-angle-up"></div>
 
 	<!-- External JavaScripts
 	============================================= -->
-	
-	<script >
-		SEMICOLON.widget.tabs();
+	<script src="<?=base_url();?>public/js/jquery.js"></script>
+	<script src="<?=base_url();?>public/js/plugins.js"></script>
+	<script src="<?=base_url();?>public/js/plugins/jquery.validation.js"></script>
 
-		function Iniciar_sesion(form,event)
-		{
-			event.preventDefault();
+	<!-- Footer Scripts
+	============================================= -->
+	<script src="<?=base_url();?>public/js/functions.js"></script>
+	<script src="<?=base_url();?>public/js/funciones.js?v=4"></script>
 
-			if( Enviar_formulario(form,event) )
-			{
+
+	<script>
+
+	</script>
+	<!-- External JavaScripts
+				============================================= -->
 				
-				window.location.href = '<?=base_url();?>Sitio';
-			}
+	<script >
+		$( "#login-form" ).validate({
+		  	rules: {
+		    	correo: {
+		      		required: true
+		    	},
+		    	contrasenia: {
+		      		required: true
+		    	}
+		  	},
+		  	messages: {
+		  		
+			    correo: "Este campo es requerido",
+			    contrasenia: "Este campo es requerido"
+			    /*
+			    correo: {
+			    	required: "We need your email address to contact you",
+			    	email: "Your email address must be in the format of name@domain.com"
+			    }*/
+		  	},
+		  	submitHandler: function(form){
+		  		Iniciar_sesion(form,'<?=base_url();?>Sitio/loguearse');
+
+		  	}
+		});
+
+		function Iniciar_sesion(form,url_destino)
+		{
+			$.ajax({
+		        url: url_destino,
+		        type: 'POST',
+		        async: false,	//	Para obligar al usuario a esperar una respuesta
+		        data: $(form).serialize(),
+		        error: function(XMLHttpRequest, errMsg, exception){
+		            var msg = "Ha fallado la petición al servidor";
+		            alert(msg);
+		        },
+		        success: function(htmlcode){
+		        	var cod = htmlcode.split("-");
+		        	switch(cod[0])
+		            {
+		                case "0":
+		                    Notificacion('Autentificado','success');
+		                    window.location.href = '<?=base_url();?>';
+		                    break;                    
+		                default:
+		                    Notificacion(msg[cod[0]],'error');
+		                    break;
+		            }
+		        }
+		    });	
 		}
+
 	</script>
 
 	<!-- Footer Scripts
 	============================================= -->
-	
 
-</div>
+</body>
+</html>

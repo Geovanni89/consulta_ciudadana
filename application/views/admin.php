@@ -14,7 +14,7 @@
     <!-- Custom CSS -->
     <link href="<?=base_url();?>admin/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
     <link href="<?=base_url();?>admin/assets/extra-libs/c3/c3.min.css" rel="stylesheet">
-    <link href="<?=base_url();?>admin/assets/libs/morris.js/morris.css" rel="stylesheet">
+    <link href="<?=base_url();?>admin/assets/libs/toastr/build/toastr.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="<?=base_url();?>admin/dist/css/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -143,10 +143,12 @@
         <aside class="left-sidebar">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
+                <?php echo $menu; ?>
                 <!-- Sidebar navigation-->
+                <!--
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <!-- User Profile-->
+                        
                         <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Personal</span></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-Car-Wheel"></i><span class="hide-menu">Dashboard </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
@@ -475,6 +477,8 @@
     <!--Mensajes SweetAlert -->
     <script src="<?=base_url();?>admin/assets/libs/sweetalert2/dist/sweetalert2.all.min.js"></script>
     <script src="<?=base_url();?>admin/assets/libs/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <!-- Mensajes del sistema -->
+    <script src="<?=base_url();?>admin/assets/libs/toastr/build/toastr.min.js"></script>
     <!--<script src="<?=base_url();?>admin/assets/libs/sweetalert2/sweet-alert.init.js"></script> Este es el ejemplo-->
 
     <?php /*
@@ -491,8 +495,12 @@
     <script src="../../dist/js/pages/dashboards/dashboard1.js"></script>
     */ ?>
     <!-- funciones Jorge Estrella-->
-    <script src="<?=base_url();?>public/js/funciones.js?v=4"></script>
+    <script src="<?=base_url();?>public/js/funciones.js?v=6"></script>
     <script type="text/javascript">
+        $(document).ready(function(){            
+        });
+        
+
         function Confirmar_cerrar_sesion()
         {
             $('#confirmar_cerrar_sesion').modal();
