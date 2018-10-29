@@ -24,6 +24,9 @@
 	<!-- Document Title
 	============================================= -->
 	<title>Consulta Ciudadana | Crea tu propuesta</title>
+	<style type="text/css">
+		#map { height: 400px; }
+	</style>
 
 </head>
 
@@ -65,34 +68,42 @@
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="sel_sect">Selecciona el Sector</label>
-									<select class="form-control" id="sel_sect">
-										<option>1</option>
-										<option>2</option>									
+									<select class="form-control" id="iIdSector" name="iIdSector" onchange="carga_temas(this.value);">
+										<option value="0">Sectores</option>
+										<?php echo $select_sec; ?>
 									</select>
 								</div>
 								<div class="form-group col-md-6">
-									<label for="id_tema">Selecciona el Tema</label>
-									<select class="form-control" id="id_tema" name="id_tema" required>
-									<option>1</option>
-									<option>2</option>									
-								</select>
+									<label for="iIdTema">Selecciona el Tema</label>
+									<select class="form-control" id="iIdTema" name="iIdTema" required>
+										<option>Temas</option>									
+									</select>
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="titulo">Titulo propuesta</label>
-								<input type="text" class="form-control" id="titulo" name="titulo" placeholder="1234 Main St" required>
-								<div class="show-error-msg|"></div>
+								<label for="vTitulo">Titulo propuesta</label>
+								<input type="text" class="form-control" id="vTitulo" name="vTitulo" placeholder="1234 Main St" required>
 							</div>
 							<div class="form-group">
-								<label for="descripcion">Resumen de la propuesta</label>
+								<label for="vDescripcion">Resumen de la propuesta</label>
 								<small id="descnHelp" class="form-text text-muted">(Máximo 200 caracteres)</small>
-								<textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
-								<div class="show-error-msg|"></div>
+								<textarea class="form-control" id="vDescripcion" name="vDescripcion" rows="3" required></textarea>
 							</div>
 							<div class="form-group">
-								<label for="video_url">Enlace video externo</label>
-								<input type="url" class="form-control" id="video_url" name="video_url" placeholder="Url" required>
-								<div class="show-error-msg|"></div>
+								<label for="vUrlVideoExterno">Enlace video externo</label>
+								<input type="url" class="form-control" id="vUrlVideoExterno" name="vUrlVideoExterno" placeholder="http://example.com" required>
+							</div>
+							<div class="row">
+								<div class="col-lg-12 bottommargin">
+									<label>Imágenes descriptivas:</label>
+									<small id="" class="form-text text-muted">Puedes subir hasta 5 imagenes en los formatos jpeg o jpg; hasta 1 MB por acrhivo.<br></small><br>
+									<input id="input-3" name="input2[]" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" data-show-preview="true">
+								</div>
+								<div class="col-lg-12 bottommargin">
+									<label>Dcomentos</label>
+									<small id="" class="form-text text-muted">Puedes subir hasta un máximo de 5 documentos en formato pdf, de hasta 3 MB por archivo.</small><br>
+									<input id="input-3" name="input2[]" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" data-show-preview="true">
+								</div>
 							</div>
 							<div class="form-group">
 								<label for="ambito_med">Ámbito de actuación</label>
@@ -103,15 +114,15 @@
 							</div>
 							<div class="form-group">
 								<small id="resumenHelp" class="form-text text-muted">Seleccione el municipio y coloque un punto</small>
-								<select class="form-control" id="id_municipio" name="id_municipio">
+								<select class="form-control" id="iIdMunicipio" name="iIdMunicipio">
 									<option>Seleccionar</option>
 									<?php echo $select; ?>
 								</select>
 							</div>
 							<div class="form-group">
-								<h1>MAPA</h1>
-								<input type="hidden" id="punto_x" name="punto_x" value="21.0371254">
-								<input type="hidden" id="punto_y" name="punto_y" value="-89.6311864">
+								<div id="map"></div>
+								<input type="text" id="nLatDec" name="nLatDec" value="20.96704600410666">
+								<input type="text" id="nLongDec" name="nLongDec" value="-89.62374816045451">
 							</div>
 							<div class="form-group">
 								<label for="sel_integra">Integrar propuestas</label>
@@ -165,7 +176,44 @@
 	<!-- Footer Scripts
 	============================================= -->
 	<script src="<?=base_url();?>public/js/functions.js"></script>
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnOBLYrneZlLUF5_bhWzGnwc6I7s01qEs&callback=initMap" async defer></script>
+
 	<script>
+
+		var map;		
+		var image = '<?=base_url();?>img/logo_vertical_2.png';
+
+	    function initMap() {
+
+	    	map = new google.maps.Map(document.getElementById('map'), {
+	        	center: { lat: 20.97636467031955, lng: -89.62927700124328 },
+	          	zoom: 8
+	        });
+
+	        var marker = new google.maps.Marker({
+	          position: { lat: 20.97636467031955, lng: -89.62927700124328 },
+	          map: map,
+	          title: 'Click to zoom',
+	          icon: image
+	        });
+
+	        map.addListener('click', function(e){
+	        	var lat = e.latLng.lat();
+	        	var lng = e.latLng.lng();
+	        	var lat_lng = new google.maps.LatLng(lat,lng);
+
+	        	marker.setPosition(lat_lng);
+	        	map.setZoom(11);
+	        	map.panTo(lat_lng);
+
+	        	console.log('Lat\n'+lat);
+	        	console.log('Lng'+lng);
+
+	        	document.getElementById('nLatDec').value = lat;
+	        	document.getElementById('nLongDec').value = lng;
+	        });
+        }
 
 		$('#formPropuesta').validate({
 			rules: {				
@@ -213,6 +261,13 @@
 
 			})
 		}
+
+		function carga_temas(id) {
+			$.post('<?=base_url();?>C_propuestas/carga_temas', {id:id}, function(resp){
+				console.log(resp);
+				$('#iIdTema').html(resp);
+			})
+		}		
 	</script>
 
 </body>

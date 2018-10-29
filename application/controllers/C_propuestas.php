@@ -7,7 +7,7 @@ class C_propuestas extends CI_Controller {
     {
         parent::__construct();
         $this->load->helper('url');
-        //$this->load->model('M_prueba');
+        $this->load->model('M_propuestas');
     }
 
 	public function propuesta_sim()
@@ -17,22 +17,46 @@ class C_propuestas extends CI_Controller {
 
 	public function captura_propuesta()
 	{
-		$titulo = $this->input->post('titulo', TRUE);
-		$descripcion = $this->input->post('descripcion', TRUE);
-		$video_url = $this->input->post('video_url', TRUE);
-		$id_municipio = $this->input->post('id_municipio', TRUE);
-		$punto_x = $this->input->post('punto_x', TRUE);
-		$punto_y = $this->input->post('punto_y', TRUE);
-
-		$array = array(
-			'titulo' => $titulo,
-			'descripcion' => $descripcion,
-			'video_url' => $video_url,
-			'id_municipio' => $id_municipio,
-			'punto_x' => $punto_x,
-			'punto_y' => $punto_y
+		$vTitulo = $this->input->post('vTitulo', TRUE);
+		$vDescripcion = $this->input->post('vDescripcion', TRUE);
+		$iIdTema = $this->input->post('iIdTema', TRUE);
+		$vUrlVideoExterno = $this->input->post('vUrlVideoExterno', TRUE);
+		$iIdMunicipio = $this->input->post('iIdMunicipio', TRUE);
+		$nLatDec = $this->input->post('nLatDec', TRUE);
+		$nLongDec = $this->input->post('nLongDec', TRUE);
+		
+		$datos = array(
+			'vTitulo' => $vTitulo,
+			'tDescripcion' => $vDescripcion,
+			'iIdTema' => $iIdTema,
+			'vUrlVideoExterno' => $vUrlVideoExterno,
+			'iIdMunicpio' => $iIdMunicipio,
+			'nLatDec' => $nLatDec,
+			'nLongDec' => $nLongDec,
+			'iEstatus' => 1,
+			'iIdUsuario' => 1,
+			'vCodigo' => 'PYUC-001'
 		);
 
-		print_r($array);
+		$model = new M_propuestas();
+		$query_prop = $model->inserta_propuesta($datos,'Propuesta');
+		if($query_prop===false) echo "no funcionó";
+		else echo $query_prop;
+	}
+
+	public function carga_temas()
+	{
+		$select = '<option value="0">Temas</option>';
+		$id_sec = $this->input->post('id', TRUE);
+		$model = new M_propuestas();
+		$query_tem = $model->datos_temas($id_sec);
+		if($query_tem!=false)
+		{
+			foreach ($query_tem as $tema) {
+				$select .= '<option value="'.$tema->iIdTema.'">'.$tema->vTema.'</option>';
+			}
+		}
+		echo $select;
+
 	}
 }
