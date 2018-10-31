@@ -8,6 +8,7 @@ class C_propuestas extends CI_Controller {
         parent::__construct();
         $this->load->helper('url');
         $this->load->model('M_propuestas');
+        $this->load->library('Class_propuestas');
     }
 
 	public function propuesta_sim()
@@ -96,6 +97,14 @@ class C_propuestas extends CI_Controller {
 		echo $select;
 	}
 
+	public function pagina_prop()
+	{
+		$pagina = $this->input->post('pagina', TRUE);
+		$prop = new Class_propuestas();
+		$propuestas = $prop->carga_propuestas($pagina);
+		echo $propuestas;
+	}
+
 	public function subir()
 	{
 		
@@ -103,7 +112,7 @@ class C_propuestas extends CI_Controller {
 		$iIdPropuesta = $this->input->post('iIdPropuesta', TRUE);		
 		$ruta = 'archivos/';
 		$tArchivos = 0;
-		$dFecha = $today = date("Y-m-d H:i:s.uP");
+		$dFecha = $today = date("Y-m-d H:i:s");
 		
 		if($op==1)
 		{

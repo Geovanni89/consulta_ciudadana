@@ -10,11 +10,11 @@ class Class_propuestas {
         $CI->load->model('M_propuestas'); 
     }
 
-    function carga_propuestas()
+    function carga_propuestas($pagina=0)
     {
         $propuestas = "";
         $model = new M_propuestas();
-        $query_prop = $model->carga_propuestas();
+        $query_prop = $model->carga_propuestas(0,$pagina);
         if($query_prop!=false)
         {            
 
@@ -28,7 +28,7 @@ class Class_propuestas {
                                     <a href="'.base_url().$urlImg.'" data-lightbox="image"><img class="image_fade" src="'.base_url().$urlImg.'" alt="Standard Post with Image"></a>
                                 </div>
                                 <div class="entry-title">
-                                    <h2><a href="javascript:" onclick="propuesta_simple('.$vprop->iIdPropuesta.')">'.$vprop->vTitulo.'</a></h2>
+                                    <h2><a href="javascript:" onclick="propuesta_simple('.$vprop->iIdPropuesta.')">'.$vprop->vTitulo.'-'.$vprop->iIdPropuesta.'</a></h2>
                                 </div>
                                 <ul class="entry-meta clearfix">
                                     <li><a href="javascript:"><i class="icon-comments"></i> 2 Comentarios</a></li>
@@ -44,7 +44,15 @@ class Class_propuestas {
             }
         }
         return $propuestas;
-    }    
+    }
+
+    function total_propuestas()
+    {
+        $model = new M_propuestas();
+        $query_total = $model->total_propuestas();
+        if($query_total!=false) return $query_total;
+        else return false;
+    }
 
    
 }

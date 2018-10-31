@@ -89,6 +89,7 @@ class Sitio extends CI_Controller {
 	{
 		$prop = new Class_propuestas();
 		$datos['propuestas'] = $prop->carga_propuestas();
+		$datos['total'] = $prop->total_propuestas();
 		$this->load->view('propuestas',$datos);
 	}
 

@@ -54,6 +54,8 @@
 
 			<div class="entry clearfix">
 				<div class="tabs nobottommargin topmargin clearfix" id="sidebar-tabs">
+					<input type="hidden" name="nLatDec" id="nLatDec" value="<?php echo $nLatDec;?>">
+					<input type="hidden" name="nLongDec" id="nLongDec" value="<?php echo $nLongDec; ?>">					
 
 					<ul class="tab-nav clearfix">
 						<li><a href="#tab-mapa">Mapa</a></li>
@@ -274,17 +276,41 @@
 ============================================= -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnOBLYrneZlLUF5_bhWzGnwc6I7s01qEs&callback=initMap" async defer></script>
 <script type="text/javascript">
-	function initMap() {	        
-			var latLong = {lat: <?php echo $nLatDec;?>, lng: <?php echo $nLongDec; ?>}
-	        map = new google.maps.Map(document.getElementById('map'), {
-	          zoom: 12,
-	          center: latLong
-	        });
+	function initMap() {
 
-	        var marker = new google.maps.Marker({
-	          position: latLong,
-	          map: map,
-	          title: 'Propuesta'
-	        });
+			var nLatDec = $('#nLatDec').val(); console.log(typeof nLatDec);
+			var nLongDec = $('#nLongDec').val(); console.log(typeof nLongDec);
+			var key = 'AIzaSyBnOBLYrneZlLUF5_bhWzGnwc6I7s01qEs';
+			var marker = "";
+
+			if(nLatDec!="" && nLongDec!="") {
+				/*var latLong = {lat: nLatDec, lng: nLongDec}
+		        map = new google.maps.Map(document.getElementById('map'), {
+		          zoom: 12,
+		          center: latLong
+		        });
+
+		        var marker = new google.maps.Marker({
+		          position: latLong,
+		          map: map,
+		          title: 'Propuesta'
+		        });*/
+		        zoom = 12;
+		        maptype="roadmap"
+		        marker = '&markers=color:blue%7Clabel:P%7C'+nLatDec+','+nLongDec;    
+		        url = 'https://maps.googleapis.com/maps/api/staticmap?center='+nLatDec+','+nLongDec+'&zoom='+zoom+'&size=600x300&maptype='+maptype+marker+'&key='+key
+			}
+			else {
+				nLatDec = 20.55489;
+				nLongDec = -88.8236247;
+				zoom = 8;
+				maptype="terrain";
+				url = '<?=base_url();?>img/mapa.jpg';
+			}	
+
+			var img = document.createElement("IMG");
+			img.setAttribute('src',url);
+			document.getElementById('map').appendChild(img);
+			
 	      }
 </script>

@@ -62,6 +62,30 @@
 
 						</div><!-- #posts end -->
 
+						<div class="row mb-3">
+							<div class="col-12">
+								<div class="col_third_fourth">
+									<div class="col_one_third">
+										
+									</div>
+									<div class="col_one_third">
+										<ul class="pagination">
+											<li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+											<?php
+											//$total = (ceil($total/5) > 5) ? 5 : ceil($total/5);
+											$total = floor($total/5);
+												for ($i=0; $i < $total; $i++) { 
+													echo '<li class="page-item"><a class="page-link" onclick="pagina_propuesta('.($i+1).')" href="javascript:">'.($i+1).'</a></li>';
+												}
+											?>
+											<li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+											</ul>
+									</div>						
+								</div>	
+								
+							</div>
+						</div>
+
 					</div><!-- .postcontent end -->
 
 					<!-- Sidebar
@@ -163,7 +187,13 @@
 					alert("Error al cargar la propuesta");
 				}
 			});
-		}		
+		}
+
+		function pagina_propuesta(pagina) {
+			$.post('<?=base_url();?>C_propuestas/pagina_prop',{pagina:pagina}, function(resp){
+				$('#posts').empty().html(resp);
+			});
+		}	
 
 			
 	</script>
