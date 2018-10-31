@@ -17,6 +17,10 @@
 	<link rel="stylesheet" href="<?=base_url();?>public/css/magnific-popup.css" type="text/css" />
 
 	<link rel="stylesheet" href="<?=base_url();?>public/css/responsive.css" type="text/css" />
+	<!--Modal Loading -->
+	<link type="text/css" rel="stylesheet" href="<?=base_url();?>admin/plugins/modal-loading/css/modal-loading.css" />
+	<link type="text/css" rel="stylesheet" href="<?=base_url();?>admin/plugins/modal-loading/css/modal-loading-animate.css" />
+	<!--Modal Loading -->
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 	<!-- Document Title
@@ -89,21 +93,16 @@
 							<div class="card-body" style="padding: 40px;">
 								<form id="login-form" name="login-form" class="nobottommargin" method="post" action="" onsubmit="">
 
-									<h3>Ingrese a su cuenta</h3>
+									<h3>Recuperar contraseña</h3>
 
 									<div class="col_full" id="#divcorreo">
 										<label for="login-form-username">Correo electrónico:</label>
 										<input type="text" id="correo" name="correo" value="" class="form-control" autocomplete="off" />
 									</div>
-
-									<div class="col_full">
-										<label for="login-form-password">Contraseña:</label>
-										<input type="password" id="contrasenia" name="contrasenia" value="" class="form-control" autocomplete="off" />
-									</div>
+									
 
 									<div class="col_full nobottommargin">
-										<button class="button button-3d button-black nomargin" id="login-form-submit" name="login-form-submit" value="login">Iniciar sesión</button>
-										<a href="<?=base_url();?>C_seguridad/recuperar_contrasenia" class="fright">¿Olvidó su contraseña?</a>
+										<button class="button button-3d nomargin" id="login-form-submit" name="login-form-submit" value="login">Enviar correo</button>
 									</div>
 
 								</form>
@@ -156,6 +155,9 @@
 	============================================= -->
 	<script src="<?=base_url();?>public/js/functions.js"></script>
 	<script src="<?=base_url();?>public/js/funciones.js?v=4"></script>
+	<!--Modal Loading -->
+	<script src="<?=base_url();?>admin/plugins/modal-loading/js/modal-loading.js"></script>
+	<!--Modal Loading -->
 
 
 	<script>
@@ -168,30 +170,28 @@
 		$( "#login-form" ).validate({
 		  	rules: {
 		    	correo: {
-		      		required: true
-		    	},
-		    	contrasenia: {
-		      		required: true
+		      		required: true,
+		      		email: true
 		    	}
 		  	},
-		  	messages: {
-		  		
-			    correo: "Este campo es requerido",
-			    contrasenia: "Este campo es requerido"
-			    /*
+		  	messages: {		  		
 			    correo: {
-			    	required: "We need your email address to contact you",
-			    	email: "Your email address must be in the format of name@domain.com"
-			    }*/
+			    	required: "Este campo es requerido",
+			    	email: "Por favor ingrese un correo en formato ejemplo@dominio.com"
+			    }
 		  	},
 		  	submitHandler: function(form){
-		  		Iniciar_sesion(form,'<?=base_url();?>Sitio/loguearse');
+		  		EnviarCorreoRecuperacion(form,'<?=base_url();?>C_seguridad/validar_envio_recuperacion_contrasenia');
 
 		  	}
 		});
 
-		function Iniciar_sesion(form,url_destino)
+		function EnviarCorreoRecuperacion(form,url_destino)
 		{
+			var loading = new Loading({
+					discription: 'Espere...',
+			    	defaultApply: true
+			    });
 			$.ajax({
 		        url: url_destino,
 		        type: 'POST',
@@ -206,11 +206,12 @@
 		        	switch(cod[0])
 		            {
 		                case "0":
-		                    Notificacion('Autentificado','success');
-		                    window.location.href = '<?=base_url();?>';
+		                	loading.out();
+		                    Notificacion('Correo enviado','success');
 		                    break;                    
 		                default:
-		                    Notificacion(msg[cod[0]],'error');
+		                	loading.out();
+		                    Notificacion(htmlcode,'error');
 		                    break;
 		            }
 		        }
@@ -221,6 +222,39 @@
 
 	<!-- Footer Scripts
 	============================================= -->
+	
 
+  	ALTER TABLE public."Usuario" DROP COLUMN "dFechaRegistro";
+
+  	ALTER TABLE public."Usuario"
+    	ADD COLUMN "dFechaRegitro" timestamp without time zone;
+
+	ALTER TABLE public."Comentario" DROP COLUMN "dFecha";
+
+	ALTER TABLE public."Comentario"
+    	ADD COLUMN "dFecha" timestamp without time zone;
+
+	ALTER TABLE public."ComentarioLike" DROP COLUMN "dFecha";
+
+	ALTER TABLE public."ComentarioLike"
+    	ADD COLUMN "dFecha" timestamp without time zone;
+
+	ALTER TABLE public."Propuesta"
+    	ADD COLUMN "dFecha" timestamp without time zone;
+
+    ALTER TABLE public."PropuestaAdjunto" DROP COLUMN "dFecha";
+
+	ALTER TABLE public."PropuestaAdjunto"
+    	ADD COLUMN "dFecha" timestamp without time zone;
+
+	ALTER TABLE public."PropuestaLike" DROP COLUMN "dFecha";
+
+	ALTER TABLE public."PropuestaLike"
+    	ADD COLUMN "dFecha" timestamp without time zone;
+
+	ALTER TABLE public."VotoPropuesta" DROP COLUMN "dFecha";
+
+	ALTER TABLE public."VotoPropuesta"
+    	ADD COLUMN "dFecha" timestamp without time zone;
 </body>
 </html>

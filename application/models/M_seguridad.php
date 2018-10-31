@@ -84,6 +84,76 @@ class M_seguridad extends CI_Model {
 				ORDER BY t.\"iOrden\" ASC";
 		return $this->db->query($sql);
 	}
+
+	public function buscar_usuarios($where ='',$palabra='')
+	{
+		$this->db->select('u.iIdUsuario, u.vNombre, u.vApellidoPaterno, u.vApellidoMaterno, u.vCorreo, r.vRol, r.iIdRol');
+		$this->db->from('Usuario u');
+		$this->db->join('Rol r','r.iIdRol = u.iIdRol','INNER');
+		$this->db->where('u.iEstatus >',0);
+		if($palabra != '')
+		{
+			//$this->bd->where("v. LIKE '%$palabra%'");
+		}
+
+		if(!empty($where)) $this->db->where($where);
+
+		
+		$this->db->order_by('u.vNombre');
+		
+
+		return $this->db->get();
+	}
+
+	public function consultar_usuario_por_token($idusuario, $token)
+	{
+		$this->db->select('u.iIdUsuario, u.vNombre, u.vApellidoPaterno, u.vApellidoMaterno, u.vCorreo, r.vRol, r.iIdRol');
+		$this->db->from('Usuario u');
+		$this->db->join('Rol r','r.iIdRol = u.iIdRol','INNER');
+		$this->db->where('u.iEstatus >',0);
+		$this->db->where('u.iIdUsuario',$idusuario);
+		$this->db->where('u.vToken',$token);
+		$response = false;
+
+		$query =  $this->db->get();
+		if($query)
+		{
+			if($query->num_rows() == 1) $response = true;
+		}
+
+		return $response;
+	}
+
+	public function consultar_usuario_por_correo($correo)
+	{
+		$this->db->select('u.iIdUsuario, u.vNombre, u.vApellidoPaterno, u.vApellidoMaterno');
+		$this->db->from('Usuario u');
+		$this->db->join('Rol r','r.iIdRol = u.iIdRol','INNER');
+		$this->db->where('u.iEstatus ',2);
+		$this->db->where('u.vCorreo',$correo);
+		$this->db->limit(1);	//Sólo debe haber un correo registrado
+		$response = false;
+
+		$query =  $this->db->get();
+		
+		return $query;
+	}
+
+	public function verificar_existe_correo_usuario($correo)
+	{
+		$this->db->select('u.iIdUsuario');
+		$this->db->from('Usuario u');
+		$this->db->join('Rol r','r.iIdRol = u.iIdRol','INNER');
+		$this->db->where('u.iEstatus >',0);	// Se excluyen usuarios eliminados
+		$this->db->where('u.vCorreo',$correo);
+		$response = false;
+
+		$query =  $this->db->get();
+
+		if($query->num_rows() > 0) $response = true;
+		
+		return $response;
+	}	
 	
 }
 

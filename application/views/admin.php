@@ -144,37 +144,8 @@
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <?php echo $menu; ?>
-                <!-- Sidebar navigation-->
-                <!--
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        
-                        <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Personal</span></li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-Car-Wheel"></i><span class="hide-menu">Dashboard </span></a>
-                            <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="index.html" class="sidebar-link"><i class="mdi mdi-adjust"></i><span class="hide-menu"> Dashboard 1 </span></a></li>
-                                <li class="sidebar-item"><a href="index2.html" class="sidebar-link"><i class="mdi mdi-adjust"></i><span class="hide-menu"> Dashboard 2 </span></a></li>
-                                <li class="sidebar-item"><a href="index3.html" class="sidebar-link"><i class="mdi mdi-adjust"></i><span class="hide-menu"> Dashboard 3 </span></a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Apps</span></li>
-                        <li class="sidebar-item"> <a class="sidebar-link two-column has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-Box-withFolders"></i><span class="hide-menu">Apps </span></a>
-                            <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item"><a href="inbox-email.html" class="sidebar-link"><i class="mdi mdi-email"></i><span class="hide-menu"> Email </span></a></li>
-                                <li class="sidebar-item"><a href="inbox-email-detail.html" class="sidebar-link"><i class="mdi mdi-email-alert"></i><span class="hide-menu"> Email Detail </span></a></li>
-                                <li class="sidebar-item"><a href="inbox-email-compose.html" class="sidebar-link"><i class="mdi mdi-email-secure"></i><span class="hide-menu"> Email Compose </span></a></li>
-                                <li class="sidebar-item"><a href="ticket-list.html" class="sidebar-link"><i class="mdi mdi-book-multiple"></i><span class="hide-menu"> Ticket List </span></a></li>
-                                <li class="sidebar-item"><a href="ticket-detail.html" class="sidebar-link"><i class="mdi mdi-book-plus"></i><span class="hide-menu"> Ticket Detail </span></a></li>
-                                <li class="sidebar-item"><a href="app-chats.html" class="sidebar-link"><i class="mdi mdi-comment-processing-outline"></i><span class="hide-menu"> Chats Apps </span></a></li>
-                                <li class="sidebar-item"><a href="app-calendar.html" class="sidebar-link"><i class="mdi mdi-calendar"></i><span class="hide-menu"> Calender </span></a></li>
-                                <li class="sidebar-item"><a href="app-taskboard.html" class="sidebar-link"><i class="mdi mdi-bulletin-board"></i><span class="hide-menu"> Taskboard </span></a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-                <!-- End Sidebar navigation -->
+               
             </div>
-            <!-- End Sidebar scroll-->
         </aside>
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
@@ -214,14 +185,15 @@
             <!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->
+            <button onclick="PonerEfecto();">Poner Efecto</button>
+            <button onclick="QuitarEfecto();">Quitar Efecto</button>
             <div class="container-fluid" id="contenido">
                
                hola
              
-              
-               
-               
                 
+               
+              
             </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
@@ -327,127 +299,12 @@
                 <!-- End Tab 1 -->
                 <!-- Tab 2 -->
                 <div class="tab-pane fade" id="chat" role="tabpanel" aria-labelledby="pills-profile-tab">
-                    <ul class="mailbox list-style-none m-t-20">
-                        <li>
-                            <div class="message-center chat-scroll">
-                                <a href="javascript:void(0)" class="message-item" id='chat_user_1' data-user-id='1'>
-                                    <span class="user-img"> <img src="../../assets/images/users/1.jpg" alt="user" class="rounded-circle"> <span class="profile-status online pull-right"></span> </span>
-                                    <div class="mail-contnet">
-                                        <h5 class="message-title">Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:30 AM</span> </div>
-                                </a>
-                                <!-- Message -->
-                                <a href="javascript:void(0)" class="message-item" id='chat_user_2' data-user-id='2'>
-                                    <span class="user-img"> <img src="../../assets/images/users/2.jpg" alt="user" class="rounded-circle"> <span class="profile-status busy pull-right"></span> </span>
-                                    <div class="mail-contnet">
-                                        <h5 class="message-title">Sonu Nigam</h5> <span class="mail-desc">I've sung a song! See you at</span> <span class="time">9:10 AM</span> </div>
-                                </a>
-                                <!-- Message -->
-                                <a href="javascript:void(0)" class="message-item" id='chat_user_3' data-user-id='3'>
-                                    <span class="user-img"> <img src="../../assets/images/users/3.jpg" alt="user" class="rounded-circle"> <span class="profile-status away pull-right"></span> </span>
-                                    <div class="mail-contnet">
-                                        <h5 class="message-title">Arijit Sinh</h5> <span class="mail-desc">I am a singer!</span> <span class="time">9:08 AM</span> </div>
-                                </a>
-                                <!-- Message -->
-                                <a href="javascript:void(0)" class="message-item" id='chat_user_4' data-user-id='4'>
-                                    <span class="user-img"> <img src="../../assets/images/users/4.jpg" alt="user" class="rounded-circle"> <span class="profile-status offline pull-right"></span> </span>
-                                    <div class="mail-contnet">
-                                        <h5 class="message-title">Nirav Joshi</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
-                                </a>
-                                <!-- Message -->
-                                <!-- Message -->
-                                <a href="javascript:void(0)" class="message-item" id='chat_user_5' data-user-id='5'>
-                                    <span class="user-img"> <img src="../../assets/images/users/5.jpg" alt="user" class="rounded-circle"> <span class="profile-status offline pull-right"></span> </span>
-                                    <div class="mail-contnet">
-                                        <h5 class="message-title">Sunil Joshi</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
-                                </a>
-                                <!-- Message -->
-                                <!-- Message -->
-                                <a href="javascript:void(0)" class="message-item" id='chat_user_6' data-user-id='6'>
-                                    <span class="user-img"> <img src="../../assets/images/users/6.jpg" alt="user" class="rounded-circle"> <span class="profile-status offline pull-right"></span> </span>
-                                    <div class="mail-contnet">
-                                        <h5 class="message-title">Akshay Kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
-                                </a>
-                                <!-- Message -->
-                                <!-- Message -->
-                                <a href="javascript:void(0)" class="message-item" id='chat_user_7' data-user-id='7'>
-                                    <span class="user-img"> <img src="../../assets/images/users/7.jpg" alt="user" class="rounded-circle"> <span class="profile-status offline pull-right"></span> </span>
-                                    <div class="mail-contnet">
-                                        <h5 class="message-title">Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
-                                </a>
-                                <!-- Message -->
-                                <!-- Message -->
-                                <a href="javascript:void(0)" class="message-item" id='chat_user_8' data-user-id='8'>
-                                    <span class="user-img"> <img src="../../assets/images/users/8.jpg" alt="user" class="rounded-circle"> <span class="profile-status offline pull-right"></span> </span>
-                                    <div class="mail-contnet">
-                                        <h5 class="message-title">Varun Dhavan</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
-                                </a>
-                                <!-- Message -->
-                            </div>
-                        </li>
-                    </ul>
+                    
                 </div>
                 <!-- End Tab 2 -->
                 <!-- Tab 3 -->
                 <div class="tab-pane fade p-15" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                    <h6 class="m-t-20 m-b-20">Activity Timeline</h6>
-                    <div class="steamline">
-                        <div class="sl-item">
-                            <div class="sl-left bg-success"> <i class="ti-user"></i></div>
-                            <div class="sl-right">
-                                <div class="font-medium">Meeting today <span class="sl-date"> 5pm</span></div>
-                                <div class="desc">you can write anything </div>
-                            </div>
-                        </div>
-                        <div class="sl-item">
-                            <div class="sl-left bg-info"><i class="fas fa-image"></i></div>
-                            <div class="sl-right">
-                                <div class="font-medium">Send documents to Clark</div>
-                                <div class="desc">Lorem Ipsum is simply </div>
-                            </div>
-                        </div>
-                        <div class="sl-item">
-                            <div class="sl-left"> <img class="rounded-circle" alt="user" src="../../assets/images/users/2.jpg"> </div>
-                            <div class="sl-right">
-                                <div class="font-medium">Go to the Doctor <span class="sl-date">5 minutes ago</span></div>
-                                <div class="desc">Contrary to popular belief</div>
-                            </div>
-                        </div>
-                        <div class="sl-item">
-                            <div class="sl-left"> <img class="rounded-circle" alt="user" src="../../assets/images/users/1.jpg"> </div>
-                            <div class="sl-right">
-                                <div><a href="javascript:void(0)">Stephen</a> <span class="sl-date">5 minutes ago</span></div>
-                                <div class="desc">Approve meeting with tiger</div>
-                            </div>
-                        </div>
-                        <div class="sl-item">
-                            <div class="sl-left bg-primary"> <i class="ti-user"></i></div>
-                            <div class="sl-right">
-                                <div class="font-medium">Meeting today <span class="sl-date"> 5pm</span></div>
-                                <div class="desc">you can write anything </div>
-                            </div>
-                        </div>
-                        <div class="sl-item">
-                            <div class="sl-left bg-info"><i class="fas fa-image"></i></div>
-                            <div class="sl-right">
-                                <div class="font-medium">Send documents to Clark</div>
-                                <div class="desc">Lorem Ipsum is simply </div>
-                            </div>
-                        </div>
-                        <div class="sl-item">
-                            <div class="sl-left"> <img class="rounded-circle" alt="user" src="../../assets/images/users/4.jpg"> </div>
-                            <div class="sl-right">
-                                <div class="font-medium">Go to the Doctor <span class="sl-date">5 minutes ago</span></div>
-                                <div class="desc">Contrary to popular belief</div>
-                            </div>
-                        </div>
-                        <div class="sl-item">
-                            <div class="sl-left"> <img class="rounded-circle" alt="user" src="../../assets/images/users/6.jpg"> </div>
-                            <div class="sl-right">
-                                <div><a href="javascript:void(0)">Stephen</a> <span class="sl-date">5 minutes ago</span></div>
-                                <div class="desc">Approve meeting with tiger</div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
                 <!-- End Tab 3 -->
             </div>
@@ -501,6 +358,22 @@
         });
         
 
+        function PonerEfecto()
+        {
+            //$('.preloader').fadeIn();
+            //$('#contenedor').fadeIn();
+            Cargar('','#contenido','POST');
+
+        }
+
+         function QuitarEfecto()
+        {
+            //$('.preloader').fadeIn();
+            $('#contenedor').fadeOut();
+            $('#contenedor').removeClass('preloader');
+
+        }
+
         function Confirmar_cerrar_sesion()
         {
             $('#confirmar_cerrar_sesion').modal();
@@ -524,6 +397,28 @@
             });
         }
 
+        function Cargar(pagina,obj,metodo,variables)
+        {
+            var loading = '<div id="page-loader" class="fade in"><span class="spinner"></span></div>';
+            //var loading = '<div class="preloader"><div class="lds-ripple"><div class="lds-pos"></div><div class="lds-pos"></div></div></div>';
+
+            if(typeof(metodo) == "undefined" || metodo == ""){ metodo = "POST";}
+            if(typeof(variables) == "undefined" || variables == ""){ variables = "";}
+            $(obj).html(loading);
+            $.ajax({
+                url: pagina,
+                type: metodo,
+                async: true,
+                data: variables,
+                success: function(htmlcode){
+                    $(obj).html(htmlcode);
+                },
+                error: function(XMLHttpRequest, errMsg, exception){
+                    Notificacion(errMsg,"error");
+                }
+            });
+          
+        }
 
     </script>
 </body>
