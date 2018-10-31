@@ -24,7 +24,8 @@ class Sitio extends CI_Controller {
         parent::__construct();
         session_start();
         $this->load->helper('url');
-        $this->load->model('M_prueba');
+        $this->load->model('M_propuestas');
+        $this->load->library('Class_propuestas');
     }
 
 
@@ -90,12 +91,40 @@ class Sitio extends CI_Controller {
 
 	public function propuestas()
 	{
-		$this->load->view('propuestas');
+		$prop = new Class_propuestas();
+		$datos['propuestas'] = $prop->carga_propuestas();
+		$this->load->view('propuestas',$datos);
 	}
 
 	public function form_propuesta()
 	{
-		$this->load->view('form_propuesta');
+		//estas consultas se moveran posteriormente a C_propuestas
+		$select_sec = '';
+		$select = '';
+		$model = new M_propuestas();
+
+		$query = $model->datos_sectores();
+		if($query!=false)
+		{
+			foreach ($query as $sector)
+            {
+                $select_sec .= '<option value="'.$sector->iIdSector.'">'.$sector->vSector.'</option>';
+            }
+		}
+		$datos['select_sec'] = $select_sec;
+		
+		$query_mun = $model->datos_municipios();
+		if($query_mun!=false)
+		{
+			foreach ($query_mun as $municipio)
+            {
+                $select .= '<option value="'.$municipio->iIdMunicipio.'">'.$municipio->vMunicipio.'</option>';
+            }
+		}
+		$datos['select'] = $select;
+		//estas consultas se moveran posteriormente a C_propuestas
+
+		$this->load->view('form_propuesta',$datos);
 	}
 
 	public function test()
