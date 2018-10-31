@@ -5,7 +5,7 @@
 
 	<!-- Copyrights
 	============================================= -->
-	<div id="copyrights">
+	<div id="copyrights" class="nopadding">
 
 		<div class="container clearfix">
 

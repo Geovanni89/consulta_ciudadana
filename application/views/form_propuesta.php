@@ -23,11 +23,7 @@
 
 	<!-- Document Title
 	============================================= -->
-	<title>Consulta Ciudadana | Crea tu propuesta</title>
-	<style type="text/css">
-		#map { height: 400px; }
-	</style>
-
+	<title>Consulta Ciudadana | Crea tu propuesta</title>	
 </head>
 
 <body class="stretched">
@@ -327,16 +323,12 @@
 						var filesCount = $('#adjuntoArchivos').fileinput('getFilesCount');
 						
 
-						if(imageCount>0){							
-							//$('#adjuntoFotos').fileinput('refresh',{uploadUrl: '<?=base_url();?>C_propuestas/subir?op=1&id='+data})
+						if(imageCount>0){
 							$('#adjuntoFotos').fileinput('upload');
-								//setTimeout(function(){ $('#adjuntoFotos').fileinput('upload'); }, 2200);
 						}
 
 						if(filesCount>0){
-							//$('#adjuntoArchivos').fileinput('refresh',{uploadUrl: '<?=base_url();?>C_propuestas/subir?op=2&id='+data})
 							$('#adjuntoArchivos').fileinput('upload');
-							//setTimeout(function(){ $('#adjuntoArchivos').fileinput('upload'); }, 2200);
 						}
 
 						$('#formPropuesta')[0].reset();

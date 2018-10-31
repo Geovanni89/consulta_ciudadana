@@ -25,6 +25,7 @@ class Sitio extends CI_Controller {
         session_start();
         $this->load->helper('url');
         $this->load->model('M_propuestas');
+        $this->load->library('Class_propuestas');
     }
 
 
@@ -86,7 +87,9 @@ class Sitio extends CI_Controller {
 
 	public function propuestas()
 	{
-		$this->load->view('propuestas');
+		$prop = new Class_propuestas();
+		$datos['propuestas'] = $prop->carga_propuestas();
+		$this->load->view('propuestas',$datos);
 	}
 
 	public function form_propuesta()

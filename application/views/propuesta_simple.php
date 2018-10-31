@@ -1,5 +1,4 @@
-<div class="single-post nobottommargin">
-
+<div class="single-post nobottommargin">	
 	<!-- Single Post
 	============================================= -->
 	<div class="entry clearfix">
@@ -7,7 +6,7 @@
 		<!-- Entry Title
 		============================================= -->
 		<div class="entry-title">
-			<h2>Pasos de cebra en calle Amaniel</h2>
+			<h2><?php echo $vTitulo;?></h2>
 		</div><!-- .entry-title end -->
 
 		<!-- Entry Meta
@@ -15,7 +14,7 @@
 		<ul class="entry-meta clearfix">
 			<li><a href="#"><i class="icon-comments"></i> 2 Comentarios</a></li>
 			<li><i class="icon-calendar3"></i> 22/10/2018</li>
-			<li><a href="#"><i class="icon-user"></i> JorgeEstrella</a></li>
+			<li><a href="#"><i class="icon-user"></i> <?php echo $vNombre.' '.$vApellidoPaterno.' '.$vApellidoMaterno; ?></a></li>
 		</ul><!-- .entry-meta end -->
 
 		<!--Multi Entry Image
@@ -24,9 +23,19 @@
 			<div class="fslider" data-arrows="false" data-lightbox="gallery">
 				<div class="flexslider">
 					<div class="slider-wrap">
-						<div class="slide"><a href="<?=base_url();?>public/images/blog/full/10.jpg" data-lightbox="gallery-item"><img class="image_fade" src="<?=base_url();?>public/images/blog/standard/10.jpg" alt="Standard Post with Gallery"></a></div>
-						<div class="slide"><a href="<?=base_url();?>public/images/blog/full/20.jpg" data-lightbox="gallery-item"><img class="image_fade" src="<?=base_url();?>public/images/blog/standard/20.jpg" alt="Standard Post with Gallery"></a></div>
-						<div class="slide"><a href="<?=base_url();?>public/images/blog/full/21.jpg" data-lightbox="gallery-item"><img class="image_fade" src="<?=base_url();?>public/images/blog/standard/21.jpg" alt="Standard Post with Gallery"></a></div>
+						<?php 
+							if($img!=false) 
+							{
+								foreach ($img as $vimg) {
+									echo '<div class="slide"><a href="'.base_url().$vimg->vRutaAdjunto.'" data-lightbox="gallery-item"><img class="image_fade" src="'.base_url().$vimg->vRutaAdjunto.'" alt="'.$vimg->vNombreAdjunto.'"></a></div>';
+								}
+							}
+							else
+							{
+								echo '<div class="slide"><a href="'.base_url().'public/images/blog/full/10.jpg" data-lightbox="gallery-item"><img class="image_fade" src="'.base_url().'public/images/blog/standard/10.jpg" alt="Imagen predeterminada"></a></div>';
+							}
+						?>
+
 					</div>
 				</div>
 			</div>
@@ -34,57 +43,54 @@
 
 		<!-- Entry Content
 		============================================= -->
-		<div class="entry-content notopmargin">
+		<div class="entry-content notopmargin ">
+			<div class="clearfix bottommargin-sm">
+				<button type="button" class="btn btn-outline-success btn-lg btn-block">Apoyar</button>
+			</div>
+			<?php echo $tDescripcion;?>
 
-			<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
-
-			<p>Nullam id dolor id nibh ultricies vehicula ut id elit. <a href="#">Curabitur blandit tempus porttitor</a>. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper.</p>
 
 			<!-- Post Single - Content End -->
 
 			<div class="entry clearfix">
-				<div class="tabs nobottommargin clearfix" id="sidebar-tabs">
+				<div class="tabs nobottommargin topmargin clearfix" id="sidebar-tabs">
 
 					<ul class="tab-nav clearfix">
-						<li><a href="#tabs-1">Mapa</a></li>
+						<li><a href="#tab-mapa">Mapa</a></li>
 						<li><a href="#tabs-2">Documentación</a></li>
 					</ul>
 
 					<div class="tab-container">
 
-						<div class="tab-content clearfix" id="tabs-1">
-							<div id="popular-post-list-sidebar">
-
-								<div class="spost clearfix">
-									<div class="entry-image">
-										<a href="#" class="nobg"><img class="rounded-circle" src="<?=base_url();?>public/images/magazine/small/3.jpg" alt=""></a>
-									</div>
-									<div class="entry-c">
-										<div class="entry-title">
-											<h4><a href="#">Debitis nihil placeat, illum est nisi</a></h4>
-										</div>
-										<ul class="entry-meta">
-											<li><i class="icon-comments-alt"></i> 35 Comments</li>
-										</ul>
-									</div>
-								</div>
-							</div>
+						<div class="tab-content clearfix" id="tab-mapa">
+							<div id="map"></div>
 						</div>
 						<div class="tab-content clearfix" id="tabs-2">
 							<div id="recent-post-list-sidebar">
-								<div class="spost clearfix">
-									<div class="entry-image">
-										<a href="#" class="nobg"><img class="rounded-circle" src="<?=base_url();?>public/images/magazine/small/3.jpg" alt=""></a>
-									</div>
-									<div class="entry-c">
-										<div class="entry-title">
-											<h4><a href="#">Debitis nihil placeat, illum est nisi</a></h4>
-										</div>
-										<ul class="entry-meta">
-											<li>10th July 2014</li>
-										</ul>
-									</div>
-								</div>
+								<?php 
+									if($pdf!=false) 
+									{
+										foreach ($pdf as $vpdf) {
+											
+											
+											echo '<div class="spost clearfix">
+													<div class="entry-image">
+														<a href="javascript:" class="nobg"><img class="rounded-circle" src="'.base_url().'public/images/magazine/small/3.jpg" alt=""></a>
+													</div>
+													<div class="entry-c">										
+														<div class="entry-title">
+															<h4><a href="'.base_url().$vpdf->vRutaAdjunto.'">'.$vpdf->vNombreAdjunto.'</a></h4>
+														</div>
+														<ul class="entry-meta">
+															<li>'.$vpdf->dFecha.'</li>
+														</ul>
+													</div>
+												</div>';
+										}
+									}
+									else echo '<h3>Sin documentos</h3>';
+								?>
+								
 
 							</div>
 						</div>
@@ -109,7 +115,7 @@
 			<!-- Post Single - Share
 			============================================= -->
 			<div class="si-share noborder clearfix">
-				<span>Share this Post:</span>
+				<span>Compártelo en tus redes sociales:</span>
 				<div>
 					<a href="#" class="social-icon si-borderless si-facebook">
 						<i class="icon-facebook"></i>
@@ -118,23 +124,11 @@
 					<a href="#" class="social-icon si-borderless si-twitter">
 						<i class="icon-twitter"></i>
 						<i class="icon-twitter"></i>
-					</a>
-					<a href="#" class="social-icon si-borderless si-pinterest">
-						<i class="icon-pinterest"></i>
-						<i class="icon-pinterest"></i>
-					</a>
+					</a>					
 					<a href="#" class="social-icon si-borderless si-gplus">
 						<i class="icon-gplus"></i>
 						<i class="icon-gplus"></i>
-					</a>
-					<a href="#" class="social-icon si-borderless si-rss">
-						<i class="icon-rss"></i>
-						<i class="icon-rss"></i>
-					</a>
-					<a href="#" class="social-icon si-borderless si-email3">
-						<i class="icon-email3"></i>
-						<i class="icon-email3"></i>
-					</a>
+					</a>					
 				</div>
 			</div><!-- Post Single - Share End -->
 
@@ -276,3 +270,21 @@
 	</div><!-- #comments end -->
 
 </div>
+<!-- Google Maps API v3
+============================================= -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnOBLYrneZlLUF5_bhWzGnwc6I7s01qEs&callback=initMap" async defer></script>
+<script type="text/javascript">
+	function initMap() {	        
+			var latLong = {lat: <?php echo $nLatDec;?>, lng: <?php echo $nLongDec; ?>}
+	        map = new google.maps.Map(document.getElementById('map'), {
+	          zoom: 12,
+	          center: latLong
+	        });
+
+	        var marker = new google.maps.Marker({
+	          position: latLong,
+	          map: map,
+	          title: 'Propuesta'
+	        });
+	      }
+</script>

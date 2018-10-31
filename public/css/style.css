@@ -12119,6 +12119,11 @@ button.toast-close-button {
 
 #copyrights .tright a:last-child { margin-right: 0; }
 
+#copyrights img {
+    max-width: 76%;
+    padding-top: 5%;
+}
+
 .footer-logo {
 	display: block;
 	margin-bottom: 30px;
@@ -13749,3 +13754,5 @@ body:not(.no-transition) #wrapper,
 	-webkit-text-stroke: 0px !important;
 	text-shadow: none !important;
 }
+
+#map { height: 400px !important;}

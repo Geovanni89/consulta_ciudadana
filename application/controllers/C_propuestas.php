@@ -12,7 +12,23 @@ class C_propuestas extends CI_Controller {
 
 	public function propuesta_sim()
 	{
-		$this->load->view('propuesta_simple');
+		$iIdPropuesta = $this->input->post('iIdPropuesta', TRUE);
+		$model = new M_propuestas();
+		$query_prop = $model->carga_propuestas($iIdPropuesta);
+		if($query_prop!=false) 
+		{
+			$datos['vTitulo'] = $query_prop[0]->vTitulo;
+			$datos['tDescripcion'] = $query_prop[0]->tDescripcion;
+			$datos['nLatDec'] = $query_prop[0]->nLatDec;
+			$datos['nLongDec'] = $query_prop[0]->nLongDec;
+			$datos['vNombre'] = $query_prop[0]->vNombre;
+			$datos['vApellidoPaterno'] = $query_prop[0]->vApellidoPaterno;
+			$datos['vApellidoMaterno'] = $query_prop[0]->vApellidoMaterno;
+			$datos['img'] = $model->carga_adjuntos($iIdPropuesta,1);
+			$datos['pdf'] = $model->carga_adjuntos($iIdPropuesta,2);
+			$this->load->view('propuesta_simple',$datos);
+		} 
+		else echo "error";
 	}
 
 	public function captura_propuesta()
@@ -86,7 +102,8 @@ class C_propuestas extends CI_Controller {
 		$op = $this->input->get('op', TRUE);
 		$iIdPropuesta = $this->input->post('iIdPropuesta', TRUE);		
 		$ruta = 'archivos/';
-		$tArchivos = 0;		
+		$tArchivos = 0;
+		$dFecha = $today = date("Y-m-d H:i:s.uP");
 		
 		if($op==1)
 		{
@@ -127,7 +144,7 @@ class C_propuestas extends CI_Controller {
 						'vRutaAdjunto' => $vRutaAdjunto,
 						'iTipo' => $tipo,
 						'vExtension' => $extension,
-						'dFecha' => '2018-10-29 12:30:12-6:00',
+						'dFecha' => $dFecha,
 						'iIdPropuesta' => $iIdPropuesta
 			);
 

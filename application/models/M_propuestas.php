@@ -76,6 +76,32 @@ class M_propuestas extends CI_Model {
 			return true;
 		}
 	}
+
+	public function carga_propuestas($iIdPropuesta=0)
+	{
+		$this->db->select('p.iIdPropuesta,p.vTitulo,p.tDescripcion,p.nLatDec,p.nLongDec,u.iIdUsuario,u.vNombre,u.vApellidoPaterno,u.vApellidoMaterno');
+		$this->db->from('Propuesta p');
+		$this->db->join('Usuario u','p.iIdUsuario = u.iIdUsuario','INNER');
+		$this->db->where('p.iEstatus>',0);
+		if($iIdPropuesta>0) $this->db->where('p.iIdPropuesta',$iIdPropuesta);
+
+		$query = $this->db->get();
+		if($query!=false) return $query->result();
+		else return false;
+	}	
+
+	public function carga_adjuntos($iIdPropuesta,$tipo)
+	{
+		$this->db->select('vRutaAdjunto,vNombreAdjunto,dFecha');
+		$this->db->from('PropuestaAdjunto');
+		$this->db->where('iIdPropuesta',$iIdPropuesta);
+		$this->db->where('iTipo',$tipo);
+		$this->db->order_by('dFecha','ASC');
+
+		$query = $this->db->get();
+		if($query!=false) return $query->result();
+		else return false;		
+	}
 }
 
 ?>

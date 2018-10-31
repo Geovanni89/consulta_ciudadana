@@ -58,61 +58,7 @@
 						============================================= -->
 						<div id="posts">
 
-							<div class="entry clearfix">
-								<div class="entry-image">
-									<a href="images/blog/full/17.jpg" data-lightbox="image"><img class="image_fade" src="<?=base_url();?>public/images/blog/standard/17.jpg" alt="Standard Post with Image"></a>
-								</div>
-								<div class="entry-title">
-									<h2><a href="blog-single.html">This is a Standard post with a Preview Image</a></h2>
-								</div>
-								<ul class="entry-meta clearfix">
-									<li><a href="blog-single.html#comments"><i class="icon-comments"></i> 2 Comentarios</a></li>
-									<li><i class="icon-calendar3"></i> 22/10/18</li>
-									<li><a href="#"><i class="icon-user"></i> JorgeEstrella</a></li>
-								</ul>
-								<div class="entry-content">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, asperiores quod est tenetur in. Eligendi, deserunt, blanditiis est quisquam doloribus voluptate id aperiam ea ipsum magni aut perspiciatis rem voluptatibus officia eos rerum deleniti quae nihil facilis repellat atque vitae voluptatem libero at eveniet veritatis ab facere.</p>
-									<a href="javascript:" onclick="propuesta_simple();" class="btn btn-success">Apoyar</a>
-								</div>
-							</div>
-
-							<div class="entry clearfix">
-								<div class="entry-image">
-									<a href="images/blog/full/17.jpg" data-lightbox="image"><img class="image_fade" src="<?=base_url();?>public/images/blog/standard/17.jpg" alt="Standard Post with Image"></a>
-								</div>
-								<div class="entry-title">
-									<h2><a href="blog-single.html">This is a Standard post with a Preview Image</a></h2>
-								</div>
-								<ul class="entry-meta clearfix">
-									<li><a href="blog-single.html#comments"><i class="icon-comments"></i> 2 Comentarios</a></li>
-									<li><i class="icon-calendar3"></i> 22/10/18</li>
-									<li><a href="#"><i class="icon-user"></i> JorgeEstrella</a></li>
-								</ul>
-								<div class="entry-content">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, asperiores quod est tenetur in. Eligendi, deserunt, blanditiis est quisquam doloribus voluptate id aperiam ea ipsum magni aut perspiciatis rem voluptatibus officia eos rerum deleniti quae nihil facilis repellat atque vitae voluptatem libero at eveniet veritatis ab facere.</p>
-									<a href="javascript:" onclick="propuesta_simple();" class="btn btn-success">Apoyar</a>
-								</div>
-							</div>
-
-							<div class="entry clearfix">
-								<div class="entry-image">
-									<a href="images/blog/full/17.jpg" data-lightbox="image"><img class="image_fade" src="<?=base_url();?>public/images/blog/standard/17.jpg" alt="Standard Post with Image"></a>
-								</div>
-								<div class="entry-title">
-									<h2><a href="blog-single.html">This is a Standard post with a Preview Image</a></h2>
-								</div>
-								<ul class="entry-meta clearfix">
-									<li><a href="blog-single.html#comments"><i class="icon-comments"></i> 2 Comentarios</a></li>
-									<li><i class="icon-calendar3"></i> 22/10/18</li>
-									<li><a href="#"><i class="icon-user"></i> JorgeEstrella</a></li>
-								</ul>
-								<div class="entry-content">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, asperiores quod est tenetur in. Eligendi, deserunt, blanditiis est quisquam doloribus voluptate id aperiam ea ipsum magni aut perspiciatis rem voluptatibus officia eos rerum deleniti quae nihil facilis repellat atque vitae voluptatem libero at eveniet veritatis ab facere.</p>
-									<a href="javascript:" onclick="propuesta_simple();" class="btn btn-success">Apoyar</a>
-								</div>
-							</div>
-
-
+							<?php echo $propuestas; ?>
 
 						</div><!-- #posts end -->
 
@@ -191,23 +137,33 @@
 	============================================= -->
 	<script src="<?=base_url();?>public/js/jquery.js"></script>
 	<script src="<?=base_url();?>public/js/plugins.js"></script>
-
+	
 	<!-- Footer Scripts
 	============================================= -->
 	<script src="<?=base_url();?>public/js/functions.js"></script>
-	<script type="text/javascript">
-		function propuesta_simple() {
-			$.post('<?=base_url();?>C_propuestas/propuesta_sim', function(resp){
-				$('#posts').addClass('animated fadeOut')
-				.empty()
-				.html(resp)
-				.addClass('fadeIn')
-				.removeClass('fadeOut');
-				SEMICOLON.widget.tabs();
-				SEMICOLON.widget.loadFlexSlider();
 
+	<script type="text/javascript">
+		var map;
+		var image = '<?=base_url();?>img/logo_vertical_2.png';
+
+		function propuesta_simple(idProp) {
+			$.post('<?=base_url();?>C_propuestas/propuesta_sim', {iIdPropuesta:idProp},function(resp){
+				if(resp!="error")
+				{
+					$('#posts').addClass('animated fadeOut')
+					.empty()
+					.html(resp)
+					.addClass('fadeIn')
+					.removeClass('fadeOut');
+					SEMICOLON.initialize.goToTop();				
+					SEMICOLON.widget.tabs();
+					SEMICOLON.widget.loadFlexSlider();
+					window.scrollTo(0,0);
+				} else {
+					alert("Error al cargar la propuesta");
+				}
 			});
-		}
+		}		
 
 			
 	</script>
