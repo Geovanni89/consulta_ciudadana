@@ -58,30 +58,34 @@ class Sitio extends CI_Controller {
     
 	public function index()
 	{
-		if(isset($_SESSION[PREFIJO.'_id_rol']) && !empty($_SESSION[PREFIJO.'_id_rol']))
+		if(isset($_SESSION[PREFIJO.'_idrol']) && !empty($_SESSION[PREFIJO.'_idrol']))
 		{
-			$id_rol = (int)$_SESSION[PREFIJO.'_id_rol'];
+			$idrol = (int)$_SESSION[PREFIJO.'_idrol'];
+			$idusuario = (int)$_SESSION[PREFIJO.'_idusuario'];
 
-			switch ($id_rol){
+			switch ($idrol){
 				case 1:
 					//	Administrador
-					$this->load->view('admin');
+					$this->load->library('Class_seguridad');
+					$ms = new Class_seguridad();
+					$datos['menu'] = $ms->pintar_menu($idusuario);
+					$this->load->view('admin',$datos);
 					break;
 				case 2:
 					//	Ciudadano
 					$this->load->view('index');
 					break;
 				case 3:
-					//	Administrador
+					//	Moderador
 					echo 'Hola Moderador';
 					break;
 				
 				default:
-					$this->load->view('index');
+					$this->load->view('plantilla_html');
 					break;
 			}
 
-		}else $this->load->view('index');
+		}else $this->load->view('index_mod');
 	}
 
 	public function propuestas()
@@ -97,18 +101,20 @@ class Sitio extends CI_Controller {
 	public function test()
 	{
 		$prueba = new M_prueba();
-		$datos['prueba'] = $prueba->datos_tabla();
-		$this->load->view('test',$datos);
+		var_dump($prueba->datos_tabla());
+		
 	}
 
 	public function login()
 	{
-		$this->load->library('Class_options');
-		$op = new Class_options();
-		$datos['op_grados_estudio'] = $op->options_grados_estudio(0,'Seleccione un grado de estudio');
-		$datos['op_ocupaciones'] = $op->options_ocupaciones(0,'Seleccione una ocupación');
-
-		$this->load->view('login',$datos);
+		if(isset($_SESSION[PREFIJO.'_idrol']) && !empty($_SESSION[PREFIJO.'_idrol']))
+		{
+			$this->index();
+		}
+		else
+		{
+			$this->load->view('login');
+		}
 	}
 
 	public function loguearse()
@@ -121,6 +127,7 @@ class Sitio extends CI_Controller {
 			$seg = new Class_seguridad();
 
 			$cod = $seg->iniciar_sesion($usuario,$contrasenia);
+			//var_dump($_SESSION['consulta']);
 			                        
 			echo $cod;
 		}else echo 100;
@@ -138,4 +145,75 @@ class Sitio extends CI_Controller {
 
 		$this->index();
 	}
+
+	public function registrarse()
+	{
+		$this->load->library('Class_options');
+		$op = new Class_options();
+		$datos['op_grados_estudio'] = $op->options_grados_estudio(0,'Seleccione un grado de estudio');
+		$datos['op_ocupaciones'] = $op->options_ocupaciones(0,'Seleccione una ocupación');
+		$datos['op_municipios'] = $op->options_municipios(0,'Seleccione un municipio');
+		$where1['iIdMunicipio'] = 0;
+		$datos['op_localidades'] = $op->options_localidades(0,'Seleccione una localidad',$where1);
+		$where2['iIdLocalidad'] = 0;
+		$datos['op_asentamientos'] = $op->options_asentamientos(0,'Seleccione una colonia',$where2);
+		$datos['op_dias'] = $op->options_dias(0,'Día');
+		$datos['op_meses'] = $op->options_meses(0,'Mes');
+		$datos['op_anios'] = $op->options_anios(0,'Año');
+
+
+		$this->load->view('registrarse',$datos);
+	}
+
+	function listado_dependiente()
+	{
+		$this->load->library('Class_options');
+
+		$nombrelst = $this->input->post('nombrelst');
+		switch ($nombrelst)
+		{
+			case 'localidades':
+				$op = new Class_options();
+				$where['iIdMunicipio'] = $this->input->post('valor');
+				echo $op->options_localidades(0,'',$where);
+				break;
+			case 'asentamientos':
+				$op = new Class_options();
+				$where['iIdLocalidad'] = $this->input->post('valor');
+				echo $op->options_asentamientos(0,'',$where);
+				break;
+			case 'codigo_postal':
+				$op = new Class_options();
+				$where['iCodigoPostal'] = $this->input->post('valor');
+				echo $op->options_asentamientos_cp(0,'',$where);
+				break;
+			case 'datos_faltantes':
+				$this->load->model('M_catalogos','mc');
+				$datos['success'] = false;
+				$datos['municipio'] = '';
+				$datos['localidad'] = '';
+				$datos['id_asentamiento'] = '';
+				$query = $this->mc->devulve_municipio_localidad($this->input->post('valor'));
+
+				if($query)
+				{
+					if($query->num_rows() > 0)
+					{
+						$query = $query->row();
+						$datos['success'] = true;
+						$datos['municipio'] = $query->vMunicipio;
+						$datos['localidad'] = $query->vLocalidad;
+						$datos['id_asentamiento'] = $query->iIdAsentamiento;	
+					}
+				}
+				
+				echo json_encode($datos);
+
+				break;
+			default:
+				# code...
+				break;
+		}		
+	}
+
 }

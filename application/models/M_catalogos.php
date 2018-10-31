@@ -34,6 +34,64 @@ class M_catalogos extends CI_Model {
 
 		return $query;
 	}
+
+	public function datos_municipios($where='')
+	{
+		$this->db->select('iIdMunicipio,vMunicipio');
+		$this->db->from('Municipio');
+		$this->db->where('iActivo',1);
+		$this->db->order_by('vMunicipio');
+
+		if($where != '') $this->db->where($where);
+
+		$query = $this->db->get();
+
+		return $query;
+	}
+
+	public function datos_localidades($where='')
+	{
+		$this->db->select('iIdLocalidad,vLocalidad');
+		$this->db->from('Localidad');
+		$this->db->where('iActivo',1);
+		$this->db->order_by('vLocalidad');
+
+		if($where != '') $this->db->where($where);
+
+		$query = $this->db->get();
+
+		return $query;
+	}
+
+	public function datos_asentamientos($where='')
+	{
+		$this->db->select('iIdAsentamiento,vAsentamiento,iCodigoPostal');
+		$this->db->from('Asentamiento');
+		$this->db->where('iActivo',1);
+		$this->db->order_by('vAsentamiento');
+
+		if($where != '') $this->db->where($where);
+
+		$query = $this->db->get();
+
+		return $query;
+	}
+
+	public function devulve_municipio_localidad($idasentamiento)
+	{
+		$this->db->select('a.iIdAsentamiento, l.vLocalidad, m.vMunicipio');
+		$this->db->from('Asentamiento a');
+		$this->db->join('Localidad l','l.iIdLocalidad = a.iIdLocalidad','INNER');
+		$this->db->join('Municipio m','m.iIdMunicipio = l.iIdMunicipio','INNER');
+		$this->db->where('a.iActivo',1);
+		$this->db->where('a.iIdAsentamiento',$idasentamiento);
+
+		$query = $this->db->get();
+
+		$_SESSION['c'] = $this->db->last_query();
+
+		return $query;
+	}
 }
 
 ?>

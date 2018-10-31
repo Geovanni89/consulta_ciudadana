@@ -329,7 +329,7 @@ function PintaBotonesPaginacion($num_reg,$num_pag_actual,$num_pags,$num_btn_pag=
 			    for($i=$lim_inicio; $i <= $lim_fin ; $i++)
 			    { 
 			    	if($num_pag_actual == $i) $paginacion .= '<li class="active"><a href="#">'.$i.'</a></li>';
-			    	else $paginacion .= '<li><a href="#" onclick="carga_listado('.$i.');">'.$i.'</a></li>';
+			    	else $paginacion .= '<li><a href="#" onclick="Buscar('.$i.');">'.$i.'</a></li>';
 			    }
 
 			    if($num_pag_actual == $num_pags)
@@ -338,8 +338,8 @@ function PintaBotonesPaginacion($num_reg,$num_pag_actual,$num_pags,$num_btn_pag=
 					$paginacion .= '<li class="disabled"><a href="#" aria-label="Último"><span aria-hidden="true">Último</span></a></li>';
 				}else
 				{
-					$paginacion .= '<li><a href="#" onclick="carga_listado('.$siguiente.');" aria-label="Siguiente"><span aria-hidden="true">Siguiente</span></a></li>';
-					$paginacion .= '<li><a href="#" onclick="carga_listado('.$num_pags.');" aria-label="Último"><span aria-hidden="true">Último</span></a></li>';
+					$paginacion .= '<li><a href="#" onclick="Buscar('.$siguiente.');" aria-label="Siguiente"><span aria-hidden="true">Siguiente</span></a></li>';
+					$paginacion .= '<li><a href="#" onclick="Buscar('.$num_pags.');" aria-label="Último"><span aria-hidden="true">Último</span></a></li>';
 				}
 			$paginacion .= '</ul>';
 		$paginacion .= '</nav>';
@@ -425,5 +425,11 @@ function decimal_a_romano($numero,$case="u")
  
 // Ejemplo de uso -->  
 //echo $numero=dec_romana("2349","u");
+
+function generar_token()
+{
+	$var = rand(100000, 999999);
+	return md5($var);
+}
 
 ?>

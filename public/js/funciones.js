@@ -133,3 +133,35 @@ function Notificacion(mensaje,tipo)
 			break;
 	}
 }
+
+var isIE = document.all?true:false;
+var isNS = document.layers?true:false;
+
+
+function SoloDigitos(e,decReq) {
+	var key = (isIE) ? event.keyCode : e.which;
+	var obj = (isIE) ? event.srcElement : e.target;
+	var isNum = (key > 47 && key < 58) ? true : false;
+	var dotOK = (key==46 && decReq=='decOK' && (obj.value.indexOf(".")<0 || obj.value.length==0)) ? true:false;
+	var isDel = (key==0 || key==8 ) ? true:false;
+	var isEnter = (key==13) ? true:false;
+	//e.which = (!isNum && !dotOK && isNS) ? 0 : key;
+	return (isNum || dotOK || isDel || isEnter);
+}
+
+// Removes leading whitespaces
+function LTrim( value ) {
+	var re = /\s*((\S+\s*)*)/;
+	return value.replace(re, "$1");
+	
+}
+// Removes ending whitespaces
+function RTrim( value ) {	
+	var re = /((\s*\S+)*)\s*/;
+	return value.replace(re, "$1");
+}
+
+// Removes leading and ending whitespaces
+function Trim( value ) {
+	return LTrim(RTrim(value));
+}
