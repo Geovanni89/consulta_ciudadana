@@ -75,7 +75,7 @@ class Class_seguridad {
                     else
                     {
                          $str .= '<li class="sidebar-item">
-                                <a class="sidebar-link  waves-effect waves-dark" onclick="Cargar(\''.$hijo->vUrl.'\',\'#contenido\');" aria-expanded="false"><i class="'.$padre->vImagen.'"></i><span class="hide-menu">'.$padre->vPermiso.'</span></a>
+                                <a class="sidebar-link  waves-effect waves-dark" onclick="Cargar(\''.$padre->vUrl.'\',\'#contenido\');" aria-expanded="false"><i class="'.$padre->vImagen.'"></i><span class="hide-menu">'.$padre->vPermiso.'</span></a>
                             </li>';
                     }
                 }

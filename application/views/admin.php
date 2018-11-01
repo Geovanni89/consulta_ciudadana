@@ -16,7 +16,13 @@
     <link href="<?=base_url();?>admin/assets/extra-libs/c3/c3.min.css" rel="stylesheet">
     <link href="<?=base_url();?>admin/assets/libs/toastr/build/toastr.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="<?=base_url();?>admin/dist/css/style.min.css" rel="stylesheet">
+    <link href="<?=base_url();?>admin/dist/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>admin/assets/libs/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css">
+    <!--Modal Loading -->
+    <link type="text/css" rel="stylesheet" href="<?=base_url();?>admin/plugins/modal-loading/css/modal-loading.css" />
+    <link type="text/css" rel="stylesheet" href="<?=base_url();?>admin/plugins/modal-loading/css/modal-loading-animate.css" />
+    <!--Modal Loading -->
+    <link rel="stylesheet" type="text/css" href="<?=base_url();?>admin/assets/extra-libs/prism/prism.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -157,7 +163,7 @@
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
-            <div class="page-breadcrumb">
+            <!--<div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-5 align-self-center">
                         <h4 class="page-title">Dashboard</h4>
@@ -178,22 +184,24 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
             <!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->
-            <button onclick="PonerEfecto();">Poner Efecto</button>
-            <button onclick="QuitarEfecto();">Quitar Efecto</button>
+            
             <div class="container-fluid" id="contenido">
-               
-               hola
-             
-                
-               
-              
+              <nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="javascript:void(0)">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="javascript:void(0)">1</a></li>
+        <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
+        <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+        <li class="page-item"><a class="page-link" href="javascript:void(0)">Next</a></li>
+    </ul>
+</nav>
             </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
@@ -337,7 +345,9 @@
     <!-- Mensajes del sistema -->
     <script src="<?=base_url();?>admin/assets/libs/toastr/build/toastr.min.js"></script>
     <!--<script src="<?=base_url();?>admin/assets/libs/sweetalert2/sweet-alert.init.js"></script> Este es el ejemplo-->
-
+    <script src="<?=base_url();?>admin/assets/libs/moment/moment.js?v=1.1"></script>
+    <script src="<?=base_url();?>admin/assets/libs/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker-custom.js?v=1.3"></script>
+    <script src="<?=base_url();?>public/js/plugins/jquery.validation.js"></script>
     <?php /*
     <!--chartis chart-->
     <script src="../../assets/libs/chartist/dist/chartist.min.js"></script>
@@ -352,7 +362,12 @@
     <script src="../../dist/js/pages/dashboards/dashboard1.js"></script>
     */ ?>
     <!-- funciones Jorge Estrella-->
-    <script src="<?=base_url();?>public/js/funciones.js?v=6"></script>
+
+    <!--Modal Loading -->
+    <script src="<?=base_url();?>admin/plugins/modal-loading/js/modal-loading.js"></script>
+    <!--Modal Loading -->
+    <script src="<?=base_url();?>admin/assets/extra-libs/prism/prism.js"></script>
+    <script src="<?=base_url();?>public/js/funciones.js?v=6"></script>    
     <script type="text/javascript">
         $(document).ready(function(){            
         });

@@ -534,14 +534,10 @@
 		                case "0":
 		                	loading.out();
 		                    Notificacion('Un correo ha sido enviado para confirmar su cuenta','success');
-		                    break;
-		                case "1":
-		                	loading.out();
-		                    Notificacion('El correo ya ha sido registrado','error');
-		                    break;
+		                    break;		                
 		                default:
 		                	loading.out();
-		                    Notificacion(msg[cod[0]],'error');
+		                    Notificacion(htmlcode,'error');
 		                    break;
 		            }
 		        }
