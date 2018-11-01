@@ -72,13 +72,16 @@
 										<ul class="pagination" id="paginador">
 											<li id="previous" class="page-item disabled"><a class="page-link" href="javascript:">&laquo;</a></li>
 											<?php
-											$total_pag = floor($total/5);
-											$total = (floor($total/5) > 5) ? 5 : floor($total/5);
-												for ($i=0; $i < $total; $i++) { 
-													echo '<li id="pg_'.$i.'" class="page-item"><a class="page-link" onclick="pagina_propuesta('.$i.')" href="javascript:">'.($i+1).'</a></li>';
-												}
-											?>
-											<li id="next" class="page-item"><a class="page-link" onclick="paginador('sig',0,4,<?php echo $total_pag; ?>)" href="javascript:">&raquo;</a></li>
+											$total_pag = floor($total/5);											
+											$total = (floor($total/5) > 5) ? 4 : floor($total/5);
+											for ($i=0; $i <= $total; $i++) { 
+												echo '<li id="pg_'.$i.'" class="page-item"><a class="page-link" onclick="pagina_propuesta('.$i.')" href="javascript:">'.($i+1).'</a></li>';
+											}												
+											if($total_pag <= 5)
+												echo '<li id="next" class="page-item disabled"><a class="page-link" href="javascript:">&raquo;</a></li>';
+											else
+												echo '<li id="next" class="page-item"><a class="page-link" onclick="paginador(\'sig\',0,4,'.$total_pag.')" href="javascript:">&raquo;</a></li>';
+											?>											
 											</ul>
 									</div>						
 								</div>	
@@ -219,14 +222,20 @@
 
 		function apoya_propuesta(id) {
 			$.post('<?=base_url();?>C_propuestas/apoyar_propuesta',{id:id}, function(resp){
-				console.log(resp);
-				if(resp!="error" && resp!="error1") {
-					document.getElementById("apoyar_prop").removeAttribute("onclick"); 
-					$('#apoyar_prop').attr('disabled').removeAttr('onclick');
-					$('#apoyar_prop').attr('disabled').setAttribute('disabled','');
-					
+				switch(resp)
+				{
+					case 'correcto' :  
+						toastr.success('Correcto', 'Operación completa', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+						document.getElementById("apoyar_prop").removeAttribute("onclick");
+						document.getElementById("apoyar_prop").setAttribute("disabled",'');
+						break;
+					case 'error' :  
+						toastr.error('No se pudo completar la operación', '¡Error!', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+						break;
+					case 'error1' :  
+						toastr.warning('Usted ya ha apoyado esta propuesta', '¡Advertencia!', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+						break;
 				}
-
 			});
 		}
 

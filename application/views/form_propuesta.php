@@ -104,35 +104,26 @@
 							<div class="form-group">
 								<label for="ambitoMed">Ámbito de actuación</label>
 								<div>
-									<input id="ambitoMed" class="checkbox-style" name="ambitoMed" type="checkbox">
+									<input id="ambitoMed" class="checkbox-style" name="ambitoMed" type="checkbox" onclick="checks(2);">
 									<label for="ambitoMed" class="checkbox-style-3-label checkbox-small">Esta propuesta no tiene una ubicación concreta o no la conozco</label>									
 								</div>
 							</div>
 							<div class="form-group">
 								<small id="resumenHelp" class="form-text text-muted">Seleccione el municipio y coloque un punto</small>
-								<select class="form-control" id="iIdMunicipio" name="iIdMunicipio">
-									<option>Seleccionar</option>
+								<select class="form-control" id="iIdMunicipio" name="iIdMunicipio" required onchange="js_municipio(this.value);">
+									<option value="">Seleccionar</option>
 									<?php echo $select; ?>
 								</select>
 							</div>
 							<div class="form-group">
-								<div id="map"></div>
+								<div id="map" class="map"></div>
+								<div id="map2" class="map"></div>
 								<input type="hidden" id="nLatDec" name="nLatDec" value="20.96704600410666">
 								<input type="hidden" id="nLongDec" name="nLongDec" value="-89.62374816045451">
-							</div>
-							<!--<div class="form-group">
-								<label for="sel_integra">Integrar propuestas</label>
-								<select multiple class="form-control" id="sel_integra">
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-									<option>5</option>
-								</select>
-							</div>-->
+							</div>							
 							<div class="form-group">
 								<div>
-									<input id="terminos" class="checkbox-style" name="terminos" type="checkbox" onclick="aceptaTerminos();">
+									<input id="terminos" class="checkbox-style" name="terminos" type="checkbox" onclick="checks(1);">
 									<label for="terminos" class="checkbox-style-3-label checkbox-small">Acepto la Política de privacidad y las condiciones de uso</label>
 								</div>
 								<!--<input type="submit" class="btn btn-success" id="guarda_propuesta" onclick="actualizaText();" value="Crear propuesta" disabled/>-->
@@ -235,7 +226,7 @@
 		    }
 		});
 
-		$('#formPropuesta').validate({			
+		var valida_form = $('#formPropuesta').validate({			
 			rules: {
 				iIdSector: "required",
 				iIdTema: "required",
@@ -245,18 +236,18 @@
 					maxlength: 200
 				},
 				vDescripcion: "required"
-				
 			},
 			messages: {
 				iIdSector: "Debe seleccionar un Sector",
 				iIdTema: "Debe seleccionar un Tema",
 				vTitulo: {
-					required: "Campo requerido",
+					required: "Ingrese un título para su propuesta",
 					minlength: "El título debe contener un mínimo de 10 caracteres",
 					maxlength: "El título puede contener un máximo de 200 caracteres"
 				},
 				vDescripcion: "Debe ingresar una descripción a la propuesta",
-				vUrlVideoExterno: "Inserte una URL válida",				
+				vUrlVideoExterno: "Inserte una URL válida",	
+				iIdMunicipio: "Debe seleccionar un municipio"
 
 			},
 			submitHandler: function(form) {
@@ -294,7 +285,7 @@
 
 	        	document.getElementById('nLatDec').value = lat;
 	        	document.getElementById('nLongDec').value = lng;
-	        });
+	        });	        
         }
 
 
@@ -308,37 +299,42 @@
 			var metodo = $('#formPropuesta').attr('method');
 			var uri = $('#formPropuesta').attr('action');
 
+			if(document.getElementById('terminos').checked) {
+				$.ajax({
+					type: metodo,
+					url: uri,
+					data: form,
+					async: false,
+					success: function(data) {
+						if(data > 0) {
 
-			$.ajax({
-				type: metodo,
-				url: uri,
-				data: form,
-				async: false,
-				success: function(data) {
-					if(data > 0) {
+							idReturn = data;
+							var imageCount = $('#adjuntoFotos').fileinput('getFilesCount');
+							var filesCount = $('#adjuntoArchivos').fileinput('getFilesCount');
+							
 
-						idReturn = data;
-						var imageCount = $('#adjuntoFotos').fileinput('getFilesCount');
-						var filesCount = $('#adjuntoArchivos').fileinput('getFilesCount');
-						
+							if(imageCount>0){
+								$('#adjuntoFotos').fileinput('upload');
+							}
 
-						if(imageCount>0){
-							$('#adjuntoFotos').fileinput('upload');
+							if(filesCount>0){
+								$('#adjuntoArchivos').fileinput('upload');
+							}
+
+							$('#formPropuesta')[0].reset();
+							editor.setData('');
 						}
+					},
+					fail: function() {
+					    console.log("error");
+					 }
 
-						if(filesCount>0){
-							$('#adjuntoArchivos').fileinput('upload');
-						}
+				});	
 
-						$('#formPropuesta')[0].reset();
-						editor.setData('');
-					}
-				},
-				fail: function() {
-				    console.log("error");
-				 }
+			}
+			else toastr.warning('Debe aceptar la política de privacidad', '¡Advertencia!', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
 
-			});	
+
 		}
 
 		function carga_temas(id) {
@@ -347,10 +343,26 @@
 			})
 		}
 
-		function aceptaTerminos()
+		function checks(op)
 		{
-			if(document.getElementById('terminos').checked === true)
-				document.getElementById('guarda_propuesta').removeAttribute('disabled');
+			if(op==1) {
+				if(document.getElementById('terminos').checked)
+					document.getElementById('guarda_propuesta').removeAttribute('disabled');
+				else
+					document.getElementById('guarda_propuesta').setAttribute('disabled','');				
+			}
+			else if(op==2) {
+				if(document.getElementById('ambitoMed').checked)
+					document.getElementById('iIdMunicipio').removeAttribute('required');
+					if($("#iIdMunicipio").hasClass("error")) 
+						document.getElementById('iIdMunicipio').classList.remove('error');
+				else
+					document.getElementById('iIdMunicipio').setAttribute('required','');
+			}
+		}
+
+		function js_municipio(valor) {
+			
 		}
 
 		/*function actualizaText()

@@ -44,8 +44,17 @@
 		<!-- Entry Content
 		============================================= -->
 		<div class="entry-content notopmargin ">
-			<div class="clearfix bottommargin-sm">
-				<button id="apoyar_prop" type="button" class="btn btn-outline-success btn-lg btn-block" onclick="apoya_propuesta(<?php echo $iIdPropuesta; ?>);">Apoyar</button>
+			<div class="clearfix bottommargin-sm">				
+				<?php
+				if(isset($_SESSION[PREFIJO.'_idusuario'])) 
+				{
+					if($apoyo>0)
+						echo '<button id="apoyar_prop" type="button" class="btn btn-outline-warning btn-lg btn-block">Usted ya ha apoyado esta propuesta</button>';
+					else
+						echo '<button id="apoyar_prop" type="button" class="btn btn-outline-success btn-lg btn-block" onclick="apoya_propuesta('.$iIdPropuesta.');">Apoyar</button>';
+				}
+				else echo '<div id="error_sesion" class="style-msg2 errormsg"><div class="msgtitle">Inicio de sesión</div><div class="sb-msg"><ul><li>Para poder apoyar una propuesta debe iniciar sesión</li></ul></div></div>';
+				?>					
 			</div>
 			<?php echo $tDescripcion;?>
 
@@ -311,6 +320,5 @@
 			var img = document.createElement("IMG");
 			img.setAttribute('src',url);
 			document.getElementById('map').appendChild(img);
-			
-	      }
+	      }	      
 </script>

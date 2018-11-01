@@ -13,9 +13,12 @@ class C_propuestas extends CI_Controller {
 
 	public function propuesta_sim()
 	{
+		$iIdUsuario = 1;
 		$iIdPropuesta = $this->input->post('iIdPropuesta', TRUE);
 		$model = new M_propuestas();
 		$query_prop = $model->carga_propuestas($iIdPropuesta);
+		$query_existe = $model->ver_apoyo($iIdPropuesta,$iIdUsuario);		
+
 		if($query_prop!=false) 
 		{
 			$datos['iIdPropuesta'] = $iIdPropuesta;
@@ -29,6 +32,7 @@ class C_propuestas extends CI_Controller {
 			$datos['dFecha'] = $query_prop[0]->dFecha;
 			$datos['img'] = $model->carga_adjuntos($iIdPropuesta,1);
 			$datos['pdf'] = $model->carga_adjuntos($iIdPropuesta,2);
+			$datos['apoyo'] = $query_existe;
 			$this->load->view('propuesta_simple',$datos);
 		} 
 		else echo "error";
@@ -235,7 +239,7 @@ class C_propuestas extends CI_Controller {
 		else {
 			$query_like = $model->apoyar_propuesta($datos);
 			if($query_like==false) echo "error";
-			else echo $query_like;			
+			else echo "correcto";			
 		}
 
 	}
