@@ -59,6 +59,34 @@ class Sitio extends CI_Controller {
     
 	public function index()
 	{
+		if(isset($_SESSION[PREFIJO.'_idrol']) && !empty($_SESSION[PREFIJO.'_idrol']))
+		{
+			$idrol = (int)$_SESSION[PREFIJO.'_idrol'];
+			$idusuario = (int)$_SESSION[PREFIJO.'_idusuario'];
+
+			switch ($idrol){
+				case 1:
+					//	Administrador
+					$this->load->library('Class_seguridad');
+					$ms = new Class_seguridad();
+					$datos['menu'] = $ms->pintar_menu($idusuario);
+					$this->load->view('admin',$datos);
+					break;
+				case 2:
+					//	Ciudadano
+					$this->load->view('index');
+					break;
+				case 3:
+					//	Moderador
+					echo 'Hola Moderador';
+					break;
+				
+				default:
+					$this->load->view('plantilla_html');
+					break;
+			}
+
+		}else $this->load->view('index');
 		$datos['active'] = 1;
 		$this->load->view('index',$datos);
 	}

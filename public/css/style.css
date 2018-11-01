@@ -13755,4 +13755,4 @@ body:not(.no-transition) #wrapper,
 	text-shadow: none !important;
 }
 
-#map { height: 400px !important;}
+.map { height: 400px !important;}

@@ -96,9 +96,11 @@ class M_propuestas extends CI_Model {
 		$this->db->join('Usuario u','p.iIdUsuario = u.iIdUsuario','INNER');
 		$this->db->where('p.iEstatus>',0);
 		if($iIdPropuesta>0) $this->db->where('p.iIdPropuesta',$iIdPropuesta);
+		$this->db->order_by('dFecha','DESC');
 
 		$limit = $pagina*$lim_inf;
 		$this->db->limit($lim_inf,$limit);
+		$this->db->order_by('');
 
 		$query = $this->db->get();
 		if($query!=false) return $query->result();
