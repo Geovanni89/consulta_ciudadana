@@ -86,7 +86,7 @@ class Sitio extends CI_Controller {
 					break;
 			}
 
-		}else $this->load->view('index_mod');
+		}else $this->load->view('index');
 	}
 
 	public function propuestas()
