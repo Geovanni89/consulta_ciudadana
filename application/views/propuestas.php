@@ -221,7 +221,10 @@
 			$.post('<?=base_url();?>C_propuestas/apoyar_propuesta',{id:id}, function(resp){
 				console.log(resp);
 				if(resp!="error" && resp!="error1") {
+					document.getElementById("apoyar_prop").removeAttribute("onclick"); 
 					$('#apoyar_prop').attr('disabled').removeAttr('onclick');
+					$('#apoyar_prop').attr('disabled').setAttribute('disabled','');
+					
 				}
 
 			});
