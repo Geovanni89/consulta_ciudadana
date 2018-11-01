@@ -15,16 +15,50 @@
 				<a href="index.html" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img src="<?=base_url();?>public/images/logo@2x.png" alt="Canvas Logo"></a>
 			</div><!-- #logo end -->
 
+			<div id="top-account" class="dropdown">
+				<?php if(isset($_SESSION[PREFIJO.'_idusuario']) && !empty($_SESSION[PREFIJO.'_idusuario']))
+				{ ?>
+					<a href="#" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="icon-user"></i></a>
+				<?php 
+				}
+				else
+				{?>
+					<a href="#" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="icon-user"></i></a>
+				<?php 
+				}?>
+				
+				<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+					
+					
+					<?php if(isset($_SESSION[PREFIJO.'_idusuario']) && !empty($_SESSION[PREFIJO.'_idusuario']))
+					{ ?>						
+						<a class="dropdown-item tleft" href="<?=base_url()?>Sitio/admin" target="_blank">Panel de administración <i class="icon-gears"></i></a>
+						
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item tleft" href="<?=base_url()?>Sitio/cerrar_sesion">Cerrar sesión <i class="icon-signout"></i></a>
+					<?php 
+					}
+					else
+					{?>
+						<a class="dropdown-item tleft" href="<?=base_url()?>Sitio/login">Entrar <i class="icon-signin"></i></a>
+					<?php 
+					}?>
+				</ul>
+			</div>
+
 			<!-- Primary Navigation
 			============================================= -->
 			<nav id="primary-menu">
 
 				<ul>
-					<li><a href="<?=base_url();?>"><div>Inicio</div></a></li>
-					<li class="current"><a href="<?=base_url();?>Sitio/propuestas"><div>Propuestas</div></a></li>
-					<li><a href="index.html"><div>Votaciones</div></a></li>
-					<li><a href="#"><div>Entrar</div></a></li>								
-					<li><a href="index.html"><div>Registro</div></a></li>
+					<li <?php if(isset($active) && $active == 1) echo 'class="current"'; ?>><a href="<?=base_url();?>"><div>Inicio</div></a></li>
+					<li <?php if(isset($active) && $active == 2) echo 'class="current"'; ?>><a href="<?=base_url();?>Sitio/propuestas"><div>Propuestas</div></a></li>
+					<li <?php if(isset($active) && $active == 3) echo 'class="current"'; ?>><a href="#"><div>Votaciones</div></a></li>
+					<?php if(!isset($_SESSION[PREFIJO.'_idusuario']) || empty($_SESSION[PREFIJO.'_idusuario']))
+					{ ?>
+					<li <?php if(isset($active) && $active == 4) echo 'class="current"'; ?>><a href="<?=base_url();?>Sitio/login"><div>Entrar</div></a></li>
+					<?php } ?>
+					<li <?php if(isset($active) && $active == 5) echo 'class="current"'; ?>><a href="<?=base_url();?>Sitio/registrarse"><div>Registro</div></a></li>
 				</ul>
 				
 
@@ -36,6 +70,8 @@
 						<input type="text" name="q" class="form-control" value="" placeholder="Type &amp; Hit Enter..">
 					</form>
 				</div><!-- #top-search end -->
+
+
 
 			</nav><!-- #primary-menu end -->
 
