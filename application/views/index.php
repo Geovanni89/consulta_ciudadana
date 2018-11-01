@@ -59,42 +59,7 @@
 
 		<!-- Header
 		============================================= -->
-		<header id="header" class="full-header">
-
-			<div id="header-wrap">
-
-				<div class="container clearfix">
-
-					<div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
-
-					<!-- Logo
-					============================================= -->
-					<div id="logo">
-						<!--
-						<a href="index.html" class="standard-logo" data-dark-logo="images/logo-dark.png"><img src="public/images/logo.png" alt="Canvas Logo"></a>
-						<a href="index.html" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img src="public/images/logo@2x.png" alt="Canvas Logo"></a>
-					-->
-					</div><!-- #logo end -->
-
-					<!-- Primary Navigation
-					============================================= -->
-					<nav id="primary-menu">
-
-						<ul class="one-page-menu" data-easing="easeInOutExpo" data-speed="1500">
-							<li current><a href="javascript:" data-href="#home"><div>Inicio</div></a></li>
-							<li><a href="<?=base_url();?>sitio/propuestas"><div>Propuestas</div></a></li>
-							<li><a href="#" data-href="#section-work"><div>Votaciones</div></a></li>
-							<li><a href="<?=base_url();?>Sitio/login""><div>Entrar</div></a></li>
-							<li><a href="#" data-href="#section-services"><div>Registro</div></a></li>
-						</ul>
-
-					</nav><!-- #primary-menu end -->
-
-				</div>
-
-			</div>
-
-		</header><!-- #header end -->
+		<?php include('header.php'); ?>
 
 		<div class="clear"></div>
 

@@ -153,7 +153,18 @@ class M_seguridad extends CI_Model {
 		if($query->num_rows() > 0) $response = true;
 		
 		return $response;
-	}	
+	}
+
+	public function consulta_valor_parametros($where='')
+	{
+		$this->db->select('p.vValor, p.vId, p.vDescripcion');
+		$this->db->from('Parametro p');		
+		$this->db->where('p.iActivo',1);	// Se excluyen usuarios eliminados
+
+		$query =  $this->db->get();
+
+		return $query;
+	}
 	
 }
 

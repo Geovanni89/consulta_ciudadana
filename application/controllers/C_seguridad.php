@@ -50,8 +50,7 @@ class C_seguridad extends CI_Controller {
 	    			//	Registro de usuario
 	    			$token = generar_token();
 	    			$d_usuario['iRegistroCon'] = 1;
-	    			//$d_usuario['fecha_registro'] = date('Y-m-d H:i:s');
-	    			$d_usuario['dFechaRegistro'] = date('H:i:s');
+	    			$d_usuario['dFechaRegistro'] = date('Y-m-d H:i:s');	    			
 	    			$d_usuario['vContrasenia'] = SHA1($this->input->post('contrasenia'));
 	    			$d_usuario['iEstatus'] = 1;	//	Pendiente de confirmación
 	    			$d_usuario['vToken'] = $token;
@@ -78,7 +77,7 @@ class C_seguridad extends CI_Controller {
 		    		{
 		    			if($this->enviar_correo_confirmacion($d_usuario['vCorreo'],$d_usuario['vNombre'],$idusuario,$token))
 		    			{
-		    				echo 'Correo enviado';
+		    				echo '0';
 		    			}
 		    			else
 		    			{
@@ -109,6 +108,13 @@ class C_seguridad extends CI_Controller {
     	$this->load->view('usuarios/index',$datos);
     }
 
+    public function buscar_usuarios()
+    {
+    	$pag = $this->input->post('pag');
+
+    	echo $this->listado_usuarios('',$pag);
+    }
+
     public function listado_usuarios($palabra='',$pag=1)
 	{
 		$qc = $this->ms->buscar_usuarios('',$palabra);
@@ -116,7 +122,7 @@ class C_seguridad extends CI_Controller {
 
 		if($qc)
 		{
-			$paginador = Paginador($qc,$pag);
+			$paginador = Paginador($qc,$pag,3);
 
 			if($paginador['total_registros'] > 0)
 			{ 
@@ -141,10 +147,12 @@ class C_seguridad extends CI_Controller {
                                     <td>'.$dc->vNombre.' '.$dc->vApellidoPaterno.' '.$dc->vApellidoMaterno.'</td>
                                     <td>'.$dc->vCorreo.'</td>
                                     <td>'.$dc->vRol.'</td>
-                                    <td width="100px" align="center"><i class="fa fa-lg fa-pencil" onclick="capturar('.$dc->iIdUsuario.');" title="Modificar" style="cursor:pointer;pull-center"></i>&nbsp;';
-                                if($dc->iIdRol != $_SESSION[PREFIJO.'_idrol'])
+                                    <td width="300px" align="center">';
+                                    $listado .= '<button type="button" class="btn waves-effect waves-light btn-outline-dark"><i class="mdi mdi-lead-pencil"></i>&nbsp;Editar</button>';
+                                if($dc->iIdUsuario != $_SESSION[PREFIJO.'_idusuario'])
                             	{
-                            		$listado .= '<i class="text-danger fa fa-lg fa-times" onclick="eliminar('.$dc->iIdUsuario.')" title="Eliminar" style="cursor:pointer;pull-center"></i>';
+                            		
+                            		$listado .= '&nbsp;<button type="button" class="btn waves-effect waves-light btn-outline-dark" onclick="Eliminar(\''.$dc->iIdUsuario.'\');"><i class="mdi mdi-delete"></i>&nbsp;Eliminar</button>';
                             	}
                         		$listado .= '</td>
                                 </tr>';                        
@@ -162,6 +170,29 @@ class C_seguridad extends CI_Controller {
 
 
 		return $listado;
+	}
+
+	function eliminar_usuario()
+	{
+		if(isset($_POST['id']) && !empty($_POST['id']))
+		{
+			
+			$datos['iEstatus'] = 0;
+			$where['iIdUsuario'] = $this->input->post('id');
+			$con = $this->ms->iniciar_transaccion();
+
+    		$aux = $this->ms->actualiza_registro('Usuario',$where,$datos,$con);
+
+    		if($this->ms->terminar_transaccion($con))
+    		{
+    			echo 0;
+    		}
+    		else
+    		{
+    			echo 'No fue posible eliminar el usuario';
+    		}
+
+		}else echo 'Acceso denegado';
 	}
 
 	function enviar_correo_confirmacion($correo_dest,$nombre_dest,$idusuario,$token)

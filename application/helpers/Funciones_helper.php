@@ -286,19 +286,20 @@ function PintaBotonesPaginacion($num_reg,$num_pag_actual,$num_pags,$num_btn_pag=
 		$paginacion .= '<div class="row">';
 		$paginacion .= '<div class="col-md-6"><br><div class="text-left">'.$num_reg.' registros / Página '.$num_pag_actual.' de '.$num_pags.'</div></div>';
 		$paginacion .= '<div class="col-md-6">';
-		$paginacion .= '<nav>';
-			  $paginacion .= '<ul class="pagination no-margin pull-right">';
+		
+		$paginacion .= '<nav aria-label="Page navigation example">';
+			  $paginacion .= '<ul class="pagination">';
 			  	
 			  	$anterior = $num_pag_actual - 1;
 			  	$siguiente = $num_pag_actual + 1;
 			  	if($num_pag_actual == 1)
 			  	{
-			    	$paginacion .= '<li class="disabled"><a href="#" aria-label="Primero"><span aria-hidden="true">Primero</span></a></li>';
-					$paginacion .= '<li class="disabled"><a href="#" aria-label="Siguiente"><span aria-hidden="true">Anterior</span></a></li>';
+			    	$paginacion .= '<li class="page-item disabled"><a href="#" class="page-link">Primero</a></li>';
+					$paginacion .= '<li class="page-item disabled"><a href="#" class="page-link">Anterior</a></li>';
 				}else
 				{
-					$paginacion .= '<li><a href="#" onclick="carga_listado(1);" aria-label="Primero"><span aria-hidden="true">Primero</span></a></li>';
-					$paginacion .= '<li><a href="#" onclick="carga_listado('.$anterior.');" aria-label="Siguiente"><span aria-hidden="true">Anterior</span></a></li>';
+					$paginacion .= '<li class="page-item"><a href="#" onclick="Buscar(1);" class="page-link">Primero</a></li>';
+					$paginacion .= '<li class="page-item"><a href="#" onclick="Buscar('.$anterior.');" class="page-link">Anterior</a></li>';
 				}
 
 				if($num_pags > $num_btn_pag)
@@ -328,18 +329,18 @@ function PintaBotonesPaginacion($num_reg,$num_pag_actual,$num_pags,$num_btn_pag=
 
 			    for($i=$lim_inicio; $i <= $lim_fin ; $i++)
 			    { 
-			    	if($num_pag_actual == $i) $paginacion .= '<li class="active"><a href="#">'.$i.'</a></li>';
-			    	else $paginacion .= '<li><a href="#" onclick="Buscar('.$i.');">'.$i.'</a></li>';
+			    	if($num_pag_actual == $i) $paginacion .= '<li class="page-item active"><a href="#" class="page-link">'.$i.'</a></li>';
+			    	else $paginacion .= '<li class="page-item"><a href="#" class="page-link" onclick="Buscar('.$i.');">'.$i.'</a></li>';
 			    }
 
 			    if($num_pag_actual == $num_pags)
 			    {
-			    	$paginacion .= '<li class="disabled"><a href="#" aria-label="Siguiente"><span aria-hidden="true">Siguiente</span></a></li>';
-					$paginacion .= '<li class="disabled"><a href="#" aria-label="Último"><span aria-hidden="true">Último</span></a></li>';
+			    	$paginacion .= '<li class="page-item disabled"><a href="#" class="page-link">Siguiente</a></li>';
+					$paginacion .= '<li class="page-item disabled"><a href="#" class="page-link">Último</a></li>';
 				}else
 				{
-					$paginacion .= '<li><a href="#" onclick="Buscar('.$siguiente.');" aria-label="Siguiente"><span aria-hidden="true">Siguiente</span></a></li>';
-					$paginacion .= '<li><a href="#" onclick="Buscar('.$num_pags.');" aria-label="Último"><span aria-hidden="true">Último</span></a></li>';
+					$paginacion .= '<li class="page-item"><a href="#" onclick="Buscar('.$siguiente.');" class="page-link">Siguiente</a></li>';
+					$paginacion .= '<li class="page-item"><a href="#" onclick="Buscar('.$num_pags.');" class="page-link">Último</a></li>';
 				}
 			$paginacion .= '</ul>';
 		$paginacion .= '</nav>';
