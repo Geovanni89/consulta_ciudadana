@@ -8,6 +8,7 @@ class C_propuestas extends CI_Controller {
         parent::__construct();
         $this->load->helper('url');
         $this->load->model('M_propuestas');
+        $this->load->library('Class_propuestas');
     }
 
 	public function propuesta_sim()
@@ -17,6 +18,7 @@ class C_propuestas extends CI_Controller {
 		$query_prop = $model->carga_propuestas($iIdPropuesta);
 		if($query_prop!=false) 
 		{
+			$datos['iIdPropuesta'] = $iIdPropuesta;
 			$datos['vTitulo'] = $query_prop[0]->vTitulo;
 			$datos['tDescripcion'] = $query_prop[0]->tDescripcion;
 			$datos['nLatDec'] = $query_prop[0]->nLatDec;
@@ -24,6 +26,7 @@ class C_propuestas extends CI_Controller {
 			$datos['vNombre'] = $query_prop[0]->vNombre;
 			$datos['vApellidoPaterno'] = $query_prop[0]->vApellidoPaterno;
 			$datos['vApellidoMaterno'] = $query_prop[0]->vApellidoMaterno;
+			$datos['dFecha'] = $query_prop[0]->dFecha;
 			$datos['img'] = $model->carga_adjuntos($iIdPropuesta,1);
 			$datos['pdf'] = $model->carga_adjuntos($iIdPropuesta,2);
 			$this->load->view('propuesta_simple',$datos);
@@ -47,6 +50,7 @@ class C_propuestas extends CI_Controller {
 		$ambitoMed = $this->input->post('ambitoMed', TRUE);
 
 		$vDescripcion = base64_decode($descrip64);
+		$dFecha = date("Y-m-d H:i:s");
 
 
 		$vCodigo = 'PYUC-0'.$iIdSector;
@@ -60,7 +64,8 @@ class C_propuestas extends CI_Controller {
 			'vUrlVideoExterno' => $vUrlVideoExterno,
 			'iEstatus' => 1,
 			'iIdUsuario' => 1,
-			'vCodigo' => $vCodigo
+			'vCodigo' => $vCodigo,
+			'dFecha' => $dFecha
 		);
 
 		if($ambitoMed=="on") 
@@ -75,7 +80,7 @@ class C_propuestas extends CI_Controller {
 		}
 
 		$model = new M_propuestas();
-		$query_prop = $model->inserta_propuesta($datos,'Propuesta');
+		$query_prop = $model->inserta_propuesta($datos,'Propuesta',$vCodigo);
 		if($query_prop===false) echo 0;
 		else echo $query_prop;
 		
@@ -96,14 +101,59 @@ class C_propuestas extends CI_Controller {
 		echo $select;
 	}
 
-	public function subir()
+	public function pagina_prop()
 	{
-		
+		$pagina = $this->input->post('pagina', TRUE);
+		$prop = new Class_propuestas();
+		$propuestas = $prop->carga_propuestas($pagina);
+		echo $propuestas;
+	}
+
+	public function paginador()
+	{
+		$op = $this->input->post('op', TRUE);
+		$lim_i = $this->input->post('lim_i', TRUE);
+		$lim_s = $this->input->post('lim_s', TRUE);
+		$total = $this->input->post('total', TRUE);
+		if($op=="sig")
+		{
+			$lim_i+=1;
+			$lim_s+=1;			
+		}
+		elseif($op=="ant")
+		{
+			$lim_i-=1;
+			$lim_s-=1;			
+		}
+
+		if($lim_i == 1) $dis_ant = "disabled";
+		else $dis_ant = "";
+
+		//echo 'total: '.$total;
+		//echo '<br>limite_superior: '.$lim_s;
+
+		if($lim_i == 0)
+			echo '<li id="previous" class="page-item disabled"><a class="page-link" href="javascript:">&laquo;</a></li>';
+		else
+			echo '<li id="previous" class="page-item"><a class="page-link" onclick="paginador(\'ant\','.$lim_i.','.$lim_s.','.$total.')" href="javascript:">&laquo;</a></li>';
+
+		for ($i=$lim_i; $i <=$lim_s; $i++) { 
+			echo '<li id="pg_'.$i.'" class="page-item"><a class="page-link" onclick="pagina_propuesta('.$i.')" href="javascript:">'.($i+1).'</a></li>';
+		}
+
+		if($lim_s == $total)
+			echo '<li id="next" class="page-item disabled"><a class="page-link" href="javascript:">&raquo;</a></li>';
+		else
+			echo '<li id="next" class="page-item"><a class="page-link" onclick="paginador(\'sig\','.$lim_i.','.$lim_s.','.$total.')" href="javascript:">&raquo;</a></li>';
+	}
+
+	public function subir()
+	{		
 		$op = $this->input->get('op', TRUE);
 		$iIdPropuesta = $this->input->post('iIdPropuesta', TRUE);		
 		$ruta = 'archivos/';
 		$tArchivos = 0;
-		$dFecha = $today = date("Y-m-d H:i:s.uP");
+		$dFecha = date("Y-m-d H:i:s");
 		
 		if($op==1)
 		{
@@ -163,6 +213,31 @@ class C_propuestas extends CI_Controller {
 				echo json_encode($arr);		
 			}
 		}
+	}
+
+	public function apoyar_propuesta()
+	{
+		$iIdUsuario = 1;
+
+		$iIdPropuesta = $this->input->post('id');
+		$dFecha = date("Y-m-d H:i:s");
+
+		$datos = array(
+			'iIdPropuesta' => $iIdPropuesta,
+			'iIdUsuario' => $iIdUsuario,
+			'iLike' => 1,
+			'dFecha' => $dFecha,
+		);
+
+		$model = new M_propuestas();
+		$query_existe = $model->ver_apoyo($iIdPropuesta,$iIdUsuario);
+		if($query_existe>0) echo 'error1';
+		else {
+			$query_like = $model->apoyar_propuesta($datos);
+			if($query_like==false) echo "error";
+			else echo $query_like;			
+		}
+
 	}
 	
 }
