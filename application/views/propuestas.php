@@ -62,23 +62,23 @@
 
 						</div><!-- #posts end -->
 
-						<div class="row mb-3">
+						<div class="row mb-3" id="container_paginador">
 							<div class="col-12">
 								<div class="col_third_fourth">
 									<div class="col_one_third">
 										
 									</div>
 									<div class="col_one_third">
-										<ul class="pagination">
-											<li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+										<ul class="pagination" id="paginador">
+											<li id="previous" class="page-item disabled"><a class="page-link" href="javascript:">&laquo;</a></li>
 											<?php
-											//$total = (ceil($total/5) > 5) ? 5 : ceil($total/5);
-											$total = floor($total/5);
+											$total_pag = floor($total/5);
+											$total = (floor($total/5) > 5) ? 5 : floor($total/5);
 												for ($i=0; $i < $total; $i++) { 
-													echo '<li class="page-item"><a class="page-link" onclick="pagina_propuesta('.($i+1).')" href="javascript:">'.($i+1).'</a></li>';
+													echo '<li id="pg_'.$i.'" class="page-item"><a class="page-link" onclick="pagina_propuesta('.$i.')" href="javascript:">'.($i+1).'</a></li>';
 												}
 											?>
-											<li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+											<li id="next" class="page-item"><a class="page-link" onclick="paginador('sig',0,4,<?php echo $total_pag; ?>)" href="javascript:">&raquo;</a></li>
 											</ul>
 									</div>						
 								</div>	
@@ -167,7 +167,12 @@
 	<script src="<?=base_url();?>public/js/functions.js"></script>
 
 	<script type="text/javascript">
+		(function(){
+			$('#pg_0').addClass('active');
+		})();
+
 		var map;
+		var pagina_actual = 0;		
 		var image = '<?=base_url();?>img/logo_vertical_2.png';
 
 		function propuesta_simple(idProp) {
@@ -183,6 +188,7 @@
 					SEMICOLON.widget.tabs();
 					SEMICOLON.widget.loadFlexSlider();
 					window.scrollTo(0,0);
+					$('#container_paginador').empty();					
 				} else {
 					alert("Error al cargar la propuesta");
 				}
@@ -190,10 +196,38 @@
 		}
 
 		function pagina_propuesta(pagina) {
+
 			$.post('<?=base_url();?>C_propuestas/pagina_prop',{pagina:pagina}, function(resp){
+				$('#pg_'+pagina_actual).removeClass('active')
+				$('#pg_'+pagina).addClass('active');
+				pagina_actual = pagina;
 				$('#posts').empty().html(resp);
 			});
-		}	
+		}
+
+		function paginador(op,lim_i,lim_s,total) {
+			if(op=='sig') pagina = pagina_actual+1;
+			if(op=='ant') pagina = pagina_actual-1;
+
+			$.post('<?=base_url();?>C_propuestas/paginador',{op:op,lim_i:lim_i,lim_s:lim_s,total:total}, function(resp){
+				$('#paginador').empty().html(resp);
+				pagina_propuesta(pagina);
+
+			});
+
+		}
+
+		function apoya_propuesta(id) {
+			$.post('<?=base_url();?>C_propuestas/apoyar_propuesta',{id:id}, function(resp){
+				console.log(resp);
+				if(resp!="error" && resp!="error1") {
+					$('#apoyar_prop').attr('disabled').removeAttr('onclick');
+				}
+
+			});
+		}
+
+		
 
 			
 	</script>

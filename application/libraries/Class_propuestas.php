@@ -19,6 +19,7 @@ class Class_propuestas {
         {            
 
             foreach ($query_prop as $vprop) {
+                $fecha = new DateTime($vprop->dFecha);
                 $query_img = $model->carga_adjuntos($vprop->iIdPropuesta,1);
                 if(isset($query_img[0])) $urlImg = $query_img[0]->vRutaAdjunto;
                 else $urlImg = "public/images/blog/standard/17.jpg";
@@ -32,7 +33,7 @@ class Class_propuestas {
                                 </div>
                                 <ul class="entry-meta clearfix">
                                     <li><a href="javascript:"><i class="icon-comments"></i> 2 Comentarios</a></li>
-                                    <li><i class="icon-calendar3"></i> 22/10/18</li>
+                                    <li><i class="icon-calendar3"></i> '.date_format($fecha,'d/m/Y').'</li>
                                     <li><a href="javascript:"><i class="icon-user"></i> '.$vprop->vNombre.' '.$vprop->vApellidoPaterno.' '.$vprop->vApellidoMaterno.'</a></li>
                                 </ul>
                                 <div class="entry-content">

@@ -277,7 +277,6 @@
 	        var marker = new google.maps.Marker({
 	          position: { lat: 20.97636467031955, lng: -89.62927700124328 },
 	          map: map,
-	          title: 'Click to zoom',
 	          icon: image
 	        });
 
@@ -332,6 +331,7 @@
 						}
 
 						$('#formPropuesta')[0].reset();
+						editor.setData('');
 					}
 				},
 				fail: function() {

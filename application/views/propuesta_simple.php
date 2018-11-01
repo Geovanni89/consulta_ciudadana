@@ -13,7 +13,7 @@
 		============================================= -->
 		<ul class="entry-meta clearfix">
 			<li><a href="#"><i class="icon-comments"></i> 2 Comentarios</a></li>
-			<li><i class="icon-calendar3"></i> 22/10/2018</li>
+			<li><i class="icon-calendar3"></i> <?php $fecha = new DateTime($dFecha); echo date_format($fecha,'d/m/Y'); ?></li>
 			<li><a href="#"><i class="icon-user"></i> <?php echo $vNombre.' '.$vApellidoPaterno.' '.$vApellidoMaterno; ?></a></li>
 		</ul><!-- .entry-meta end -->
 
@@ -45,7 +45,7 @@
 		============================================= -->
 		<div class="entry-content notopmargin ">
 			<div class="clearfix bottommargin-sm">
-				<button type="button" class="btn btn-outline-success btn-lg btn-block">Apoyar</button>
+				<button id="apoyar_prop" type="button" class="btn btn-outline-success btn-lg btn-block" onclick="apoya_propuesta(<?php echo $iIdPropuesta; ?>);">Apoyar</button>
 			</div>
 			<?php echo $tDescripcion;?>
 
@@ -73,18 +73,18 @@
 									if($pdf!=false) 
 									{
 										foreach ($pdf as $vpdf) {
-											
+											$fecha_adj = new DateTime($vpdf->dFecha);
 											
 											echo '<div class="spost clearfix">
 													<div class="entry-image">
-														<a href="javascript:" class="nobg"><img class="rounded-circle" src="'.base_url().'public/images/magazine/small/3.jpg" alt=""></a>
+														<a href="javascript:" class="nobg"><img class="rounded-circle" src="'.base_url().'img/pdf.jpg" alt=""></a>
 													</div>
 													<div class="entry-c">										
 														<div class="entry-title">
 															<h4><a href="'.base_url().$vpdf->vRutaAdjunto.'">'.$vpdf->vNombreAdjunto.'</a></h4>
 														</div>
 														<ul class="entry-meta">
-															<li>'.$vpdf->dFecha.'</li>
+															<li>'.date_format($fecha_adj,'d/m/Y').'</li>
 														</ul>
 													</div>
 												</div>';
@@ -278,8 +278,8 @@
 <script type="text/javascript">
 	function initMap() {
 
-			var nLatDec = $('#nLatDec').val(); console.log(typeof nLatDec);
-			var nLongDec = $('#nLongDec').val(); console.log(typeof nLongDec);
+			var nLatDec = $('#nLatDec').val();
+			var nLongDec = $('#nLongDec').val();
 			var key = 'AIzaSyBnOBLYrneZlLUF5_bhWzGnwc6I7s01qEs';
 			var marker = "";
 
