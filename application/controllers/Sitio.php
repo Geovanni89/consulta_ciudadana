@@ -59,7 +59,6 @@ class Sitio extends CI_Controller {
     
 	public function index()
 	{
-<<<<<<< HEAD
 		if(isset($_SESSION[PREFIJO.'_idrol']) && !empty($_SESSION[PREFIJO.'_idrol']))
 		{
 			$idrol = (int)$_SESSION[PREFIJO.'_idrol'];
@@ -88,10 +87,8 @@ class Sitio extends CI_Controller {
 			}
 
 		}else $this->load->view('index');
-=======
 		$datos['active'] = 1;
 		$this->load->view('index',$datos);
->>>>>>> effff6cb618bee9f8e7ee4b3ee924dcca0f23d7b
 	}
 
 	public function propuestas()

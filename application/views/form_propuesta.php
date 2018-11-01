@@ -117,7 +117,6 @@
 							</div>
 							<div class="form-group">
 								<div id="map" class="map"></div>
-								<div id="map2" class="map"></div>
 								<input type="hidden" id="nLatDec" name="nLatDec" value="20.96704600410666">
 								<input type="hidden" id="nLongDec" name="nLongDec" value="-89.62374816045451">
 							</div>							

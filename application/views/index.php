@@ -97,7 +97,7 @@
 							<div class="col_one_fourth nobottommargin center" data-animate="bounceIn" data-delay="200">
 								<i class="i-plain i-xlarge divcenter nobottommargin icon-magic"></i>
 								<div class="counter counter-lined"><span data-from="3000" data-to="250" data-refresh-interval="100" data-speed="2500"></span>+</div>
-								<h5>Propuestas</h5>
+								<h5>Propuestas :D</h5>
 							</div>
 
 							<div class="col_one_fourth nobottommargin center" data-animate="bounceIn" data-delay="400">
