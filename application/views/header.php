@@ -31,18 +31,16 @@
 					
 					
 					<?php if(isset($_SESSION[PREFIJO.'_idusuario']) && !empty($_SESSION[PREFIJO.'_idusuario']))
-					{ ?>						
-						<a class="dropdown-item tleft" href="<?=base_url()?>Sitio/admin" target="_blank">Panel de administración <i class="icon-gears"></i></a>
+					{ 
+						if( $_SESSION[PREFIJO.'_idrol'] != 2  ){ echo '<a class="dropdown-item tleft" href="'.base_url().'Sitio/admin" target="_blank">Panel de administración <i class="icon-gears"></i></a><div class="dropdown-divider"></div>';}
 						
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item tleft" href="<?=base_url()?>Sitio/cerrar_sesion">Cerrar sesión <i class="icon-signout"></i></a>
-					<?php 
+						
+						echo '<a class="dropdown-item tleft" href="'.base_url().'Sitio/cerrar_sesion">Cerrar sesión <i class="icon-signout"></i></a>';
 					}
 					else
-					{?>
-						<a class="dropdown-item tleft" href="<?=base_url()?>Sitio/login">Entrar <i class="icon-signin"></i></a>
-					<?php 
-					}?>
+					{
+						echo '<a class="dropdown-item tleft" href="'.base_url().'Sitio/login">Entrar <i class="icon-signin"></i></a>';
+					} ?>
 				</ul>
 			</div>
 
