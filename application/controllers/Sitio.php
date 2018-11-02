@@ -59,7 +59,10 @@ class Sitio extends CI_Controller {
     
 	public function index()
 	{
+		$prop = new Class_propuestas();
+
 		$datos['active'] = 1;
+		$datos['prop_index'] = $prop->prop_index();
 		if(isset($_SESSION[PREFIJO.'_idrol']) && !empty($_SESSION[PREFIJO.'_idrol']))
 		{
 			$idrol = (int)$_SESSION[PREFIJO.'_idrol'];
@@ -146,7 +149,7 @@ class Sitio extends CI_Controller {
 		else
 		{
 			$datos['active'] = 4;
-			$this->load->view('login');
+			$this->load->view('login',$datos);
 		}
 	}
 

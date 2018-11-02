@@ -47,6 +47,11 @@ class Class_propuestas {
         return $propuestas;
     }
 
+    function prop_index()
+    {
+        
+    }
+
     function total_propuestas()
     {
         $model = new M_propuestas();
