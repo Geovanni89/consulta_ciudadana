@@ -59,6 +59,7 @@ class Sitio extends CI_Controller {
     
 	public function index()
 	{
+		$datos['active'] = 1;
 		if(isset($_SESSION[PREFIJO.'_idrol']) && !empty($_SESSION[PREFIJO.'_idrol']))
 		{
 			$idrol = (int)$_SESSION[PREFIJO.'_idrol'];
@@ -74,7 +75,7 @@ class Sitio extends CI_Controller {
 					break;
 				case 2:
 					//	Ciudadano
-					$this->load->view('index');
+					$this->load->view('index',$datos);
 					break;
 				case 3:
 					//	Moderador
@@ -86,7 +87,7 @@ class Sitio extends CI_Controller {
 					break;
 			}
 
-		}else $this->load->view('index');
+		}else $this->load->view('index',$datos);
 	}
 
 	public function propuestas()
@@ -94,6 +95,7 @@ class Sitio extends CI_Controller {
 		$prop = new Class_propuestas();
 		$datos['propuestas'] = $prop->carga_propuestas();
 		$datos['total'] = $prop->total_propuestas();
+		$datos['active'] = 2;
 		$this->load->view('propuestas',$datos);
 	}
 
@@ -143,6 +145,7 @@ class Sitio extends CI_Controller {
 		}
 		else
 		{
+			$datos['active'] = 4;
 			$this->load->view('login');
 		}
 	}
@@ -190,6 +193,7 @@ class Sitio extends CI_Controller {
 		$datos['op_dias'] = $op->options_dias(0,'Día');
 		$datos['op_meses'] = $op->options_meses(0,'Mes');
 		$datos['op_anios'] = $op->options_anios(0,'Año');
+		$datos['active'] = 5;
 
 
 		$this->load->view('registrarse',$datos);
