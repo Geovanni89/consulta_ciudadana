@@ -261,7 +261,7 @@ class C_seguridad extends CI_Controller {
 
 	public function recuperar_contrasenia()
 	{
-		$this->load->view('seguridad/recuperar_contrasenia');
+		$this->load->view('recuperar_contrasenia');
 	}
 
 	public function validar_envio_recuperacion_contrasenia()
@@ -346,7 +346,7 @@ class C_seguridad extends CI_Controller {
 			$datos['idusuario'] = $this->input->get('id');
 			$datos['token'] = $this->input->get('token');
 
-			$this->load->view('seguridad/cambiar_contrasenia',$datos);			
+			$this->load->view('cambiar_contrasenia',$datos);			
 		}
 		else
 		{

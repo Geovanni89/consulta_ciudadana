@@ -63,7 +63,7 @@ class Sitio extends CI_Controller {
 
 		$datos['active'] = 1;
 		$datos['prop_index'] = $prop->prop_index();
-		if(isset($_SESSION[PREFIJO.'_idrol']) && !empty($_SESSION[PREFIJO.'_idrol']))
+		/*if(isset($_SESSION[PREFIJO.'_idrol']) && !empty($_SESSION[PREFIJO.'_idrol']))
 		{
 			$idrol = (int)$_SESSION[PREFIJO.'_idrol'];
 			$idusuario = (int)$_SESSION[PREFIJO.'_idusuario'];
@@ -90,7 +90,7 @@ class Sitio extends CI_Controller {
 					break;
 			}
 
-		}else $this->load->view('index',$datos);
+		}else*/ $this->load->view('index',$datos);
 	}
 
 	public function propuestas()
@@ -251,6 +251,21 @@ class Sitio extends CI_Controller {
 				# code...
 				break;
 		}		
+	}
+
+	function admin()
+	{
+		if(isset($_SESSION[PREFIJO.'_idrol']) && !empty($_SESSION[PREFIJO.'_idrol']))
+		{
+			$idrol = (int)$_SESSION[PREFIJO.'_idrol'];
+			$idusuario = (int)$_SESSION[PREFIJO.'_idusuario'];
+			
+			$this->load->library('Class_seguridad');
+			$ms = new Class_seguridad();
+			$datos['menu'] = $ms->pintar_menu($idusuario);
+			$this->load->view('admin',$datos);
+
+		}else $this->load->view('index');
 	}
 
 }

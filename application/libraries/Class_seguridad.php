@@ -66,7 +66,7 @@ class Class_seguridad {
                                         ';
                         foreach ($submenu as $hijo)
                         {
-                            $str .=  '<li class="sidebar-item" style="cursor:pointer;"><a onclick="Cargar(\''.$hijo->vUrl.'\',\'#contenido\');" class="sidebar-link"><i class="'.$hijo->vImagen.'"></i><span class="hide-menu"><i class=""></i>'.$hijo->vPermiso.'</span></a></li>';
+                            $str .=  '<li class="sidebar-item" style="cursor:pointer;"><a onclick="Cargar(\''.base_url().$hijo->vUrl.'\',\'#contenido\');" class="sidebar-link"><i class="'.$hijo->vImagen.'"></i><span class="hide-menu"><i class=""></i>'.$hijo->vPermiso.'</span></a></li>';
                         }
                                 
                         $str .= '   </ul>
@@ -75,7 +75,7 @@ class Class_seguridad {
                     else
                     {
                          $str .= '<li class="sidebar-item">
-                                <a class="sidebar-link  waves-effect waves-dark" onclick="Cargar(\''.$padre->vUrl.'\',\'#contenido\');" aria-expanded="false"><i class="'.$padre->vImagen.'"></i><span class="hide-menu">'.$padre->vPermiso.'</span></a>
+                                <a class="sidebar-link  waves-effect waves-dark" onclick="Cargar(\''.base_url().$padre->vUrl.'\',\'#contenido\');" aria-expanded="false"><i class="'.$padre->vImagen.'"></i><span class="hide-menu">'.$padre->vPermiso.'</span></a>
                             </li>';
                     }
                 }
