@@ -49,7 +49,29 @@ class Class_propuestas {
 
     function prop_index()
     {
-        
+        $propuestas = '';
+        for ($i=0; $i < 4; $i++) 
+        { 
+            $propuestas.='<div class="col-lg-6 bottommargin">
+                <div class="team team-list clearfix">
+                    <div class="team-image">
+                        <img src="'.base_url().'public/images/team/3.jpg" alt="John Doe">
+                    </div>
+                    <div class="team-desc">
+                        <div class="team-title"><h4>John Doe</h4><span>CEO</span></div>
+                        <ul class="entry-meta clearfix">
+                            <li><a href="blog-single.html#comments"><i class="icon-comments"></i> 2 Comentarios</a></li>
+                            <li>08/10/2017</li>
+                            <li><a href="#"><i class="icon-user"></i> Elías</a></li>
+                        </ul>
+                        <div class="team-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat assumenda similique unde mollitia.</div>
+                        <br><button class="btn btn-success">Consultar</button>                                      
+                    </div>
+                </div>
+            </div>';
+        }
+
+        return $propuestas;
     }
 
     function total_propuestas()
