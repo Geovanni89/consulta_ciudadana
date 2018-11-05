@@ -117,8 +117,8 @@
 							</div>
 							<div class="form-group">
 								<div id="map" class="map"></div>
-								<input type="hidden" id="nLatDec" name="nLatDec" value="20.96704600410666">
-								<input type="hidden" id="nLongDec" name="nLongDec" value="-89.62374816045451">
+								<input type="hidden" id="nLatDec" name="nLatDec" value="0">
+								<input type="hidden" id="nLongDec" name="nLongDec" value="0">
 							</div>							
 							<div class="form-group">
 								<div>
@@ -177,6 +177,7 @@
 
 		$(document).ready(function(){
 			ClassicEditor.create(document.querySelector('#vDescripcion'), {
+				autoUpdateElement: true,
 				toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote'],
 				heading: {
 		            options: [
@@ -196,7 +197,8 @@
 			});
 		});
 
-
+		    /*minImageWidth: 50,
+    minImageHeight: 50*/
 		$("#adjuntoFotos").fileinput({
 		    uploadUrl: '<?=base_url();?>C_propuestas/subir?op=1',
 		    maxFileCount: 5,
@@ -225,6 +227,38 @@
 		    }
 		});
 
+		// funciones de google maps----------------------------------------------------------------------
+		var map;		
+		var image = '<?=base_url();?>img/logo_vertical_2.png';
+
+	    function initMap() {
+
+	    	map = new google.maps.Map(document.getElementById('map'), {
+	        	center: { lat: 20.97636467031955, lng: -89.62927700124328 },
+	          	zoom: 8
+	        });
+
+	        var marker = new google.maps.Marker({
+	          position: { lat: 20.97636467031955, lng: -89.62927700124328 },
+	          map: map,
+	          icon: image
+	        });
+
+	        map.addListener('click', function(e){
+	        	var lat = e.latLng.lat();
+	        	var lng = e.latLng.lng();
+	        	var lat_lng = new google.maps.LatLng(lat,lng);
+
+	        	marker.setPosition(lat_lng);
+	        	map.setZoom(11);
+	        	map.panTo(lat_lng);
+
+	        	document.getElementById('nLatDec').value = lat;
+	        	document.getElementById('nLongDec').value = lng;
+	        });
+        }
+
+
 		var valida_form = $('#formPropuesta').validate({			
 			rules: {
 				iIdSector: "required",
@@ -252,88 +286,58 @@
 			submitHandler: function(form) {
 				envia_form();
 			}
-		});
-		// funciones de google maps----------------------------------------------------------------------
-		var map;		
-		var image = '<?=base_url();?>img/logo_vertical_2.png';
-
-	    function initMap() {
-
-	    	map = new google.maps.Map(document.getElementById('map'), {
-	        	center: { lat: 20.97636467031955, lng: -89.62927700124328 },
-	          	zoom: 8
-	        });
-
-	        var marker = new google.maps.Marker({
-	          position: { lat: 20.97636467031955, lng: -89.62927700124328 },
-	          map: map,
-	          icon: image
-	        });
-
-	        map.addListener('click', function(e){
-	        	var lat = e.latLng.lat();
-	        	var lng = e.latLng.lng();
-	        	var lat_lng = new google.maps.LatLng(lat,lng);
-
-	        	marker.setPosition(lat_lng);
-	        	map.setZoom(11);
-	        	map.panTo(lat_lng);
-
-	        	console.log('Lat\n'+lat);
-	        	console.log('Lng'+lng);
-
-	        	document.getElementById('nLatDec').value = lat;
-	        	document.getElementById('nLongDec').value = lng;
-	        });	        
-        }
-
+		});		
 
         //envio de formulario -------------------------------------------------------------------------
 		function envia_form() {			
 			$.base64.utf8encode = true;
 			
 			document.getElementById('vDescripcion').value = $.base64('encode',editor.getData(),true);
+			var nLatDec = document.getElementById('nLatDec').value;
+	        var nLongDec = document.getElementById('nLongDec').value;	        
 
 			var form =  $('#formPropuesta').serialize();
 			var metodo = $('#formPropuesta').attr('method');
 			var uri = $('#formPropuesta').attr('action');
 
 			if(document.getElementById('terminos').checked) {
-				$.ajax({
-					type: metodo,
-					url: uri,
-					data: form,
-					async: false,
-					success: function(data) {
-						if(data > 0) {
+				if((nLatDec != "0" && nLongDec != "0") || (document.getElementById('ambitoMed'))==true) {
+					$.ajax({
+						type: metodo,
+						url: uri,
+						data: form,
+						async: false,
+						success: function(data) {
+							if(data > 0) {
 
-							idReturn = data;
-							var imageCount = $('#adjuntoFotos').fileinput('getFilesCount');
-							var filesCount = $('#adjuntoArchivos').fileinput('getFilesCount');
-							
+								idReturn = data;
+								var imageCount = $('#adjuntoFotos').fileinput('getFilesCount');
+								var filesCount = $('#adjuntoArchivos').fileinput('getFilesCount');
+								
 
-							if(imageCount>0){
-								$('#adjuntoFotos').fileinput('upload');
+								if(imageCount>0){
+									$('#adjuntoFotos').fileinput('upload');
+								}
+
+								if(filesCount>0){
+									$('#adjuntoArchivos').fileinput('upload');
+								}
+
+								//$('#formPropuesta')[0].reset();
+								//editor.setData('');
+								location.href = "<?=base_url();?>Sitio/propuestas";
 							}
+						},
+						fail: function() {
+						    console.log("error");
+						 }
 
-							if(filesCount>0){
-								$('#adjuntoArchivos').fileinput('upload');
-							}
-
-							$('#formPropuesta')[0].reset();
-							editor.setData('');
-						}
-					},
-					fail: function() {
-					    console.log("error");
-					 }
-
-				});	
+					});						
+				}
+				else toastr.warning('Error de latitud y longitud', '¡Advertencia!', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
 
 			}
 			else toastr.warning('Debe aceptar la política de privacidad', '¡Advertencia!', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
-
-
 		}
 
 		function carga_temas(id) {
@@ -349,19 +353,30 @@
 					document.getElementById('guarda_propuesta').removeAttribute('disabled');
 				else
 					document.getElementById('guarda_propuesta').setAttribute('disabled','');				
-			}
+			}			
 			else if(op==2) {
-				if(document.getElementById('ambitoMed').checked)
+				if(document.getElementById('ambitoMed').checked==true) {
 					document.getElementById('iIdMunicipio').removeAttribute('required');
-					if($("#iIdMunicipio").hasClass("error")) 
-						document.getElementById('iIdMunicipio').classList.remove('error');
+					if($("#iIdMunicipio").hasClass("error"))  {						
+						document.getElementById('iIdMunicipio').classList.remove('error');					
+					}
+				}
 				else
 					document.getElementById('iIdMunicipio').setAttribute('required','');
 			}
 		}
 
 		function js_municipio(valor) {
-			
+			map.data.forEach(function(feature) {
+		        map.data.remove(feature);
+		    });
+
+			map.data.loadGeoJson('<?=base_url();?>json/m'+valor+'.json');
+	        map.data.setStyle({
+			    fillColor: 'green',
+			    fillOpacity: 0,
+				strokeWeight: 1
+			});
 		}
 
 		/*function actualizaText()

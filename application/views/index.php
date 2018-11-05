@@ -39,7 +39,7 @@
 
 				<div class="swiper-container swiper-parent">
 					<div class="swiper-wrapper">
-						<div class="swiper-slide dark" style="background-image: url('<?=base_url();?>public/images/slider/swiper/1.jpg');">
+						<div class="swiper-slide dark" style="background-image: url('<?=base_url();?>public/images/slider/swiper/chichen.jpg');">
 							<div class="container clearfix">
 								<div class="slider-caption slider-caption-center">
 									<h2 data-animate="fadeInUp">Particippación Ciudadana</h2>
@@ -149,7 +149,7 @@
 						<div class="col_one_third nobottommargin">
 							<div class="feature-box media-box">
 								<div class="fbox-media">
-									<img src="<?=base_url();?>public/images/services/1.jpg" alt="Why choose Us?">
+									<img src="<?=base_url();?>public/images/services/mayapan.jpg" alt="Why choose Us?">
 								</div>
 								<div class="fbox-desc">
 									<h3><span>Remodelación de la Plaza Cívica de Lucero</span></h3>
@@ -163,7 +163,7 @@
 						<div class="col_one_third nobottommargin">
 							<div class="feature-box media-box">
 								<div class="fbox-media">
-									<img src="<?=base_url();?>public/images/services/2.jpg" alt="Why choose Us?">
+									<img src="<?=base_url();?>public/images/services/monumento_bandera.jpg" alt="Why choose Us?">
 								</div>
 								<div class="fbox-desc">
 									<h3><span>Remodelación de la Plaza Cívica de Lucero</span></h3>
@@ -177,7 +177,7 @@
 						<div class="col_one_third nobottommargin col_last">
 							<div class="feature-box media-box">
 								<div class="fbox-media">
-									<img src="<?=base_url();?>public/images/services/3.jpg" alt="Why choose Us?">
+									<img src="<?=base_url();?>public/images/services/izamal.jpg" alt="Why choose Us?">
 								</div>
 								<div class="fbox-desc">
 									<h3><span>Remodelación de la Plaza Cívica de Lucero</span></h3>

@@ -88,24 +88,27 @@ class M_propuestas extends CI_Model {
 		}
 	}
 
-	public function carga_propuestas($iIdPropuesta=0,$pagina=0)
+	public function carga_propuestas($iIdPropuesta=0,$pagina=0,$lim=0)
 	{
 		$lim_inf = 5;
-		$this->db->select('p.iIdPropuesta,p.vTitulo,p.tDescripcion,p.nLatDec,p.nLongDec,p.dFecha,u.iIdUsuario,u.vNombre,u.vApellidoPaterno,u.vApellidoMaterno');
+		$this->db->select('p.iIdPropuesta,p.vTitulo,p.tDescripcion,p.nLatDec,p.nLongDec,p.dFecha,u.iIdUsuario,u.vNombre,u.vApellidoPaterno,u.vApellidoMaterno,p.vCodigo');
 		$this->db->from('Propuesta p');
 		$this->db->join('Usuario u','p.iIdUsuario = u.iIdUsuario','INNER');
 		$this->db->where('p.iEstatus>',0);
 		if($iIdPropuesta>0) $this->db->where('p.iIdPropuesta',$iIdPropuesta);
 		$this->db->order_by('dFecha','DESC');
 
-		$limit = $pagina*$lim_inf;
-		$this->db->limit($lim_inf,$limit);
-		$this->db->order_by('');
+		if($lim==0)
+		{
+			$limit = $pagina*$lim_inf;
+			$this->db->limit($lim_inf,$limit);					
+		}
+		elseif($lim > 0) $this->db->limit($lim);
 
 		$query = $this->db->get();
 		if($query!=false) return $query->result();
 		else return false;
-	}	
+	}
 
 	public function carga_adjuntos($iIdPropuesta,$tipo)
 	{

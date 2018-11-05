@@ -46,7 +46,7 @@
 		<div class="entry-content notopmargin ">
 			<div class="clearfix bottommargin-sm">				
 				<?php
-				if(isset($_SESSION[PREFIJO.'_idusuario'])) 
+				if(isset($_SESSION[PREFIJO.'_idusuario']))
 				{
 					if($apoyo>0)
 						echo '<button id="apoyar_prop" type="button" class="btn btn-outline-warning btn-lg btn-block">Usted ya ha apoyado esta propuesta</button>';
@@ -112,14 +112,14 @@
 
 			<!-- Tag Cloud
 			============================================= -->
-			<div class="tagcloud clearfix bottommargin">
+			<!--<div class="tagcloud clearfix bottommargin">
 				<a href="#">general</a>
 				<a href="#">information</a>
 				<a href="#">media</a>
 				<a href="#">press</a>
 				<a href="#">gallery</a>
 				<a href="#">illustration</a>
-			</div><!-- .tagcloud end -->
+			</div>-->
 
 			<div class="clear"></div>
 
@@ -237,7 +237,7 @@
 
 					<div class="comment-content clearfix">
 
-						<div class="comment-author"><a href='http://themeforest.net/user/semicolonweb' rel='external nofollow' class='url'>SemiColon</a><span><a href="#" title="Permalink to this comment">April 25, 2012 at 1:03 am</a></span></div>
+						<div class="comment-author"><a href='http://themeforest.net/user/semicolonweb' rel='external nofollow' class='url'>Victor Barbosa</a><span><a href="#" title="Permalink to this comment">April 25, 2012 at 1:03 am</a></span></div>
 
 						<p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
 

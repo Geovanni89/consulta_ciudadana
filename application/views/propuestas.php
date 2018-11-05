@@ -94,8 +94,11 @@
 					<!-- Sidebar
 					============================================= -->
 					<div class="sidebar nobottommargin col_last clearfix">
+						<?php if(isset($_SESSION[PREFIJO.'_idusuario'])) {?>
 						<a href="<?=base_url();?>Sitio/form_propuesta" class="btn btn-success">Crear una propuesta</a>
 						<br>
+
+						<?php } ?>
 						<div class="sidebar-widgets-wrap">							
 
 							<div class="widget clearfix">

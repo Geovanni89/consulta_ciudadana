@@ -6,9 +6,11 @@ class C_propuestas extends CI_Controller {
 	public function __construct()
     {
         parent::__construct();
+        session_start();
         $this->load->helper('url');
         $this->load->model('M_propuestas');
         $this->load->library('Class_propuestas');
+
     }
 
 	public function propuesta_sim()
@@ -52,6 +54,7 @@ class C_propuestas extends CI_Controller {
 		$imagenes = $this->input->post('adjuntoFotos', TRUE);
 		$archivos = $this->input->post('adjuntoArchivos', TRUE);
 		$ambitoMed = $this->input->post('ambitoMed', TRUE);
+		$iIdUsuario = $_SESSION[PREFIJO.'_idusuario'];
 
 		$vDescripcion = base64_decode($descrip64);
 		$dFecha = date("Y-m-d H:i:s");
@@ -67,7 +70,7 @@ class C_propuestas extends CI_Controller {
 			'iIdTema' => $iIdTema,
 			'vUrlVideoExterno' => $vUrlVideoExterno,
 			'iEstatus' => 1,
-			'iIdUsuario' => 1,
+			'iIdUsuario' => $iIdUsuario,
 			'vCodigo' => $vCodigo,
 			'dFecha' => $dFecha
 		);
@@ -210,18 +213,41 @@ class C_propuestas extends CI_Controller {
 			{
 			
 				move_uploaded_file($nombreTemp, $vRutaAdjunto);
+				if($tipo==1) $min = $this->genera_miniatura($nombreArch);
 				
 				//$infoImagenesSubidas[$i]=array("caption"=>"$nombreArch","height"=>"120px","url"=>"C_propuestas/borrar","key"=>$nombreArch);		
-
-				$arr = array("file_id"=>0,"overwriteInitial"=>true);
-				echo json_encode($arr);		
 			}
 		}
+
+		$arr = array("file_id"=>0,"overwriteInitial"=>true);
+		echo json_encode($arr);
+	}
+
+	private function genera_miniatura($nombre)
+	{
+		$this->load->library('image_lib');
+		$config['image_library'] = 'GD2';
+		$config['source_image'] = 'archivos/imagenes/'.$nombre;
+		$config['new_image'] = 'archivos/imagenes/thumbnail/'.$nombre;
+		$config['create_thumb'] = FALSE;
+		$config['maintain_ratio'] = TRUE;
+		$config['width']         = 450;
+		$config['height']       = 550;	
+
+
+
+		$this->image_lib->clear();
+       	$this->image_lib->initialize($config);
+       	$this->image_lib->resize();
+		if(!$this->image_lib->resize()) $resp = "error_miniatura";
+		else $resp = "correcto_miniatura";
+		//echo $this->image_lib->display_errors();
+		return $resp;
 	}
 
 	public function apoyar_propuesta()
 	{
-		$iIdUsuario = 1;
+		$iIdUsuario = $_SESSION[PREFIJO.'_idusuario'];
 
 		$iIdPropuesta = $this->input->post('id');
 		$dFecha = date("Y-m-d H:i:s");
