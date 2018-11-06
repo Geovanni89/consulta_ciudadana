@@ -302,13 +302,76 @@ class C_propuestas extends CI_Controller {
 		$iLike = $this->input->post('iLike', TRUE);
 		$dFecha = date("Y-m-d H:i:s");
 		
-		$datos = array(
-			'iIdComentario' => $iIdComentario,
-			'iIdUsuario' => $iIdUsuario,
+		$datos = array(			
 			'iLike' => $iLike,
 			'dFecha' => $dFecha);
 
-		print_r($datos);
+		$model = new M_propuestas();
+		$verifica = $model->verifica_like($iIdUsuario,$iIdComentario);
+		if($verifica!=false)
+			$op = 'update';
+		else
+		{
+			$op = 'insert';
+			$datos['iIdCometario'] = $iIdComentario;
+			$datos['iIdUsuario'] = $iIdUsuario;
+		}
+		$like = $model->guarda_like($datos,$op,$iIdUsuario,$iIdComentario);
+
+		$arr = array("res"=>$like,"accion"=>$op);
+		echo json_encode($arr);
+	}
+
+	public function respuestas()
+	{
+		$iIdComentario = $this->input->post('iIdComentario', TRUE);
+		$model = new M_propuestas();
+		$resp = $model->carga_respuestas($iIdComentario);
+		if($resp!=false) 
+		{
+			foreach ($resp as $vresp) {
+				echo '<ul class="children">
+						<li class="comment byuser comment-author-_smcl_admin odd alt depth-2" id="li-comment-3">
+							<div id="comment-3" class="comment-wrap clearfix">
+								<div class="comment-meta">
+									<div class="comment-author vcard">
+										<span class="comment-avatar clearfix">
+										<img alt="" src="'.base_url().'img/icon-user.png" class="avatar avatar-40 photo" height="40" width="40" /></span>
+									</div>
+								</div>
+								<div class="comment-content clearfix">
+									<div class="comment-author"><a href="#" rel="external nofollow" class="url">'.$vresp->vNombre.' '.$vresp->vApellidoPaterno.' '.$vresp->vApellidoMaterno.'</a><span><a href="#" title="Permalink to this comment">'.$vresp->dFecha.'</a></span></div>
+									<p>'.$vresp->vComentario.'</p>									
+									<a class="comment-reply-link" href="javascript:" onclick="responder('.$vresp->iIdComentario.',\''.$vresp->vNombre.'\');"><i class="icon-reply"></i></a>';
+									if($vresp->iLike=="")
+									{
+										echo '<a id="like_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(1,'.$vresp->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<a id="dislike_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(0,'.$vresp->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a>';	
+									}
+									elseif($vresp->iLike==0)
+									{
+										echo '<a id="like_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(1,'.$vresp->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<a class="btn-like" id="dislike_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(0,'.$vresp->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a>';
+									}
+									elseif($vresp->iLike==1)
+									{
+										echo '<a class="btn-like" id="like_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(1,'.$vresp->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<a id="dislike_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(0,'.$vresp->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a>';
+									}
+								echo '</div>
+								<div class="clear"></div>
+							</div>
+							<div id="respuestas_1"></div>
+						</li>
+					</ul>';
+			}
+		}
+		//print_r($resp);
+
+		else echo 'sin respuestas';
 	}
 	
 }

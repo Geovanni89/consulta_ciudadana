@@ -217,15 +217,20 @@
 										
 									<?php
 										if($comentarios!=false) 
-										{
-																					
-											foreach ($comentarios as $vcom) {											
-												echo '<li class="comment byuser comment-author-_smcl_admin even thread-odd thread-alt depth-1" id="li-comment-2">
+										{	
+											/*echo '<pre>';
+											print_r($comentarios);
+											echo '</pre>';
+											$respuestas = 1;
+											*/
+														
+											foreach ($comentarios as $vcom) {												
+												echo '<li class="comment byuser comment-author-_smcl_admin even thread-odd thread-alt depth-1" id="li_comentario_'.$vcom->iIdComentario.'">
 											<div id="comment-2" class="comment-wrap clearfix">
 												<div class="comment-meta">
 													<div class="comment-author vcard">
 														<span class="comment-avatar clearfix">
-														<img alt="" src="http://0.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=60" class="avatar avatar-60 photo" height="60"  width="60"/></span>
+														<img alt="" src="'.base_url().'img/icon-user.png" class="avatar avatar-60 photo" height="60"  width="60"/></span>
 													</div>
 												</div>
 												<div class="comment-content clearfix">
@@ -233,14 +238,46 @@
 													<a href="http://themeforest.net/user/semicolonweb" rel="external nofollow" class="url">'.$vcom->vNombre.' '.$vcom->vApellidoPaterno.' '.$vcom->vApellidoMaterno.'</a>
 													<span><a href="#" title="Permalink to this comment">'.$vcom->dFecha.'</a></span></div>
 													<p>'.$vcom->vComentario.'</p>
-													<a class="comment-reply-link" href="javascript:" onclick="responder('.$vcom->iIdComentario.',\''.$vcom->vNombre.'\');"><i class="icon-reply"></i></a>
-													<a href="javascript:" onclick="like(1,'.$vcom->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a>
+													<a class="comment-reply-link" href="javascript:" onclick="responder('.$vcom->iIdComentario.',\''.$vcom->vNombre.'\');"><i class="icon-reply"></i></a>';
+													
+													if($vcom->iLike=="")
+													{
+														echo '<a id="like_'.$vcom->iIdComentario.'" href="javascript:" onclick="like(1,'.$vcom->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a>
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														<a id="dislike_'.$vcom->iIdComentario.'" href="javascript:" onclick="like(0,'.$vcom->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a>';	
+													}
+													elseif($vcom->iLike==0)
+													{
+														echo '<a id="like_'.$vcom->iIdComentario.'" href="javascript:" onclick="like(1,'.$vcom->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a>
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														<a class="btn-like" id="dislike_'.$vcom->iIdComentario.'" href="javascript:" onclick="like(0,'.$vcom->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a>';
+													}
+													elseif($vcom->iLike==1)
+													{
+														echo '<a class="btn-like" id="like_'.$vcom->iIdComentario.'" href="javascript:" onclick="like(1,'.$vcom->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a>
 													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-													<a href="javascript:" onclick="like(0,'.$vcom->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a>
+													<a id="dislike_'.$vcom->iIdComentario.'" href="javascript:" onclick="like(0,'.$vcom->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a>';
+													}
+
+
+												if($vcom->respuestas > 0)
+												{
+													echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+													<a id="respuestas_'.$vcom->iIdComentario.'" href="javascript:" onclick="respuestas('.$vcom->iIdComentario.')">Ver respuestas</a>
+													</div>
+													<div class="clear"></div>
 												</div>
-												<div class="clear"></div>
-											</div>
-										</li>';
+												<div id="resp_'.$vcom->iIdComentario.'"></div>';
+
+												}
+												else
+												{
+													echo '</div>
+													<div class="clear"></div>
+												</div>';
+												}
+
+										echo '</li>';
 											}
 										} 										
 									?>
@@ -439,8 +476,15 @@
 		}
 
 		function responder(idcoment,nombre) {
+			var resp_act = document.getElementById('idresp_com').value;
+			if(resp_act!="") {				
+				document.getElementById("li_comentario_"+resp_act).style.boxShadow = "";
+			}
+			
+			document.getElementById("li_comentario_"+idcoment).style.boxShadow = "10px 10px 5px 0px #0c67a79e";
 			document.getElementById('idresp_com').value=idcoment;
 			document.getElementById("title-coment").innerText = "Respuesta al comentario de "+nombre;
+
 		}
 
 		function envia_comentario() {
@@ -456,8 +500,26 @@
 		}
 
 		function like(reaccion,comentario) {
+			var btn_reac = '';
+			if(reaccion=='0') { btn_reac = 'dislike_'; btn_reac_op = 'like_';}
+			else if(reaccion=='1') { btn_reac = 'like_'; btn_reac_op = 'dislike_';}
 			$.post('<?=base_url();?>C_propuestas/like_comentario', {iLike:reaccion,iIdComentario:comentario}, function(resp) {
+				var obj = JSON.parse(resp);
+				var res = obj['res'];
+
+				if(res==true) {
+					$('#'+btn_reac+comentario).addClass('btn-like');
+					if($('#'+btn_reac_op+comentario).hasClass("btn-like")==true)
+						$('#'+btn_reac_op+comentario).removeClass('btn-like');
+				}
+				else console.log('error');
+			});
+		}
+
+		function respuestas(iIdComentario) {
+			$.post('<?=base_url();?>C_propuestas/respuestas', {iIdComentario:iIdComentario}, function(resp) {
 				console.log(resp);
+				$('#resp_'+iIdComentario).html(resp);
 			});
 		}
 

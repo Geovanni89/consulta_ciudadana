@@ -112,9 +112,10 @@ class M_propuestas extends CI_Model {
 
 	public function carga_comentarios($iIdPropuesta,$iIdComentario=0)
 	{
-		$this->db->select('c.iIdComentario,c.vComentario,c.iIdPropuesta,c.iIdReplicaDe,c.dFecha,u.iIdUsuario,u.vNombre,u.vApellidoPaterno,u.vApellidoMaterno');
+		$this->db->select('(select count(c2."iIdComentario") from "Comentario" c2 where c2."iIdReplicaDe" = c."iIdComentario") as respuestas, cl.iLike,c.iIdComentario,c.vComentario,c.iIdPropuesta,c.iIdReplicaDe,c.dFecha,u.iIdUsuario,u.vNombre,u.vApellidoPaterno,u.vApellidoMaterno');
 		$this->db->from('Comentario c');
 		$this->db->join('Usuario u','c.iIdUsuario = u.iIdUsuario','INNER');
+		$this->db->join('ComentarioLike cl','c.iIdComentario = cl.iIdCometario','LEFT');
 		$this->db->where('c.iIdPropuesta',$iIdPropuesta);
 		$this->db->where('c.iEstatus >',1);
 		$this->db->where('c.iIdReplicaDe',0);
@@ -190,6 +191,59 @@ class M_propuestas extends CI_Model {
 			$this->db->trans_commit();
 			return $query;
 		}
+	}
+
+	public function verifica_like($iIdUsuario,$iIdComentario)
+	{
+		$this->db->select('iIdCometario');
+		$this->db->from('ComentarioLike');
+		$this->db->where('iIdUsuario',$iIdUsuario);
+		$this->db->where('iIdCometario',$iIdComentario);
+
+		$query = $this->db->get();
+		if($query!=false) return $query->num_rows();
+		else return false;
+	}
+
+	public function guarda_like($datos,$op,$iIdUsuario,$iIdComentario)
+	{
+		$this->db->trans_begin();
+		if($op=='update') 
+		{
+			$this->db->where('iIdUsuario',$iIdUsuario);
+			$this->db->where('iIdCometario',$iIdComentario);
+			$query = $this->db->update('ComentarioLike',$datos);
+		}
+		elseif($op=='insert') 
+			$query = $this->db->insert('ComentarioLike',$datos);
+
+		if($this->db->trans_status() === FALSE) 
+		{
+			$this->db->trans_rollback();
+			return false;
+		}
+		else 
+		{
+			$this->db->trans_commit();
+			return $query;
+		}
+	}
+
+	public function carga_respuestas($iIdComentario)
+	{
+		$this->db->select('(select count(c2."iIdComentario") from "Comentario" c2 where c2."iIdReplicaDe" = c."iIdComentario") as respuestas, cl.iLike,c.iIdComentario,c.vComentario,c.iIdPropuesta,c.iIdReplicaDe,c.dFecha,u.iIdUsuario,u.vNombre,u.vApellidoPaterno,u.vApellidoMaterno');
+		$this->db->from('Comentario c');
+		$this->db->join('Usuario u','c.iIdUsuario = u.iIdUsuario','INNER');
+		$this->db->join('ComentarioLike cl','c.iIdComentario = cl.iIdCometario','LEFT');
+		$this->db->where('c.iEstatus >',1);
+		$this->db->where('c.iIdReplicaDe',$iIdComentario);
+
+
+
+
+		$query = $this->db->get();
+		if($query!=false) return $query->result();
+		else return false;
 	}
 }
 

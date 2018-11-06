@@ -190,7 +190,7 @@
 					.html(resp)
 					.addClass('fadeIn')
 					.removeClass('fadeOut');
-					SEMICOLON.initialize.goToTop();				
+					SEMICOLON.initialize.goToTop();
 					SEMICOLON.widget.tabs();
 					SEMICOLON.widget.loadFlexSlider();
 					window.scrollTo(0,0);
