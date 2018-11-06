@@ -181,7 +181,7 @@
 		var pagina_actual = 0;		
 		var image = '<?=base_url();?>img/logo_vertical_2.png';
 
-		function propuesta_simple(idProp) {
+		/*function propuesta_simple(idProp) {
 			$.post('<?=base_url();?>C_propuestas/propuesta_sim', {iIdPropuesta:idProp},function(resp){
 				if(resp!="error")
 				{
@@ -199,7 +199,7 @@
 					alert("Error al cargar la propuesta");
 				}
 			});
-		}
+		}*/
 
 		function pagina_propuesta(pagina) {
 
@@ -222,28 +222,6 @@
 			});
 
 		}
-
-		function apoya_propuesta(id) {
-			$.post('<?=base_url();?>C_propuestas/apoyar_propuesta',{id:id}, function(resp){
-				switch(resp)
-				{
-					case 'correcto' :  
-						toastr.success('Correcto', 'Operación completa', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
-						document.getElementById("apoyar_prop").removeAttribute("onclick");
-						document.getElementById("apoyar_prop").setAttribute("disabled",'');
-						break;
-					case 'error' :  
-						toastr.error('No se pudo completar la operación', '¡Error!', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
-						break;
-					case 'error1' :  
-						toastr.warning('Usted ya ha apoyado esta propuesta', '¡Advertencia!', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
-						break;
-				}
-			});
-		}
-
-		
-
 			
 	</script>
 
