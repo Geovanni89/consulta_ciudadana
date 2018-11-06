@@ -10840,7 +10840,8 @@ blockquote.float-right {
 	position: absolute;
 	left: 0;
 	width: 100%;
-	padding: 2rem;
+	/* Editado por Jorge Estrella para acomodar el texto de la matriz de ejes
+	padding: 2rem;*/
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	outline: 1px solid transparent;

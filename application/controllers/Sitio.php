@@ -268,4 +268,14 @@ class Sitio extends CI_Controller {
 		}else $this->load->view('index');
 	}
 
+	function matriz_ejes()
+	{
+		$this->load->view('matriz_ejes');
+	}
+
+	function infografia()
+	{
+		$this->load->view('infografia');
+	}
+
 }

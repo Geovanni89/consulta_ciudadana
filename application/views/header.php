@@ -50,6 +50,7 @@
 
 				<ul>
 					<li <?php if(isset($active) && $active == 1) echo 'class="current"'; ?>><a href="<?=base_url();?>"><div>Inicio</div></a></li>
+					<li <?php if(isset($active) && $active == 6) echo 'class="current"'; ?>><a href="<?=base_url();?>Sitio/matriz_ejes"><div>¿Cómo estamos?</div></a></li>
 					<li <?php if(isset($active) && $active == 2) echo 'class="current"'; ?>><a href="<?=base_url();?>Sitio/propuestas"><div>Propuestas</div></a></li>
 					<li <?php if(isset($active) && $active == 3) echo 'class="current"'; ?>><a href="#"><div>Votaciones</div></a></li>
 					<?php if(!isset($_SESSION[PREFIJO.'_idusuario']) || empty($_SESSION[PREFIJO.'_idusuario']))
