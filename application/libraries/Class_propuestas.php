@@ -29,7 +29,7 @@ class Class_propuestas {
                                     <a href="'.base_url().$urlImg.'" data-lightbox="image"><img class="image_fade" src="'.base_url().$urlImg.'" alt="Standard Post with Image"></a>
                                 </div>
                                 <div class="entry-title">
-                                    <h2><a href="javascript:" onclick="propuesta_simple('.$vprop->iIdPropuesta.')">'.$vprop->vTitulo.'</a></h2>
+                                    <h2><a target="_blank" href="'.base_url().'C_propuestas/propuesta_sim?id='.$vprop->iIdPropuesta.'">'.$vprop->vTitulo.'</a></h2>
                                 </div>
                                 <ul class="entry-meta clearfix">
                                     <li><a href="javascript:"><i class="icon-comments"></i> 2 Comentarios</a></li>
@@ -75,7 +75,7 @@ class Class_propuestas {
                                 <li><a href="#"><i class="icon-user"></i> '.$vprop->vNombre.' '.$vprop->vApellidoPaterno.' '.$vprop->vApellidoMaterno.'</a></li>
                             </ul>
                             <div class="team-content">'.$vprop->tDescripcion.'</div>
-                            <br><button class="btn btn-success">Consultar</button>                                      
+                            <br><a target="_blank" href="'.base_url().'C_propuestas/propuesta_sim?id='.$vprop->iIdPropuesta.'" class="btn btn-success">Consultar</a>                                      
                         </div>
                     </div>
                 </div>';

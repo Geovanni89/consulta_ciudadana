@@ -43,7 +43,7 @@
 
 			<div class="container clearfix">
 				<h1>Crea tu propuesta</h1>
-				<span>Elías Abdala</span>				
+				<span><?php echo $_SESSION[PREFIJO.'_nombre']; ?></span>				
 			</div>
 
 		</section><!-- #page-title end -->
@@ -367,6 +367,7 @@
 		}
 
 		function js_municipio(valor) {
+			/*
 			map.data.forEach(function(feature) {
 		        map.data.remove(feature);
 		    });
@@ -376,7 +377,7 @@
 			    fillColor: 'green',
 			    fillOpacity: 0,
 				strokeWeight: 1
-			});
+			});*/
 		}
 
 		/*function actualizaText()

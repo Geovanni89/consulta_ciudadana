@@ -15,11 +15,12 @@ class C_propuestas extends CI_Controller {
 
 	public function propuesta_sim()
 	{
-		$iIdUsuario = 1;
-		$iIdPropuesta = $this->input->post('iIdPropuesta', TRUE);
+		$iIdUsuario = $_SESSION[PREFIJO.'_idusuario'];
+		$iIdPropuesta = $this->input->get('id', TRUE);
 		$model = new M_propuestas();
 		$query_prop = $model->carga_propuestas($iIdPropuesta);
-		$query_existe = $model->ver_apoyo($iIdPropuesta,$iIdUsuario);		
+		$query_existe = $model->ver_apoyo($iIdPropuesta,$iIdUsuario);
+		$query_coment = $model->carga_comentarios($iIdPropuesta);
 
 		if($query_prop!=false) 
 		{
@@ -35,6 +36,7 @@ class C_propuestas extends CI_Controller {
 			$datos['img'] = $model->carga_adjuntos($iIdPropuesta,1);
 			$datos['pdf'] = $model->carga_adjuntos($iIdPropuesta,2);
 			$datos['apoyo'] = $query_existe;
+			$datos['comentarios'] = $query_coment;
 			$this->load->view('propuesta_simple',$datos);
 		} 
 		else echo "error";
@@ -268,6 +270,45 @@ class C_propuestas extends CI_Controller {
 			else echo "correcto";			
 		}
 
+	}
+
+	public function envia_comentario()
+	{
+		$model = new M_propuestas();
+		$iIdUsuario = $_SESSION[PREFIJO.'_idusuario'];
+		$idprop = $this->input->post('idprop', TRUE);
+		$idresp = $this->input->post('idcom', TRUE);
+		$vComentario = $this->input->post('com', TRUE);
+		$dFecha = date("Y-m-d H:i:s");
+
+		$datos = array( 
+			'vComentario'=>$vComentario,
+			'iEstatus'=>1,
+			'iIdPropuesta'=>$idprop,
+			'iIdUsuario'=>$iIdUsuario,			
+			'dFecha'=> $dFecha);
+		
+		if($idresp > 0) $datos['iIdReplicaDe'] = $idresp;
+
+		$coment = $model->guarda_comentario($datos);
+		echo $coment;
+	}
+
+	public function like_comentario()
+	{
+		$iIdUsuario = $_SESSION[PREFIJO.'_idusuario'];
+
+		$iIdComentario = $this->input->post('iIdComentario', TRUE);
+		$iLike = $this->input->post('iLike', TRUE);
+		$dFecha = date("Y-m-d H:i:s");
+		
+		$datos = array(
+			'iIdComentario' => $iIdComentario,
+			'iIdUsuario' => $iIdUsuario,
+			'iLike' => $iLike,
+			'dFecha' => $dFecha);
+
+		print_r($datos);
 	}
 	
 }

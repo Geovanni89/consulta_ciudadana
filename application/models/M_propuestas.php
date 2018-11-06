@@ -94,7 +94,7 @@ class M_propuestas extends CI_Model {
 		$this->db->select('p.iIdPropuesta,p.vTitulo,p.tDescripcion,p.nLatDec,p.nLongDec,p.dFecha,u.iIdUsuario,u.vNombre,u.vApellidoPaterno,u.vApellidoMaterno,p.vCodigo');
 		$this->db->from('Propuesta p');
 		$this->db->join('Usuario u','p.iIdUsuario = u.iIdUsuario','INNER');
-		$this->db->where('p.iEstatus>',0);
+		$this->db->where('p.iEstatus>',1);
 		if($iIdPropuesta>0) $this->db->where('p.iIdPropuesta',$iIdPropuesta);
 		$this->db->order_by('dFecha','DESC');
 
@@ -104,6 +104,20 @@ class M_propuestas extends CI_Model {
 			$this->db->limit($lim_inf,$limit);					
 		}
 		elseif($lim > 0) $this->db->limit($lim);
+
+		$query = $this->db->get();
+		if($query!=false) return $query->result();
+		else return false;
+	}
+
+	public function carga_comentarios($iIdPropuesta,$iIdComentario=0)
+	{
+		$this->db->select('c.iIdComentario,c.vComentario,c.iIdPropuesta,c.iIdReplicaDe,c.dFecha,u.iIdUsuario,u.vNombre,u.vApellidoPaterno,u.vApellidoMaterno');
+		$this->db->from('Comentario c');
+		$this->db->join('Usuario u','c.iIdUsuario = u.iIdUsuario','INNER');
+		$this->db->where('c.iIdPropuesta',$iIdPropuesta);
+		$this->db->where('c.iEstatus >',1);
+		$this->db->where('c.iIdReplicaDe',0);
 
 		$query = $this->db->get();
 		if($query!=false) return $query->result();
@@ -150,6 +164,22 @@ class M_propuestas extends CI_Model {
 	{
 		$this->db->trans_begin();
 		$query = $this->db->insert('PropuestaLike',$datos);
+		if($this->db->trans_status() === FALSE) 
+		{
+			$this->db->trans_rollback();
+			return false;
+		}
+		else 
+		{
+			$this->db->trans_commit();
+			return $query;
+		}
+	}
+
+	public function guarda_comentario($datos)
+	{
+		$this->db->trans_begin();
+		$query = $this->db->insert('Comentario',$datos);
 		if($this->db->trans_status() === FALSE) 
 		{
 			$this->db->trans_rollback();
