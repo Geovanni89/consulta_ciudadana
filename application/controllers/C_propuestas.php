@@ -37,6 +37,8 @@ class C_propuestas extends CI_Controller {
 			$datos['pdf'] = $model->carga_adjuntos($iIdPropuesta,2);
 			$datos['apoyo'] = $query_existe;
 			$datos['comentarios'] = $query_coment;
+			//$datos['url_actual'] = base_url().'C_propuestas/propuesta_sim?id='.$iIdPropuesta;
+			$datos['url_actual'] = 'http://siegy.yucatan.gob.mx/';
 			$this->load->view('propuesta_simple',$datos);
 		} 
 		else echo "error";
@@ -285,10 +287,11 @@ class C_propuestas extends CI_Controller {
 			'vComentario'=>$vComentario,
 			'iEstatus'=>1,
 			'iIdPropuesta'=>$idprop,
-			'iIdUsuario'=>$iIdUsuario,			
+			'iIdUsuario'=>$iIdUsuario,
+			'iIdReplicaDe' => 0,
 			'dFecha'=> $dFecha);
 		
-		if($idresp > 0) $datos['iIdReplicaDe'] = $idresp;
+		if(isset($idresp) && $idresp > 0) $datos['iIdReplicaDe'] = $idresp;
 
 		$coment = $model->guarda_comentario($datos);
 		echo $coment;
@@ -367,6 +370,7 @@ class C_propuestas extends CI_Controller {
 										echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<a id="respuestas_'.$vresp->iIdComentario.'" href="javascript:" onclick="respuestas('.$vresp->iIdComentario.')">Ver respuestas</a>
 										</div>
+										<div class="col" style="display: none;" id="container_respuesta_'.$vresp->iIdComentario.'"></div>
 										<div class="clear"></div>
 									</div>
 									<div id="resp_'.$vresp->iIdComentario.'"></div>';
@@ -375,6 +379,7 @@ class C_propuestas extends CI_Controller {
 									else
 									{
 										echo '</div>
+										<div class="col" style="display: none;" id="container_respuesta_'.$vresp->iIdComentario.'"></div>
 										<div class="clear"></div>
 									</div>';
 									}

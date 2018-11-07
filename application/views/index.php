@@ -42,7 +42,7 @@
 						<div class="swiper-slide dark" style="background-image: url('<?=base_url();?>public/images/slider/swiper/chichen.jpg');">
 							<div class="container clearfix">
 								<div class="slider-caption slider-caption-center">
-									<h2 data-animate="fadeInUp">Particippación Ciudadana</h2>
+									<h2 data-animate="fadeInUp">Participación Ciudadana</h2>
 									<p class="d-none d-sm-block" data-animate="fadeInUp" data-delay="200">¿CÓMO QUIERES VER A YUCATÁN?</p>
 								</div>
 							</div>

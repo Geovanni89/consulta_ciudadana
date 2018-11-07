@@ -25,6 +25,14 @@
 </head>
 
 <body class="stretched">
+	<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.2&appId=305657250272074&autoLogAppEvents=1';
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
 
 	<!-- Document Wrapper
 	============================================= -->
@@ -188,15 +196,17 @@
 										<div class="si-share noborder clearfix">
 											<span>Compártelo en tus redes sociales:</span>
 											<div>
-												<a href="#" class="social-icon si-borderless si-facebook">
+												<?php echo $url_actual; ?>
+
+												<a href="http://www.facebook.com/sharer.php?u=<?php echo $url_actual; ?>" class="social-icon si-borderless si-facebook">
 													<i class="icon-facebook"></i>
 													<i class="icon-facebook"></i>
 												</a>
-												<a href="#" class="social-icon si-borderless si-twitter">
+												<a href="https://twitter.com/?status=Me gusta esta página <?php echo $url_actual; ?>" class="social-icon si-borderless si-twitter">
 													<i class="icon-twitter"></i>
 													<i class="icon-twitter"></i>
 												</a>					
-												<a href="#" class="social-icon si-borderless si-gplus">
+												<a href="https://plus.google.com/share?url=<?php echo $url_actual; ?>" class="social-icon si-borderless si-gplus">
 													<i class="icon-gplus"></i>
 													<i class="icon-gplus"></i>
 												</a>					
@@ -259,12 +269,13 @@
 													<a id="dislike_'.$vcom->iIdComentario.'" href="javascript:" onclick="like(0,'.$vcom->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a>';
 													}
 
-
+													
 												if($vcom->respuestas > 0)
 												{
 													echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 													<a id="respuestas_'.$vcom->iIdComentario.'" href="javascript:" onclick="respuestas('.$vcom->iIdComentario.')">Ver respuestas</a>
 													</div>
+													<div class="col" style="display: none;" id="container_respuesta_'.$vcom->iIdComentario.'"></div>
 													<div class="clear"></div>
 												</div>
 												<div id="resp_'.$vcom->iIdComentario.'"></div>';
@@ -273,6 +284,7 @@
 												else
 												{
 													echo '</div>
+													<div class="col" style="display: none;" id="container_respuesta_'.$vcom->iIdComentario.'"></div>
 													<div class="clear"></div>
 												</div>';
 												}
@@ -480,23 +492,48 @@
 			if(resp_act!="") {				
 				document.getElementById("li_comentario_"+resp_act).style.boxShadow = "";
 			}
-			
-			document.getElementById("li_comentario_"+idcoment).style.boxShadow = "10px 10px 5px 0px #0c67a79e";
+
+			document.getElementById("li_comentario_"+idcoment).style.boxShadow = "10px 10px 5px 0px #abadaf";
 			document.getElementById('idresp_com').value=idcoment;
-			document.getElementById("title-coment").innerText = "Respuesta al comentario de "+nombre;
+
+			/*if(document.getElementById('container_respuesta_'+idcoment).childNodes.length > 0) {
+				$('#container_respuesta_'+idcoment).addClass('animated fadeOutDown');
+				$('#container_respuesta_'+idcoment).hide('slow');	
+				$('#container_respuesta_'+idcoment).html('');
+			} else {*/
+				$('#container_respuesta_'+idcoment).html('<br><br><h4>Responder comentario</h4><textarea class="form-control" id="resp_coment_'+idcoment+'" name="resp_coment_'+idcoment+'" rows="5"></textarea><br><button class="btn btn-success" onclick="responder_comentario('+idcoment+');" id="btn_resp_'+idcoment+'">Responder</button>');
+				$('#container_respuesta_'+idcoment).addClass('animated fadeInDown');
+				$('#container_respuesta_'+idcoment).show('slow');				
+			//}
+			
 
 		}
 
 		function envia_comentario() {
 			var idPropuesta = document.getElementById('idprop_com').value;
-			var idComent = document.getElementById('idresp_com').value;
 			var vComentario =  document.getElementById('vComentario').value;
 
-			$.post('<?=base_url();?>C_propuestas/envia_comentario', {idprop:idPropuesta,idcom:idComent,com:vComentario}, function(resp){
+			$.post('<?=base_url();?>C_propuestas/envia_comentario', {idprop:idPropuesta,com:vComentario}, function(resp){
 				console.log(resp);
 				if(resp==1) toastr.success('Correcto', 'Operación completa', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
 				else toastr.warning('Error al enviar su comentario', '¡Advertencia!', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
-			})
+			});
+		}
+
+		function responder_comentario(idcoment) {
+			var idPropuesta = document.getElementById('idprop_com').value;
+			var vComentario =  document.getElementById('resp_coment_'+idcoment).value;
+
+			$.post('<?=base_url();?>C_propuestas/envia_comentario', {idprop:idPropuesta,idcom:idcoment,com:vComentario}, function(resp){
+				console.log(resp);
+				if(resp==1) {
+					toastr.success('Correcto', 'Operación completa', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+					$('#container_respuesta_'+idcoment).removeClass('fadeInDown').addClass('fadeOutDown');
+					$('#container_respuesta_'+idcoment).hide('slow');					
+					$('#container_respuesta_'+idcoment).html('').removeClass('animated fadeOutDown');
+				}
+				else toastr.warning('Error al enviar su comentario', '¡Advertencia!', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+			});
 		}
 
 		function like(reaccion,comentario) {
@@ -518,9 +555,14 @@
 
 		function respuestas(iIdComentario) {
 			$.post('<?=base_url();?>C_propuestas/respuestas', {iIdComentario:iIdComentario}, function(resp) {
-				console.log(resp);
 				$('#resp_'+iIdComentario).html(resp);
 			});
 		}
 
+		function comp_face() {
+			FB.ui({
+			  method: 'share',
+			  href: 'https://siegy.yucatan.gob.mx',
+			}, function(response){});
+		}
 </script>
