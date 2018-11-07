@@ -6,7 +6,7 @@ class Class_options {
     {
         $CI =& get_instance();
         $CI->load->helper('url');
-        $CI->load->helper('Funciones');        
+        $CI->load->helper('Funciones_helper');        
         $CI->load->model('M_catalogos'); 
     }
 

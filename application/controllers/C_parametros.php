@@ -60,6 +60,32 @@ class C_parametros extends CI_Controller {
 
     		$aux = $this->ms->actualiza_registro('Parametro',$where,$datos,$con);
 
+            //  Fecha de inicio captura de comentarios
+            $datos = array('vValor' => $this->input->post('INI_CAP_COM') );
+            $where = array('vId' => 'INI_CAP_COM' );
+
+            $aux = $this->ms->actualiza_registro('Parametro',$where,$datos,$con);
+
+            //  Fecha de fin captura de comentarios
+            $datos = array('vValor' => $this->input->post('FIN_CAP_COM') );
+            $where = array('vId' => 'FIN_CAP_COM' );
+
+            $aux = $this->ms->actualiza_registro('Parametro',$where,$datos,$con);
+
+            //  Fecha de inicio votciones
+            $datos = array('vValor' => $this->input->post('INI_VOT') );
+            $where = array('vId' => 'INI_VOT' );
+
+            $aux = $this->ms->actualiza_registro('Parametro',$where,$datos,$con);
+
+            //  Fecha de fin captura de votaciones
+            $datos = array('vValor' => $this->input->post('FIN_VOT') );
+            $where = array('vId' => 'FIN_VOT' );
+
+            $aux = $this->ms->actualiza_registro('Parametro',$where,$datos,$con);
+
+
+
     		if($this->ms->terminar_transaccion($con)) echo 0;
     		else echo 500;
     	}

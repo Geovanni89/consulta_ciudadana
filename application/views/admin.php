@@ -125,8 +125,8 @@
                                     </div>
                                 </div>                                
                                 
-                                <a class="dropdown-item" href="javascript:void(0)">
-                                    <i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
+                                <a class="dropdown-item" href="<?=base_url();?>Sitio" target="_blank">
+                                    <i class="fa fa-home m-r-5 m-l-5"></i> Página principal</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" onclick="Cerrar_sesion();" style="cursor:pointer;">
                                     <i class="fa fa-power-off m-r-5 m-l-5"></i> Cerrar sesión</a>
@@ -193,15 +193,7 @@
             <!-- ============================================================== -->
             
             <div class="container-fluid" id="contenido">
-              <nav aria-label="Page navigation example">
-    <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="javascript:void(0)">Previous</a></li>
-        <li class="page-item"><a class="page-link" href="javascript:void(0)">1</a></li>
-        <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-        <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-        <li class="page-item"><a class="page-link" href="javascript:void(0)">Next</a></li>
-    </ul>
-</nav>
+    
             </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
@@ -210,8 +202,7 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center">
-                All Rights Reserved by AdminBite admin. Designed and Developed by
-                <a href="https://wrappixel.com">WrapPixel</a>.
+                <a href="www.seplan.yucatan.gob.mx">SEPLAN</a>
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
