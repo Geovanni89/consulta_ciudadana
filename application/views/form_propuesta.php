@@ -290,6 +290,7 @@
 
         //envio de formulario -------------------------------------------------------------------------
 		function envia_form() {			
+
 			$.base64.utf8encode = true;
 			
 			document.getElementById('vDescripcion').value = $.base64('encode',editor.getData(),true);
@@ -301,7 +302,7 @@
 			var uri = $('#formPropuesta').attr('action');
 
 			if(document.getElementById('terminos').checked) {
-				if((nLatDec != "0" && nLongDec != "0") || (document.getElementById('ambitoMed'))==true) {
+				if((nLatDec != "0" && nLongDec != "0") || (document.getElementById('ambitoMed').checked==true)) {
 					$.ajax({
 						type: metodo,
 						url: uri,
@@ -332,10 +333,9 @@
 						    console.log("error");
 						 }
 
-					});						
+					});	
 				}
 				else toastr.warning('Error de latitud y longitud', '¡Advertencia!', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
-
 			}
 			else toastr.warning('Debe aceptar la política de privacidad', '¡Advertencia!', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
 		}
