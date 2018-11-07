@@ -331,7 +331,7 @@ class C_propuestas extends CI_Controller {
 		{
 			foreach ($resp as $vresp) {
 				echo '<ul class="children">
-						<li class="comment byuser comment-author-_smcl_admin odd alt depth-2" id="li-comment-3">
+						<li class="comment byuser comment-author-_smcl_admin odd alt depth-2" id="li_comentario_'.$vresp->iIdComentario.'">
 							<div id="comment-3" class="comment-wrap clearfix">
 								<div class="comment-meta">
 									<div class="comment-author vcard">
@@ -358,14 +358,27 @@ class C_propuestas extends CI_Controller {
 									elseif($vresp->iLike==1)
 									{
 										echo '<a class="btn-like" id="like_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(1,'.$vresp->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<a id="dislike_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(0,'.$vresp->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a>';
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<a id="dislike_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(0,'.$vresp->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a>';
 									}
-								echo '</div>
-								<div class="clear"></div>
-							</div>
-							<div id="respuestas_1"></div>
-						</li>
+
+									if($vresp->respuestas > 0)
+									{
+										echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<a id="respuestas_'.$vresp->iIdComentario.'" href="javascript:" onclick="respuestas('.$vresp->iIdComentario.')">Ver respuestas</a>
+										</div>
+										<div class="clear"></div>
+									</div>
+									<div id="resp_'.$vresp->iIdComentario.'"></div>';
+
+									}
+									else
+									{
+										echo '</div>
+										<div class="clear"></div>
+									</div>';
+									}
+					echo '</li>
 					</ul>';
 			}
 		}
