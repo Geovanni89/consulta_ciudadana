@@ -18,7 +18,7 @@
 
 	<link rel="stylesheet" href="<?=base_url();?>public/css/responsive.css" type="text/css" />
 
-	<link rel="stylesheet" href="<?=base_url();?>public/chosen/chosen.min.css?v=3" type="text/css" />
+	<link rel="stylesheet" href="<?=base_url();?>public/chosen/chosen.min.css?v=1" type="text/css" />
 	<!--Modal Loading -->
 	<link type="text/css" rel="stylesheet" href="<?=base_url();?>admin/plugins/modal-loading/css/modal-loading.css" />
 	<link type="text/css" rel="stylesheet" href="<?=base_url();?>admin/plugins/modal-loading/css/modal-loading-animate.css" />
@@ -115,7 +115,7 @@
 										</div>
 										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
 									</div>
@@ -135,7 +135,7 @@
 										</div>
 										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
 									</div>
@@ -155,7 +155,7 @@
 										</div>
 										<div class="flip-card-back" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner bg-danger no-after">
-												<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
 									</div>
@@ -175,7 +175,7 @@
 										</div>
 										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto2?>" >
 											<div class="flip-card-inner">												
-												<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
 									</div>
@@ -195,7 +195,7 @@
 										</div>
 										<div class="flip-card-back no-after bg-danger" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
 									</div>
@@ -217,7 +217,7 @@
 										</div>
 										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
 									</div>
@@ -245,7 +245,7 @@
 										</div>
 										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
 									</div>
@@ -266,7 +266,7 @@
 										</div>
 										<div class="flip-card-back no-after bg-danger" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
 									</div>
@@ -286,7 +286,7 @@
 										</div>
 										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>" >
 											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
 									</div>
@@ -306,7 +306,7 @@
 										</div>
 										<div class="flip-card-back no-after bg-danger" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
 									</div>
@@ -326,7 +326,7 @@
 										</div>
 										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">												
-												<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
 									</div>
@@ -347,7 +347,7 @@
 										<div class="flip-card-back" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												
-												<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
 									</div>
@@ -367,7 +367,7 @@
 										</div>
 										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
 									</div>
@@ -387,7 +387,7 @@
 										</div>
 										<div class="flip-card-back no-after bg-danger" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
 									</div>
@@ -415,7 +415,7 @@
 										</div>
 										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
 									</div>
@@ -436,7 +436,7 @@
 										</div>
 										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
 									</div>
@@ -456,7 +456,7 @@
 										</div>
 										<div class="flip-card-back no-after bg-danger" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
 									</div>
@@ -476,7 +476,7 @@
 										</div>
 										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
 									</div>
@@ -497,7 +497,7 @@
 										</div>
 										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
 									</div>
@@ -517,7 +517,7 @@
 										</div>
 										<div class="flip-card-back no-after bg-danger" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
 									</div>
@@ -547,7 +547,7 @@
 										</div>
 										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
 									</div>
@@ -568,7 +568,7 @@
 										</div>
 										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
 									</div>
@@ -588,7 +588,7 @@
 										</div>
 										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
 									</div>
@@ -608,7 +608,7 @@
 										</div>
 										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
 									</div>
@@ -628,7 +628,7 @@
 										</div>
 										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">												
-												<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
 									</div>
@@ -648,7 +648,7 @@
 										</div>
 										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
 									</div>
@@ -668,7 +668,7 @@
 										</div>
 										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
 									</div>
@@ -705,7 +705,7 @@
 							</div>
 							<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto;?>">
 								<div class="flip-card-inner">
-									<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+									<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 								</div>
 							</div>
 						</div>
@@ -725,7 +725,7 @@
 							</div>
 							<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto;?>">
 								<div class="flip-card-inner">									
-									<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+									<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 								</div>
 							</div>
 						</div>
@@ -745,7 +745,7 @@
 							</div>
 							<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto;?>">
 								<div class="flip-card-inner">
-									<button type="button" class="btn btn-outline-light mt-2"><i class="icon icon-search"></i></button>
+									<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 								</div>
 							</div>
 						</div>
@@ -790,7 +790,7 @@
 		</footer><!-- #footer end -->
 
 	</div><!-- #wrapper end -->
-	
+
 	<div class="modal1 mfp-hide" id="myModal1">
 		<div class="block divcenter" style="background-color: #FFF; max-width: 500px;">
 			<div class="feature-box fbox-center fbox-effect nobottomborder nobottommargin" style="padding: 40px;">

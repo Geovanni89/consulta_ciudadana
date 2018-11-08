@@ -7,7 +7,8 @@ class C_seguridad extends CI_Controller {
         parent::__construct();
         session_start();
         $this->load->helper('url');
-        $this->load->helper('Funciones');
+        //$this->load->helper('Funciones');
+        $this->load->library('Class_options');
         $this->load->model('M_seguridad','ms');
     }
 
@@ -48,7 +49,7 @@ class C_seguridad extends CI_Controller {
     			if(!$this->ms->verificar_existe_correo_usuario($d_usuario['vCorreo']))
     			{
 	    			//	Registro de usuario
-	    			$token = generar_token();
+	    			$token = $this->generar_token();
 	    			$d_usuario['iRegistroCon'] = 1;
 	    			$d_usuario['dFechaRegistro'] = date('Y-m-d H:i:s');	    			
 	    			$d_usuario['vContrasenia'] = SHA1($this->input->post('contrasenia'));
@@ -75,14 +76,22 @@ class C_seguridad extends CI_Controller {
 
 		    		if($this->ms->terminar_transaccion($con))
 		    		{
-		    			if($this->enviar_correo_confirmacion($d_usuario['vCorreo'],$d_usuario['vNombre'],$idusuario,$token))
-		    			{
-		    				echo '0';
-		    			}
-		    			else
-		    			{
-		    				echo 'No se ha podido enviar el correo';
-		    			}
+
+		    			// Enviar correo de confirmación
+
+		    			$this->load->library('Class_mail');
+						$mail = new Class_mail();
+
+						$template = 'templates/confirmar_correo.html';
+						$mensaje = file_get_contents($template);
+						$url = base_url().'C_seguridad/confirmar_correo?id='.$idusuario.'&token='.$token;
+						$mensaje = str_replace('{{var_nombre_dest}}', $d_usuario['vNombre'], $mensaje);
+						$mensaje = str_replace('{{var_url}}', $url, $mensaje);
+						
+						$asunto = utf8_decode('Confirmación de correo');
+
+		    			if($mail->enviar_correo_gmail($d_usuario['vCorreo'],$asunto,$mensaje)) echo '0';		    			
+		    			else echo 'No se ha podido enviar el correo';
 		    		}
 		    		else
 		    		{
@@ -102,8 +111,10 @@ class C_seguridad extends CI_Controller {
 
     public function index_usuarios()
     {
-
-    	$datos['resultado_busqueda'] = $this->listado_usuarios('',1);
+    	$op = new Class_options();
+    	$datos['resultado_busqueda'] = $this->listado_usuarios('','',1);
+    	$datos['op_roles'] = $op->options_roles(0,'Seleccione un rol');
+    	$datos['op_estatus'] = $op->options_estatus_usuario(0,'Seleccione un estatus');
 
     	$this->load->view('usuarios/index',$datos);
     }
@@ -111,13 +122,17 @@ class C_seguridad extends CI_Controller {
     public function buscar_usuarios()
     {
     	$pag = $this->input->post('pag');
+    	$where = '';
+    	$palabra = trim($this->input->post('fTitulo'));
+    	if($this->input->post('fEstatus') > 0) $where['u.iEstatus'] = $this->input->post('fEstatus');
+    	if($this->input->post('fRol') > 0) $where['u.iIdRol'] = $this->input->post('fRol');
 
-    	echo $this->listado_usuarios('',$pag);
+    	echo $this->listado_usuarios($where,$palabra,$pag);
     }
 
-    public function listado_usuarios($palabra='',$pag=1)
+    public function listado_usuarios($where='',$palabra='',$pag=1)
 	{
-		$qc = $this->ms->buscar_usuarios('',$palabra);
+		$qc = $this->ms->buscar_usuarios($where,$palabra);
 		$listado = '';
 
 		if($qc)
@@ -148,7 +163,7 @@ class C_seguridad extends CI_Controller {
                                     <td>'.$dc->vCorreo.'</td>
                                     <td>'.$dc->vRol.'</td>
                                     <td width="300px" align="center">';
-                                    $listado .= '<button type="button" class="btn waves-effect waves-light btn-outline-dark"><i class="mdi mdi-lead-pencil"></i>&nbsp;Editar</button>';
+                                    $listado .= '<button type="button" class="btn waves-effect waves-light btn-outline-dark" onclick="CapturarUsuario('.$dc->iIdUsuario.');"><i class="mdi mdi-lead-pencil"  ></i>&nbsp;Editar</button>';
                                 if($dc->iIdUsuario != $_SESSION[PREFIJO.'_idusuario'])
                             	{
                             		
@@ -172,6 +187,43 @@ class C_seguridad extends CI_Controller {
 		return $listado;
 	}
 
+	public function capturar_usuario()
+	{
+		if(isset($_POST['id']))
+		{
+			$id = $this->input->post('id');
+			$op = new Class_options();
+
+			if($id == 0)
+			{
+				$datos['iIdUsuario'] = $id;
+				$datos['vNombre'] = '';
+				$datos['vApellidoPaterno'] = '';
+				$datos['vApellidoMaterno'] = '';
+				$datos['vCorreo'] = '';
+
+			}
+			else
+			{
+
+			}
+
+			$datos['op_grados_estudio'] = $op->options_grados_estudio(0,'Seleccione un grado de estudio');
+			$datos['op_ocupaciones'] = $op->options_ocupaciones(0,'Seleccione una ocupación');
+			$datos['op_municipios'] = $op->options_municipios(0,'Seleccione un municipio');
+			$where1['iIdMunicipio'] = 0;
+			$datos['op_localidades'] = $op->options_localidades(0,'Seleccione una localidad',$where1);
+			$where2['iIdLocalidad'] = 0;
+			$datos['op_asentamientos'] = $op->options_asentamientos(0,'Seleccione una colonia',$where2);
+			$datos['op_dias'] = $op->options_dias(0,'Día');
+			$datos['op_meses'] = $op->options_meses(0,'Mes');
+			$datos['op_anios'] = $op->options_anios(0,'Año');
+
+			$this->load->view('usuarios/capturar_usuario',$datos);	
+		}
+		
+	}
+
 	function eliminar_usuario()
 	{
 		if(isset($_POST['id']) && !empty($_POST['id']))
@@ -193,43 +245,6 @@ class C_seguridad extends CI_Controller {
     		}
 
 		}else echo 'Acceso denegado';
-	}
-
-	function enviar_correo_confirmacion($correo_dest,$nombre_dest,$idusuario,$token)
-	{
-		$this->load->library('Class_mail');
-		$mail = new Class_mail();
-
-
-		$mail->isSMTP();                            // Establecer el correo electrónico para utilizar SMTP
-		$mail->Host = 'smtp.gmail.com';             // Especificar el servidor de correo a utilizar 
-		$mail->SMTPAuth = true;                     // Habilitar la autenticacion con SMTP
-		$mail->Username = 'jorge.alph@gmail.com';          // Correo electronico saliente ejemplo: tucorreo@gmail.com
-		$mail->Password = 'N30-4lph@1351'; 		// Tu contraseña de gmail
-		$mail->SMTPSecure = 'tls';                  // Habilitar encriptacion, `ssl` es aceptada
-		$mail->Port = 587;                          // Puerto TCP  para conectarse 
-		$mail->setFrom('jorge.alph@gmail.com', 'Jorge Estrella');//Introduzca la dirección de la que debe aparecer el correo electrónico. Puede utilizar cualquier dirección que el servidor SMTP acepte como válida. El segundo parámetro opcional para esta función es el nombre que se mostrará como el remitente en lugar de la dirección de correo electrónico en sí.
-		$mail->addReplyTo('jorge.alph@gmail.com', 'Jorge Estrella');//Introduzca la dirección de la que debe responder. El segundo parámetro opcional para esta función es el nombre que se mostrará para responder
-		$mail->addAddress($correo_dest);   // Agregar quien recibe el e-mail enviado
-		$template = 'templates/confirmar_correo.html';
-		$message = file_get_contents($template);
-		$message = str_replace('{{var_nombre_dest}}', $nombre_dest, $message);
-		$message = str_replace('{{var_id}}', $idusuario, $message);
-		$message = str_replace('{{var_token}}', $token, $message);
-		
-		$mail->isHTML(true);  // Establecer el formato de correo electrónico en HTML
-		
-		$mail->Subject = utf8_decode('Confirmación de correo');
-		$mail->msgHTML($message);
-		if(!$mail->send()) {
-			return false;
-			//echo '<p style="color:red">No se pudo enviar el mensaje..';
-			//echo 'Error de correo: ' . $mail->ErrorInfo."</p>";
-		} else {
-			return true;
-			//echo '<p style="color:green">Tu mensaje ha sido enviado!</p>';
-		}
-
 	}
 
 	public function confirmar_correo()
@@ -277,7 +292,7 @@ class C_seguridad extends CI_Controller {
 				if($query->num_rows() == 1)
 				{	
 					//	Obtenermos los datos del usuario
-					$token = generar_token();				
+					$token = $this->generar_token();				
 					$where['iIdUsuario'] = $idusuario = $query->row()->iIdUsuario;
 					$nombre = $query->row()->vNombre;
 					$datos_usuario['vToken'] = $token;
@@ -289,8 +304,22 @@ class C_seguridad extends CI_Controller {
 
 					if($this->ms->terminar_transaccion($con))
 					{
-						if( $this->enviar_correo_recuperacion_contrasenia($correo,$nombre,$idusuario,$token) ) echo 0;
+						//Enviamos el correo
+
+						$template = 'templates/recuperar_contrasenia.html';
+						$url = base_url().'C_seguridad/cambiar_contrasenia?id='.$idusuario.'&token='.$token;
+						$mensaje = file_get_contents($template);
+						$mensaje = str_replace('{{var_url}}', $url, $mensaje);
+						$asunto = utf8_decode('Recuperación de contraseña');
+
+						$this->load->library('Class_mail');
+						$mail = new Class_mail();
+
+						if($mail->enviar_correo_gmail($correo,$asunto,$mensaje)) echo '0';
 						else echo 'No se ha podido enviar el correo, intente de nuevo más tarde';
+
+						/*if( $this->enviar_correo_recuperacion_contrasenia($correo,$nombre,$idusuario,$token) ) echo 0;
+						else echo 'No se ha podido enviar el correo, intente de nuevo más tarde';*/
 					}
 
 
@@ -301,43 +330,7 @@ class C_seguridad extends CI_Controller {
 		}
 
 	}
-
-	public function enviar_correo_recuperacion_contrasenia($correo_dest,$nombre_dest,$idusuario,$token)
-	{		
-		$this->load->library('Class_mail');
-		$mail = new Class_mail();
-
-
-		$mail->isSMTP();                            // Establecer el correo electrónico para utilizar SMTP
-		$mail->Host = 'smtp.gmail.com';             // Especificar el servidor de correo a utilizar 
-		$mail->SMTPAuth = true;                     // Habilitar la autenticacion con SMTP
-		$mail->Username = 'jorge.alph@gmail.com';          // Correo electronico saliente ejemplo: tucorreo@gmail.com
-		$mail->Password = 'N30-4lph@1351'; 		// Tu contraseña de gmail
-		$mail->SMTPSecure = 'tls';                  // Habilitar encriptacion, `ssl` es aceptada
-		$mail->Port = 587;                          // Puerto TCP  para conectarse 
-		$mail->setFrom('jorge.alph@gmail.com', 'Jorge Estrella');//Introduzca la dirección de la que debe aparecer el correo electrónico. Puede utilizar cualquier dirección que el servidor SMTP acepte como válida. El segundo parámetro opcional para esta función es el nombre que se mostrará como el remitente en lugar de la dirección de correo electrónico en sí.
-		$mail->addReplyTo('jorge.alph@gmail.com', 'Jorge Estrella');//Introduzca la dirección de la que debe responder. El segundo parámetro opcional para esta función es el nombre que se mostrará para responder
-		$mail->addAddress($correo_dest);   // Agregar quien recibe el e-mail enviado
-		$template = 'templates/recuperar_contrasenia.html';
-		$message = file_get_contents($template);
-		$message = str_replace('{{var_nombre_dest}}', $nombre_dest, $message);
-		$message = str_replace('{{var_id}}', $idusuario, $message);
-		$message = str_replace('{{var_token}}', $token, $message);
-		
-		$mail->isHTML(true);  // Establecer el formato de correo electrónico en HTML
-		
-		$mail->Subject = utf8_decode('Recuperar contraseña');
-		$mail->msgHTML($message);
-		if(!$mail->send()) {
-			return false;
-			//echo '<p style="color:red">No se pudo enviar el mensaje..';
-			//echo 'Error de correo: ' . $mail->ErrorInfo."</p>";
-		} else {
-			return true;
-			//echo '<p style="color:green">Tu mensaje ha sido enviado!</p>';
-		}
-	}
-
+	
 	public function cambiar_contrasenia()
 	{
 		if( isset($_GET['id']) && !empty($_GET['id']) && isset($_GET['token']) && !empty($_GET['token']) )
@@ -380,6 +373,12 @@ class C_seguridad extends CI_Controller {
 			if(!$this->ms->verificar_existe_correo_usuario($correo)) echo 0;
 			else echo "1";
 		}
+	}
+
+	public function generar_token()
+	{
+		$var = rand(100000, 999999);
+		return md5($var);
 	}
 
 }

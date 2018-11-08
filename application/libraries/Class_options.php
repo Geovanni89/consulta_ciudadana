@@ -221,4 +221,115 @@ class Class_options {
 
         return $select;
     }
+
+    // === Añadido en 2018-11-07
+
+    function options_sectores($seleccionado="", $opcion0="",$where='')
+    { 
+        $model = new M_catalogos();
+        $select = '';
+        
+        //  Primera opción del selector
+        if($opcion0 != '')
+        {
+            if($seleccionado == 0) $select .="<option value=\"0\" rel=\"0\" selected>$opcion0</option>";
+            else $select .="<option value=\"0\" rel=\"0\">$opcion0</option>";
+        }
+
+        $query = $model->datos_sectores($where);
+
+        if($query != false)
+        {   
+            $query = $query->result();
+            foreach ($query as $e)
+            {
+                $selected = ($e->iIdSector == $seleccionado) ? 'selected':'';
+                $select .= '<option value="'.$e->iIdSector.'" '.$selected.'>'.$e->vSector.'</option>';
+            }
+        }
+
+        return $select;
+    }
+
+    function options_temas($seleccionado="", $opcion0="",$id=0)
+    { 
+        $model = new M_catalogos();
+        $select = '';
+
+        $query = $model->devuelve_temas_por_sector($id);
+        //  Primera opción del selector
+        if($opcion0 != '')
+        {
+            if($seleccionado == 0) $select .="<option value=\"0\" rel=\"0\" selected>$opcion0</option>";
+            else $select .="<option value=\"0\" rel=\"0\">$opcion0</option>";
+        }
+
+        if($query != false)
+        {
+
+            $query = $query->result();
+            foreach ($query as $e)
+            {
+                $selected = ($e->iIdTema == $seleccionado) ? 'selected':'';
+                $select .= '<option value="'.$e->iIdTema.'" '.$selected.' >'.$e->vTema.'</option>';
+            }
+        }
+
+        return $select;
+    }
+
+    function options_estatus_propuestas($seleccionado="",$opcion0=true)
+    { 
+        $select = '';
+
+        if($opcion0) $select .= '<option value="10" rel="0">Todas</option>';
+        $select .= ($seleccionado == 0) ? '<option value="0" rel="0" selected>No viables</option>':'<option value="0"  rel="0">No viables</option>';
+        $select .= ($seleccionado == 1) ? '<option value="1" rel="0" selected>Pendientes de revisión</option>':'<option value="1"  rel="0">Pendientes de revisión</option>';
+        $select .= ($seleccionado == 2) ? '<option value="2" rel="0" selected>Integrada</option>': '<option value="2" rel="0" >Integrada</option>';
+        $select .= ($seleccionado == 3) ? '<option value="3" rel="0" selected>Aprobada</option>':'<option value="3" rel="0" >Aprobada</option>';
+
+        return $select;
+    }
+
+    function options_roles($seleccionado="", $opcion0="",$where='')
+    { 
+        $model = new M_catalogos();
+        $select = '';
+        
+        //  Primera opción del selector
+        if($opcion0 != '')
+        {
+            if($seleccionado == 0) $select .="<option value=\"0\" rel=\"0\" selected>$opcion0</option>";
+            else $select .="<option value=\"0\" rel=\"0\">$opcion0</option>";
+        }
+
+        $query = $model->datos_roles($where);
+
+        if($query != false)
+        {   
+            $query = $query->result();
+            foreach ($query as $e)
+            {
+                $selected = ($e->iIdRol == $seleccionado) ? 'selected':'';
+                $select .= '<option value="'.$e->iIdRol.'" '.$selected.'>'.$e->vRol.'</option>';
+            }
+        }
+
+        return $select;
+    }
+
+    function options_estatus_usuario($seleccionado="",$opcion0='')
+    { 
+        $select = '';
+         if($opcion0 != '')
+        {
+            if($seleccionado == 0) $select .="<option value=\"0\" rel=\"0\" selected>$opcion0</option>";
+            else $select .="<option value=\"0\" rel=\"0\">$opcion0</option>";
+        }
+       
+        $select .= ($seleccionado == 1) ? '<option value="1" rel="0" selected >Pendiente de validación</option>':'<option value="1" rel="0">Pendiente de validación</option>';
+        $select .= ($seleccionado == 2) ? '<option value="2" rel="0" selected >Correo validado</option>': '<option value="2" rel="0">Correo validado</option>';
+
+        return $select;
+    }
 }

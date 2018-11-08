@@ -13,21 +13,43 @@
 
 <body>
 	<div class="container">
-		<div class="row">
+		<!--<div class="row">
 			<div class="col-lg-12">
-				<img src="<?=base_url();?>img/infografiademo.jpg">
+				<img src="<?=base_url();?>img/ficha.jpg">
 			</div>
 		</div>
-		<br>
+		<br>-->
+
 		<div class="row">
-			<div class="col-lg-10">
+			<div class="col-lg-12">
+				<div id="example1"></div>
 			</div>
-			<div class="col-lg-2">
-			<?php if(isset($_SESSION[PREFIJO.'_idusuario'])) {?>
-				<a href="<?=base_url();?>Sitio/form_propuesta?idtema=1" class="btn btn-success">Crear una propuesta</a>
-			<?php } ?>
+		</div>
+
+		
+		<div class="row">
+			<div class="col-lg-12 text-right">
+			<?php 
+				if(isset($_SESSION[PREFIJO.'_idusuario'])) {
+					echo '<a href="'.base_url().'Sitio/form_propuesta?idsector=1&idtema=1" class="btn btn-success">Crear una propuesta</a>';
+				}
+				else
+				{
+                    echo '<div class="style-msg errormsg"><div class="sb-msg"><i class="icon-remove"></i>Inicie sesión para crear una propuesta sobre este tema</div></div>';
+				
+				}
+			?>
 			</div>
 		</div>
 	</div>	
-</body>
+</body>}
+<script src="<?=base_url();?>js/pdfobject.js"></script>
+<script>
+	var options = {
+    	height: "600px",
+    	pdfOpenParams: { view: 'FitV' }
+	};
+	
+	PDFObject.embed("<?=base_url();?>img/ficha.pdf", "#example1",options);
+</script>
 </html>
