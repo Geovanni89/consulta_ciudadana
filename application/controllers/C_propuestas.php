@@ -450,6 +450,7 @@ class C_propuestas extends CI_Controller {
                             		</div></td></tr>';
                             	}
                             }
+                            else echo '<tr><td colspan="4">Sin resultados</td></tr>';
                             echo '</tbody>
                         </table>
                     </div>
