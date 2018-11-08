@@ -81,11 +81,11 @@ class C_propuestas extends CI_Controller {
 
 		if($ambitoMed=="on") 
 		{
-			$datos['iIdMunicpio'] = 0;
+			$datos['iIdMunicipio'] = 0;
 		}
 		else
 		{
-			$datos['iIdMunicpio'] = $iIdMunicipio;
+			$datos['iIdMunicipio'] = $iIdMunicipio;
 			$datos['nLatDec'] = $nLatDec;
 			$datos['nLongDec'] = $nLongDec;
 		}
