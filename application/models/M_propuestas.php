@@ -125,6 +125,31 @@ class M_propuestas extends CI_Model {
 		else return false;
 	}
 
+	public function carga_prop_admin($iIdTema)
+	{
+		$this->db->select('p.iIdPropuesta,p.vTitulo');
+		$this->db->from('Propuesta p');
+		$this->db->where('p.iEstatus>',1);
+		$this->db->where('p.iIdTema',$iIdTema);
+		$this->db->order_by('dFecha','DESC');
+
+		$query = $this->db->get();
+		if($query!=false) return $query->result();
+		else return false;
+	}
+
+	public function carga_coment_admin($iIdPropuesta)
+	{
+		$this->db->select('iIdComentario,vComentario,dFecha');
+		$this->db->from('Comentario');
+		$this->db->where('iEstatus',1);
+		$this->db->where('iIdPropuesta',$iIdPropuesta);
+
+		$query = $this->db->get();
+		if($query!=false) return $query->result();
+		else return false;
+	}
+
 	public function carga_adjuntos($iIdPropuesta,$tipo)
 	{
 		$this->db->select('vRutaAdjunto,vNombreAdjunto,dFecha');
@@ -238,12 +263,27 @@ class M_propuestas extends CI_Model {
 		$this->db->where('c.iEstatus >',1);
 		$this->db->where('c.iIdReplicaDe',$iIdComentario);
 
-
-
-
 		$query = $this->db->get();
 		if($query!=false) return $query->result();
 		else return false;
+	}
+
+	public function actualiza_comentario($datos,$idcoment)
+	{
+		$this->db->trans_begin();
+		$this->db->where('iIdComentario',$idcoment);
+		$query = $this->db->update('Comentario',$datos);
+
+		if($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			return false;
+		}
+		else
+		{
+			$this->db->trans_commit();
+			return $query;
+		}
 	}
 }
 

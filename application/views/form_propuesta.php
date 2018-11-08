@@ -96,7 +96,7 @@
 									<input id="adjuntoFotos" name="adjuntoFotos[]" type="file" class="file" accept="image/*" multiple data-show-upload="false" data-show-caption="true" data-show-preview="true" data-show-upload="false">
 								</div>
 								<div class="col-lg-12 bottommargin">
-									<label>Dcomentos</label>
+									<label>Documentos</label>
 									<small id="" class="form-text text-muted">Puedes subir hasta un máximo de 3 documentos en formato pdf, de hasta 3 MB por archivo.</small><br>
 									<input id="adjuntoArchivos" name="adjuntoArchivos[]" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" data-show-preview="true" data-allowed-file-extensions='["pdf"]' data-show-upload="false">
 								</div>

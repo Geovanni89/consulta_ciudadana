@@ -358,9 +358,15 @@
     <script src="<?=base_url();?>admin/plugins/modal-loading/js/modal-loading.js"></script>
     <!--Modal Loading -->
     <script src="<?=base_url();?>admin/assets/extra-libs/prism/prism.js"></script>
-    <script src="<?=base_url();?>public/js/funciones.js?v=6"></script>    
+    <script src="<?=base_url();?>public/js/funciones.js?v=6"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnOBLYrneZlLUF5_bhWzGnwc6I7s01qEs" async defer></script>
+
+    <script src="<?=base_url();?>js/funciones_barbosa.js"></script>
     <script type="text/javascript">
-        $(document).ready(function(){            
+        var url_sitio = '<?=base_url();?>';
+
+        $(document).ready(function(){  
         });
         
 

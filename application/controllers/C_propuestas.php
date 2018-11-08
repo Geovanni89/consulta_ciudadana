@@ -391,5 +391,84 @@ class C_propuestas extends CI_Controller {
 
 		else echo 'sin respuestas';
 	}
+
+	//-------------------------------------------moderación de comentarios -------------------------------------------
+
+	public function modera_comentario()
+	{
+		$model = new M_propuestas();
+		$query_sector = $model->datos_sectores();
+		$datos['sectores'] = $query_sector;
+		$this->load->view('modera_comentarios',$datos);
+	}
+
+	public function carga_propuestas()
+	{
+		$id_tema = $this->input->post('id', TRUE);
+		$model = new M_propuestas();
+		$query_prop = $model->carga_prop_admin($id_tema);
+		echo '<option value="">Seleccione una propuesta</option>';
+		if($query_prop!=false) 
+		{
+			foreach ($query_prop as $vprop) {
+				echo '<option value="'.$vprop->iIdPropuesta.'">'.$vprop->vTitulo.'</option>';
+			}
+		}
+	}
+
+	public function carga_comentarios()
+	{
+		$iIdPropuesta = $this->input->post('iIdPropuesta', TRUE);
+		
+		$model = new M_propuestas();
+		$query_coment = $model->carga_coment_admin($iIdPropuesta);
+		//print_r($query_coment);
+		echo '<div class="col-12">
+                <div class="card">                    
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Comentario</th>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>';
+                            if($query_coment!=false)
+                            {
+                            	foreach ($query_coment as $vcom) {
+                            		echo '<tr><th scope="row">'.$vcom->iIdComentario.'</th><td>'.$vcom->vComentario.'</td><td>'.$vcom->dFecha.'</td>
+                            		<td><div class="row">
+                            		<div class="col-md-2"><a href="javascript:" onclick="modera_coment(1,'.$vcom->iIdComentario.');">
+                            			<li class="fa fa-check"></li>
+                            		</a></div>
+                            		<div class="col-md-2"><a href="javascript:" onclick="modera_coment(0,'.$vcom->iIdComentario.');">
+                            			<li class="fa fa-times"></li>
+                            		</a></div>
+                            		</div></td></tr>';
+                            	}
+                            }
+                            echo '</tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>';
+	}
+
+	public function act_coment()
+	{
+		$idcoment = $this->input->post('idcoment', TRUE);
+		$op = $this->input->post('op', TRUE);
+		
+		$datos = array();
+		if($op==1) $datos['iEstatus'] = 2;
+		elseif($op==0) $datos['iEstatus'] = 0;
+
+		$model = new M_propuestas();
+		$query_coment = $model->actualiza_comentario($datos,$idcoment);
+		echo $query_coment;
+	}
 	
 }
