@@ -79,7 +79,7 @@
 									<!-- Entry Meta
 									============================================= -->
 									<ul class="entry-meta clearfix">
-										<li><a href="#"><i class="icon-comments"></i> 2 Comentarios</a></li>
+										<li><a href="javascript:"><i class="icon-comments"></i> <?php echo $total_coment; echo ($total_coment>1)? " Comentarios":" Comentario"; ?></a></li>
 										<li><i class="icon-calendar3"></i> <?php $fecha = new DateTime($dFecha); echo date_format($fecha,'d/m/Y'); ?></li>
 										<li><a href="#"><i class="icon-user"></i> <?php echo $vNombre.' '.$vApellidoPaterno.' '.$vApellidoMaterno; ?></a></li>
 									</ul><!-- .entry-meta end -->
@@ -111,7 +111,9 @@
 									<!-- Entry Content
 									============================================= -->
 									<div class="entry-content notopmargin ">
-										<div class="clearfix bottommargin-sm">				
+										<div class="clearfix bottommargin-sm">
+											<div class="row">
+											
 											<?php
 											if(isset($_SESSION[PREFIJO.'_idusuario']))
 											{
@@ -119,10 +121,12 @@
 												if($apoyo>0)
 													echo '<button id="apoyar_prop" type="button" class="btn btn-outline-warning btn-lg btn-block">Usted ya ha apoyado esta propuesta</button>';
 												else
-													echo '<button id="apoyar_prop" type="button" class="btn btn-outline-success btn-lg btn-block" onclick="apoya_propuesta('.$iIdPropuesta.');">Apoyar</button>';
+													echo '<div class="col-md-6"><button id="apoyar_prop" type="button" class="btn btn-outline-success btn-lg btn-block" onclick="apoya_propuesta('.$iIdPropuesta.');">A favor</button></div>
+													<div class="col-md-6"><button id="apoyar_prop_dislike" type="button" class="btn btn-outline-danger btn-lg btn-block" onclick="apoya_propuesta('.$iIdPropuesta.');">En contra</button></div>';
 											}
 											else echo '<div id="error_sesion" class="style-msg2 errormsg"><div class="msgtitle">Inicio de sesión</div><div class="sb-msg"><ul><li>Para poder apoyar una propuesta debe iniciar sesión</li></ul></div></div>';
 											?>					
+											</div>		
 										</div>
 										<?php echo $tDescripcion;?>
 
@@ -196,17 +200,15 @@
 										<div class="si-share noborder clearfix">
 											<span>Compártelo en tus redes sociales:</span>
 											<div>
-												<?php echo $url_actual; ?>
-
-												<a href="http://www.facebook.com/sharer.php?u=<?php echo $url_actual; ?>" class="social-icon si-borderless si-facebook">
+												<a target="_blank" href="http://www.facebook.com/sharer.php?u=<?php echo $url_actual; ?>" class="social-icon si-borderless si-facebook">
 													<i class="icon-facebook"></i>
 													<i class="icon-facebook"></i>
 												</a>
-												<a href="https://twitter.com/?status=Me gusta esta página <?php echo $url_actual; ?>" class="social-icon si-borderless si-twitter">
+												<a target="_blank" href="https://twitter.com/?status=Me gusta esta página <?php echo $url_actual; ?>" class="social-icon si-borderless si-twitter">
 													<i class="icon-twitter"></i>
 													<i class="icon-twitter"></i>
 												</a>					
-												<a href="https://plus.google.com/share?url=<?php echo $url_actual; ?>" class="social-icon si-borderless si-gplus">
+												<a target="_blank" href="https://plus.google.com/share?url=<?php echo $url_actual; ?>" class="social-icon si-borderless si-gplus">
 													<i class="icon-gplus"></i>
 													<i class="icon-gplus"></i>
 												</a>					
@@ -220,7 +222,7 @@
 								============================================= -->
 								<div id="comments" class="clearfix">
 
-									<h3 id="comments-title"><span><?php echo count($comentarios); ?></span> Comentarios</h3>
+									<h3 id="comments-title"><span><?php echo $total_coment; ?></span> <?php echo ($total_coment>1)? " Comentarios":" Comentario"; ?></h3>
 									
 									<br><br>
 									<ol class="commentlist clearfix">
@@ -234,7 +236,7 @@
 											$respuestas = 1;
 											*/
 														
-											foreach ($comentarios as $vcom) {												
+											foreach ($comentarios as $vcom) {
 												echo '<li class="comment byuser comment-author-_smcl_admin even thread-odd thread-alt depth-1" id="li_comentario_'.$vcom->iIdComentario.'">
 											<div id="comment-2" class="comment-wrap clearfix">
 												<div class="comment-meta">
@@ -248,32 +250,34 @@
 													<a href="http://themeforest.net/user/semicolonweb" rel="external nofollow" class="url">'.$vcom->vNombre.' '.$vcom->vApellidoPaterno.' '.$vcom->vApellidoMaterno.'</a>
 													<span><a href="#" title="Permalink to this comment">'.$vcom->dFecha.'</a></span></div>
 													<p>'.$vcom->vComentario.'</p>
-													<a class="comment-reply-link" href="javascript:" onclick="responder('.$vcom->iIdComentario.',\''.$vcom->vNombre.'\');"><i class="icon-reply"></i></a>';
+													<a class="comment-reply-link" href="javascript:" onclick="responder('.$vcom->iIdComentario.',\''.$vcom->vNombre.'\');"><i class="icon-reply"></i></a>
+													<div class="row">';
 													
 													if($vcom->iLike=="")
 													{
-														echo '<a id="like_'.$vcom->iIdComentario.'" href="javascript:" onclick="like(1,'.$vcom->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a>
+														echo '<div class="col-"><a id="like_'.$vcom->iIdComentario.'" href="javascript:" onclick="like(1,'.$vcom->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a></div>
 														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-														<a id="dislike_'.$vcom->iIdComentario.'" href="javascript:" onclick="like(0,'.$vcom->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a>';	
+														<div class="col-"><a id="dislike_'.$vcom->iIdComentario.'" href="javascript:" onclick="like(0,'.$vcom->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a></div>';
 													}
 													elseif($vcom->iLike==0)
 													{
-														echo '<a id="like_'.$vcom->iIdComentario.'" href="javascript:" onclick="like(1,'.$vcom->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a>
+														echo '<div class="col-"><a id="like_'.$vcom->iIdComentario.'" href="javascript:" onclick="like(1,'.$vcom->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a></div>
 														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-														<a class="btn-like" id="dislike_'.$vcom->iIdComentario.'" href="javascript:" onclick="like(0,'.$vcom->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a>';
+														<div class="col-"><a class="btn-like" id="dislike_'.$vcom->iIdComentario.'" href="javascript:" onclick="like(0,'.$vcom->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a></div>';
 													}
 													elseif($vcom->iLike==1)
 													{
-														echo '<a class="btn-like" id="like_'.$vcom->iIdComentario.'" href="javascript:" onclick="like(1,'.$vcom->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a>
-													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-													<a id="dislike_'.$vcom->iIdComentario.'" href="javascript:" onclick="like(0,'.$vcom->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a>';
+														echo '<div class="col-"><a class="btn-like" id="like_'.$vcom->iIdComentario.'" href="javascript:" onclick="like(1,'.$vcom->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a></div>
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														<div class="col-"><a id="dislike_'.$vcom->iIdComentario.'" href="javascript:" onclick="like(0,'.$vcom->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a></div>';
 													}
 
 													
 												if($vcom->respuestas > 0)
 												{
 													echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-													<a id="respuestas_'.$vcom->iIdComentario.'" href="javascript:" onclick="respuestas('.$vcom->iIdComentario.')">Ver respuestas</a>
+													<div class="col-md-1 col-sm-12"><a id="respuestas_'.$vcom->iIdComentario.'" href="javascript:" onclick="respuestas('.$vcom->iIdComentario.')">Ver respuestas</a></div>
+													</div>
 													</div>
 													<div class="col" style="display: none;" id="container_respuesta_'.$vcom->iIdComentario.'"></div>
 													<div class="clear"></div>
@@ -283,7 +287,7 @@
 												}
 												else
 												{
-													echo '</div>
+													echo '</div></div>
 													<div class="col" style="display: none;" id="container_respuesta_'.$vcom->iIdComentario.'"></div>
 													<div class="clear"></div>
 												</div>';
@@ -332,12 +336,7 @@
 
 					<!-- Sidebar
 					============================================= -->
-					<div class="sidebar nobottommargin col_last clearfix">
-						<?php if(isset($_SESSION[PREFIJO.'_idusuario'])) {?>
-						<a href="<?=base_url();?>Sitio/form_propuesta" class="btn btn-success">Crear una propuesta</a>
-						<br>
-
-						<?php } ?>
+					<div class="sidebar nobottommargin col_last clearfix">						
 						<div class="sidebar-widgets-wrap">							
 
 							<div class="widget clearfix">
@@ -515,7 +514,7 @@
 
 			$.post('<?=base_url();?>C_propuestas/envia_comentario', {idprop:idPropuesta,com:vComentario}, function(resp){
 				console.log(resp);
-				if(resp==1) toastr.success('Correcto', 'Operación completa', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+				if(resp==1) { toastr.success('Correcto', 'Operación completa', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 }); $('#vComentario').val("");}
 				else toastr.warning('Error al enviar su comentario', '¡Advertencia!', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
 			});
 		}
