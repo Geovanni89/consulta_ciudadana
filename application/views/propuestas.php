@@ -70,17 +70,21 @@
 									</div>
 									<div class="col_one_third">
 										<ul class="pagination" id="paginador">
-											<li id="previous" class="page-item disabled"><a class="page-link" href="javascript:">&laquo;</a></li>
+											
 											<?php
-											$total_pag = floor($total/5);											
-											$total = (floor($total/5) > 5) ? 4 : floor($total/5);
-											for ($i=0; $i <= $total; $i++) { 
-												echo '<li id="pg_'.$i.'" class="page-item"><a class="page-link" onclick="pagina_propuesta('.$i.')" href="javascript:">'.($i+1).'</a></li>';
-											}												
-											if($total_pag <= 5)
-												echo '<li id="next" class="page-item disabled"><a class="page-link" href="javascript:">&raquo;</a></li>';
-											else
-												echo '<li id="next" class="page-item"><a class="page-link" onclick="paginador(\'sig\',0,4,'.$total_pag.')" href="javascript:">&raquo;</a></li>';
+											if($total>0)
+											{
+												echo '<li id="previous" class="page-item disabled"><a class="page-link" href="javascript:">&laquo;</a></li>';
+												$total_pag = floor($total/5);											
+												$total = (floor($total/5) > 5) ? 4 : floor($total/5);
+												for ($i=0; $i <= $total; $i++) { 
+													echo '<li id="pg_'.$i.'" class="page-item"><a class="page-link" onclick="pagina_propuesta('.$i.')" href="javascript:">'.($i+1).'</a></li>';
+												}												
+												if($total_pag <= 5)
+													echo '<li id="next" class="page-item disabled"><a class="page-link" href="javascript:">&raquo;</a></li>';
+												else
+													echo '<li id="next" class="page-item"><a class="page-link" onclick="paginador(\'sig\',0,4,'.$total_pag.')" href="javascript:">&raquo;</a></li>';												
+											}
 											?>											
 											</ul>
 									</div>						
@@ -93,12 +97,7 @@
 
 					<!-- Sidebar
 					============================================= -->
-					<div class="sidebar nobottommargin col_last clearfix">
-						<?php if(isset($_SESSION[PREFIJO.'_idusuario'])) {?>
-						<a href="<?=base_url();?>Sitio/form_propuesta" class="btn btn-success">Crear una propuesta</a>
-						<br>
-
-						<?php } ?>
+					<div class="sidebar nobottommargin col_last clearfix">						
 						<div class="sidebar-widgets-wrap">							
 
 							<div class="widget clearfix">

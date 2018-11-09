@@ -26,6 +26,7 @@ class Sitio extends CI_Controller {
         $this->load->helper('url');
         $this->load->model('M_propuestas');
         $this->load->library('Class_propuestas');
+        $this->load->library('Class_votacion');
     }
 
 
@@ -276,6 +277,16 @@ class Sitio extends CI_Controller {
 	function infografia()
 	{
 		$this->load->view('infografia');
+	}
+
+	public function votaciones() 
+	{
+		$vota = new Class_votacion();
+
+		$datos['active'] = 3;
+		$datos['prop_vota'] = $vota->carga_propuestas();
+		
+		$this->load->view('votaciones',$datos);
 	}
 
 }

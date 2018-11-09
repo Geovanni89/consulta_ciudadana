@@ -21,6 +21,7 @@ class C_propuestas extends CI_Controller {
 		$query_prop = $model->carga_propuestas($iIdPropuesta);
 		$query_existe = $model->ver_apoyo($iIdPropuesta,$iIdUsuario);
 		$query_coment = $model->carga_comentarios($iIdPropuesta);
+		$total_coment = $model->total_comentarios($iIdPropuesta);
 
 		if($query_prop!=false) 
 		{
@@ -37,11 +38,12 @@ class C_propuestas extends CI_Controller {
 			$datos['pdf'] = $model->carga_adjuntos($iIdPropuesta,2);
 			$datos['apoyo'] = $query_existe;
 			$datos['comentarios'] = $query_coment;
-			//$datos['url_actual'] = base_url().'C_propuestas/propuesta_sim?id='.$iIdPropuesta;
-			$datos['url_actual'] = 'http://siegy.yucatan.gob.mx/';
+			$datos['total_coment'] = $total_coment;
+			$datos['url_actual'] = base_url().'C_propuestas/propuesta_sim?id='.$iIdPropuesta;
+			//$datos['url_actual'] = 'http://siegy.yucatan.gob.mx/';
 			$this->load->view('propuesta_simple',$datos);
 		} 
-		else echo "error";
+		else header("Location: ".base_url()."Sitio/propuestas");
 	}
 
 	public function captura_propuesta()
@@ -441,10 +443,10 @@ class C_propuestas extends CI_Controller {
                             	foreach ($query_coment as $vcom) {
                             		echo '<tr><th scope="row">'.$vcom->iIdComentario.'</th><td>'.$vcom->vComentario.'</td><td>'.$vcom->dFecha.'</td>
                             		<td><div class="row">
-                            		<div class="col-md-2"><a href="javascript:" onclick="modera_coment(1,'.$vcom->iIdComentario.');">
+                            		<div class="col-md-2"><a href="javascript:" title="Aceptar comentario" onclick="modera_coment(1,'.$vcom->iIdComentario.');">
                             			<li class="fa fa-check"></li>
                             		</a></div>
-                            		<div class="col-md-2"><a href="javascript:" onclick="modera_coment(0,'.$vcom->iIdComentario.');">
+                            		<div class="col-md-2"><a href="javascript:" title="Eliminar comentario" onclick="modera_coment(0,'.$vcom->iIdComentario.');">
                             			<li class="fa fa-times"></li>
                             		</a></div>
                             		</div></td></tr>';

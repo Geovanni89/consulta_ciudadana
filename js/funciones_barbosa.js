@@ -18,17 +18,19 @@ function carga_comentarios() {
 	var idsector = $('#iIdSector option:selected').val();
 	var idtema = $('#iIdTema option:selected').val();
 	var idprop = $('#iIdPropuesta option:selected').val();
+	if(idprop!="") {
+		$.post(url_sitio+funcion, {iIdPropuesta:idprop}, function(resp){
+			$('#contenido_comentarios').html(resp);
+		});
+	} else toastr.warning('Debe seleccionar una propuesta', 'Advertencia', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
 
-	$.post(url_sitio+funcion, {iIdPropuesta:idprop}, function(resp){
-		$('#contenido_comentarios').html(resp);
-	});
 
 }
 
 function modera_coment(op,idcoment) {
 	var funcion = 'C_propuestas/act_coment';
 	$.post(url_sitio+funcion, {idcoment:idcoment,op:op}, function(resp){
-		console.log(resp);
+		toastr.success('Correcto', 'Operación completa', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
 		carga_comentarios();
 	});
 }

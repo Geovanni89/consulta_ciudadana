@@ -18,9 +18,11 @@ class Class_propuestas {
         if($query_prop!=false)
         {            
 
-            foreach ($query_prop as $vprop) {
+            foreach ($query_prop as $vprop) {                
                 $fecha = new DateTime($vprop->dFecha);
                 $query_img = $model->carga_adjuntos($vprop->iIdPropuesta,1);
+                $total_coment = $model->total_comentarios($vprop->iIdPropuesta);
+                $text_coment = ($total_coment>1)? "Comentarios":"Comentario";
                 if(isset($query_img[0])) $urlImg = $query_img[0]->vRutaAdjunto;
                 else $urlImg = "public/images/blog/standard/17.jpg";
 
@@ -32,19 +34,21 @@ class Class_propuestas {
                                     <h2><a target="_blank" href="'.base_url().'C_propuestas/propuesta_sim?id='.$vprop->iIdPropuesta.'">'.$vprop->vTitulo.'</a></h2>
                                 </div>
                                 <ul class="entry-meta clearfix">
-                                    <li><a href="javascript:"><i class="icon-comments"></i> 2 Comentarios</a></li>
+                                    <li><a href="javascript:"><i class="icon-comments"></i> '.$total_coment.' '.$text_coment.' </a></li>
                                     <li><i class="icon-calendar3"></i> '.date_format($fecha,'d/m/Y').'</li>
                                     <li><a href="javascript:"><i class="icon-user"></i> '.$vprop->vNombre.' '.$vprop->vApellidoPaterno.' '.$vprop->vApellidoMaterno.'</a></li>
                                 </ul>
                                 <div class="entry-content">'.$vprop->tDescripcion.'<br>';
-                                if(isset($_SESSION[PREFIJO.'_idusuario']))
+                                $propuestas.='<a target="_blank" href="'.base_url().'C_propuestas/propuesta_sim?id='.$vprop->iIdPropuesta.'" class="btn btn-success">Consultar</a>';
+                                /*if(isset($_SESSION[PREFIJO.'_idusuario']))
                                     $propuestas.='<a href="javascript:" onclick="propuesta_simple('.$vprop->iIdPropuesta.');" class="btn btn-success">Apoyar</a>';
-                                else $propuestas.='<div class="style-msg errormsg"><div class="sb-msg"><i class="icon-remove"></i>Inicie sesión para apoyar la propuesta</div></div>';
+                                else $propuestas.='<div class="style-msg errormsg"><div class="sb-msg"><i class="icon-remove"></i>Inicie sesión para apoyar la propuesta</div></div>'; */
 
                                 $propuestas.='</div>
                             </div>';
             }
         }
+        else $propuestas.='<h1>Sin propuestas</h1>';
         return $propuestas;
     }
 
@@ -70,7 +74,7 @@ class Class_propuestas {
                         <div class="team-desc">
                             <div class="team-title"><h4></h4><span>'.$vprop->vTitulo.'</span></div>
                             <ul class="entry-meta clearfix">
-                                <li><a href="blog-single.html#comments"><i class="icon-comments"></i> 2 Comentarios</a></li>
+                                <li><a href="#"><i class="icon-comments"></i> 2 Comentarios</a></li>
                                 <li>'.date_format($fecha,'d/m/Y').'</li>
                                 <li><a href="#"><i class="icon-user"></i> '.$vprop->vNombre.' '.$vprop->vApellidoPaterno.' '.$vprop->vApellidoMaterno.'</a></li>
                             </ul>

@@ -94,7 +94,7 @@ class M_propuestas extends CI_Model {
 		$this->db->select('p.iIdPropuesta,p.vTitulo,p.tDescripcion,p.nLatDec,p.nLongDec,p.dFecha,u.iIdUsuario,u.vNombre,u.vApellidoPaterno,u.vApellidoMaterno,p.vCodigo');
 		$this->db->from('Propuesta p');
 		$this->db->join('Usuario u','p.iIdUsuario = u.iIdUsuario','INNER');
-		$this->db->where('p.iEstatus>',1);
+		$this->db->where('p.iEstatus',3);
 		if($iIdPropuesta>0) $this->db->where('p.iIdPropuesta',$iIdPropuesta);
 		$this->db->order_by('dFecha','DESC');
 
@@ -122,6 +122,18 @@ class M_propuestas extends CI_Model {
 
 		$query = $this->db->get();
 		if($query!=false) return $query->result();
+		else return false;
+	}
+
+	public function total_comentarios($iIdPropuesta)
+	{
+		$this->db->select('iIdComentario');
+		$this->db->from('Comentario');
+		$this->db->where('iIdPropuesta',$iIdPropuesta);
+		$this->db->where('iEstatus',2);
+
+		$query = $this->db->get();
+		if($query!=false) return $query->num_rows();
 		else return false;
 	}
 
@@ -167,7 +179,7 @@ class M_propuestas extends CI_Model {
 	{
 		$this->db->select('p.iIdPropuesta');
 		$this->db->from('Propuesta p');
-		$this->db->where('p.iEstatus>',0);
+		$this->db->where('p.iEstatus',3);
 
 		$query = $this->db->get();
 		if($query!=false) return $query->num_rows();
