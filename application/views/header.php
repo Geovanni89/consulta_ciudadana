@@ -56,8 +56,8 @@
 					<?php if(!isset($_SESSION[PREFIJO.'_idusuario']) || empty($_SESSION[PREFIJO.'_idusuario']))
 					{ ?>
 					<li <?php if(isset($active) && $active == 4) echo 'class="current"'; ?>><a href="<?=base_url();?>Sitio/login"><div>Entrar</div></a></li>
-					<?php } ?>
 					<li <?php if(isset($active) && $active == 5) echo 'class="current"'; ?>><a href="<?=base_url();?>Sitio/registrarse"><div>Registro</div></a></li>
+					<?php } ?>
 				</ul>
 				
 

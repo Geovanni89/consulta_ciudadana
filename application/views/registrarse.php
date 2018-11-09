@@ -23,6 +23,12 @@
 	<link type="text/css" rel="stylesheet" href="<?=base_url();?>admin/plugins/modal-loading/css/modal-loading.css" />
 	<link type="text/css" rel="stylesheet" href="<?=base_url();?>admin/plugins/modal-loading/css/modal-loading-animate.css" />
 	<!--Modal Loading -->
+	<style type="text/css">
+		.error_chosen{
+			border: 1px solid #EE0000;
+		}
+		
+	</style>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -208,7 +214,7 @@
 
 							<div class="col_two_third col_last">
 								<label for="register-form-name">Ocupación:</label>
-								<select name="id_ocupacion" id="id_ocupacion" class="form-control chosen-select">
+								<select name="id_ocupacion" id="id_ocupacion" class="form-control chosen-select validate[required]" data-prompt-position="inline" data-prompt-target="id_ocupacion">
 									<?php echo $op_ocupaciones; ?>
 								</select>
 							</div>
@@ -285,6 +291,26 @@
 			$('[data-toggle="tooltip"]').tooltip();
 
 			$( "#register-form" ).validate({
+				ignore: [],
+				highlight: function (element) {
+					if( $("#"+element.id).hasClass('chosen-select')){
+						$("#"+element.id+"_chosen").addClass("error_chosen");
+					}else $(element).closest('.form-control').addClass('error');
+				},
+				unhighlight: function (element) {
+					//console.log(element);
+					if( $("#"+element.id).hasClass('chosen-select')){
+						$("#"+element.id+"_chosen").removeClass("error_chosen");
+					}else $(element).closest('.form-control').removeClass('error');
+				},
+				errorPlacement: function (error, element) {
+					if (element.hasClass("chosen-select")) {
+						var id = ("#"+element[0].id)+"_chosen";
+				      	error.insertAfter($(id));
+				    }else{
+				    	error.insertAfter(element);
+				    }					
+				},
 			  	rules: {
 			    	nombre: {
 			      		required: true
@@ -322,7 +348,7 @@
 			    	id_grado_estudio: {
 				 		min: 1
 				 	},
-				 	id_ocupacion_chosen:{
+				 	id_ocupacion:{
 				 		min: 1
 				 	}
 
@@ -361,7 +387,7 @@
 				 	id_grado_estudio: {
 				 		min: "Por favor elija una opción"
 				 	},
-				 	id_ocupacion_chosen: {
+				 	id_ocupacion: {
 				 		min: "Por favor elija una opción"
 				 	}
 				    

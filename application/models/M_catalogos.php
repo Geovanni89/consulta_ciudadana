@@ -92,6 +92,49 @@ class M_catalogos extends CI_Model {
 
 		return $query;
 	}
+
+
+	public function datos_sectores($where='')
+	{
+		$this->db->select('iIdSector,vSector');
+		$this->db->from('Sector');
+		$this->db->where('iActivo',1);
+
+		if($where != '') $this->db->where($where);
+
+		$query = $this->db->get();
+
+		return $query;
+	}
+
+	public function devuelve_temas_por_sector($id)
+	{
+		$this->db->select('a.iIdTema, a.vTema');
+		$this->db->from('Tema a');
+		$this->db->join('Sector l','l.iIdSector = a.iIdSector','INNER');
+		$this->db->where('a.iActivo',1);
+		$this->db->where('a.iIdSector',$id);
+
+		$query = $this->db->get();
+
+		//$_SESSION['c'] = $this->db->last_query();
+
+		return $query;
+	}
+
+	public function datos_roles($where='')
+	{
+		$this->db->select('iIdRol,vRol');
+		$this->db->from('Rol');
+		$this->db->where('iActivo',1);
+
+		if($where != '') $this->db->where($where);
+
+		$query = $this->db->get();
+
+		return $query;
+	}
+
 }
 
 ?>
