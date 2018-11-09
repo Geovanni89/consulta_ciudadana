@@ -132,32 +132,33 @@
 
 		function EnviarCorreoRecuperacion(form,url_destino)
 		{
-			var loading = new Loading({
-					discription: 'Espere...',
-			    	defaultApply: true
-			    });
+			var loading;
 			$.ajax({
 		        url: url_destino,
 		        type: 'POST',
-		        async: false,	//	Para obligar al usuario a esperar una respuesta
 		        data: $(form).serialize(),
 		        error: function(XMLHttpRequest, errMsg, exception){
 		            var msg = "Ha fallado la petición al servidor";
 		            alert(msg);
 		        },
+		        beforeSend: function(){
+		           loading = new Loading({
+		                discription: 'Espere...',
+		                defaultApply: true
+		            });
+		        },
 		        success: function(htmlcode){
+		        	loading.out();
 		        	var cod = htmlcode.split("-");
 		        	switch(cod[0])
 		            {
 		                case "0":
-		                	loading.out();
-		                    Notificacion('Correo enviado','success');
+		                    Notificacion('Revise su bandeja de correo','success');
 		                    break;                    
 		                default:
-		                	loading.out();
 		                    Notificacion(htmlcode,'error');
 		                    break;
-		            }
+		            }		            
 		        }
 		    });	
 		}

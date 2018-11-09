@@ -510,10 +510,7 @@
 
 		function RegistrarUsuario(form)
 		{
-			var loading = new Loading({
-					discription: 'Espere...',
-			    	defaultApply: true
-			    });
+			var loading;
 			$.ajax({
 		        url: '<?=base_url();?>C_seguridad/guardar_usuario',
 		        type: 'POST',
@@ -524,16 +521,21 @@
 		            loading.out();
 		            alert(msg);
 		        },
+		         beforeSend: function(){
+		           loading = new Loading({
+		                discription: 'Espere...',
+		                defaultApply: true
+		            });
+		        },
 		        success: function(htmlcode){
+		        	loading.out();
 		        	var cod = htmlcode.split("-");
 		        	switch(cod[0])
 		            {
 		                case "0":
-		                	loading.out();
 		                    Notificacion('Un correo ha sido enviado para confirmar su cuenta','success');
 		                    break;		                
 		                default:
-		                	loading.out();
 		                    Notificacion(htmlcode,'error');
 		                    break;
 		            }
