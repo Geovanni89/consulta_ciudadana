@@ -15,11 +15,16 @@ class C_propuestas extends CI_Controller {
 
 	public function propuesta_sim()
 	{
-		$iIdUsuario = $_SESSION[PREFIJO.'_idusuario'];
 		$iIdPropuesta = $this->input->get('id', TRUE);
 		$model = new M_propuestas();
+		if(isset($_SESSION[PREFIJO.'_idusuario']))
+		{
+			
+			$iIdUsuario = $_SESSION[PREFIJO.'_idusuario'];
+			$query_existe = $model->ver_apoyo($iIdPropuesta,$iIdUsuario);
+		}
+		else $query_existe = 0;
 		$query_prop = $model->carga_propuestas($iIdPropuesta);
-		$query_existe = $model->ver_apoyo($iIdPropuesta,$iIdUsuario);
 		$query_coment = $model->carga_comentarios($iIdPropuesta);
 		$total_coment = $model->total_comentarios($iIdPropuesta);
 
@@ -256,16 +261,26 @@ class C_propuestas extends CI_Controller {
 		$iIdUsuario = $_SESSION[PREFIJO.'_idusuario'];
 
 		$iIdPropuesta = $this->input->post('id');
+		$vVoto = $this->input->post('op', TRUE);
 		$dFecha = date("Y-m-d H:i:s");
+		$model = new M_propuestas();
 
 		$datos = array(
+			'iIdPropuesta' => $iIdPropuesta,
+			'iIdUsuario' => $iIdUsuario,
+			'vVoto' => $vVoto,
+			'dFecha' => $dFecha,
+		);
+
+
+		/*$datos = array(
 			'iIdPropuesta' => $iIdPropuesta,
 			'iIdUsuario' => $iIdUsuario,
 			'iLike' => 1,
 			'dFecha' => $dFecha,
 		);
+		$query_existe = $model->ver_apoyo($iIdPropuesta,$iIdUsuario);*/
 
-		$model = new M_propuestas();
 		$query_existe = $model->ver_apoyo($iIdPropuesta,$iIdUsuario);
 		if($query_existe>0) echo 'error1';
 		else {
@@ -347,30 +362,32 @@ class C_propuestas extends CI_Controller {
 								<div class="comment-content clearfix">
 									<div class="comment-author"><a href="#" rel="external nofollow" class="url">'.$vresp->vNombre.' '.$vresp->vApellidoPaterno.' '.$vresp->vApellidoMaterno.'</a><span><a href="#" title="Permalink to this comment">'.$vresp->dFecha.'</a></span></div>
 									<p>'.$vresp->vComentario.'</p>									
-									<a class="comment-reply-link" href="javascript:" onclick="responder('.$vresp->iIdComentario.',\''.$vresp->vNombre.'\');"><i class="icon-reply"></i></a>';
+									<a class="comment-reply-link" href="javascript:" onclick="responder('.$vresp->iIdComentario.',\''.$vresp->vNombre.'\');"><i class="icon-reply"></i></a>
+									<div class="row">';
 									if($vresp->iLike=="")
 									{
-										echo '<a id="like_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(1,'.$vresp->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a>
+										echo '<div class="col-"><a id="like_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(1,'.$vresp->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a></div>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<a id="dislike_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(0,'.$vresp->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a>';	
+										<div class="col-"><a id="dislike_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(0,'.$vresp->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a></div>';	
 									}
 									elseif($vresp->iLike==0)
 									{
-										echo '<a id="like_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(1,'.$vresp->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a>
+										echo '<div class="col-"><a id="like_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(1,'.$vresp->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a></div>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<a class="btn-like" id="dislike_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(0,'.$vresp->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a>';
+										<div class="col-"><a class="btn-like" id="dislike_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(0,'.$vresp->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a></div>';
 									}
 									elseif($vresp->iLike==1)
 									{
-										echo '<a class="btn-like" id="like_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(1,'.$vresp->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a>
+										echo '<div class="col-"><a class="btn-like" id="like_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(1,'.$vresp->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a></div>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<a id="dislike_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(0,'.$vresp->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a>';
+										<div class="col-"><a id="dislike_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(0,'.$vresp->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a></div>';
 									}
 
 									if($vresp->respuestas > 0)
 									{
 										echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<a id="respuestas_'.$vresp->iIdComentario.'" href="javascript:" onclick="respuestas('.$vresp->iIdComentario.')">Ver respuestas</a>
+										<div class="col"><a id="respuestas_'.$vresp->iIdComentario.'" href="javascript:" onclick="respuestas('.$vresp->iIdComentario.')">Ver respuestas</a></div>
+										</div>
 										</div>
 										<div class="col" style="display: none;" id="container_respuesta_'.$vresp->iIdComentario.'"></div>
 										<div class="clear"></div>
@@ -380,7 +397,7 @@ class C_propuestas extends CI_Controller {
 									}
 									else
 									{
-										echo '</div>
+										echo '</div></div>
 										<div class="col" style="display: none;" id="container_respuesta_'.$vresp->iIdComentario.'"></div>
 										<div class="clear"></div>
 									</div>';

@@ -20,9 +20,12 @@
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>admin/assets/libs/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css">
     <!--Modal Loading -->
     <link type="text/css" rel="stylesheet" href="<?=base_url();?>admin/plugins/modal-loading/css/modal-loading.css" />
-    <link type="text/css" rel="stylesheet" href="<?=base_url();?>admin/plugins/modal-loading/css/modal-loading-animate.css" />
+    <link type="text/css" rel="stylesheet" href="<?=base_url();?>admin/plugins/modal-loading/css/modal-loading-animate.css" />    
     <!--Modal Loading -->
     <link rel="stylesheet" type="text/css" href="<?=base_url();?>admin/assets/extra-libs/prism/prism.css">
+    <!-- Sweet Alerts-->
+    <link href="<?=base_url();?>admin/assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -332,7 +335,7 @@
     <script src="<?=base_url();?>admin/dist/js/custom.min.js"></script>
     <!--Mensajes SweetAlert -->
     <script src="<?=base_url();?>admin/assets/libs/sweetalert2/dist/sweetalert2.all.min.js"></script>
-    <script src="<?=base_url();?>admin/assets/libs/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="<?=base_url();?>admin/assets/libs/sweetalert2/sweet-alert.init.js"></script>
     <!-- Mensajes del sistema -->
     <script src="<?=base_url();?>admin/assets/libs/toastr/build/toastr.min.js"></script>
     <!--<script src="<?=base_url();?>admin/assets/libs/sweetalert2/sweet-alert.init.js"></script> Este es el ejemplo-->
@@ -363,6 +366,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnOBLYrneZlLUF5_bhWzGnwc6I7s01qEs" async defer></script>
 
     <script src="<?=base_url();?>js/funciones_barbosa.js"></script>
+    
     <script type="text/javascript">
         var url_sitio = '<?=base_url();?>';
 

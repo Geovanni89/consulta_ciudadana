@@ -108,17 +108,30 @@ class Sitio extends CI_Controller {
 		//estas consultas se moveran posteriormente a C_propuestas
 		$select_sec = '';
 		$select = '';
+		$select_tema = '';
+		$iIdSector = $this->input->get('iIdSector', TRUE);
+		$iIdTema = $this->input->get('iIdTema', TRUE);
 		$model = new M_propuestas();
 
-		$query = $model->datos_sectores();
-		if($query!=false)
+		$query_sec = $model->datos_sectores($iIdSector);
+		if($query_sec!=false)
 		{
-			foreach ($query as $sector)
+			foreach ($query_sec as $sector)
             {
-                $select_sec .= '<option value="'.$sector->iIdSector.'">'.$sector->vSector.'</option>';
+                $select_sec .= '<option value="'.$sector->iIdSector.'" selected>'.$sector->vSector.'</option>';
             }
 		}
 		$datos['select_sec'] = $select_sec;
+
+		$query_tema = $model->datos_temas($iIdSector,$iIdTema);
+		if($query_tema!=false)
+		{
+			foreach ($query_tema as $tema)
+            {
+                $select_tema .= '<option value="'.$tema->iIdTema.'" selected>'.$tema->vTema.'</option>';
+            }
+		}
+		$datos['select_tema'] = $select_tema;
 		
 		$query_mun = $model->datos_municipios();
 		if($query_mun!=false)

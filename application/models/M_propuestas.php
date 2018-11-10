@@ -8,10 +8,11 @@ class M_propuestas extends CI_Model {
 		$this->db = $this->load->database('default',TRUE);
 	}
 
-	public function datos_sectores()
+	public function datos_sectores($iIdSector=0)
 	{
 		$this->db->select('iIdSector,vSector');
 		$this->db->from('Sector');
+		if($iIdSector>0) $this->db->where('iIdSector',$iIdSector);
 		$this->db->where('iActivo',1);
 
 		$query = $this->db->get();
@@ -20,11 +21,12 @@ class M_propuestas extends CI_Model {
 		else return false;
 	}
 
-	public function datos_temas($id_sec)
+	public function datos_temas($id_sec=0,$iIdTema=0)
 	{
 		$this->db->select('iIdTema,vTema');
 		$this->db->from('Tema');
 		$this->db->where('iIdSector',$id_sec);
+		if($iIdTema>0) $this->db->where('iIdTema',$iIdTema);
 		$this->db->where('iActivo',1);
 
 		$query = $this->db->get();
@@ -188,8 +190,15 @@ class M_propuestas extends CI_Model {
 
 	public function ver_apoyo($iIdPropuesta,$iIdUsuario)
 	{
+		/*
 		$this->db->select('iIdPropuesta,iIdUsuario');
 		$this->db->from('PropuestaLike');
+		$this->db->where('iIdPropuesta',$iIdPropuesta);
+		$this->db->where('iIdUsuario',$iIdUsuario);
+		*/
+
+		$this->db->select('iIdPropuesta,iIdUsuario');
+		$this->db->from('VotoPropuesta');
 		$this->db->where('iIdPropuesta',$iIdPropuesta);
 		$this->db->where('iIdUsuario',$iIdUsuario);
 
@@ -201,7 +210,8 @@ class M_propuestas extends CI_Model {
 	public function apoyar_propuesta($datos)
 	{
 		$this->db->trans_begin();
-		$query = $this->db->insert('PropuestaLike',$datos);
+		//$query = $this->db->insert('PropuestaLike',$datos);
+		$query = $this->db->insert('VotoPropuesta',$datos);
 		if($this->db->trans_status() === FALSE) 
 		{
 			$this->db->trans_rollback();
