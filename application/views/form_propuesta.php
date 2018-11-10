@@ -85,7 +85,7 @@
 							<div class="form-group">
 								<label for="vDescripcion">Resumen de la propuesta</label>
 								<small id="descnHelp" class="form-text text-muted">(Máximo 200 caracteres)</small>
-								<textarea class="form-control" id="vDescripcion" name="vDescripcion" rows="5" required></textarea>
+								<textarea class="form-control" id="vDescripcion" name="vDescripcion" rows="5"></textarea>
 							</div>
 							<div class="form-group">
 								<label for="vUrlVideoExterno">Enlace video externo</label>
@@ -286,7 +286,8 @@
         }
 
 
-		var valida_form = $('#formPropuesta').validate({			
+		var valida_form = $('#formPropuesta').validate({
+			ignore: [],	
 			rules: {
 				iIdSector: "required",
 				iIdTema: "required",
@@ -421,7 +422,7 @@
 			    fillOpacity: 0,
 				strokeWeight: 1
 			});*/
-		}
+		}		
 
 		/*function actualizaText()
 		{
