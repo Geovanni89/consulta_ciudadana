@@ -329,6 +329,7 @@ class Class_options {
        
         $select .= ($seleccionado == 1) ? '<option value="1" rel="0" selected >Pendiente de validación</option>':'<option value="1" rel="0">Pendiente de validación</option>';
         $select .= ($seleccionado == 2) ? '<option value="2" rel="0" selected >Correo validado</option>': '<option value="2" rel="0">Correo validado</option>';
+        $select .= ($seleccionado == 3) ? '<option value="3" rel="0" selected >Correo validado</option>': '<option value="3" rel="0">Bloqueado</option>';
 
         return $select;
     }

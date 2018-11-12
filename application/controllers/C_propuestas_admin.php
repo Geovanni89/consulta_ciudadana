@@ -69,9 +69,10 @@ class C_propuestas_admin extends CI_Controller {
                             foreach ($paginador['resultado'] as $dc)
                             {	
                             	$checked = ( isset($_SESSION['checks'][$dc->iIdPropuesta] ) ) ? 'checked':'';
+                            	$inputcheck = ($dc->iEstatus == 1) ? '<input type="checkbox" class="" id="chk'.$dc->iIdPropuesta.'" onclick="GuardarId('.$dc->iIdPropuesta.')" '.$checked.'>':'';
                                 $listado .= '<tr>
                                     <td>'.$dc->iIdPropuesta.'</td>
-                                    <td> <input type="checkbox" class="" id="chk'.$dc->iIdPropuesta.'" onclick="GuardarId('.$dc->iIdPropuesta.')" '.$checked.'>'.$dc->vCodigo.'</td>
+                                    <td>'.$inputcheck.$dc->vCodigo.'</td>
                                     <td>'.$dc->vTitulo.'</td>
                                     <td>'.$this->estatus_propuesta($dc->iEstatus).'</td>
                                     <td>'.$dc->vRol.'</td>

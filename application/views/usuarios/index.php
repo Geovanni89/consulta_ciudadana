@@ -91,6 +91,54 @@
         });
 	}
 
+    function Bloquear(id)
+    {
+        Swal({
+          title: 'Bloquear usuario',
+          text: '¿Realmente desea Bloquear a este usuario?',
+          type: 'question',
+          showCancelButton: true,
+          confirmButtonText: 'Confirmar',
+          cancelButtonText: 'Cancelar'
+        }).then((result) => {           
+            if (result.value) {           
+                $.post("<?=base_url();?>C_seguridad/bloquear_usuario",{id:id},function(resultado,status){
+                    if(resultado == "0"){                       
+                        Notificacion('Usuario bloqueado','success');
+                        Buscar(1);
+                    }
+                    else Notificacion(resultado,'error');                   
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+            
+            }
+        });
+    }
+
+    function Desbloquear(id)
+    {
+        Swal({
+          title: 'Desbloquear usuario',
+          text: '¿Realmente desea desbloquear a este usuario?',
+          type: 'question',
+          showCancelButton: true,
+          confirmButtonText: 'Confirmar',
+          cancelButtonText: 'Cancelar'
+        }).then((result) => {           
+            if (result.value) {           
+                $.post("<?=base_url();?>C_seguridad/desbloquear_usuario",{id:id},function(resultado,status){
+                    if(resultado == "0"){                       
+                        Notificacion('Usuario desbloqueado','success');
+                        Buscar(1);
+                    }
+                    else Notificacion(resultado,'error');                   
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+            
+            }
+        });
+    }
+
 	function Buscar(pag)
 	{
 		var pag = pag || 1;

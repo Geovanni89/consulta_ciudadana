@@ -90,7 +90,7 @@ class M_seguridad extends CI_Model {
 
 	public function buscar_usuarios($where ='',$palabra='')
 	{
-		$this->db->select('u.iIdUsuario, u.vNombre, u.vApellidoPaterno, u.vApellidoMaterno, u.vCorreo, r.vRol, r.iIdRol');
+		$this->db->select('u.iIdUsuario, u.vNombre, u.vApellidoPaterno, u.vApellidoMaterno, u.vCorreo, r.vRol, r.iIdRol, u.iEstatus');
 		$this->db->from('Usuario u');
 		$this->db->join('Rol r','r.iIdRol = u.iIdRol','INNER');
 		$this->db->where('u.iEstatus >',0);
@@ -168,6 +168,23 @@ class M_seguridad extends CI_Model {
 		$query =  $this->db->get();
 
 		return $query;
+	}
+
+	public function datos_usuarios($where ='')
+	{
+		$this->db->select('u.iIdUsuario, u.vNombre, u.vApellidoPaterno, u.vApellidoMaterno, u.vCorreo, u.dFechaNacimiento, u.iGenero, u.iIdGradoEstudio, u.iIdOcupacion, u.iIdAsentamiento, u.iIdRol, u.iEstatus');
+		$this->db->select('l.iIdLocalidad, l.vLocalidad, m.iIdMunicipio, m.vMunicipio, iCodigoPostal');
+		$this->db->from('Usuario u');		
+		$this->db->join('Asentamiento a','a.iIdAsentamiento = u.iIdAsentamiento','INNER');
+		$this->db->join('Localidad l','l.iIdLocalidad = a.iIdLocalidad','INNER');
+		$this->db->join('Municipio m','m.iIdMunicipio = l.iIdMunicipio','INNER');
+		//$this->db->where('u.iEstatus >',0);
+
+		if(!empty($where)) $this->db->where($where);
+
+		$this->db->order_by('u.vNombre');
+
+		return $this->db->get();
 	}
 	
 }

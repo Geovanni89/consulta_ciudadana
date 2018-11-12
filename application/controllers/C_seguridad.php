@@ -23,24 +23,32 @@ class C_seguridad extends CI_Controller {
     		$fecha_nacimiento = $anio.'-'.$mes.'-'.$dia;
     		$id = 0;
     		$d_usuario = array(
-    			'vNombre' => $this->input->post('nombre'),
-    			'vApellidoPaterno' => $this->input->post('apellido_paterno'),
-    			'vApellidoMaterno' => $this->input->post('apellido_materno'),
+    			'vNombre' => trim($this->input->post('nombre')),
+    			'vApellidoPaterno' => trim($this->input->post('apellido_paterno')),
+    			'vApellidoMaterno' => trim($this->input->post('apellido_materno')),
     			'dFechaNacimiento' => $fecha_nacimiento,
     			'iGenero' => $this->input->post('genero'),
     			'iIdGradoEstudio' => $this->input->post('id_grado_estudio'),
     			'iIdOcupacion' => $this->input->post('id_ocupacion'),
     			'vCorreo' => $this->input->post('correo'),
     			'iRegistroCon' => 1,
-    			'iIdAsentamiento' => $this->input->post('id_asentamiento'),
-    			'iIdRol' => $this->input->post('id_rol')
+    			'iIdAsentamiento' => $this->input->post('id_asentamiento')
     		);
 
 
 
-    		if(isset($_POST['id']) && !empty($_POST['id']))
+    		if(isset($_POST['iIdUsuario']) && !empty($_POST['iIdUsuario']))
     		{
     			//	Modificación
+    			$iIdUsuario = $this->input->post('iIdUsuario');
+    			$d_usuario['iIdRol'] = $this->input->post('id_rol');
+    			$con = $this->ms->iniciar_transaccion();
+    			$where['iIdUsuario'] = $iIdUsuario;
+
+    			$id = $this->ms->actualiza_registro('Usuario',$where,$d_usuario,$con);
+
+    			if($this->ms->terminar_transaccion($con)) echo 0;
+    			else echo 'Ha ocurrido un error';
 
     		}
     		else
@@ -51,6 +59,7 @@ class C_seguridad extends CI_Controller {
 	    			//	Registro de usuario
 	    			$token = $this->generar_token();
 	    			$d_usuario['iRegistroCon'] = 1;
+	    			$d_usuario['iIdRol'] = (isset($_POST['vista_admin'])) ? $this->input->post('id_rol'):1;
 	    			$d_usuario['dFechaRegistro'] = date('Y-m-d H:i:s');	    			
 	    			$d_usuario['vContrasenia'] = SHA1($this->input->post('contrasenia'));
 	    			$d_usuario['iEstatus'] = 1;	//	Pendiente de confirmación
@@ -141,6 +150,7 @@ class C_seguridad extends CI_Controller {
 
 			if($paginador['total_registros'] > 0)
 			{ 
+
 				$listado .= '
                <div class="table-responsive">
                         <table class="table table-striped">
@@ -157,17 +167,25 @@ class C_seguridad extends CI_Controller {
                             
                             foreach ($paginador['resultado'] as $dc)
                             {	
+                                $icono = '<i class="text-success mdi mdi-account" title="Usuario activo"></i>';
+                                if($dc->iEstatus == 1) $icono = '<i class="mdi mdi-account" title="Pendiente de validar su correo"></i>';
+                                if($dc->iEstatus == 3) $icono = '<i class="text-danger mdi mdi-account-remove" title="Usuario bloqueado"></i>';
+
                                 $listado .= '<tr>
                                     <td>'.$dc->iIdUsuario.'</td>
-                                    <td>'.$dc->vNombre.' '.$dc->vApellidoPaterno.' '.$dc->vApellidoMaterno.'</td>
+                                    <td>'.$icono.'&nbsp;'.$dc->vNombre.' '.$dc->vApellidoPaterno.' '.$dc->vApellidoMaterno.'</td>
                                     <td>'.$dc->vCorreo.'</td>
                                     <td>'.$dc->vRol.'</td>
                                     <td width="300px" align="center">';
-                                    $listado .= '<button type="button" class="btn waves-effect waves-light btn-outline-dark" onclick="CapturarUsuario('.$dc->iIdUsuario.');"><i class="mdi mdi-lead-pencil"  ></i>&nbsp;Editar</button>';
+                                    $listado .= '<i class="mdi mdi-lead-pencil" style="cursor:pointer" title="Editar" onclick="CapturarUsuario('.$dc->iIdUsuario.')"></i>&nbsp;';
+                                    //$listado .= '<button type="button" class="btn waves-effect waves-light btn-outline-dark" onclick="CapturarUsuario('.$dc->iIdUsuario.');"><i class="mdi mdi-lead-pencil"  ></i>&nbsp;Editar</button>';
+                                    
                                 if($dc->iIdUsuario != $_SESSION[PREFIJO.'_idusuario'])
-                            	{
-                            		
-                            		$listado .= '&nbsp;<button type="button" class="btn waves-effect waves-light btn-outline-dark" onclick="Eliminar(\''.$dc->iIdUsuario.'\');"><i class="mdi mdi-delete"></i>&nbsp;Eliminar</button>';
+                            	{   
+                            		if($dc->iEstatus == 3) $listado .= '<i class="mdi mdi-account-check text-success" title="Desbloquear" style="cursor:pointer" onclick="Desbloquear('.$dc->iIdUsuario.');"></i>&nbsp;';
+                            		else $listado .= '<i class="mdi mdi-block-helper text-danger" title="Bloquear" style="cursor:pointer" onclick="Bloquear('.$dc->iIdUsuario.');"></i>&nbsp;';
+                            		$listado .= '<i class="mdi mdi-delete-forever" title="Eliminar" style="cursor:pointer" onclick="Eliminar('.$dc->iIdUsuario.');"></i>&nbsp;';
+                            		//$listado .= '&nbsp;<button type="button" class="btn waves-effect waves-light btn-outline-dark" onclick="Eliminar(\''.$dc->iIdUsuario.'\');"><i class="mdi mdi-delete"></i>&nbsp;Eliminar</button>';
                             	}
                         		$listado .= '</td>
                                 </tr>';                        
@@ -201,24 +219,53 @@ class C_seguridad extends CI_Controller {
 				$datos['vApellidoPaterno'] = '';
 				$datos['vApellidoMaterno'] = '';
 				$datos['vCorreo'] = '';
+				$datos['iIdMunicipio'] = 0;
+				$datos['vMunicipio'] = '';
+				$datos['iIdLocalidad'] = 0;
+				$datos['vLocalidad'] = '';
+				$datos['iIdAsentamiento'] = 0;
+				$datos['iIdGradoEstudio'] = 0;
+				$datos['iIdOcupacion'] = 0;
+				$datos['dia'] = 0;
+				$datos['mes'] = 0;
+				$datos['anio'] = 0;
+				$datos['iCodigoPostal'] = '';
+				$datos['iIdRol'] = 0;
+				$datos['iGenero'] = 0;
 
 			}
 			else
 			{
+				$where['u.iIdUsuario'] = $id;
+				$usuario = $this->ms->datos_usuarios($where);
+				if($usuario)
+				{
+					$usuario = $usuario->row();
+					foreach ($usuario as $key => $value)
+					{
+						$datos[$key] = $value;
+					}
 
+					$datos['dia'] = substr($datos['dFechaNacimiento'], 8,2);
+					$datos['mes'] = substr($datos['dFechaNacimiento'], 5,2);
+					$datos['anio'] = substr($datos['dFechaNacimiento'], 0,4);
+				}
 			}
 
-			$datos['op_grados_estudio'] = $op->options_grados_estudio(0,'Seleccione un grado de estudio');
-			$datos['op_ocupaciones'] = $op->options_ocupaciones(0,'Seleccione una ocupación');
-			$datos['op_municipios'] = $op->options_municipios(0,'Seleccione un municipio');
-			$where1['iIdMunicipio'] = 0;
-			$datos['op_localidades'] = $op->options_localidades(0,'Seleccione una localidad',$where1);
-			$where2['iIdLocalidad'] = 0;
-			$datos['op_asentamientos'] = $op->options_asentamientos(0,'Seleccione una colonia',$where2);
-			$datos['op_dias'] = $op->options_dias(0,'Día');
-			$datos['op_meses'] = $op->options_meses(0,'Mes');
-			$datos['op_anios'] = $op->options_anios(0,'Año');
 
+			$datos['op_grados_estudio'] = $op->options_grados_estudio($datos['iIdGradoEstudio'],'Seleccione un grado de estudio');
+			$datos['op_ocupaciones'] = $op->options_ocupaciones($datos['iIdOcupacion'],'Seleccione una ocupación');
+			$datos['op_municipios'] = $op->options_municipios($datos['iIdMunicipio'],'Seleccione un municipio');
+			$where1['iIdMunicipio'] = $datos['iIdMunicipio'];
+			$datos['op_localidades'] = $op->options_localidades($datos['iIdLocalidad'],'Seleccione una localidad',$where1);
+			$where2['iIdLocalidad'] = $datos['iIdLocalidad'];
+			$datos['op_asentamientos'] = $op->options_asentamientos($datos['iIdAsentamiento'],'Seleccione una colonia',$where2);
+			$datos['op_dias'] = $op->options_dias($datos['dia'],'Día');
+			$datos['op_meses'] = $op->options_meses($datos['mes'],'Mes');
+			$datos['op_anios'] = $op->options_anios($datos['anio'],'Año');
+			$datos['op_roles'] = $op->options_roles($datos['iIdRol'],'Seleccione un estatus');
+
+			//var_dump($datos);
 			$this->load->view('usuarios/capturar_usuario',$datos);	
 		}
 		
@@ -242,6 +289,52 @@ class C_seguridad extends CI_Controller {
     		else
     		{
     			echo 'No fue posible eliminar el usuario';
+    		}
+
+		}else echo 'Acceso denegado';
+	}
+
+	function bloquear_usuario()
+	{
+		if(isset($_POST['id']) && !empty($_POST['id']))
+		{
+			
+			$datos['iEstatus'] = 3;
+			$where['iIdUsuario'] = $this->input->post('id');
+			$con = $this->ms->iniciar_transaccion();
+
+    		$aux = $this->ms->actualiza_registro('Usuario',$where,$datos,$con);
+
+    		if($this->ms->terminar_transaccion($con))
+    		{
+    			echo 0;
+    		}
+    		else
+    		{
+    			echo 'No fue posible bloquear el usuario';
+    		}
+
+		}else echo 'Acceso denegado';
+	}
+
+	function desbloquear_usuario()
+	{
+		if(isset($_POST['id']) && !empty($_POST['id']))
+		{
+			
+			$datos['iEstatus'] = 2;
+			$where['iIdUsuario'] = $this->input->post('id');
+			$con = $this->ms->iniciar_transaccion();
+
+    		$aux = $this->ms->actualiza_registro('Usuario',$where,$datos,$con);
+
+    		if($this->ms->terminar_transaccion($con))
+    		{
+    			echo 0;
+    		}
+    		else
+    		{
+    			echo 'No fue posible bloquear el usuario';
     		}
 
 		}else echo 'Acceso denegado';
