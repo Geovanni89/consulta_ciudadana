@@ -164,7 +164,15 @@
 
 	<!-- CKEditor.js 
 	============================================= -->
-	<script type="text/javascript" src="<?=base_url();?>js/ckeditor.js"></script>
+	<!--<script type="text/javascript" src="<?=base_url();?>js/ckeditor/ckeditor.js"></script>
+	<script type="text/javascript" src="<?=base_url();?>js/ckeditor/config.js"></script>-->
+
+
+	<script type="text/javascript" src="<?=base_url();?>admin/assets/libs/ckeditor/ckeditor.js"></script>
+	<script type="text/javascript" src="<?=base_url();?>admin/assets/libs/ckeditor/config.js"></script>
+
+
+
 	<script type="text/javascript" src='<?=base_url();?>js/jquery.base64.js'></script>
 
 	<!-- Loader
@@ -184,25 +192,30 @@
 		var editor;
 
 		$(document).ready(function(){
-			ClassicEditor.create(document.querySelector('#vDescripcion'), {
-				autoUpdateElement: true,
-				toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote'],
-				heading: {
-		            options: [
-		                { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-		                { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-		                { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
-		            ]
-		        }
 
-			})
-			.then(newEditor=> {
-				console.log(newEditor);
-				editor = newEditor;
-			})
-			.catch(error=> {
-				console.log(error);
-			});
+			CKEDITOR.replace('vDescripcion');
+
+			CKEDITOR.editorConfig = function( config ) {
+				config.toolbarGroups = [
+					{ name: 'forms', groups: [ 'forms' ] },
+					{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+					{ name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+					{ name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+					{ name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
+					'/',
+					{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
+					{ name: 'links', groups: [ 'links' ] },
+					{ name: 'insert', groups: [ 'insert' ] },
+					'/',
+					{ name: 'styles', groups: [ 'styles' ] },
+					{ name: 'colors', groups: [ 'colors' ] },
+					{ name: 'tools', groups: [ 'tools' ] },
+					{ name: 'others', groups: [ 'others' ] },
+					{ name: 'about', groups: [ 'about' ] }
+				];
+
+				config.removeButtons = 'Save,NewPage,Preview,Print,Templates,Cut,Copy,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Strike,Subscript,BidiLtr,BidiRtl,Language,Anchor,Flash,Smiley,SpecialChar,PageBreak,Iframe,Maximize,ShowBlocks,About,Outdent,Indent,Find,Replace,Scayt,Source,BGColor,Superscript,RemoveFormat,CopyFormatting';
+			}			
 		});
 
 		    /*minImageWidth: 50,
@@ -296,7 +309,12 @@
 					minlength: 10,
 					maxlength: 200
 				},
-				vDescripcion: "required"
+				vDescripcion: {
+					required: function() {
+						CKEDITOR.instances.vDescripcion.updateElement();
+					},
+					minlength: 18
+				}
 			},
 			messages: {
 				iIdSector: "Debe seleccionar un Sector",
@@ -306,7 +324,11 @@
 					minlength: "El título debe contener un mínimo de 10 caracteres",
 					maxlength: "El título puede contener un máximo de 200 caracteres"
 				},
-				vDescripcion: "Debe ingresar una descripción a la propuesta",
+				vDescripcion: {
+					required: "Debe ingresar una descripción a la propuesta",
+					minlength: "La propuesta debe contener un mínimo de 10 caracteres",
+					
+				},
 				vUrlVideoExterno: "Inserte una URL válida",	
 				iIdMunicipio: "Debe seleccionar un municipio"
 

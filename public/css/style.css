@@ -13759,3 +13759,5 @@ body:not(.no-transition) #wrapper,
 .map { height: 400px !important;}
 
 .btn-like { color: #1138de !important; }
+
+.comment textarea { border-radius: 10px; }

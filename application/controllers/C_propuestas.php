@@ -10,6 +10,7 @@ class C_propuestas extends CI_Controller {
         $this->load->helper('url');
         $this->load->model('M_propuestas');
         $this->load->library('Class_propuestas');
+        $this->load->library('Class_mail');
 
     }
 
@@ -408,7 +409,7 @@ class C_propuestas extends CI_Controller {
 		}
 		//print_r($resp);
 
-		else echo 'sin respuestas';
+		else echo 'Sin respuestas';
 	}
 
 	//-------------------------------------------moderación de comentarios -------------------------------------------
@@ -479,6 +480,10 @@ class C_propuestas extends CI_Controller {
 
 	public function act_coment()
 	{
+		$correo = 'vg.barbosa89@gmail.com';
+		$asunto = 'Comentario eliminado';
+		$mensaje = 'Su comentario fue eliminado por contener palabras culeras';
+
 		$idcoment = $this->input->post('idcoment', TRUE);
 		$op = $this->input->post('op', TRUE);
 		
@@ -488,7 +493,18 @@ class C_propuestas extends CI_Controller {
 
 		$model = new M_propuestas();
 		$query_coment = $model->actualiza_comentario($datos,$idcoment);
-		echo $query_coment;
+		if($query_coment!=false)
+		{
+			if($op==0)
+			{
+				$this->load->library('Class_mail');
+				$mail = new Class_mail();
+
+				if($mail->enviar_correo_gmail($correo,$asunto,$mensaje)) echo 'correcto';
+				else echo 'error1';
+			}
+		}
+		else echo "error2";
 	}
 	
 }
