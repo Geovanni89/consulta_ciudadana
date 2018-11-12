@@ -32,21 +32,24 @@ class M_seguridad extends CI_Model {
 		}
 	}
 
-	public function inserta_registro($tabla,$datos,$con)
+	public function inserta_registro($tabla,$datos,$con='')
 	{
-	if($con->insert($tabla,$datos)) return $con->insert_id();
-	else return false;
+		if($con == '') $con = $this->db;
+
+		if($con->insert($tabla,$datos)) return $con->insert_id();
+		else return false;
 	}
 
-	public function actualiza_registro($tabla,$where,$datos,$con)
+	public function actualiza_registro($tabla,$where,$datos,$con='')
 	{
-	$con->where($where);
+		if($con == '') $con = $this->db;
+		$con->where($where);
 		return $con->update($tabla, $datos);
 	}
 
 	public function elimina_registro($tabla,$where,$con)
 	{
-	return $con->delete($tabla,$where);
+		return $con->delete($tabla,$where);
 	}
 
 	/*	Funciones para usar transacciones

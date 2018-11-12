@@ -282,11 +282,11 @@ class Class_options {
     { 
         $select = '';
 
-        if($opcion0) $select .= '<option value="10" rel="0">Todas</option>';
-        $select .= ($seleccionado == 0) ? '<option value="0" rel="0" selected>No viables</option>':'<option value="0"  rel="0">No viables</option>';
-        $select .= ($seleccionado == 1) ? '<option value="1" rel="0" selected>Pendientes de revisión</option>':'<option value="1"  rel="0">Pendientes de revisión</option>';
-        $select .= ($seleccionado == 2) ? '<option value="2" rel="0" selected>Integrada</option>': '<option value="2" rel="0" >Integrada</option>';
-        $select .= ($seleccionado == 3) ? '<option value="3" rel="0" selected>Aprobada</option>':'<option value="3" rel="0" >Aprobada</option>';
+        if($opcion0) $select .= '<option value="10" selected>Todas</option>';
+        $select .= ($seleccionado == 0) ? '<option value="0" selected>No viables</option>':'<option value="0"  rel="0">No viables</option>';
+        $select .= ($seleccionado == 1) ? '<option value="1" selected>Pendientes de revisión</option>':'<option value="1"  rel="0">Pendientes de revisión</option>';
+        $select .= ($seleccionado == 2) ? '<option value="2" selected>Integrada</option>': '<option value="2" rel="0" >Integrada</option>';
+        $select .= ($seleccionado == 3) ? '<option value="3" selected>Aprobada</option>':'<option value="3" rel="0" >Aprobada</option>';
 
         return $select;
     }

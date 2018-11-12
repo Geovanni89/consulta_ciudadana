@@ -20,19 +20,35 @@
 					<form action="#" id="formbusqueda">
                         <div class="form-body">
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-2">
                                     <div class="form-group">
-                                    	<label>Estatus</label>
-                                        <select name="fEstatus" id="fEstatus" class="form-control">
-                                        	<?=$op_estatus;?>
+                                    	<label>Sector</label>
+                                        <select name="fSector" id="fSector" class="form-control" onchange="CargarListado('temas', 'fSector', 'fTema');">
+                                        	<?=$op_sectores; ?>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                    	<label>Tema</label>
+                                        <select name="fTema" id="fTema" class="form-control">
+                                        	<?=$op_temas; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                    	<label>Estatus</label>
+                                        <select name="fEstatus" id="fEstatus" class="form-control">
+                                        	<?=$op_estatus_propuestas; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
                                     <div class="form-group">
                                     	<label>Rol</label>
                                         <select name="fRol" id="fRol" class="form-control">
-                                        	<?=$op_roles;?>
+                                        	<?=$op_roles; ?>
                                         </select>
                                     </div>
                                 </div>
@@ -40,7 +56,7 @@
 
                             <div class="row">
                             	<div class="col-md-10">
-                            		<label>Nombre del usuario</label>
+                            		<label>Título de la propuesta</label>
                             		<div class="input-group mb-12">
                                         <input type="text" class="form-control" name="fTitulo" id="fTitulo" placeholder="" aria-label="" aria-describedby="basic-addon1">
                                         <div class="input-group-append">
@@ -49,7 +65,7 @@
                                     </div>
                             	</div>
                             	<div class="col-md-2">
-                        			<button class="btn btn-success" type="button" onclick="CapturarUsuario(0);" style="margin-top:28px;">Crear usuario</button>
+                        			<button class="btn btn-success" type="button" onclick="CapturarPropuesta(0);" style="margin-top:28px;">Crear propuesta</button>
                             	</div>
                             </div>
                            
@@ -67,6 +83,33 @@
 	</div>
 </body>
 <script type="text/javascript">
+	function Buscar(pag)
+	{
+		var pag = pag || 1;
+
+		var variables = $("#formbusqueda").serialize();
+		variables = variables + '&pag=' + pag;
+
+		Cargar('<?=base_url();?>C_propuestas_admin/buscar_propuestas','#contenidomodulo','POST',variables);
+	}
+
+    function GuardarId(id)
+    {
+        var check = 0;
+        if($("#chk"+id).is(':checked')) check = 1;
+        
+        $.post("<?=base_url();?>C_propuestas_admin/guardar_id",{id:id,check:check},function(resultado,status){
+            
+        });
+    }
+
+	function CapturarPropuesta(id)
+	{
+		var vars = 'id=' + id		
+		Cargar('<?=base_url();?>C_propuestas_admin/capturar_propuesta','#contenidomodulo','POST',vars);
+	}
+
+
 	function Eliminar(id)
 	{
 		Swal({
@@ -91,21 +134,33 @@
         });
 	}
 
-	function Buscar(pag)
-	{
-		var pag = pag || 1;
+    function CargarListado(nombrelst, lstpadreid, lsthijoid)
+    {
+        var valor = $("#"+lstpadreid).val();
+        var patron = /chosen-select/g;
 
-		var variables = $("#formbusqueda").serialize();
-		variables = variables + '&pag=' + pag;
+        var loading = new Loading({
+                discription: 'Espere...',
+                defaultApply: true
+            });
 
-		Cargar('<?=base_url();?>C_seguridad/buscar_usuarios','#contenidomodulo','POST',variables);
-	}
-    
+        $.post("<?=base_url();?>C_propuestas_admin/listado_dependiente",{nombrelst:nombrelst,valor:valor},function(resultado,status){
+            $('#'+lsthijoid+' option[value!="0"]').remove();
+            if(valor > 0 && valor != '')
+            { // En este caso se utiliza el largo de la cadena debido a que no se recibe numero si no cadenas
+                $('#'+lsthijoid).append(resultado);
+                $('#'+lsthijoid).attr("disabled",false);
+            }
+            else $('#'+lsthijoid).attr("disabled",true);
 
-	function CapturarUsuario(id)
-	{
-		var vars = 'id=' + id		
-		Cargar('<?=base_url();?>C_seguridad/capturar_usuario','#contenidomodulo','POST',vars);
-	}
+            if(patron.test($('#'+lsthijoid).attr('class')))
+            {
+                $('#'+lsthijoid).trigger("chosen:updated");
+                    
+            } 
+        });
+
+        loading.out();
+    }
 </script>
 </html>
