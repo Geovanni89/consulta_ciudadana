@@ -480,9 +480,7 @@ class C_propuestas extends CI_Controller {
 
 	public function act_coment()
 	{
-		$correo = 'vg.barbosa89@gmail.com';
-		$asunto = 'Comentario eliminado';
-		$mensaje = 'Su comentario fue eliminado por contener palabras culeras';
+		
 
 		$idcoment = $this->input->post('idcoment', TRUE);
 		$op = $this->input->post('op', TRUE);
@@ -495,13 +493,31 @@ class C_propuestas extends CI_Controller {
 		$query_coment = $model->actualiza_comentario($datos,$idcoment);
 		if($query_coment!=false)
 		{
+			$model = new M_propuestas();
+			$query = $model->datos_correo($idcoment);
 			if($op==0)
 			{
+				$propuesta = $query[0]->vTitulo;
+				$nombre = $query[0]->vNombre.' '.$query[0]->vApellidoPaterno.' '.$query[0]->vApellidoMaterno;
+				//$correo = $query[0]->vCorreo;
+				$correo = 'vg.barbosa89@gmail.com';
+				$codigo = $query[0]->vCodigo;
+				$asunto = 'Comentario eliminado';
+
 				$this->load->library('Class_mail');
 				$mail = new Class_mail();
+				$template = 'templates/comentario_eliminado.html';
+				$mensaje = file_get_contents($template);
+				$mensaje = str_replace("{{var_nombre}}", $nombre, $mensaje);
+				$mensaje = str_replace("{{var_propuesta}}", $propuesta, $mensaje);
+				$mensaje = str_replace("{{var_codigo}}", $codigo, $mensaje);
 
-				if($mail->enviar_correo_gmail($correo,$asunto,$mensaje)) echo 'correcto';
-				else echo 'error1';
+
+				if($mail->enviar_correo_gmail($correo,$asunto,$mensaje)) 
+					echo 'correcto';
+				else 
+					echo 'error1';
+					
 			}
 		}
 		else echo "error2";
