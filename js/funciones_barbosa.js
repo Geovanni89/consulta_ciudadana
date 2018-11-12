@@ -41,7 +41,18 @@ function modera_coment(op,idcoment) {
         }).then((result) => {           
             if (result.value) {        
                 $.post(url_sitio+funcion, {idcoment:idcoment,op:op}, function(resp){
-					toastr.success('Comentario eliminado', 'Operación completa', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+                	switch(resp) {
+                		case "correcto": 
+                			toastr.success('Comentario eliminado', 'Operación completa', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+                			break;
+                		case "error1": 
+                			toastr.warning('No se ha podido enviar el correo, intente de nuevo más tarde', 'Operación completa', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+                			break;
+                		case "error2": 
+	                		toastr.danger('Error al eliminar el comentario', 'Operación completa', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+	                		break;
+                	}
+					//toastr.success('Comentario eliminado', 'Operación completa', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
 					carga_comentarios();
 				});	
             } else if (result.dismiss === Swal.DismissReason.cancel) {
