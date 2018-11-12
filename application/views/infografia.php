@@ -31,7 +31,7 @@
 			<div class="col-lg-12 text-right">
 			<?php 
 				if(isset($_SESSION[PREFIJO.'_idusuario'])) {
-					echo '<a href="'.base_url().'Sitio/form_propuesta?idsector=1&idtema=1" class="btn btn-success">Crear una propuesta</a>';
+					echo '<a href="'.base_url().'Sitio/form_propuesta?iIdSector=1&iIdTema=1" class="btn btn-success">Crear una propuesta</a>';
 				}
 				else
 				{
