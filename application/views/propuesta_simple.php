@@ -112,19 +112,19 @@
 									============================================= -->
 									<div class="entry-content notopmargin ">
 										<div class="clearfix bottommargin-sm">
-											<div class="row">
+											<div class="row" id="div_btn_apoyo">
 											
 											<?php
 											if(isset($_SESSION[PREFIJO.'_idusuario']))
 											{
 
 												if($apoyo>0)
-													echo '<button id="apoyar_prop" type="button" class="btn btn-outline-warning btn-lg btn-block">Usted ya ha apoyado esta propuesta</button>';
+													echo '<div class="col-md-12"><button id="apoyar_prop" type="button" class="btn btn-outline-warning btn-lg btn-block">Usted ya ha apoyado esta propuesta</button></div>';
 												else
-													echo '<div class="col-md-6"><button id="apoyar_prop" type="button" class="btn btn-outline-success btn-lg btn-block" onclick="apoya_propuesta('.$iIdPropuesta.');">A favor</button></div>
-													<div class="col-md-6"><button id="apoyar_prop_dislike" type="button" class="btn btn-outline-danger btn-lg btn-block" onclick="apoya_propuesta('.$iIdPropuesta.');">En contra</button></div>';
+													echo '<div class="col-md-6"><button id="apoyar_prop" type="button" class="btn btn-outline-success btn-lg btn-block" onclick="apoya_propuesta('.$iIdPropuesta.',1);">A favor</button></div>
+													<div class="col-md-6"><button id="apoyar_prop_dislike" type="button" class="btn btn-outline-danger btn-lg btn-block" onclick="apoya_propuesta('.$iIdPropuesta.',0);">En contra</button></div>';
 											}
-											else echo '<div id="error_sesion" class="style-msg2 errormsg"><div class="msgtitle">Inicio de sesión</div><div class="sb-msg"><ul><li>Para poder apoyar una propuesta debe iniciar sesión</li></ul></div></div>';
+											else echo '<div class="col-md-12"><div id="error_sesion" class="style-msg2 errormsg"><div class="msgtitle">Inicio de sesión</div><div class="sb-msg"><ul><li>Para poder apoyar una propuesta debe iniciar sesión</li></ul></div></div></div>';
 											?>					
 											</div>		
 										</div>
@@ -276,7 +276,7 @@
 												if($vcom->respuestas > 0)
 												{
 													echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-													<div class="col-md-1 col-sm-12"><a id="respuestas_'.$vcom->iIdComentario.'" href="javascript:" onclick="respuestas('.$vcom->iIdComentario.')">Ver respuestas</a></div>
+													<div class="col"><a id="respuestas_'.$vcom->iIdComentario.'" href="javascript:" onclick="respuestas('.$vcom->iIdComentario.')">Ver respuestas</a></div>
 													</div>
 													</div>
 													<div class="col" style="display: none;" id="container_respuesta_'.$vcom->iIdComentario.'"></div>
@@ -467,14 +467,17 @@
 		document.getElementById('map').appendChild(img);
 	  }
 
-	function apoya_propuesta(id) {
-			$.post('<?=base_url();?>C_propuestas/apoyar_propuesta',{id:id}, function(resp){
+	function apoya_propuesta(id,op) {
+			$.post('<?=base_url();?>C_propuestas/apoyar_propuesta',{id:id,op:op}, function(resp){
 				switch(resp)
 				{
 					case 'correcto' :  
-						toastr.success('Correcto', 'Operación completa', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
-						document.getElementById("apoyar_prop").removeAttribute("onclick");
+						toastr.success('Operación completa', 'Correcto', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+						$('#div_btn_apoyo').empty().html('<div class="col-md-12"><button id="apoyar_prop" type="button" class="btn btn-outline-warning btn-lg btn-block">Usted ya ha apoyado esta propuesta</button></div>');
+						/*document.getElementById("apoyar_prop").removeAttribute("onclick");
 						document.getElementById("apoyar_prop").setAttribute("disabled",'');
+						document.getElementById("apoyar_prop_dislike").removeAttribute("onclick");
+						document.getElementById("apoyar_prop_dislike").setAttribute("disabled",'');*/
 						break;
 					case 'error' :  
 						toastr.error('No se pudo completar la operación', '¡Error!', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
@@ -514,7 +517,7 @@
 
 			$.post('<?=base_url();?>C_propuestas/envia_comentario', {idprop:idPropuesta,com:vComentario}, function(resp){
 				console.log(resp);
-				if(resp==1) { toastr.success('Correcto', 'Operación completa', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 }); $('#vComentario').val("");}
+				if(resp==1) { toastr.success('Su comentario será validado por los moderadores y podrá verlo pronto', 'Correcto', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 }); $('#vComentario').val("");}
 				else toastr.warning('Error al enviar su comentario', '¡Advertencia!', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
 			});
 		}
@@ -526,7 +529,7 @@
 			$.post('<?=base_url();?>C_propuestas/envia_comentario', {idprop:idPropuesta,idcom:idcoment,com:vComentario}, function(resp){
 				console.log(resp);
 				if(resp==1) {
-					toastr.success('Correcto', 'Operación completa', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+					toastr.success('Su comentario será validado por los moderadores y podrá verlo pronto', 'Correcto', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
 					$('#container_respuesta_'+idcoment).removeClass('fadeInDown').addClass('fadeOutDown');
 					$('#container_respuesta_'+idcoment).hide('slow');					
 					$('#container_respuesta_'+idcoment).html('').removeClass('animated fadeOutDown');

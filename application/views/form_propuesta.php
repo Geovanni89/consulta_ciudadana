@@ -18,6 +18,9 @@
 	<link rel="stylesheet" href="<?=base_url();?>public/css/components/radio-checkbox.css" type="text/css" />
 	<link rel="stylesheet" href="<?=base_url();?>public/css/components/bs-filestyle.css" type="text/css" />
 
+	<link type="text/css" rel="stylesheet" href="<?=base_url();?>admin/plugins/modal-loading/css/modal-loading.css" />
+    <link type="text/css" rel="stylesheet" href="<?=base_url();?>admin/plugins/modal-loading/css/modal-loading-animate.css" />
+
 	<link rel="stylesheet" href="<?=base_url();?>public/css/responsive.css" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -64,15 +67,14 @@
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="sel_sect">Selecciona el Sector</label>
-									<select class="form-control" id="iIdSector" name="iIdSector" onchange="carga_temas(this.value);" required>
-										<option value="">Sectores</option>
-										<?php echo $select_sec; ?>
+									<select class="form-control" id="iIdSector" name="iIdSector" readonly required>
+										<?php echo $select_sec; /* <select class="form-control" id="iIdSector" name="iIdSector" onchange="carga_temas(this.value);" readonly required>*/?>
 									</select>
 								</div>
 								<div class="form-group col-md-6">
 									<label for="iIdTema">Selecciona el Tema</label>
-									<select class="form-control" id="iIdTema" name="iIdTema" required>
-										<option value="">Temas</option>									
+									<select class="form-control" id="iIdTema" name="iIdTema" readonly required>
+										<?php echo $select_tema; ?>
 									</select>
 								</div>
 							</div>
@@ -83,7 +85,7 @@
 							<div class="form-group">
 								<label for="vDescripcion">Resumen de la propuesta</label>
 								<small id="descnHelp" class="form-text text-muted">(Máximo 200 caracteres)</small>
-								<textarea class="form-control" id="vDescripcion" name="vDescripcion" rows="5" required></textarea>
+								<textarea class="form-control" id="vDescripcion" name="vDescripcion" rows="5"></textarea>
 							</div>
 							<div class="form-group">
 								<label for="vUrlVideoExterno">Enlace video externo</label>
@@ -93,12 +95,12 @@
 								<div class="col-lg-12 bottommargin">
 									<label>Imágenes descriptivas:</label>
 									<small id="" class="form-text text-muted">Puedes subir hasta 5 imagenes en los formatos jpeg o jpg; hasta 1 MB por acrhivo.<br></small><br>
-									<input id="adjuntoFotos" name="adjuntoFotos[]" type="file" class="file" accept="image/*" multiple data-show-upload="false" data-show-caption="true" data-show-preview="true" data-show-upload="false">
+									<input id="adjuntoFotos" name="adjuntoFotos[]" type="file" class="file" accept="image/*" multiple data-show-caption="true" data-show-preview="true" data-show-upload="false">
 								</div>
 								<div class="col-lg-12 bottommargin">
 									<label>Documentos</label>
 									<small id="" class="form-text text-muted">Puedes subir hasta un máximo de 3 documentos en formato pdf, de hasta 3 MB por archivo.</small><br>
-									<input id="adjuntoArchivos" name="adjuntoArchivos[]" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" data-show-preview="true" data-allowed-file-extensions='["pdf"]' data-show-upload="false">
+									<input id="adjuntoArchivos" name="adjuntoArchivos[]" type="file" class="file" multiple data-show-caption="true" data-show-preview="true" data-allowed-file-extensions='["pdf"]' data-show-upload="false">
 								</div>
 							</div>
 							<div class="form-group">
@@ -165,11 +167,17 @@
 	<script type="text/javascript" src="<?=base_url();?>js/ckeditor.js"></script>
 	<script type="text/javascript" src='<?=base_url();?>js/jquery.base64.js'></script>
 
+	<!-- Loader
+	==============================================-->
+	<script src="<?=base_url();?>admin/plugins/modal-loading/js/modal-loading.js"></script>
+
+
 	<!-- Footer Scripts
 	============================================= -->
 	<script src="<?=base_url();?>public/js/functions.js"></script>
 
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnOBLYrneZlLUF5_bhWzGnwc6I7s01qEs&callback=initMap" async defer></script>
+	<script src="<?=base_url();?>js/municipios.js"></script>
 
 	<script>
 		var idReturn = 0;
@@ -200,11 +208,20 @@
 		    /*minImageWidth: 50,
     minImageHeight: 50*/
 		$("#adjuntoFotos").fileinput({
+		    showUpload: false,
+		    layoutTemplates: {
+				actions: '<div class="file-actions">\n' +
+		        '    <div class="file-footer-buttons">\n' +
+		        '        {delete} {zoom}' +
+		        '    </div>\n' +
+		        '    {drag}\n' +
+		        '    <div class="clearfix"></div>\n' +
+		        '</div>',
+			},
 		    uploadUrl: '<?=base_url();?>C_propuestas/subir?op=1',
 		    maxFileCount: 5,
 		    allowedFileExtensions: ["jpg", "png", "gif"],
 		    maxFileSize: 1024,
-		    showUpload: false,
 		    uploadAsync: false,
 		    uploadExtraData: function() {
 		    	return {
@@ -214,11 +231,20 @@
 		});	
 
 		$("#adjuntoArchivos").fileinput({
+		    showUpload: false,
+		    layoutTemplates: {
+				actions: '<div class="file-actions">\n' +
+		        '    <div class="file-footer-buttons">\n' +
+		        '        {delete} {zoom}' +
+		        '    </div>\n' +
+		        '    {drag}\n' +
+		        '    <div class="clearfix"></div>\n' +
+		        '</div>',
+			},
 			uploadUrl: '<?=base_url();?>C_propuestas/subir?op=2',
 		    maxFileCount: 3,
 		    allowedFileExtensions: "pdf",
 		    maxFileSize: 10240,
-		    showUpload: false,
 		    uploadAsync: false,
 		    uploadExtraData: function() {
 		    	return {
@@ -228,7 +254,8 @@
 		});
 
 		// funciones de google maps----------------------------------------------------------------------
-		var map;		
+		var map;
+		var marker;	
 		var image = '<?=base_url();?>img/logo_vertical_2.png';
 
 	    function initMap() {
@@ -238,7 +265,7 @@
 	          	zoom: 8
 	        });
 
-	        var marker = new google.maps.Marker({
+	        marker = new google.maps.Marker({
 	          position: { lat: 20.97636467031955, lng: -89.62927700124328 },
 	          map: map,
 	          icon: image
@@ -259,7 +286,8 @@
         }
 
 
-		var valida_form = $('#formPropuesta').validate({			
+		var valida_form = $('#formPropuesta').validate({
+			ignore: [],	
 			rules: {
 				iIdSector: "required",
 				iIdTema: "required",
@@ -292,6 +320,7 @@
 		function envia_form() {			
 
 			$.base64.utf8encode = true;
+			var loading;
 			
 			document.getElementById('vDescripcion').value = $.base64('encode',editor.getData(),true);
 			var nLatDec = document.getElementById('nLatDec').value;
@@ -308,7 +337,14 @@
 						url: uri,
 						data: form,
 						async: false,
+						beforeSend: function(){
+				           loading = new Loading({
+				                discription: 'Guardando...',
+				                defaultApply: true
+				            });
+				        },
 						success: function(data) {
+							
 							if(data > 0) {
 
 								idReturn = data;
@@ -326,6 +362,7 @@
 
 								//$('#formPropuesta')[0].reset();
 								//editor.setData('');
+								//loading.out();
 								location.href = "<?=base_url();?>Sitio/propuestas";
 							}
 						},
@@ -367,6 +404,13 @@
 		}
 
 		function js_municipio(valor) {
+			//console.log('latitud: '+lat_mun[valor]+'\n'+'longitud: '+lng_mun[valor]);			
+			var coordenadas = {lat: parseFloat(lat_mun[valor]), lng: parseFloat(lng_mun[valor])};			
+			
+			map.setCenter(coordenadas);
+			marker.setPosition(coordenadas);
+			map.setZoom(11);
+
 			/*
 			map.data.forEach(function(feature) {
 		        map.data.remove(feature);
@@ -378,7 +422,7 @@
 			    fillOpacity: 0,
 				strokeWeight: 1
 			});*/
-		}
+		}		
 
 		/*function actualizaText()
 		{

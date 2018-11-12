@@ -29,8 +29,31 @@ function carga_comentarios() {
 
 function modera_coment(op,idcoment) {
 	var funcion = 'C_propuestas/act_coment';
-	$.post(url_sitio+funcion, {idcoment:idcoment,op:op}, function(resp){
-		toastr.success('Correcto', 'Operación completa', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
-		carga_comentarios();
-	});
+	if(op=="0")
+	{
+		Swal({
+          title: 'Eliminar comentario',
+          text: '¿Realmente desea eliminar este comentario?',
+          type: 'question',
+          showCancelButton: true,
+          confirmButtonText: 'Confirmar',
+          cancelButtonText: 'Cancelar'
+        }).then((result) => {           
+            if (result.value) {        
+                $.post(url_sitio+funcion, {idcoment:idcoment,op:op}, function(resp){
+					toastr.success('Comentario eliminado', 'Operación completa', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+					carga_comentarios();
+				});	
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+            
+            }
+        });
+	}
+	else
+	{
+		$.post(url_sitio+funcion, {idcoment:idcoment,op:op}, function(resp){
+			toastr.success('comentario aceptado', 'Operación completa', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+			carga_comentarios();
+		});		
+	}
 }
