@@ -117,6 +117,7 @@
 											<?php
 											if(isset($_SESSION[PREFIJO.'_idusuario']))
 											{
+												echo '<input type="hidden" name="valida_sesion" id="valida_sesion" value="1">';
 
 												if($apoyo>0)
 													echo '<div class="col-md-12"><button id="apoyar_prop" type="button" class="btn btn-outline-warning btn-lg btn-block">Usted ya ha apoyado esta propuesta</button></div>';
@@ -249,7 +250,7 @@
 											$respuestas = 1;
 											*/
 														
-											foreach ($comentarios as $vcom) {
+											foreach ($comentarios as $vcom) {												
 												echo '<li class="comment byuser comment-author-_smcl_admin even thread-odd thread-alt depth-1" id="li_comentario_'.$vcom->iIdComentario.'">
 											<div id="comment-2" class="comment-wrap clearfix">
 												<div class="comment-meta">
@@ -332,7 +333,13 @@
 											</div>
 
 											<div class="col_full nobottommargin">
-												<button name="enviaComentario" type="button" id="enviaComentario" tabindex="5" onclick="envia_comentario();" class="button button-3d nomargin">Publicar comentario</button>
+											<?php
+												if(isset($_SESSION[PREFIJO.'_idusuario']))
+												{
+													echo '<button name="enviaComentario" type="button" id="enviaComentario" tabindex="5" onclick="envia_comentario();" class="button button-3d nomargin">Publicar comentario</button>';
+												}
+												else echo '<div class="col-md-12"><div id="error_sesion" class="style-msg2 errormsg"><div class="msgtitle">Inicio de sesión</div><div class="sb-msg"><ul><li>Para poder comentar la propuesta debe iniciar sesión</li></ul></div></div></div>';
+											?>													
 											</div>
 
 										</form>
@@ -504,6 +511,8 @@
 
 		function responder(idcoment,nombre) {
 			var resp_act = document.getElementById('idresp_com').value;
+			var valido = document.getElementById('valida_sesion');
+			console.log(valido);
 			if(resp_act!="") {				
 				document.getElementById("li_comentario_"+resp_act).style.boxShadow = "";
 			}
@@ -516,7 +525,13 @@
 				$('#container_respuesta_'+idcoment).hide('slow');	
 				$('#container_respuesta_'+idcoment).html('');
 			} else {*/
-				$('#container_respuesta_'+idcoment).html('<br><br><h4>Responder comentario</h4><textarea class="form-control" id="resp_coment_'+idcoment+'" name="resp_coment_'+idcoment+'" rows="5"></textarea><br><button class="btn btn-success" onclick="responder_comentario('+idcoment+');" id="btn_resp_'+idcoment+'">Responder</button>');
+				if(valido!==null && valido!=="undefined") {
+					$('#container_respuesta_'+idcoment).html('<br><br><h4>Responder comentario</h4><textarea class="form-control" id="resp_coment_'+idcoment+'" name="resp_coment_'+idcoment+'" rows="5"></textarea><br><button class="btn btn-success" onclick="responder_comentario('+idcoment+');" id="btn_resp_'+idcoment+'">Responder</button>');
+				}
+				else {
+					$('#container_respuesta_'+idcoment).html('<br><br><h4>Responder comentario</h4><textarea class="form-control" id="resp_coment_'+idcoment+'" name="resp_coment_'+idcoment+'" rows="5"></textarea><br><div class="col-md-12"><div class="style-msg errormsg" id="error_sesion"><div class="sb-msg"><i class="icon-remove"></i><strong>Inicio de sesión</strong> Para poder responder el comentario debe iniciar sesión.</div></div></div>');
+				}
+
 				$('#container_respuesta_'+idcoment).addClass('animated fadeInDown');
 				$('#container_respuesta_'+idcoment).show('slow');				
 			//}
