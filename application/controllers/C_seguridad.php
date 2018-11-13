@@ -93,8 +93,9 @@ class C_seguridad extends CI_Controller {
 
 						$template = 'templates/confirmar_correo.html';
 						$mensaje = file_get_contents($template);
+						$nombre = htmlentities($d_usuario['vNombre'], ENT_QUOTES, "UTF-8");
 						$url = base_url().'C_seguridad/confirmar_correo?id='.$idusuario.'&token='.$token;
-						$mensaje = str_replace('{{var_nombre_dest}}', $d_usuario['vNombre'], $mensaje);
+						$mensaje = str_replace('{{var_nombre_dest}}', $nombre, $mensaje);
 						$mensaje = str_replace('{{var_url}}', $url, $mensaje);
 						
 						$asunto = utf8_decode('Confirmación de correo');
@@ -146,7 +147,7 @@ class C_seguridad extends CI_Controller {
 
 		if($qc)
 		{
-			$paginador = Paginador($qc,$pag,3);
+			$paginador = Paginador($qc,$pag);
 
 			if($paginador['total_registros'] > 0)
 			{ 
@@ -315,7 +316,8 @@ class C_seguridad extends CI_Controller {
 
     			$template = 'templates/usuario_bloqueado.html';
 				$mensaje = file_get_contents($template);
-				$mensaje = str_replace('{{var_nombre}}', $usuario->vNombre, $mensaje);
+				$vNombre = htmlentities($usuario->vNombre, ENT_QUOTES, "UTF-8");
+				$mensaje = str_replace('{{var_nombre}}', $vNombre, $mensaje);
 				
 				$asunto = utf8_decode('Usuario bloqueado');
 				$correo_enviado = $mail->enviar_correo_gmail($usuario->vCorreo,$asunto,$mensaje);
@@ -352,7 +354,8 @@ class C_seguridad extends CI_Controller {
 
     			$template = 'templates/usuario_desbloqueado.html';
 				$mensaje = file_get_contents($template);
-				$mensaje = str_replace('{{var_nombre}}', $usuario->vNombre, $mensaje);
+				$vNombre = htmlentities($usuario->vNombre, ENT_QUOTES, "UTF-8");
+				$mensaje = str_replace('{{var_nombre}}', $vNombre, $mensaje);
 				
 				$asunto = utf8_decode('Usuario desbloqueado');
 				$correo_enviado = $mail->enviar_correo_gmail($usuario->vCorreo,$asunto,$mensaje);
@@ -384,7 +387,14 @@ class C_seguridad extends CI_Controller {
 
 				$this->ms->actualiza_registro('Usuario',$where,$datos_usuario,$con);
 
-				if($this->ms->terminar_transaccion($con)) echo 'Correo confirmado';
+				if($this->ms->terminar_transaccion($con))
+				{
+					$html = '<p>¡Correo confirmado! Redireccionando...</p>
+							<script>
+								setTimeout(function(){ window.location.href = "'.base_url().'Sitio/login" }, 3000);
+							</script>';
+					echo $html;
+				}
 				else echo 'Ha ocurrido un error';
 
 			}else echo 'No se encontró el usuario o ha sido bloquedado por un administrador';
@@ -500,6 +510,11 @@ class C_seguridad extends CI_Controller {
 	{
 		$var = rand(100000, 999999);
 		return md5($var);
+	}
+
+	public function usuario_registrado()
+	{
+		$this->load->view('usuario_registrado');
 	}
 
 }

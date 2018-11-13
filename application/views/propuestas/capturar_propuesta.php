@@ -127,21 +127,23 @@
 		            </div>
 
 		            <?php if($iEstatus > 0){ ?>
-		            <div class="row">
+		            <div class="row" id="rowestatus">
 		                <div class="col-md-6">
 		                    <div class="form-group">
 		                  		<label>Estatus de la propuesta</label>
+		                  		<input type="hidden" name="estatus_inicial" id="estatus_inicial" value="<?=$iEstatus;?>">
 		                    	<select name="iEstatus" id="iEstatus" class="form-control" onchange="MostrarMotivo()">
 		                    		<?=$op_estatus_propuestas;?>
 		                    	</select>
 		                    </div>
 		                </div>
+		                <!--
 		                <div class="col-md-6" id="motivo" style="display: none;">
 		                    <div class="form-group">
 		                    	<label>Motivo</label>
 		                    	<textarea class="form-control" name="vMotivo" id="vMmotivo" placeholder="Escriba el motivo"></textarea>
 		                    </div>
-	                    </div>
+	                    </div>-->
 		            </div>
 		        	<?php } 		        	
 		        	?>
@@ -178,7 +180,8 @@
 		            <div class="row">
 		                <div class="col-md-12">
 		                	<input type="submit" class="btn btn-success" id="guarda_propuesta" value="Guardar propuesta"/>
-		                	<!--<input type="button" class="btn btn-success" id="guarda_propuesta" value="Validar" onclick="validar();" />-->
+		                	<input type="button" class="btn btn-success" id="guarda_propuesta" value="Agregar" onclick="Agregar();" />
+		                	<input type="button" class="btn btn-success" id="guarda_propuesta" value="Quitar" onclick="Quitar();" />
 		                </div>
 		            </div>
 
@@ -228,7 +231,8 @@
 					maxlength: 200
 				},
 				tDescripcion: "required",
-				mensajecorreo: "required"
+				mensajecorreo: "required",
+				vMotivo:"required"
 
 			},
 			messages: {
@@ -246,6 +250,7 @@
 				tDescripcion: "Debe ingresar una descripción a la propuesta",
 				mensajecorreo: "Debe escribir un mensaje para los autores",
 				vUrlVideoExterno: "Inserte una URL válida",	
+				vMotivo: "Debe escribir el motivo",
 				//iIdMunicipio: "Debe seleccionar un municipio"
 
 			},
@@ -464,13 +469,16 @@
 
 	function MostrarMotivo()
 	{
-		if($("#iIdEstatus").val() == 0)
-		{
-			$("#motivo").css('display','');
+		if($("#iEstatus").val() == 0)
+		{			
+			if($("#estatus_inicial").val() != $("#iEstatus").val())
+			{
+				$("#rowestatus").append('<div class="col-md-6" id="motivo"><div class="form-group"><label>Motivo</label><textarea class="form-control" name="vMotivo" id="vMmotivo" placeholder="Escriba el motivo"></textarea></div></div>');
+			}
 		}
 		else
 		{
-			$("#motivo").css('display','none');
+			$("#motivo").remove();
 		}
 	}
 

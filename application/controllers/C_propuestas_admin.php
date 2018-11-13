@@ -334,6 +334,8 @@ class C_propuestas_admin extends CI_Controller {
 			$iIdPropuesta = $this->input->post('iIdPropuesta');
 			$iIdSector = $this->input->post('iIdSector');
 			$mensaje_administrador = $this->input->post('mensajecorreo');
+			$estatus_inicial = $this->input->post('estatus_inicial');
+			$mensaje_administrador = htmlentities($mensaje_administrador, ENT_QUOTES, "UTF-8");
 			$correo_enviado = true;
 
 			$d_propuesta = array(	'vTitulo' => $this->input->post('vTitulo'),
@@ -349,7 +351,6 @@ class C_propuestas_admin extends CI_Controller {
 			{
 				//	NUEVA PROPUESTA
 				$this->load->library('Class_mail');
-				$mail = new Class_mail();
 				$d_propuesta['dFecha'] = date('Y-m-d h:i:s');
 				$d_propuesta['vCodigo'] = '';
 				$d_propuesta['iEstatus'] = 3; //	Es 3 por que es creada por el administrador
@@ -369,22 +370,33 @@ class C_propuestas_admin extends CI_Controller {
 					foreach ($_SESSION['checks'] as $d)
 					{
 						$datos = array('iIdPropuesta' => $iIdPropuesta,'iIdPropuestaOrigen'=> $d);
-						$this->ms->inserta_registro('PropuestaOrigen',$datos,$con);
+						//	Insertamos la nueva propuesta
+						$aux = $this->ms->inserta_registro('PropuestaOrigen',$datos,$con);
+						//	Actualizamos las porpuestas que la originaron a integradas
+						$aux = $this->ms->actualiza_registro('Propuesta',array('iIdPropuesta' => $d),array('iEstatus' => 2),$con);
 
 						//Enviamos un correo a cada usuario
 						$autor = $this->mp->datos_autor($d);
+						if($autor)
+						{
+							$template = 'templates/mensaje_integracion.html';
+							$vNombre = htmlentities($autor->vNombre, ENT_QUOTES, "UTF-8");
+							$vTitulo = htmlentities($autor->vTitulo, ENT_QUOTES, "UTF-8");
+							$nuevapropuesta = htmlentities($d_propuesta['vTitulo'], ENT_QUOTES, "UTF-8");
 
-						$template = 'templates/mensaje_integracion.html';
-						$mensaje = file_get_contents($template);
-						$mensaje = str_replace('{{var_nombre}}', $autor->vNombre, $mensaje);
-						$mensaje = str_replace('{{var_propuesta_original}}', $autor->vTitulo, $mensaje);
-						$mensaje = str_replace('{{var_nueva_propuesta}}', $d_propuesta['vTitulo'], $mensaje);
-						$mensaje = str_replace('{{var_codigo}}', $vCodigo, $mensaje);
-						$mensaje = str_replace('{{var_mensaje}}', $mensaje_administrador, $mensaje);
+							$mensaje = file_get_contents($template);
+							$mensaje = str_replace('{{var_nombre}}', $vNombre, $mensaje);
+							$mensaje = str_replace('{{var_propuesta_original}}', $vTitulo, $mensaje);
+							$mensaje = str_replace('{{var_nueva_propuesta}}', $nuevapropuesta, $mensaje);
+							$mensaje = str_replace('{{var_codigo}}', $vCodigo, $mensaje);
+							$mensaje = str_replace('{{var_mensaje}}', $mensaje_administrador, $mensaje);
+							
+							$asunto = utf8_decode('Propuesta integrada');
+
+							$mail = new Class_mail();
+			    			$correo_enviado = $mail->enviar_correo_gmail($autor->vCorreo,$asunto,$mensaje);	
+						}
 						
-						$asunto = utf8_decode('Propuesta integrada');
-
-		    			$correo_enviado = $mail->enviar_correo_gmail($autor->vCorreo,$asunto,$mensaje);
 					}
 
 				}
@@ -395,7 +407,7 @@ class C_propuestas_admin extends CI_Controller {
 				{
 					if(isset($_SESSION['checks'])) unset($_SESSION['checks']);
 					if($correo_enviado)	echo "0-$iIdPropuesta"; //	Los cambios fueron gurdados
-					else echo "1-$iIdPropuesta";	//	Los cambios fueron guardados pero los correos no pudieron ser enviados
+					else echo "*";	//	Los cambios fueron guardados pero los correos no pudieron ser enviados
 				}
 				else echo 'Ha ocurrido un error';
 			}
@@ -403,7 +415,8 @@ class C_propuestas_admin extends CI_Controller {
 			{
 				//	MODIFICAR PROPUESTA
 				$d_propuesta['iEstatus'] = $this->input->post('iEstatus');
-				$motivo = $this->input->post('vMotivo');				
+				$motivo = $this->input->post('vMotivo');
+				$motivo = htmlentities($motivo, ENT_QUOTES, "UTF-8");
 
 				$con = $this->ms->iniciar_transaccion();
 				$aux = $this->ms->actualiza_registro('Propuesta',array('iIdPropuesta' => $iIdPropuesta),$d_propuesta,$con);
@@ -412,16 +425,19 @@ class C_propuestas_admin extends CI_Controller {
 				if($this->ms->terminar_transaccion($con))
 				{
 
-					if($d_propuesta['iEstatus'] == 0)
+					if($d_propuesta['iEstatus'] == 0 && $estatus_inicial != $d_propuesta['iEstatus'])
 					{
 						//	Si la propuesta no es viable, enviamos un correo al autor con el motivo
 						
 						$autor = $this->mp->datos_autor($iIdPropuesta);
-
+						$this->load->library('Class_mail');
+						$mail = new Class_mail();
 						$template = 'templates/propuesta_no_viable.html';
+						$vNombre = htmlentities($autor->vNombre, ENT_QUOTES, "UTF-8");
+						$vTitulo = htmlentities($autor->vTitulo, ENT_QUOTES, "UTF-8");
 						$mensaje = file_get_contents($template);
-						$mensaje = str_replace('{{var_nombre}}', $autor->vNombre, $mensaje);
-						$mensaje = str_replace('{{var_propuesta}}', $autor->vTitulo, $mensaje);						
+						$mensaje = str_replace('{{var_nombre}}', $vNombre, $mensaje);
+						$mensaje = str_replace('{{var_propuesta}}', $vTitulo, $mensaje);
 						$mensaje = str_replace('{{var_codigo}}', $autor->vCodigo, $mensaje);
 						$mensaje = str_replace('{{var_motivo}}', $motivo, $mensaje);
 						
@@ -429,7 +445,7 @@ class C_propuestas_admin extends CI_Controller {
 						$correo_enviado = $mail->enviar_correo_gmail($autor->vCorreo,$asunto,$mensaje);
 
 						if($correo_enviado)	echo "0-$iIdPropuesta"; //	Los cambios fueron gurdados
-						else echo "1-$iIdPropuesta";	//	Los cambios fueron guardados pero los correos no pudieron ser enviados
+						else echo "*";	//	Los cambios fueron guardados pero los correos no pudieron ser enviados
 					}
 					else echo '0';
 					
