@@ -344,7 +344,7 @@
 			$.base64.utf8encode = true;
 			var loading;
 			
-			document.getElementById('vDescripcion').value = $.base64('encode',editor.getData(),true);
+			//document.getElementById('vDescripcion').value = $.base64('encode',editor.getData(),true);
 			var nLatDec = document.getElementById('nLatDec').value;
 	        var nLongDec = document.getElementById('nLongDec').value;	        
 
@@ -366,7 +366,6 @@
 				            });
 				        },
 						success: function(data) {
-							
 							if(data > 0) {
 
 								idReturn = data;
@@ -385,6 +384,7 @@
 								//$('#formPropuesta')[0].reset();
 								//editor.setData('');
 								//loading.out();
+
 								location.href = "<?=base_url();?>Sitio/propuestas";
 							}
 						},
@@ -427,6 +427,9 @@
 
 		function js_municipio(valor) {
 			//console.log('latitud: '+lat_mun[valor]+'\n'+'longitud: '+lng_mun[valor]);			
+			document.getElementById('nLatDec').value = lat_mun[valor];
+	        document.getElementById('nLongDec').value = lng_mun[valor];
+
 			var coordenadas = {lat: parseFloat(lat_mun[valor]), lng: parseFloat(lng_mun[valor])};			
 			
 			map.setCenter(coordenadas);

@@ -307,6 +307,19 @@ class M_propuestas extends CI_Model {
 			return $query;
 		}
 	}
+
+	public function datos_correo($idcoment)
+	{
+		$this->db->select('c.vComentario,c.dFecha,p.vTitulo,p.vCodigo,u.iIdUsuario,u.vNombre,u.vApellidoPaterno,u.vApellidoMaterno,u.vCorreo');
+		$this->db->from('Comentario c');
+		$this->db->join('Propuesta p','c.iIdPropuesta = p.iIdPropuesta','INNER');
+		$this->db->join('Usuario u','c.iIdUsuario = u.iIdUsuario','INNER');
+		$this->db->where('c.iIdComentario',$idcoment);
+
+		$query = $this->db->get();
+		if($query!=false) return $query->result();
+		else return false;
+	}
 }
 
 ?>

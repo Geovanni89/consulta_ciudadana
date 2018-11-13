@@ -54,9 +54,11 @@ class C_propuestas extends CI_Controller {
 
 	public function captura_propuesta()
 	{
-
-		$vTitulo = $this->input->post('vTitulo', TRUE);
 		$descrip64 = $this->input->post('vDescripcion', TRUE);
+		
+		$vTitulo = $this->input->post('vTitulo', TRUE);
+		//$descrip64 = $this->input->post('vDescripcion', TRUE);
+		$vDescripcion = $this->input->post('vDescripcion', TRUE);
 		$iIdSector = $this->input->post('iIdSector', TRUE);
 		$iIdTema = $this->input->post('iIdTema', TRUE);
 		$vUrlVideoExterno = $this->input->post('vUrlVideoExterno', TRUE);
@@ -68,7 +70,7 @@ class C_propuestas extends CI_Controller {
 		$ambitoMed = $this->input->post('ambitoMed', TRUE);
 		$iIdUsuario = $_SESSION[PREFIJO.'_idusuario'];
 
-		$vDescripcion = base64_decode($descrip64);
+		//$vDescripcion = base64_decode($descrip64);
 		$dFecha = date("Y-m-d H:i:s");
 
 
@@ -102,7 +104,6 @@ class C_propuestas extends CI_Controller {
 		$query_prop = $model->inserta_propuesta($datos,'Propuesta',$vCodigo);
 		if($query_prop===false) echo 0;
 		else echo $query_prop;
-		
 	}
 
 	public function carga_temas()
@@ -480,9 +481,7 @@ class C_propuestas extends CI_Controller {
 
 	public function act_coment()
 	{
-		$correo = 'vg.barbosa89@gmail.com';
-		$asunto = 'Comentario eliminado';
-		$mensaje = 'Su comentario fue eliminado por contener palabras culeras';
+		
 
 		$idcoment = $this->input->post('idcoment', TRUE);
 		$op = $this->input->post('op', TRUE);
@@ -495,13 +494,31 @@ class C_propuestas extends CI_Controller {
 		$query_coment = $model->actualiza_comentario($datos,$idcoment);
 		if($query_coment!=false)
 		{
+			$model = new M_propuestas();
+			$query = $model->datos_correo($idcoment);
 			if($op==0)
 			{
+				$propuesta = $query[0]->vTitulo;
+				$nombre = $query[0]->vNombre.' '.$query[0]->vApellidoPaterno.' '.$query[0]->vApellidoMaterno;
+				//$correo = $query[0]->vCorreo;
+				$correo = 'vg.barbosa89@gmail.com';
+				$codigo = $query[0]->vCodigo;
+				$asunto = 'Comentario eliminado';
+
 				$this->load->library('Class_mail');
 				$mail = new Class_mail();
+				$template = 'templates/comentario_eliminado.html';
+				$mensaje = file_get_contents($template);
+				$mensaje = str_replace("{{var_nombre}}", $nombre, $mensaje);
+				$mensaje = str_replace("{{var_propuesta}}", $propuesta, $mensaje);
+				$mensaje = str_replace("{{var_codigo}}", $codigo, $mensaje);
 
-				if($mail->enviar_correo_gmail($correo,$asunto,$mensaje)) echo 'correcto';
-				else echo 'error1';
+
+				if($mail->enviar_correo_gmail($correo,$asunto,$mensaje)) 
+					echo 'correcto';
+				else 
+					echo 'error1';
+					
 			}
 		}
 		else echo "error2";

@@ -41,6 +41,7 @@ function modera_coment(op,idcoment) {
         }).then((result) => {           
             if (result.value) {        
                 $.post(url_sitio+funcion, {idcoment:idcoment,op:op}, function(resp){
+                	
                 	switch(resp) {
                 		case "correcto": 
                 			toastr.success('Comentario eliminado', 'Operación completa', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
