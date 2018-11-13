@@ -500,8 +500,8 @@ class C_propuestas extends CI_Controller {
 			{
 				$propuesta = $query[0]->vTitulo;
 				$nombre = $query[0]->vNombre.' '.$query[0]->vApellidoPaterno.' '.$query[0]->vApellidoMaterno;
-				//$correo = $query[0]->vCorreo;
-				$correo = 'vg.barbosa89@gmail.com';
+				$correo = $query[0]->vCorreo;
+				//$correo = 'vg.barbosa89@gmail.com';
 				$codigo = $query[0]->vCodigo;
 				$asunto = 'Comentario eliminado';
 
