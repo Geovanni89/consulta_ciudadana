@@ -143,13 +143,14 @@ class M_seguridad extends CI_Model {
 		return $query;
 	}
 
-	public function verificar_existe_correo_usuario($correo)
+	public function verificar_existe_correo_usuario($correo,$excepcion=0)
 	{
 		$this->db->select('u.iIdUsuario');
 		$this->db->from('Usuario u');
 		$this->db->join('Rol r','r.iIdRol = u.iIdRol','INNER');
 		$this->db->where('u.iEstatus >',0);	// Se excluyen usuarios eliminados
 		$this->db->where('u.vCorreo',$correo);
+		if($excepcion != 0) $this->db->where('u.iIdUsuario !=',$excepcion);
 		$response = false;
 
 		$query =  $this->db->get();
@@ -173,7 +174,7 @@ class M_seguridad extends CI_Model {
 	public function datos_usuarios($where ='')
 	{
 		$this->db->select('u.iIdUsuario, u.vNombre, u.vApellidoPaterno, u.vApellidoMaterno, u.vCorreo, u.dFechaNacimiento, u.iGenero, u.iIdGradoEstudio, u.iIdOcupacion, u.iIdAsentamiento, u.iIdRol, u.iEstatus');
-		$this->db->select('l.iIdLocalidad, l.vLocalidad, m.iIdMunicipio, m.vMunicipio, iCodigoPostal');
+		$this->db->select('l.iIdLocalidad, l.vLocalidad, m.iIdMunicipio, m.vMunicipio, iCodigoPostal, vToken');
 		$this->db->from('Usuario u');		
 		$this->db->join('Asentamiento a','a.iIdAsentamiento = u.iIdAsentamiento','INNER');
 		$this->db->join('Localidad l','l.iIdLocalidad = a.iIdLocalidad','INNER');

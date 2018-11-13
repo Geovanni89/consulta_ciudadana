@@ -87,7 +87,7 @@
 												<div class="card nobg noborder text-center">
 													<div class="card-body">
 														<img src="<?=base_url();?>img/matriz/i_competitividad.png" class="h1">
-														<p style="font-size: 14px">Competividad</p>
+														<p style="font-size: 12px">Competividad</p>
 													</div>
 												</div>
 											</div>
@@ -209,7 +209,7 @@
 													<div class="card nobg noborder text-center">
 														<div class="card-body">
 															<img src="<?=base_url();?>img/matriz/i_Empleo-y-fomento-al-emprendedurismo.png">
-															<p style="font-size: 12px;">Empleo y fomento al emprendedurismo</p>
+															<p style="font-size: 9px;">Empleo y <br>fomento al emprendedurismo</p>
 														</div>
 													</div>
 												</div>
@@ -238,7 +238,7 @@
 												<div class="card nobg noborder text-center">
 													<div class="card-body">
 														<img src="<?=base_url();?>img/matriz/i_Alimentaria.png">
-														<p>Aimentaria</p>
+														<p style="font-size: 14px;">Aimentaria</p>
 													</div>
 												</div>
 											</div>
@@ -429,7 +429,7 @@
 												<div class="card nobg noborder text-center">
 													<div class="card-body">
 														<img src="<?=base_url();?>img/matriz/i_Deporte_alto.png">
-														<p class="card-title">Deporte de alto rendimiento</p>
+														<p class="card-title" style="font-size: 14px;">Deporte de alto rendimiento</p>
 													</div>
 												</div>
 											</div>
@@ -561,7 +561,7 @@
 												<div class="card nobg noborder text-center">
 													<div class="card-body">
 														<img src="<?=base_url();?>img/matriz/i_movilidad.png">
-														<p class="card-title" style="font-size: 14px;">Movilidad sustentable y conectividad regional</p>														
+														<p class="card-title" style="font-size: 13px;">Movilidad sustentable y conectividad regional</p>														
 													</div>
 												</div>
 											</div>
@@ -641,7 +641,7 @@
 												<div class="card nobg noborder">
 													<div class="card-body">
 														<img src="<?=base_url();?>img/matriz/i_ordenamiento.png">
-														<p style="font-size: 14px;">Ordenamiento urbano y territorial</p>
+														<p style="font-size: 11px;">Ordenamiento urbano y territorial</p>
 													</div>
 												</div>
 											</div>

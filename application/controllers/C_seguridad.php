@@ -35,8 +35,6 @@ class C_seguridad extends CI_Controller {
     			'iIdAsentamiento' => $this->input->post('id_asentamiento')
     		);
 
-
-
     		if(isset($_POST['iIdUsuario']) && !empty($_POST['iIdUsuario']))
     		{
     			//	Modificación
@@ -45,10 +43,13 @@ class C_seguridad extends CI_Controller {
     			$con = $this->ms->iniciar_transaccion();
     			$where['iIdUsuario'] = $iIdUsuario;
 
-    			$id = $this->ms->actualiza_registro('Usuario',$where,$d_usuario,$con);
+    			if(!$this->ms->verificar_existe_correo_usuario($d_usuario['vCorreo'],$iIdUsuario))
+    			{
+	    			$id = $this->ms->actualiza_registro('Usuario',$where,$d_usuario,$con);
 
-    			if($this->ms->terminar_transaccion($con)) echo 0;
-    			else echo 'Ha ocurrido un error';
+	    			if($this->ms->terminar_transaccion($con)) echo 0;
+	    			else echo 'Ha ocurrido un error';
+	    		}else echo "El correo ya ha sido registrado";
 
     		}
     		else
@@ -178,6 +179,10 @@ class C_seguridad extends CI_Controller {
                                     <td>'.$dc->vCorreo.'</td>
                                     <td>'.$dc->vRol.'</td>
                                     <td width="300px" align="center">';
+                                    if($dc->iEstatus == 1)
+                                    {
+                                    	$listado .= '<i class="mdi mdi-send" style="cursor:pointer" title="Enviar correo de confirmación" onclick="ReeviarCorreo('.$dc->iIdUsuario.')"></i>&nbsp;';
+                                    }
                                     $listado .= '<i class="mdi mdi-lead-pencil" style="cursor:pointer" title="Editar" onclick="CapturarUsuario('.$dc->iIdUsuario.')"></i>&nbsp;';
                                     //$listado .= '<button type="button" class="btn waves-effect waves-light btn-outline-dark" onclick="CapturarUsuario('.$dc->iIdUsuario.');"><i class="mdi mdi-lead-pencil"  ></i>&nbsp;Editar</button>';
                                     
@@ -517,4 +522,33 @@ class C_seguridad extends CI_Controller {
 		$this->load->view('usuario_registrado');
 	}
 
+
+	public function enviar_validacion_correo()
+	{
+		if(isset($_POST['id']) && !empty($_POST['id']))
+		{
+			$iIdUsuario = $this->input->post('id');
+			// Enviar correo de confirmación
+
+			$this->load->library('Class_mail');
+			$mail = new Class_mail();
+			
+			$usuario = $this->ms->datos_usuarios(array('u.iIdUsuario' => $iIdUsuario));
+    		$usuario = $usuario->row();
+
+			$template = 'templates/confirmar_correo.html';
+			$mensaje = file_get_contents($template);
+			$nombre = htmlentities($usuario->vNombre, ENT_QUOTES, "UTF-8");
+			$correo = $usuario->vCorreo;
+			$token = $usuario->vToken;
+			$url = base_url().'C_seguridad/confirmar_correo?id='.$iIdUsuario.'&token='.$token;
+			$mensaje = str_replace('{{var_nombre_dest}}', $nombre, $mensaje);
+			$mensaje = str_replace('{{var_url}}', $url, $mensaje);
+			
+			$asunto = utf8_decode('Confirmación de correo');
+
+			if($mail->enviar_correo_gmail($correo,$asunto,$mensaje)) echo '0';		    			
+			else echo 'No se ha podido enviar el correo';	
+		}
+	}
 }
