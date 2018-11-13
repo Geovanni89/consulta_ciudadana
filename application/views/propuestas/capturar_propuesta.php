@@ -98,13 +98,8 @@
 		                <div class="col-md-12">
 		                    <div class="form-group">
 		                    	<label>ÁMBITO DE ACTUACIÓN</label><br>
-		                    	<div class="form-check form-check-inline">
-		                            <div class="custom-control custom-checkbox">
-		                                <input type="checkbox" class="custom-control-input" id="ambitoMed" name="ambitoMed" <?php if($iIdMunicipio == 0 ) echo 'checked'; ?>>
-		                                <label class="custom-control-label" for="customCheck1" style="font-size:12px;">ESTA PROPUESTA NO TIENE UNA UBICACIÓN CONCRETA O NO LA CONOZCO</label>
-		                            </div>
-		                        </div>
-		                        
+                    	        <input type="checkbox"  id="ambitoMed" name="ambitoMed" <?php if($iIdMunicipio == 0 ){ echo 'checked="checked"'; }?>>
+                                <label class="" for="customCheck1" style="font-size:12px;">ESTA PROPUESTA NO TIENE UNA UBICACIÓN CONCRETA O NO LA CONOZCO</label>
 		                    </div>
 		                </div>
 		            </div>
@@ -113,7 +108,7 @@
 		                <div class="col-md-12">
 		                    <div class="form-group">
 		                    	<small>Seleccione el municipio y coloque un punto.</small>
-		                    	<select name="iIdMunicipio" id="iIdMunicipio" class="form-control">
+		                    	<select name="iIdMunicipio" id="iIdMunicipio" class="form-control" onchange="js_municipio(this.value);">
 		                    		<?=$op_municipios;?>
 		                    	</select>
 		                    </div>
@@ -183,7 +178,7 @@
 		            <div class="row">
 		                <div class="col-md-12">
 		                	<input type="submit" class="btn btn-success" id="guarda_propuesta" value="Guardar propuesta"/>
-		                	<input type="button" class="btn btn-success" id="guarda_propuesta" value="Validar" onclick="validar();" />
+		                	<!--<input type="button" class="btn btn-success" id="guarda_propuesta" value="Validar" onclick="validar();" />-->
 		                </div>
 		            </div>
 
@@ -199,17 +194,21 @@
 <!-- Codificación base 64 Plugin -->
 <script type="text/javascript" src='<?=base_url();?>js/jquery.base64.js'></script>
 <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnOBLYrneZlLUF5_bhWzGnwc6I7s01qEs&callback=initMap" async defer></script>-->
+<!-- Datos de cabeceras municipales -->
+<script src="<?=base_url();?>js/municipios.js"></script>
 <script type="text/javascript">
 	var idReturn = 0;
 	var numfotos = 0;
 	var numdocs = 0;
 	var numdocsprev = <?=$numdocsprev;?>;
 	var numimgsprev = <?=$numimgsprev;?>;
-	var map;		
 	var image = '<?=base_url();?>img/logo_vertical_2.png';
 	var editor;
 	var docelim = [];
 	var fotoselim = [];
+	var map;
+	var marker;	
+	var image = '<?=base_url();?>img/logo_vertical_2.png';
 
 	$(document).ready(function(){
 		CKEDITOR.replace( 'tDescripcion' );
@@ -331,10 +330,10 @@
     	//console.log(longitud);
     	map = new google.maps.Map(document.getElementById('map'), {
         	center: { lat: latitud, lng: longitud },
-          	zoom: 8
+          	zoom: 11
         });
 
-        var marker = new google.maps.Marker({
+        marker = new google.maps.Marker({
           position: { lat: latitud, lng: longitud },
           map: map,
           icon: image
@@ -479,6 +478,17 @@
 	{
 		console.log( $('#adjuntoFotos').fileinput('getFilesCount'));
 		//$('#adjuntoFotos').fileinput('upload');
+	}
+
+	function js_municipio(valor) {
+		//var coordenadas = {lat: parseFloat(lat_mun[valor]), lng: parseFloat(lng_mun[valor])};	
+		var coordenadas = new google.maps.LatLng(lat_mun[valor],lng_mun[valor]);
+		document.getElementById('nLatDec').value = lat_mun[valor];
+        document.getElementById('nLongDec').value = lng_mun[valor];		
+		
+		map.setCenter(coordenadas);
+		marker.setPosition(coordenadas);
+		map.setZoom(11);
 	}
 </script>
 </html>

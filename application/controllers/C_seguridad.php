@@ -307,7 +307,21 @@ class C_seguridad extends CI_Controller {
 
     		if($this->ms->terminar_transaccion($con))
     		{
-    			echo 0;
+    			//	Enviamos correo de notificación
+    			$this->load->library('Class_mail');
+    			$mail = new Class_mail();
+    			$usuario = $this->ms->datos_usuarios(array('u.iIdUsuario' => $where['iIdUsuario']));
+    			$usuario = $usuario->row();
+
+    			$template = 'templates/usuario_bloqueado.html';
+				$mensaje = file_get_contents($template);
+				$mensaje = str_replace('{{var_nombre}}', $usuario->vNombre, $mensaje);
+				
+				$asunto = utf8_decode('Usuario bloqueado');
+				$correo_enviado = $mail->enviar_correo_gmail($usuario->vCorreo,$asunto,$mensaje);
+
+				if($correo_enviado)	echo "0"; //	Los cambios fueron gurdados
+				else echo "1";	//	Los cambios fueron guardados pero los correos no pudieron ser enviados
     		}
     		else
     		{
@@ -330,7 +344,21 @@ class C_seguridad extends CI_Controller {
 
     		if($this->ms->terminar_transaccion($con))
     		{
-    			echo 0;
+    			//	Enviamos correo de notificación
+    			$this->load->library('Class_mail');
+    			$mail = new Class_mail();
+    			$usuario = $this->ms->datos_usuarios(array('u.iIdUsuario' => $where['iIdUsuario']));
+    			$usuario = $usuario->row();
+
+    			$template = 'templates/usuario_desbloqueado.html';
+				$mensaje = file_get_contents($template);
+				$mensaje = str_replace('{{var_nombre}}', $usuario->vNombre, $mensaje);
+				
+				$asunto = utf8_decode('Usuario desbloqueado');
+				$correo_enviado = $mail->enviar_correo_gmail($usuario->vCorreo,$asunto,$mensaje);
+
+				if($correo_enviado)	echo "0"; //	Los cambios fueron gurdados
+				else echo "1";	//	Los cambios fueron guardados pero los correos no pudieron ser enviados
     		}
     		else
     		{

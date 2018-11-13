@@ -94,23 +94,50 @@
     function Bloquear(id)
     {
         Swal({
-          title: 'Bloquear usuario',
-          text: '¿Realmente desea Bloquear a este usuario?',
-          type: 'question',
-          showCancelButton: true,
-          confirmButtonText: 'Confirmar',
-          cancelButtonText: 'Cancelar'
-        }).then((result) => {           
-            if (result.value) {           
-                $.post("<?=base_url();?>C_seguridad/bloquear_usuario",{id:id},function(resultado,status){
-                    if(resultado == "0"){                       
-                        Notificacion('Usuario bloqueado','success');
-                        Buscar(1);
-                    }
-                    else Notificacion(resultado,'error');                   
-                });
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-            
+              title: 'Bloquear usuario',
+              text: '¿Realmente desea Bloquear a este usuario?',
+              type: 'question',
+              showCancelButton: true,
+              confirmButtonText: 'Confirmar',
+              cancelButtonText: 'Cancelar'
+            }).then((result) => {           
+                if (result.value) {
+                    var loading;
+                    $.ajax({
+                        url: '<?=base_url();?>C_seguridad/bloquear_usuario',
+                        type: 'POST',
+                        data: 'id='+id,
+                        error: function(XMLHttpRequest, errMsg, exception){
+                            var msg = "Ha fallado la petición al servidor";
+                            loading.out();
+                            alert(msg);
+                        },
+                         beforeSend: function(){
+                           loading = new Loading({
+                                discription: 'Espere...',
+                                defaultApply: true
+                            });
+                        },
+                        success: function(htmlcode){
+                            loading.out();
+                            var cod = htmlcode.split("-");
+                            switch(cod[0])
+                            {
+                                case "0":
+                                    Notificacion('Usuario bloqueado','success');    
+                                    Buscar(1);
+                                    break;
+                                case "1":
+                                    Notificacion('El usuario ha sido bloqueado, pero no se ha podido enviar correo','warning');    
+                                    Buscar(1);
+                                    break;
+                                default:
+                                    Notificacion(resultado,'error');
+                                    break;
+                            }
+                        }
+                    });
+                }else if (result.dismiss === Swal.DismissReason.cancel) {
             }
         });
     }
@@ -126,12 +153,40 @@
           cancelButtonText: 'Cancelar'
         }).then((result) => {           
             if (result.value) {           
-                $.post("<?=base_url();?>C_seguridad/desbloquear_usuario",{id:id},function(resultado,status){
-                    if(resultado == "0"){                       
-                        Notificacion('Usuario desbloqueado','success');
-                        Buscar(1);
+                var loading;
+                $.ajax({
+                    url: '<?=base_url();?>C_seguridad/desbloquear_usuario',
+                    type: 'POST',
+                    data: 'id='+id,
+                    error: function(XMLHttpRequest, errMsg, exception){
+                        var msg = "Ha fallado la petición al servidor";
+                        loading.out();
+                        alert(msg);
+                    },
+                     beforeSend: function(){
+                       loading = new Loading({
+                            discription: 'Espere...',
+                            defaultApply: true
+                        });
+                    },
+                    success: function(htmlcode){
+                        loading.out();
+                        var cod = htmlcode.split("-");
+                        switch(cod[0])
+                        {
+                            case "0":
+                                Notificacion('Usuario desbloqueado','success');    
+                                Buscar(1);
+                                break;
+                            case "1":
+                                Notificacion('El usuario ha sido desbloqueado, pero no se ha podido enviar correo','warning');    
+                                Buscar(1);
+                                break;
+                            default:
+                                Notificacion(resultado,'error');
+                                break;
+                        }
                     }
-                    else Notificacion(resultado,'error');                   
                 });
             } else if (result.dismiss === Swal.DismissReason.cancel) {
             
