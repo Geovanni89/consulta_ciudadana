@@ -40,6 +40,7 @@ class C_propuestas extends CI_Controller {
 			$datos['vApellidoPaterno'] = $query_prop[0]->vApellidoPaterno;
 			$datos['vApellidoMaterno'] = $query_prop[0]->vApellidoMaterno;
 			$datos['dFecha'] = $query_prop[0]->dFecha;
+			$datos['video'] = $query_prop[0]->vUrlVideoExterno;
 			$datos['img'] = $model->carga_adjuntos($iIdPropuesta,1);
 			$datos['pdf'] = $model->carga_adjuntos($iIdPropuesta,2);
 			$datos['apoyo'] = $query_existe;
@@ -500,8 +501,8 @@ class C_propuestas extends CI_Controller {
 			{
 				$propuesta = $query[0]->vTitulo;
 				$nombre = $query[0]->vNombre.' '.$query[0]->vApellidoPaterno.' '.$query[0]->vApellidoMaterno;
-				//$correo = $query[0]->vCorreo;
-				$correo = 'vg.barbosa89@gmail.com';
+				$correo = $query[0]->vCorreo;
+				//$correo = 'vg.barbosa89@gmail.com';
 				$codigo = $query[0]->vCodigo;
 				$asunto = 'Comentario eliminado';
 

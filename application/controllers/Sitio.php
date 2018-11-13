@@ -64,6 +64,7 @@ class Sitio extends CI_Controller {
 
 		$datos['active'] = 1;
 		$datos['prop_index'] = $prop->prop_index();
+		$datos['numeralia'] = $prop->num_index();
 		/*if(isset($_SESSION[PREFIJO.'_idrol']) && !empty($_SESSION[PREFIJO.'_idrol']))
 		{
 			$idrol = (int)$_SESSION[PREFIJO.'_idrol'];

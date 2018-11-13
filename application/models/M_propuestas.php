@@ -93,7 +93,7 @@ class M_propuestas extends CI_Model {
 	public function carga_propuestas($iIdPropuesta=0,$pagina=0,$lim=0)
 	{
 		$lim_inf = 5;
-		$this->db->select('p.iIdPropuesta,p.vTitulo,p.tDescripcion,p.nLatDec,p.nLongDec,p.dFecha,u.iIdUsuario,u.vNombre,u.vApellidoPaterno,u.vApellidoMaterno,p.vCodigo');
+		$this->db->select('p.iIdPropuesta,p.vTitulo,p.tDescripcion,p.nLatDec,p.nLongDec,p.dFecha,u.iIdUsuario,u.vNombre,u.vApellidoPaterno,u.vApellidoMaterno,p.vCodigo,p.vUrlVideoExterno');
 		$this->db->from('Propuesta p');
 		$this->db->join('Usuario u','p.iIdUsuario = u.iIdUsuario','INNER');
 		$this->db->where('p.iEstatus',3);
@@ -320,6 +320,53 @@ class M_propuestas extends CI_Model {
 		if($query!=false) return $query->result();
 		else return false;
 	}
+
+	//-----------------------------------funcion para la numeralia del index
+
+	public function total_part()
+	{
+		$this->db->select('iIdUsuario');
+		$this->db->from('Usuario');
+		$this->db->where('iIdRol',2);
+		$query = $this->db->get();
+
+		if($query!=false) return $query->num_rows();
+		else return false;
+	}
+
+	public function total_prop()
+	{
+		$this->db->select('iIdPropuesta');
+		$this->db->from('Propuesta');
+		$this->db->where('iEstatus<',2);
+		$query = $this->db->get();
+
+		if($query!=false) return $query->num_rows();
+		else return false;
+	}
+
+	public function total_acep()
+	{
+		$this->db->select('iIdPropuesta');
+		$this->db->from('Propuesta');
+		$this->db->where('iEstatus',2);
+		$query = $this->db->get();
+
+		if($query!=false) return $query->num_rows();
+		else return false;
+	}
+
+	public function total_vot($iIdPropuesta=0)
+	{
+		$this->db->select('iIdPropuesta,iIdUsuario');
+		$this->db->from('VotoPropuesta');
+		if($iIdPropuesta>0) $this->db->where('iIdPropuesta',$iIdPropuesta);
+		$query = $this->db->get();
+
+		if($query!=false) return $query->num_rows();
+		else return false;
+	}
+
 }
 
 ?>
