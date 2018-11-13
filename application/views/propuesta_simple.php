@@ -143,7 +143,7 @@
 													<li><a href="#tab-mapa"><i class="icon-map norightmargin"></i> Mapa</a></li>
 													<li><a href="#tabs-doc"><i class="icon-files norightmargin"></i> Documentación
 													</a></li>
-													<li><a href="#tab-video"><i class="icon-files norightmargin">Video</i></a></li>
+													<li><a href="#tab-video"><i class="icon-line-video norightmargin"> Video</i></a></li>
 												</ul>
 
 												<div class="tab-container">

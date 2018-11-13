@@ -40,7 +40,7 @@ class Class_propuestas {
                                 <ul class="entry-meta clearfix">
                                     <li><a href="javascript:"><i class="icon-comments"></i> '.$total_coment.' '.$text_coment.' </a></li>
                                     <li><i class="icon-calendar3"></i> '.date_format($fecha,'d/m/Y').'</li>
-                                    <li><a href="javascript:"><i class="icon-line-square-check"></i> '.$total_vot.'</a></li>
+                                    <li><a href="javascript:"><i class="icon-checkbox-checked"></i> '.$total_vot.'</a></li>
                                     <li><a href="javascript:"><i class="icon-user"></i> '.$vprop->vNombre.' '.$vprop->vApellidoPaterno.' '.$vprop->vApellidoMaterno.'</a></li>
                                 </ul>
                                 <div class="entry-content">'.substr(strip_tags($vprop->tDescripcion,'<p>'),0,100).'<br>';
@@ -89,7 +89,7 @@ class Class_propuestas {
                             <ul class="entry-meta clearfix">
                                 <li><a href="javascript:"><i class="icon-comments"></i> '.$total_coment.' '.$text_coment.' </a></li>
                                 <li>'.date_format($fecha,'d/m/Y').'</li>
-                                <li><a href="javascript:"><i class="icon-line-square-check"></i> '.$total_vot.'</a></li>
+                                <li><a href="javascript:"><i class="icon-checkbox-checked"></i> '.$total_vot.'</a></li>
                                 <li><a href="javascript:"><i class="icon-user"></i> '.$vprop->vNombre.' '.$vprop->vApellidoPaterno.' '.$vprop->vApellidoMaterno.'</a></li>
                             </ul>
                             <div class="team-content">'.substr(strip_tags($vprop->tDescripcion,'<p>'),0,100).'</div>
