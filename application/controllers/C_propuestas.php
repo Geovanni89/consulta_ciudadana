@@ -40,6 +40,7 @@ class C_propuestas extends CI_Controller {
 			$datos['vApellidoPaterno'] = $query_prop[0]->vApellidoPaterno;
 			$datos['vApellidoMaterno'] = $query_prop[0]->vApellidoMaterno;
 			$datos['dFecha'] = $query_prop[0]->dFecha;
+			$datos['video'] = $query_prop[0]->vUrlVideoExterno;
 			$datos['img'] = $model->carga_adjuntos($iIdPropuesta,1);
 			$datos['pdf'] = $model->carga_adjuntos($iIdPropuesta,2);
 			$datos['apoyo'] = $query_existe;

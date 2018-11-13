@@ -93,7 +93,7 @@ class M_propuestas extends CI_Model {
 	public function carga_propuestas($iIdPropuesta=0,$pagina=0,$lim=0)
 	{
 		$lim_inf = 5;
-		$this->db->select('p.iIdPropuesta,p.vTitulo,p.tDescripcion,p.nLatDec,p.nLongDec,p.dFecha,u.iIdUsuario,u.vNombre,u.vApellidoPaterno,u.vApellidoMaterno,p.vCodigo');
+		$this->db->select('p.iIdPropuesta,p.vTitulo,p.tDescripcion,p.nLatDec,p.nLongDec,p.dFecha,u.iIdUsuario,u.vNombre,u.vApellidoPaterno,u.vApellidoMaterno,p.vCodigo,p.vUrlVideoExterno');
 		$this->db->from('Propuesta p');
 		$this->db->join('Usuario u','p.iIdUsuario = u.iIdUsuario','INNER');
 		$this->db->where('p.iEstatus',3);

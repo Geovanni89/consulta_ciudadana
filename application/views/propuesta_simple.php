@@ -140,7 +140,9 @@
 
 												<ul class="tab-nav clearfix">
 													<li><a href="#tab-mapa"><i class="icon-map norightmargin"></i> Mapa</a></li>
-													<li><a href="#tabs-2"><i class="icon-files norightmargin"></i> Documentación</a></li>
+													<li><a href="#tabs-doc"><i class="icon-files norightmargin"></i> Documentación
+													</a></li>
+													<li><a href="#tab-video"><i class="icon-files norightmargin">Video</i></a></li>
 												</ul>
 
 												<div class="tab-container">
@@ -148,7 +150,7 @@
 													<div class="tab-content clearfix" id="tab-mapa">
 														<div id="map"></div>
 													</div>
-													<div class="tab-content clearfix" id="tabs-2">
+													<div class="tab-content clearfix" id="tabs-doc">
 														<div id="recent-post-list-sidebar">
 															<?php 
 																if($pdf!=false) 
@@ -176,6 +178,17 @@
 															
 
 														</div>
+													</div>
+													<div class="tab-content clearfix" id="tab-video">
+														<?php
+														if(strpos($video, 'youtube')!==false)
+														{
+															$idVideo = explode("=", $video);
+														    echo '<iframe width="560" height="315" src="https://www.youtube.com/embed/'.$idVideo[1].'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+														}
+														else
+														    echo "La propuesta no cuenta con video";
+														?>
 													</div>
 												</div>
 
