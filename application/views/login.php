@@ -58,7 +58,7 @@
 
 									<div class="col_full" id="#divcorreo">
 										<label for="login-form-username">Correo electrónico:</label>
-										<input type="text" id="correo" name="correo" value="" class="form-control" autocomplete="off" />
+										<input type="text" id="correo" name="correo" value="" class="form-control" autocomplete="off" autofocus />
 									</div>
 
 									<div class="col_full">
@@ -68,7 +68,7 @@
 
 									<div class="col_full nobottommargin">
 										<button class="button button-3d button-black nomargin" id="login-form-submit" name="login-form-submit" value="login">Iniciar sesión</button>
-										<a href="<?=base_url();?>C_seguridad/recuperar_contrasenia" class="fright">¿Olvidó su contraseña?</a>
+										<a href="<?=base_url();?>C_seguridad/recuperar_contrasenia" class="fright"><b>¿Olvidó su contraseña?</b></a>
 									</div>
 
 								</form>

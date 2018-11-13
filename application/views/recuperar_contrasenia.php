@@ -62,7 +62,7 @@
 
 									<div class="col_full" id="#divcorreo">
 										<label for="login-form-username">Correo electrónico:</label>
-										<input type="text" id="correo" name="correo" value="" class="form-control" autocomplete="off" />
+										<input type="text" id="correo" name="correo" value="" class="form-control" autocomplete="off" autofocus />
 									</div>
 									
 

@@ -71,7 +71,7 @@
 
 							<div class="col_one_third">
 								<label for="register-form-name">Nombre:</label>
-								<input type="text" id="nombre" name="nombre" value="" class="form-control" maxlength="100" />
+								<input type="text" id="nombre" name="nombre" value="" class="form-control" maxlength="100" autofocus />
 							</div>
 
 							<div class="col_one_third">
@@ -533,7 +533,8 @@
 		        	switch(cod[0])
 		            {
 		                case "0":
-		                    Notificacion('Un correo ha sido enviado para confirmar su cuenta','success');
+		                    //Notificacion('Un correo ha sido enviado para confirmar su cuenta','success');
+		                    window.location.href = '<?=base_url();?>C_seguridad/usuario_registrado';
 		                    break;		                
 		                default:
 		                    Notificacion(htmlcode,'error');
