@@ -73,7 +73,7 @@
 
 					<div class="container clearfix">
 
-						<div class="heading-block center">
+						<div class="heading-block center">							
 							<h2><span>BIENVENIDOS AL SITIO DE <br> PARTICIPACIÓN CIUDADANA</span></h2>
 							<span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy 
 							nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, 
@@ -84,7 +84,7 @@
 
 					</div>
 
-					<div class="section dark parallax nobottommargin" style="padding: 80px 0;background-image: url('<?=base_url();?>public/images/indicadores_participacion.jpg');" data-bottom-top="background-position:0px 100px;" data-top-bottom="background-position:0px -300px;">
+					<div class="section dark parallax nobottommargin" style="padding: 80px 0;background-image: url('<?=base_url();?>public/images/indicadores_participacion.jpg'); background-size: 100% 100%;" data-bottom-top="background-position:0px 100px;" data-top-bottom="background-position:0px -300px;">
 
 						<div class="container clearfix">
 

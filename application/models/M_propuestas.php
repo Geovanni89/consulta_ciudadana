@@ -349,7 +349,7 @@ class M_propuestas extends CI_Model {
 	{
 		$this->db->select('iIdPropuesta');
 		$this->db->from('Propuesta');
-		$this->db->where('iEstatus',2);
+		$this->db->where('iEstatus',3);
 		$query = $this->db->get();
 
 		if($query!=false) return $query->num_rows();
