@@ -54,9 +54,11 @@ class C_propuestas extends CI_Controller {
 
 	public function captura_propuesta()
 	{
-
-		$vTitulo = $this->input->post('vTitulo', TRUE);
 		$descrip64 = $this->input->post('vDescripcion', TRUE);
+		
+		$vTitulo = $this->input->post('vTitulo', TRUE);
+		//$descrip64 = $this->input->post('vDescripcion', TRUE);
+		$vDescripcion = $this->input->post('vDescripcion', TRUE);
 		$iIdSector = $this->input->post('iIdSector', TRUE);
 		$iIdTema = $this->input->post('iIdTema', TRUE);
 		$vUrlVideoExterno = $this->input->post('vUrlVideoExterno', TRUE);
@@ -68,7 +70,7 @@ class C_propuestas extends CI_Controller {
 		$ambitoMed = $this->input->post('ambitoMed', TRUE);
 		$iIdUsuario = $_SESSION[PREFIJO.'_idusuario'];
 
-		$vDescripcion = base64_decode($descrip64);
+		//$vDescripcion = base64_decode($descrip64);
 		$dFecha = date("Y-m-d H:i:s");
 
 
@@ -102,7 +104,6 @@ class C_propuestas extends CI_Controller {
 		$query_prop = $model->inserta_propuesta($datos,'Propuesta',$vCodigo);
 		if($query_prop===false) echo 0;
 		else echo $query_prop;
-		
 	}
 
 	public function carga_temas()

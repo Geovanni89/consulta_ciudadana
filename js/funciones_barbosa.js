@@ -41,8 +41,8 @@ function modera_coment(op,idcoment) {
         }).then((result) => {           
             if (result.value) {        
                 $.post(url_sitio+funcion, {idcoment:idcoment,op:op}, function(resp){
-                	console.log(resp);
-                	/*switch(resp) {
+                	
+                	switch(resp) {
                 		case "correcto": 
                 			toastr.success('Comentario eliminado', 'Operación completa', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
                 			break;
@@ -54,7 +54,7 @@ function modera_coment(op,idcoment) {
 	                		break;
                 	}
 					//toastr.success('Comentario eliminado', 'Operación completa', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
-					carga_comentarios();*/
+					carga_comentarios();
 				});	
             } else if (result.dismiss === Swal.DismissReason.cancel) {
             
