@@ -23,6 +23,10 @@ class Class_propuestas {
                 $query_img = $model->carga_adjuntos($vprop->iIdPropuesta,1);
                 $total_coment = $model->total_comentarios($vprop->iIdPropuesta);
                 $text_coment = ($total_coment>1)? "Comentarios":"Comentario";
+
+                //carga el total de votaciones de la propuesta
+                $total_vot = $model->total_vot($vprop->iIdPropuesta);
+
                 if(isset($query_img[0])) $urlImg = $query_img[0]->vRutaAdjunto;
                 else $urlImg = "public/images/blog/standard/17.jpg";
 
@@ -36,6 +40,7 @@ class Class_propuestas {
                                 <ul class="entry-meta clearfix">
                                     <li><a href="javascript:"><i class="icon-comments"></i> '.$total_coment.' '.$text_coment.' </a></li>
                                     <li><i class="icon-calendar3"></i> '.date_format($fecha,'d/m/Y').'</li>
+                                    <li><a href="javascript:"><i class="icon-line-square-check"></i> '.$total_vot.'</a></li>
                                     <li><a href="javascript:"><i class="icon-user"></i> '.$vprop->vNombre.' '.$vprop->vApellidoPaterno.' '.$vprop->vApellidoMaterno.'</a></li>
                                 </ul>
                                 <div class="entry-content">'.$vprop->tDescripcion.'<br>';
@@ -63,6 +68,14 @@ class Class_propuestas {
             foreach ($query_prop as $vprop) {
                 $fecha = new DateTime($vprop->dFecha);
                 $query_img = $model->carga_adjuntos($vprop->iIdPropuesta,1);
+                //carga el total de comentarios
+                $total_coment = $model->total_comentarios($vprop->iIdPropuesta);
+                $text_coment = ($total_coment!=1)? "Comentarios":"Comentario";
+
+                //carga el total de votaciones de la propuesta
+                $total_vot = $model->total_vot($vprop->iIdPropuesta);
+
+                //carga la imagen de la propuesta
                 if(isset($query_img[0])) $urlImg = $query_img[0]->vRutaAdjunto;
                 else $urlImg = "public/images/team/3.jpg";
 
@@ -74,9 +87,10 @@ class Class_propuestas {
                         <div class="team-desc">
                             <div class="team-title"><h4></h4><span>'.$vprop->vTitulo.'</span></div>
                             <ul class="entry-meta clearfix">
-                                <li><a href="#"><i class="icon-comments"></i> 2 Comentarios</a></li>
+                                <li><a href="javascript:"><i class="icon-comments"></i> '.$total_coment.' '.$text_coment.' </a></li>
                                 <li>'.date_format($fecha,'d/m/Y').'</li>
-                                <li><a href="#"><i class="icon-user"></i> '.$vprop->vNombre.' '.$vprop->vApellidoPaterno.' '.$vprop->vApellidoMaterno.'</a></li>
+                                <li><a href="javascript:"><i class="icon-line-square-check"></i> '.$total_vot.'</a></li>
+                                <li><a href="javascript:"><i class="icon-user"></i> '.$vprop->vNombre.' '.$vprop->vApellidoPaterno.' '.$vprop->vApellidoMaterno.'</a></li>
                             </ul>
                             <div class="team-content">'.$vprop->tDescripcion.'</div>
                             <br><a target="_blank" href="'.base_url().'C_propuestas/propuesta_sim?id='.$vprop->iIdPropuesta.'" class="btn btn-success">Consultar</a>                                      
@@ -87,6 +101,17 @@ class Class_propuestas {
         }        
 
         return $propuestas;
+    }
+
+    function num_index()
+    {
+        $model = new M_propuestas();
+        $total['tot_part'] = $model->total_part();
+        $total['tot_prop'] = $model->total_prop();
+        $total['tot_acep'] = $model->total_acep();
+        $total['tot_vot'] = $model->total_vot();
+
+        return $total;
     }
 
     function total_propuestas()

@@ -84,31 +84,31 @@
 
 					</div>
 
-					<div class="section dark parallax nobottommargin" style="padding: 80px 0;background-image: url('<?=base_url();?>public/images/parallax/1.jpg');" data-bottom-top="background-position:0px 100px;" data-top-bottom="background-position:0px -300px;">
+					<div class="section dark parallax nobottommargin" style="padding: 80px 0;background-image: url('<?=base_url();?>public/images/indicadores_participacion.jpg');" data-bottom-top="background-position:0px 100px;" data-top-bottom="background-position:0px -300px;">
 
 						<div class="container clearfix">
 
 							<div class="col_one_fourth nobottommargin center" data-animate="bounceIn">
-								<i class="i-plain i-xlarge divcenter nobottommargin icon-code"></i>
-								<div class="counter counter-lined"><span data-from="100" data-to="200" data-refresh-interval="50" data-speed="2000"></span>K+</div>
+								<img src="<?=base_url();?>public/images/i_participantes.png">
+								<div class="counter counter-lined"><span data-from="100" data-to="<?php echo $numeralia['tot_part']; ?>" data-refresh-interval="50" data-speed="2000"></span></div>
 								<h5>Participantes</h5>
 							</div>
 
 							<div class="col_one_fourth nobottommargin center" data-animate="bounceIn" data-delay="200">
-								<i class="i-plain i-xlarge divcenter nobottommargin icon-magic"></i>
-								<div class="counter counter-lined"><span data-from="3000" data-to="250" data-refresh-interval="100" data-speed="2500"></span>+</div>
-								<h5>Propuestas</h5>
+								<img src="<?=base_url();?>public/images/i_propuestas.png">
+								<div class="counter counter-lined"><span data-from="3000" data-to="<?php echo $numeralia['tot_prop']; ?>" data-refresh-interval="100" data-speed="2500"></span></div>
+								<h5>Propuestas recibidas</h5>
 							</div>
 
 							<div class="col_one_fourth nobottommargin center" data-animate="bounceIn" data-delay="400">
-								<i class="i-plain i-xlarge divcenter nobottommargin icon-file-text"></i>
-								<div class="counter counter-lined"><span data-from="10" data-to="300" data-refresh-interval="25" data-speed="3500"></span>*</div>
+								<img src="<?=base_url();?>public/images/i_propuestas_aceptadas.png">
+								<div class="counter counter-lined"><span data-from="10" data-to="<?php echo $numeralia['tot_acep']; ?>" data-refresh-interval="25" data-speed="3500"></span></div>
 								<h5>Propuestas aceptadas</h5>
 							</div>
 
 							<div class="col_one_fourth nobottommargin center col_last" data-animate="bounceIn" data-delay="600">
-								<i class="i-plain i-xlarge divcenter nobottommargin icon-time"></i>
-								<div class="counter counter-lined"><span data-from="60" data-to="350" data-refresh-interval="30" data-speed="2700"></span>+</div>
+								<img src="<?=base_url();?>public/images/i_votaciones.png">
+								<div class="counter counter-lined"><span data-from="60" data-to="<?php echo $numeralia['tot_vot']; ?>" data-refresh-interval="30" data-speed="2700"></span></div>
 								<h5>Votaciones</h5>
 							</div>
 
@@ -119,7 +119,6 @@
 				</section>
 
 				<section id="section-team" class="page-section topmargin-lg">
-
 					<div class="heading-block center">
 						<h2><span>Propuestas</span></h2>
 						<span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</span>
