@@ -53,7 +53,6 @@
 						<div class="card nobottommargin">
 							<div class="card-body" style="padding: 40px;">
 								<form id="login-form" name="login-form" class="nobottommargin" method="post" action="" onsubmit="">
-
 									<h3>Ingrese a su cuenta</h3>
 
 									<div class="col_full" id="#divcorreo">
@@ -68,7 +67,8 @@
 
 									<div class="col_full nobottommargin">
 										<button class="button button-3d button-black nomargin" id="login-form-submit" name="login-form-submit" value="login">Iniciar sesión</button>
-										<a href="<?=base_url();?>C_seguridad/recuperar_contrasenia" class="fright"><b>¿Olvidó su contraseña?</b></a>
+										<a href="<?=base_url();?>C_seguridad/recuperar_contrasenia" class="fright"><b>¿Olvidó su contraseña?</b></a><br>
+										<a href="<?=base_url();?>Sitio/registrarse" class="fright"><b>Regístrese</b></a>
 									</div>
 
 								</form>
@@ -172,7 +172,13 @@
 		            {
 		                case "0":
 		                    Notificacion('Autentificado','success');
-		                    window.location.href = '<?=base_url();?>';
+		                    var url = '<?=base_url();?>';
+		                    if(document.referrer)
+		                    {
+		                    	if(document.referrer != '<?=base_url();?>Sitio/registrarse') url = document.referrer;
+		                    }
+
+		                    window.location.href = url;
 		                    break;                    
 		                default:
 		                    Notificacion(msg[cod[0]],'error');
