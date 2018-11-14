@@ -51,7 +51,7 @@ class C_propuestas_admin extends CI_Controller {
 
 			if($paginador['total_registros'] > 0)
 			{ 
-				$listado .= '
+				$listado .= '<p>Puede integrar propuestas, seleccionado otras que se encuentren en estatus "Pendiente de revisión" y haciendo clic en "Crear propuesta"</p>
                <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>

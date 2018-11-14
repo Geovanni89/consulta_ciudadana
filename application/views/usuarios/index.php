@@ -194,6 +194,54 @@
         });
     }
 
+    function ReeviarCorreo(id)
+    {
+        Swal({
+          title: 'Enviar correo de validación',
+          text: '¿Desea reenviar el correo de validación a este usuario?',
+          type: 'question',
+          showCancelButton: true,
+          confirmButtonText: 'Confirmar',
+          cancelButtonText: 'Cancelar'
+        }).then((result) => {           
+            if (result.value) {           
+                var loading;
+                $.ajax({
+                    url: '<?=base_url();?>C_seguridad/enviar_validacion_correo',
+                    type: 'POST',
+                    data: 'id='+id,
+                    error: function(XMLHttpRequest, errMsg, exception){
+                        var msg = "Ha fallado la petición al servidor";
+                        loading.out();
+                        alert(msg);
+                    },
+                     beforeSend: function(){
+                       loading = new Loading({
+                            discription: 'Espere...',
+                            defaultApply: true
+                        });
+                    },
+                    success: function(htmlcode){
+                        loading.out();
+                        var cod = htmlcode.split("-");
+                        switch(cod[0])
+                        {
+                            case "0":
+                                Notificacion('Correo enviado','success');    
+                                Buscar(1);
+                                break;
+                            default:
+                                Notificacion(htmlcode,'error');
+                                break;
+                        }
+                    }
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+            
+            }
+        });
+    }
+
 	function Buscar(pag)
 	{
 		var pag = pag || 1;
