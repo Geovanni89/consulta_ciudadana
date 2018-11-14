@@ -370,10 +370,6 @@
     <script type="text/javascript">
         var url_sitio = '<?=base_url();?>';
 
-        $(document).ready(function(){  
-        });
-        
-
         function PonerEfecto()
         {
             //$('.preloader').fadeIn();

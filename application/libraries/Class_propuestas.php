@@ -103,6 +103,39 @@ class Class_propuestas {
         return $propuestas;
     }
 
+    function prop_votos()
+    {
+        $model = new M_propuestas();
+        $query = $model->votos_propuestas();
+        $propuesta = "";
+        if($query!=false)
+        {
+            foreach ($query as $vprop) {
+                
+                $query_img = $model->carga_adjuntos($vprop->iIdPropuesta,1);
+                if(isset($query_img[0])) $urlImg = $query_img[0]->vRutaAdjunto;
+                else $urlImg = "public/images/services/mayapan.jpg";
+
+                $propuesta.= '<div class="col-md-4 nobottommargin">
+                            <div class="feature-box media-box">
+                                <div class="fbox-media">
+                                    <img src="'.base_url().$urlImg.'" alt="">
+                                </div>
+                                <div class="fbox-desc">
+                                    <h3><span>'.$vprop->vTitulo.'</span></h3>
+                                    <ul class="entry-meta clearfix"><li><i class="icon-calendar3"></i> Desde el '.$vprop->dFecha.'</li></ul>
+                                    <p>'.$vprop->tDescripcion.'</p>
+                                    <br><button class="btn btn-success">Votar</button>
+                                </div>
+                            </div>
+                        </div>';
+            }
+        }
+        else $propuesta.="<h4>Aún no existen propuestas votadas</h4>";
+        
+        return $propuesta;
+    }
+
     function num_index()
     {
         $model = new M_propuestas();

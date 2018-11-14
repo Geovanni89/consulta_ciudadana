@@ -65,6 +65,7 @@ class Sitio extends CI_Controller {
 		$datos['active'] = 1;
 		$datos['prop_index'] = $prop->prop_index();
 		$datos['numeralia'] = $prop->num_index();
+		$datos['votos'] = $prop->prop_votos();
 		/*if(isset($_SESSION[PREFIJO.'_idrol']) && !empty($_SESSION[PREFIJO.'_idrol']))
 		{
 			$idrol = (int)$_SESSION[PREFIJO.'_idrol'];
@@ -144,8 +145,10 @@ class Sitio extends CI_Controller {
 		}
 		$datos['select'] = $select;
 		//estas consultas se moveran posteriormente a C_propuestas
-
-		$this->load->view('form_propuesta',$datos);
+		if(isset($_SESSION[PREFIJO.'_idusuario']))
+			$this->load->view('form_propuesta',$datos);
+		else
+			header("Location: ".base_url()."Sitio/matriz_ejes");
 	}
 
 	public function test()

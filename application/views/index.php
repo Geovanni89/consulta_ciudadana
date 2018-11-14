@@ -141,51 +141,12 @@
 					<div class="heading-block center">
 						<h2><span>Votaciones</span></h2>
 						<span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</span>
-					</div>
+					</div>					
 
 					<div class="container clearfix">						
-
-						<div class="col_one_third nobottommargin">
-							<div class="feature-box media-box">
-								<div class="fbox-media">
-									<img src="<?=base_url();?>public/images/services/mayapan.jpg" alt="Why choose Us?">
-								</div>
-								<div class="fbox-desc">
-									<h3><span>Remodelación de la Plaza Cívica de Lucero</span></h3>
-									<ul class="entry-meta clearfix"><li><i class="icon-calendar3"></i> Desde el 08/10/2017 hasta el 22/10/2017</li></ul>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi rem, facilis nobis voluptatum est voluptatem accusamus molestiae eaque perspiciatis mollitia.</p>
-									<br><button class="btn btn-success">Votar</button>
-								</div>
-							</div>
-						</div>
-
-						<div class="col_one_third nobottommargin">
-							<div class="feature-box media-box">
-								<div class="fbox-media">
-									<img src="<?=base_url();?>public/images/services/monumento_bandera.jpg" alt="Why choose Us?">
-								</div>
-								<div class="fbox-desc">
-									<h3><span>Remodelación de la Plaza Cívica de Lucero</span></h3>
-									<ul class="entry-meta clearfix"><li><i class="icon-calendar3"></i> Desde el 08/10/2017 hasta el 22/10/2017</li></ul>
-									<p>Quos, non, esse eligendi ab accusantium voluptatem. Maxime eligendi beatae, atque tempora ullam. Vitae delectus quia, consequuntur rerum molestias quo.</p>
-									<br><button class="btn btn-success">Votar</button>
-								</div>
-							</div>
-						</div>
-
-						<div class="col_one_third nobottommargin col_last">
-							<div class="feature-box media-box">
-								<div class="fbox-media">
-									<img src="<?=base_url();?>public/images/services/izamal.jpg" alt="Why choose Us?">
-								</div>
-								<div class="fbox-desc">
-									<h3><span>Remodelación de la Plaza Cívica de Lucero</span></h3>
-									<ul class="entry-meta clearfix"><li><i class="icon-calendar3"></i> Desde el 08/10/2017 hasta el 22/10/2017</li></ul>
-									<p>Porro repellat vero sapiente amet vitae quibusdam necessitatibus consectetur, labore totam. Accusamus perspiciatis asperiores labore esse ab accusantium ea modi ut.</p>
-									<br><button class="btn btn-success">Votar</button>
-								</div>
-							</div>
-						</div>
+						<div class="row">
+							<?php echo $votos; ?>
+						</div>					
 
 						<div class="clear"></div>
 					</div>

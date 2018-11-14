@@ -125,7 +125,7 @@
 													echo '<div class="col-md-6"><button id="apoyar_prop" type="button" class="btn btn-outline-success btn-lg btn-block" onclick="apoya_propuesta('.$iIdPropuesta.',1);">A favor</button></div>
 													<div class="col-md-6"><button id="apoyar_prop_dislike" type="button" class="btn btn-outline-danger btn-lg btn-block" onclick="apoya_propuesta('.$iIdPropuesta.',0);">En contra</button></div>';
 											}
-											else echo '<div class="col-md-12"><div id="error_sesion" class="style-msg2 errormsg"><div class="msgtitle">Inicio de sesión</div><div class="sb-msg"><ul><li>Para poder apoyar una propuesta debe <a href="'.base_url().'Sitio/login">iniciar sesión</a>.</li></ul></div></div></div>';
+											else echo '<div class="col-md-12"><div id="error_sesion" class="style-msg2 errormsg"><div class="msgtitle">Inicio de sesión</div><div class="sb-msg"><ul><li>Para poder apoyar una propuesta debe <a href="'.base_url().'Sitio/login">iniciar sesión</a> o <a href="'.base_url().'Sitio/registrarse">Registrarse</a></li></ul></div></div></div>';
 											?>					
 											</div>		
 										</div>
@@ -174,7 +174,7 @@
 																			</div>';
 																	}
 																}
-																else echo '<h3>Sin documentos</h3>';
+																else echo '<h4>La propuesta no cuenta con documentos</h4>';
 															?>
 															
 
@@ -188,7 +188,7 @@
 														    echo '<iframe width="560" height="315" src="https://www.youtube.com/embed/'.$idVideo[1].'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
 														}
 														else
-														    echo "La propuesta no cuenta con video";
+														    echo "<h4>La propuesta no cuenta con video</h4>";
 														?>
 													</div>
 												</div>
@@ -328,7 +328,7 @@
 											<div class="clear"></div>
 
 											<div class="col_full">
-												<label for="comment">Comentario</label>
+												<label for="comment">Comentario <i class="icon icon-asterisk text-danger"></i></label>
 												<textarea name="comment" cols="58" rows="7" tabindex="4" class="sm-form-control" id="vComentario" name="comentario"></textarea>
 											</div>
 
@@ -338,7 +338,7 @@
 												{
 													echo '<button name="enviaComentario" type="button" id="enviaComentario" tabindex="5" onclick="envia_comentario();" class="button button-3d nomargin">Publicar comentario</button>';
 												}
-												else echo '<div class="col-md-12"><div id="error_sesion" class="style-msg2 errormsg"><div class="msgtitle">Inicio de sesión</div><div class="sb-msg"><ul><li>Para poder comentar la propuesta debe <a href="'.base_url().'Sitio/login">iniciar sesión</a></li></ul></div></div></div>';
+												else echo '<div class="col-md-12"><div id="error_sesion" class="style-msg2 errormsg"><div class="msgtitle">Inicio de sesión</div><div class="sb-msg"><ul><li>Para poder comentar la propuesta debe <a href="'.base_url().'Sitio/login">iniciar sesión</a> o <a href="'.base_url().'Sitio/registrarse">Registrarse</a></li></ul></div></div></div>';
 											?>													
 											</div>
 
@@ -522,10 +522,10 @@
 				$('#container_respuesta_'+idcoment).html('');
 			} else {*/
 				if(valido!==null && valido!=="undefined") {
-					$('#container_respuesta_'+idcoment).html('<br><br><h4>Responder comentario</h4><textarea class="form-control" id="resp_coment_'+idcoment+'" name="resp_coment_'+idcoment+'" rows="5"></textarea><br><button class="btn btn-success" onclick="responder_comentario('+idcoment+');" id="btn_resp_'+idcoment+'">Responder</button>');
+					$('#container_respuesta_'+idcoment).html('<br><br><h4>Responder comentario <i class="icon icon-asterisk text-danger"></i></h4><textarea class="form-control" id="resp_coment_'+idcoment+'" name="resp_coment_'+idcoment+'" rows="5"></textarea><br><button class="btn btn-success" onclick="responder_comentario('+idcoment+');" id="btn_resp_'+idcoment+'">Responder</button>');
 				}
 				else {
-					$('#container_respuesta_'+idcoment).html('<br><br><h4>Responder comentario</h4><textarea class="form-control" id="resp_coment_'+idcoment+'" name="resp_coment_'+idcoment+'" rows="5"></textarea><br><div class="col-md-12"><div class="style-msg errormsg" id="error_sesion"><div class="sb-msg"><i class="icon-remove"></i><strong>Inicio de sesión</strong> Para poder responder el comentario debe iniciar sesión.</div></div></div>');
+					$('#container_respuesta_'+idcoment).html('<br><br><h4>Responder comentario <i class="icon icon-asterisk text-danger"></i></h4><textarea class="form-control" id="resp_coment_'+idcoment+'" name="resp_coment_'+idcoment+'" rows="5"></textarea><br><div class="col-md-12"><div class="style-msg errormsg" id="error_sesion"><div class="sb-msg"><i class="icon-remove"></i><strong>Inicio de sesión</strong> Para poder responder el comentario debe iniciar sesión.</div></div></div>');
 				}
 
 				$('#container_respuesta_'+idcoment).addClass('animated fadeInDown');

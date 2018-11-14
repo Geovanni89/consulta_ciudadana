@@ -66,24 +66,24 @@
 						<form id="formPropuesta" method="POST" action="<?=base_url();?>C_propuestas/captura_propuesta">
 							<div class="form-row">
 								<div class="form-group col-md-6">
-									<label for="sel_sect">Selecciona el Sector</label>
+									<label for="sel_sect">Selecciona el Sector <i class="icon icon-asterisk text-danger"></i></label>
 									<select class="form-control" id="iIdSector" name="iIdSector" readonly required>
 										<?php echo $select_sec; /* <select class="form-control" id="iIdSector" name="iIdSector" onchange="carga_temas(this.value);" readonly required>*/?>
 									</select>
 								</div>
 								<div class="form-group col-md-6">
-									<label for="iIdTema">Selecciona el Tema</label>
+									<label for="iIdTema">Selecciona el Tema <i class="icon icon-asterisk text-danger"></i></label>
 									<select class="form-control" id="iIdTema" name="iIdTema" readonly required>
 										<?php echo $select_tema; ?>
 									</select>
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="vTitulo">Titulo propuesta</label>
+								<label for="vTitulo">Titulo propuesta <i class="icon icon-asterisk text-danger"></i></label>
 								<input type="text" class="form-control" id="vTitulo" name="vTitulo" required>
 							</div>
 							<div class="form-group">
-								<label for="vDescripcion">Resumen de la propuesta</label>
+								<label for="vDescripcion">Resumen de la propuesta <i class="icon icon-asterisk text-danger"></i></label>
 								<small id="descnHelp" class="form-text text-muted">(Máximo 200 caracteres)</small>
 								<textarea class="form-control" id="vDescripcion" name="vDescripcion" rows="5"></textarea>
 							</div>
@@ -111,7 +111,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<small id="resumenHelp" class="form-text text-muted">Seleccione el municipio y coloque un punto</small>
+								<small id="resumenHelp" class="form-text text-muted">Seleccione el municipio y coloque un punto <i class="icon icon-asterisk text-danger"></i></small>
 								<select class="form-control" id="iIdMunicipio" name="iIdMunicipio" required onchange="js_municipio(this.value);">
 									<option value="">Seleccionar</option>
 									<?php echo $select; ?>
@@ -125,7 +125,7 @@
 							<div class="form-group">
 								<div>
 									<input id="terminos" class="checkbox-style" name="terminos" type="checkbox" onclick="checks(1);">
-									<label for="terminos" class="checkbox-style-3-label checkbox-small">Acepto la Política de privacidad y las condiciones de uso</label>
+									<label for="terminos" class="checkbox-style-3-label checkbox-small">Acepto la Política de privacidad y las condiciones de uso <i class="icon icon-asterisk text-danger"></i></label>
 								</div>
 								<!--<input type="submit" class="btn btn-success" id="guarda_propuesta" onclick="actualizaText();" value="Crear propuesta" disabled/>-->
 								<input type="submit" class="btn btn-success" id="guarda_propuesta" value="Crear propuesta" disabled/>

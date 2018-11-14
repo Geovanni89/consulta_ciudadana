@@ -112,6 +112,18 @@ class M_propuestas extends CI_Model {
 		else return false;
 	}
 
+	public function votos_propuestas()
+	{
+		$this->db->select('p.iIdPropuesta,p.vTitulo,p.tDescripcion,p.iEstatus,p.vCodigo,p.dFecha,(select count(vp."iIdPropuesta")from "VotoPropuesta" vp where vp."iIdPropuesta" = p."iIdPropuesta") as votos');
+		$this->db->from('Propuesta p');
+		$this->db->order_by('votos','DESC');
+		$this->db->limit(3);
+
+		$query = $this->db->get();
+		if($query!=false) return $query->result();
+		else return false;
+	}
+
 	public function carga_comentarios($iIdPropuesta,$iIdComentario=0)
 	{
 		$this->db->select('(select count(c2."iIdComentario") from "Comentario" c2 where c2."iIdReplicaDe" = c."iIdComentario" and c2."iEstatus" > 1) as respuestas, cl.iLike,c.iIdComentario,c.vComentario,c.iIdPropuesta,c.iIdReplicaDe,c.dFecha,u.iIdUsuario,u.vNombre,u.vApellidoPaterno,u.vApellidoMaterno');

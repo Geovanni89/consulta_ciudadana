@@ -35,7 +35,7 @@
 				}
 				else
 				{
-                    echo '<div class="style-msg errormsg"><div class="sb-msg"><i class="icon-remove"></i>Inicie sesión para crear una propuesta sobre este tema</div></div>';
+                    echo '<div class="style-msg errormsg"><div class="sb-msg"><i class="icon-remove"></i><a href="'.base_url().'Sitio/login">Inicie sesión</a> o <a href="'.base_url().'Sitio/registrarse">Registrese</a> para crear una propuesta sobre este tema</div></div>';
 				
 				}
 			?>
