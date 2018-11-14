@@ -88,6 +88,25 @@
 	<!-- Footer Scripts
 	============================================= -->
 	<script src="<?=base_url();?>public/js/functions.js"></script>
+	<script>
+		function apoya_propuesta(id,op) {
+			$.post('<?=base_url();?>C_propuestas/apoyar_propuesta',{id:id,op:op}, function(resp){
+				switch(resp)
+				{
+					case 'correcto' :  
+						toastr.success('Operación completa', 'Correcto', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+						$('#div_apoyo_'+id).empty().html('<div class="col-md-12"><button id="apoyar_prop" type="button" class="btn btn-outline-warning btn-lg btn-block">Usted ya ha apoyado esta propuesta</button></div>');
+						break;
+					case 'error' :  
+						toastr.error('No se pudo completar la operación', '¡Error!', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+						break;
+					case 'error1' :  
+						toastr.warning('Usted ya ha apoyado esta propuesta', '¡Advertencia!', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+						break;
+				}
+			});
+		}
+	</script>
 
 </body>
 </html>

@@ -125,7 +125,7 @@
 													echo '<div class="col-md-6"><button id="apoyar_prop" type="button" class="btn btn-outline-success btn-lg btn-block" onclick="apoya_propuesta('.$iIdPropuesta.',1);">A favor</button></div>
 													<div class="col-md-6"><button id="apoyar_prop_dislike" type="button" class="btn btn-outline-danger btn-lg btn-block" onclick="apoya_propuesta('.$iIdPropuesta.',0);">En contra</button></div>';
 											}
-											else echo '<div class="col-md-12"><div id="error_sesion" class="style-msg2 errormsg"><div class="msgtitle">Inicio de sesión</div><div class="sb-msg"><ul><li>Para poder apoyar una propuesta debe iniciar sesión</li></ul></div></div></div>';
+											else echo '<div class="col-md-12"><div id="error_sesion" class="style-msg2 errormsg"><div class="msgtitle">Inicio de sesión</div><div class="sb-msg"><ul><li>Para poder apoyar una propuesta debe <a href="'.base_url().'Sitio/login">iniciar sesión</a>.</li></ul></div></div></div>';
 											?>					
 											</div>		
 										</div>
@@ -338,7 +338,7 @@
 												{
 													echo '<button name="enviaComentario" type="button" id="enviaComentario" tabindex="5" onclick="envia_comentario();" class="button button-3d nomargin">Publicar comentario</button>';
 												}
-												else echo '<div class="col-md-12"><div id="error_sesion" class="style-msg2 errormsg"><div class="msgtitle">Inicio de sesión</div><div class="sb-msg"><ul><li>Para poder comentar la propuesta debe iniciar sesión</li></ul></div></div></div>';
+												else echo '<div class="col-md-12"><div id="error_sesion" class="style-msg2 errormsg"><div class="msgtitle">Inicio de sesión</div><div class="sb-msg"><ul><li>Para poder comentar la propuesta debe <a href="'.base_url().'Sitio/login">iniciar sesión</a></li></ul></div></div></div>';
 											?>													
 											</div>
 
@@ -494,10 +494,6 @@
 					case 'correcto' :  
 						toastr.success('Operación completa', 'Correcto', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
 						$('#div_btn_apoyo').empty().html('<div class="col-md-12"><button id="apoyar_prop" type="button" class="btn btn-outline-warning btn-lg btn-block">Usted ya ha apoyado esta propuesta</button></div>');
-						/*document.getElementById("apoyar_prop").removeAttribute("onclick");
-						document.getElementById("apoyar_prop").setAttribute("disabled",'');
-						document.getElementById("apoyar_prop_dislike").removeAttribute("onclick");
-						document.getElementById("apoyar_prop_dislike").setAttribute("disabled",'');*/
 						break;
 					case 'error' :  
 						toastr.error('No se pudo completar la operación', '¡Error!', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });

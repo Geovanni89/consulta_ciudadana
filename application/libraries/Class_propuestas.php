@@ -43,7 +43,7 @@ class Class_propuestas {
                                     <li><a href="javascript:"><i class="icon-checkbox-checked"></i> '.$total_vot.'</a></li>
                                     <li><a href="javascript:"><i class="icon-user"></i> '.$vprop->vNombre.' '.$vprop->vApellidoPaterno.' '.$vprop->vApellidoMaterno.'</a></li>
                                 </ul>
-                                <div class="entry-content">'.substr(strip_tags($vprop->tDescripcion,'<p>'),0,100).'<br>';
+                                <div class="entry-content">'.substr(strip_tags($vprop->tDescripcion,'<p>'),0,200).'<br>';
                                 $propuestas.='<a target="_blank" href="'.base_url().'C_propuestas/propuesta_sim?id='.$vprop->iIdPropuesta.'" class="btn btn-success">Consultar</a>';
                                 /*if(isset($_SESSION[PREFIJO.'_idusuario']))
                                     $propuestas.='<a href="javascript:" onclick="propuesta_simple('.$vprop->iIdPropuesta.');" class="btn btn-success">Apoyar</a>';
@@ -92,7 +92,7 @@ class Class_propuestas {
                                 <li><a href="javascript:"><i class="icon-checkbox-checked"></i> '.$total_vot.'</a></li>
                                 <li><a href="javascript:"><i class="icon-user"></i> '.$vprop->vNombre.' '.$vprop->vApellidoPaterno.' '.$vprop->vApellidoMaterno.'</a></li>
                             </ul>
-                            <div class="team-content">'.substr(strip_tags($vprop->tDescripcion,'<p>'),0,100).'</div>
+                            <div class="team-content">'.substr(strip_tags($vprop->tDescripcion,'<p>'),0,200).'</div>
                             <br><a target="_blank" href="'.base_url().'C_propuestas/propuesta_sim?id='.$vprop->iIdPropuesta.'" class="btn btn-success">Consultar</a>                                      
                         </div>
                     </div>

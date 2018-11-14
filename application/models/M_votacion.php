@@ -45,6 +45,18 @@ class M_votacion extends CI_Model {
 		if($query!=false) return $query->num_rows();
 		else return false;
 	}
+
+	public function ver_apoyo($iIdPropuesta,$iIdUsuario)
+	{
+		$this->db->select('iIdPropuesta,iIdUsuario');
+		$this->db->from('VotoPropuesta');
+		$this->db->where('iIdPropuesta',$iIdPropuesta);
+		$this->db->where('iIdUsuario',$iIdUsuario);
+
+		$query = $this->db->get();
+		if($query!=false) return $query->num_rows();
+		else return false;
+	}
 }
 
 ?>
