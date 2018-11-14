@@ -244,7 +244,7 @@ class Sitio extends CI_Controller {
 				$datos['success'] = false;
 				$datos['municipio'] = '';
 				$datos['localidad'] = '';
-				$datos['id_asentamiento'] = '';
+				$datos['id_asentamiento'] = 0;
 				$query = $this->mc->devulve_municipio_localidad($this->input->post('valor'));
 
 				if($query)

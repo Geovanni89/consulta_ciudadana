@@ -65,17 +65,17 @@
 
 						<h3>Registrate ahora.</h3>
 
-						<p>Para poder acceder a todas las funcionalidades de la página es necesario crear una cuenta. Lo cual podrás hacer a continuación.</p>
+						<p>Para poder acceder a todas las funcionalidades de la página es necesario crear una cuenta. Lo cual podrás hacer a continuación.<br><i>Todos los campos marcados con (<i class="icon icon-asterisk text-danger"></i>) son obligatorios</i></p>
 
 						<form id="register-form" name="register-form" class="nobottommargin" action="#" method="post">
 
 							<div class="col_one_third">
-								<label for="register-form-name">Nombre:</label>
-								<input type="text" id="nombre" name="nombre" value="" class="form-control" maxlength="100" autofocus />
+								<label for="register-form-name">Nombre:<i class="icon icon-asterisk text-danger"></i></label>
+								<input type="text" id="nombre" name="nombre" value="" class="form-control" maxlength="100" autofocus autocomplete="off"/>
 							</div>
 
 							<div class="col_one_third">
-								<label for="register-form-name">Apellido paterno:</label>
+								<label for="register-form-name">Apellido paterno:<i class="icon icon-asterisk text-danger"></i></label>
 								<input type="text" id="apellido_paterno" name="apellido_paterno" value="" class="form-control" maxlength="100" />
 							</div>
 
@@ -87,12 +87,12 @@
 							<div class="clear"></div>
 
 							<div class="col_one_third">
-								<label for="register-form-name">Correo:</label>
-								<input type="text" id="correo" name="correo" value="" class="form-control" maxlength="100" />
+								<label for="register-form-name">Correo:<i class="icon icon-asterisk text-danger"></i></label>
+								<input type="text" id="correo" name="correo" value="" class="form-control" maxlength="100" autocomplete="off" />
 							</div>
 
 							<div class="col_one_third">
-								<label for="register-form-password">Contraseña:</label>
+								<label for="register-form-password">Contraseña:<i class="icon icon-asterisk text-danger"></i></label>
 								<input type="password" id="contrasenia" name="contrasenia" value="" class="form-control" />
 							</div>
 
@@ -115,7 +115,7 @@
 						-->
 
 							<div class="col_one_third">
-								<label for="register-form-name">Fecha de nacimiento:</label>
+								<label for="register-form-name">Fecha de nacimiento:<i class="icon icon-asterisk text-danger"></i></label>
 								
 								<div class="row">
 									<div class="col-lg-4">
@@ -137,7 +137,7 @@
 							</div>
 							
 							<div class="col_one_third">
-								<label for="register-form-name">Género:</label>
+								<label for="register-form-name">Género:<i class="icon icon-asterisk text-danger"></i></label>
 								<select name="genero" id="genero" class="form-control">
 									<option value="0">Seleccione un género</option>
 									<option value="1">Hombre</option>
@@ -147,9 +147,8 @@
 							</div>
 
 							<div class="col_one_third col_last">
-								<label for="register-form-name">Código postal:</label>
-								<input type="text" id="codigo_postal" name="codigo_postal" value="" class="form-control" onkeypress="return SoloDigitos(event);" maxlength="5" onblur="CompletarCampos();" data-toggle="tooltip" data-placement="top" title="Indique su código postal" />
-								<input type="hidden" name="id_asentamiento" id="id_asentamiento">
+								<label for="register-form-name">Código postal:<i class="icon icon-asterisk text-danger"></i></label>
+								<input type="text" id="codigo_postal" name="codigo_postal" value="" class="form-control" onkeypress="return SoloDigitos(event);" maxlength="5" onblur="CompletarCampos();" data-toggle="tooltip" data-placement="top" title="Indique su código postal" />								
 								<div class="form-check">
 									<input type="checkbox" class="form-check-input" id="sincp" onchange="Determinar_CP(this);">
 									<label class="form-check-label" for="exampleCheck1">No conozco mi código postal</label>
@@ -161,10 +160,11 @@
 
 							<div id="divop1">
 								<div class="col_one_third">
-									<label for="register-form-name">Colonia:</label>
+									<label for="register-form-name">Colonia:<i class="icon icon-asterisk text-danger"></i></label>
 									<select name="selasentamiento1" id="selasentamiento1" class="form-control" onchange="MostrarInfoFaltante();">
 										<?php echo $op_asentamientos;?>
 									</select>
+									<input type="hidden" name="id_asentamiento" id="id_asentamiento" value="0">
 								</div>
 
 								<div class="col_one_third">
@@ -194,10 +194,11 @@
 								</div>
 
 								<div class="col_one_third col_last">
-									<label for="register-form-name">Colonia:</label>
+									<label for="register-form-name">Colonia:<i class="icon icon-asterisk text-danger"></i></label>
 									<select name="selasentamiento" id="selasentamiento" class="form-control chosen-select" onchange="MostrarCP(this);">
 										<?php echo $op_asentamientos;?>
 									</select>
+									<input type="hidden" name="id_asentamiento2" id="id_asentamiento2" value="0">
 								</div>
 
 								
@@ -206,14 +207,14 @@
 							<div class="clear"></div>
 
 							<div class="col_one_third">
-								<label for="register-form-name">Nivel de estudio:</label>
+								<label for="register-form-name">Nivel de estudio:<i class="icon icon-asterisk text-danger"></i></label>
 								<select name="id_grado_estudio" id="id_grado_estudio" class="form-control">
 									<?php echo $op_grados_estudio; ?>
 								</select>
 							</div>
 
 							<div class="col_two_third col_last">
-								<label for="register-form-name">Ocupación:</label>
+								<label for="register-form-name">Ocupación:<i class="icon icon-asterisk text-danger"></i></label>
 								<select name="id_ocupacion" id="id_ocupacion" class="form-control chosen-select validate[required]" data-prompt-position="inline" data-prompt-target="id_ocupacion">
 									<?php echo $op_ocupaciones; ?>
 								</select>
@@ -296,6 +297,8 @@
 					if( $("#"+element.id).hasClass('chosen-select')){
 						$("#"+element.id+"_chosen").addClass("error_chosen");
 					}else $(element).closest('.form-control').addClass('error');
+					//console.log($("#id_asentamiento").val());
+					//console.log($("#id_asentamiento2").val());
 				},
 				unhighlight: function (element) {
 					//console.log(element);
@@ -350,6 +353,12 @@
 				 	},
 				 	id_ocupacion:{
 				 		min: 1
+				 	},
+				 	id_asentamiento:{
+				 		min: 1	
+				 	},
+				 	id_asentamiento2:{
+				 		min: 1	
 				 	}
 
 			  	},
@@ -389,6 +398,12 @@
 				 	},
 				 	id_ocupacion: {
 				 		min: "Por favor elija una opción"
+				 	},
+				 	id_asentamiento: {
+				 		min: "Debe seleccionar una colonia"
+				 	},
+				 	id_asentamiento2: {
+				 		min: "Debe seleccionar una colonia"
 				 	}
 				    
 			  	},
@@ -455,7 +470,7 @@
 			    	defaultApply: true
 			    });
 
-			var id_asentamiento = $("#selasentamiento1 option:selected").attr('value');
+			var id_asentamiento = parseInt($("#selasentamiento1 option:selected").attr('value'));
 
 			$.post("<?=base_url();?>Sitio/listado_dependiente",{nombrelst:'datos_faltantes',valor:id_asentamiento},function(resultado,status){
 				var datos = jQuery.parseJSON(resultado);
@@ -463,6 +478,7 @@
 				$("#municipio").val(datos.municipio);
 				$("#localidad").val(datos.localidad);
 				$("#id_asentamiento").val(datos.id_asentamiento);
+				$("#id_asentamiento2").val(datos.id_asentamiento);				
 			});
 			loading.out();
 		}
@@ -474,6 +490,7 @@
 			if(id_asentamiento != 0)
 			{
 				$("#id_asentamiento").val(id_asentamiento);
+				$("#id_asentamiento2").val(id_asentamiento);
 				$("#codigo_postal").val(codigo_postal);				
 			}
 
