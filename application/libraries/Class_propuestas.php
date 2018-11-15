@@ -124,7 +124,7 @@ class Class_propuestas {
                                 <div class="fbox-desc">
                                     <h3><span>'.$vprop->vTitulo.'</span></h3>
                                     <ul class="entry-meta clearfix"><li><i class="icon-calendar3"></i> Desde el '.$vprop->dFecha.'</li></ul>
-                                    <p>'.$vprop->tDescripcion.'</p>
+                                    <p>'.substr(strip_tags($vprop->tDescripcion,'<p>'),0,200).'</p>
                                     <br><button class="btn btn-success">Votar</button>
                                 </div>
                             </div>

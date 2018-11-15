@@ -69,6 +69,7 @@ class Class_votacion {
                 </div>';  
             }
         }
+        else $propuestas.='<h4>Aún no hay propuestas para votar</h4>';
          
         return $propuestas;
     }       

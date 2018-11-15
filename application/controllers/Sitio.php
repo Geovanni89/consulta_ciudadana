@@ -306,4 +306,9 @@ class Sitio extends CI_Controller {
 		$this->load->view('votaciones',$datos);
 	}
 
+	public function presupuesto()
+	{
+		$this->load->view('presupuesto');
+	}
+
 }
