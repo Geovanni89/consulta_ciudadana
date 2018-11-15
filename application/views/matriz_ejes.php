@@ -85,9 +85,9 @@
 										<div class="flip-card-front" style="background-image: url('<?=$rutaimagen;?>competividad.jpg?v=1.3')" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
-													<div class="card-body">
+													<div class="card-body nopadding">
 														<img src="<?=base_url();?>img/matriz/i_competitividad.png" class="h1">
-														<p style="font-size: 12px">Competividad</p>
+														<p style="font-size: 14px">Competividad</p>
 													</div>
 												</div>
 											</div>
@@ -106,7 +106,7 @@
 										<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>comercialyturistica.jpg');">
 											<div class="flip-card-inner">													
 												<div class="card nobg noborder text-center">
-													<div class="card-body">
+													<div class="card-body nopadding">
 														<img src="<?=base_url();?>img/matriz/i_comercial_turistica.png">
 														<p style="font-size: 14px">Comercial y turística</p>
 													</div>
@@ -126,7 +126,7 @@
 										<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>industrial.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
-													<div class="card-body">
+													<div class="card-body nopadding">
 														<img src="<?=base_url();?>img/matriz/i_industrial.png">
 														<p style="font-size: 14px;">Industrial</p>
 													</div>
@@ -146,15 +146,15 @@
 										<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>capitalhumano.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
-													<div class="card-body">
+													<div class="card-body nopadding">
 														<img src="<?=base_url();?>img/matriz/i_Capital-humano.png">
 														<p style="font-size: 14px;">Capital humano</p>
 													</div>
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back" data-height-xl="<?=$alto?>">
-											<div class="flip-card-inner bg-danger no-after">
+										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
+											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
@@ -166,7 +166,7 @@
 										<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto2?>" style="background-image: url('<?=$rutaimagen;?>seguridadpatrimonial.jpg?v=1');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
-													<div class="card-body">												
+													<div class="card-body nopadding">												
 														<img src="<?=base_url();?>img/matriz/i_Seguridad-patrimonial.png">
 														<p style="font-size: 14px;">Seguridad patrimonial</p>
 													</div>
@@ -186,7 +186,7 @@
 										<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>cienciaytecnologia.jpg');">
 											<div class="flip-card-inner">												
 												<div class="card nobg noborder text-center">
-													<div class="card-body">
+													<div class="card-body nopadding">
 														<img src="<?=base_url();?>img/matriz/i_Ciencia-y-tecnología.png">
 														<p style="font-size: 14px;">Ciencia y tecnología</p>
 													</div>
@@ -207,9 +207,9 @@
 											<div class="flip-card-inner">
 												<div class="flip-card-inner">
 													<div class="card nobg noborder text-center">
-														<div class="card-body">
+														<div class="card-body nopadding">
 															<img src="<?=base_url();?>img/matriz/i_Empleo-y-fomento-al-emprendedurismo.png">
-															<p style="font-size: 9px;">Empleo y <br>fomento al emprendedurismo</p>
+															<p style="font-size: 14px;">Empleo y <br>fomento al emprendedurismo</p>
 														</div>
 													</div>
 												</div>
@@ -236,7 +236,7 @@
 										<div class="flip-card-front dark" style="background-image: url('<?=$rutaimagen;?>alimentaria.jpg')" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
-													<div class="card-body">
+													<div class="card-body nopadding">
 														<img src="<?=base_url();?>img/matriz/i_Alimentaria.png">
 														<p style="font-size: 14px;">Aimentaria</p>
 													</div>
@@ -257,7 +257,7 @@
 										<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>vivienda.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
-													<div class="card-body">
+													<div class="card-body nopadding">
 														<img src="<?=base_url();?>img/matriz/i_Vivienda.png">
 														<p class="card-title">Vivienda</p>
 													</div>
@@ -277,7 +277,7 @@
 										<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>salud.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
-													<div class="card-body">
+													<div class="card-body nopadding">
 														<img src="<?=base_url();?>img/matriz/i_Salud.png">
 														<p class="card-title">Salud</p>
 													</div>
@@ -297,7 +297,7 @@
 										<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>desarrolloruralypesquero.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
-													<div class="card-body">
+													<div class="card-body nopadding">
 														<img src="<?=base_url();?>img/matriz/i_Desarrollo-rural-y-pesquero.png">
 														<p class="card-title mb-0">Desarrollo rural y pesquero</p>
 													</div>
@@ -317,7 +317,7 @@
 										<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>seguridadsocial.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
-													<div class="card-body">
+													<div class="card-body nopadding">
 														<img src="<?=base_url();?>img/matriz/i_Seguridad-social.png">
 														<p>Seguridad social</p>
 													</div>
@@ -337,16 +337,15 @@
 										<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>inclusionsocial.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
-													<div class="card-body">
+													<div class="card-body nopadding">
 														<img src="<?=base_url();?>img/matriz/i_Inclusión-social.png">
 														<p>Inclusión social</p>
 													</div>
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back" data-height-xl="<?=$alto?>">
+										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
-												
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
 										</div>
@@ -358,9 +357,9 @@
 										<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>seguridadyestadodederecho.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
-													<div class="card-body">
+													<div class="card-body nopadding">
 														<img src="<?=base_url();?>img/matriz/i_Seguridad-y-Estado-de-derecho.png">
-														<p style="font-size: 12px;">Seguridad y estado de derecho</p>														
+														<p style="font-size: 14px;">Seguridad y estado de derecho</p>														
 													</div>
 												</div>
 											</div>
@@ -378,7 +377,7 @@
 										<div class="flip-card-front" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>pueblosindigenas.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
-													<div class="card-body">
+													<div class="card-body nopadding">
 														<img src="<?=base_url();?>img/matriz/i_Pueblos-indígenas.png">
 														<p>Pueblos indígenas</p>														
 													</div>
@@ -406,7 +405,7 @@
 										<div class="flip-card-front dark" style="background-image: url('<?=$rutaimagen;?>educacionuniversal.jpg')" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
-													<div class="card-body">
+													<div class="card-body nopadding">
 														<img src="<?=base_url();?>img/matriz/i_Educación_u.png">
 														<p class="card-title">Educación universal</p>
 													</div>
@@ -427,7 +426,7 @@
 										<div class="flip-card-front dark" data-height-xl="<?=$alto2?>" style="background-image: url('<?=$rutaimagen;?>deportedealtorendimiento.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
-													<div class="card-body">
+													<div class="card-body nopadding">
 														<img src="<?=base_url();?>img/matriz/i_Deporte_alto.png">
 														<p class="card-title" style="font-size: 14px;">Deporte de alto rendimiento</p>
 													</div>
@@ -447,7 +446,7 @@
 										<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>educaciondecalidad.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
-													<div class="card-body">
+													<div class="card-body nopadding">
 														<img src="<?=base_url();?>img/matriz/i_Educación_c.png">
 														<p class="card-title">Educación de calidad</p>
 													</div>
@@ -467,7 +466,7 @@
 										<div class="flip-card-front dark" style="background-image: url('<?=$rutaimagen;?>culturatradicional.jpg')" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
-													<div class="card-body">
+													<div class="card-body nopadding">
 														<img src="<?=base_url();?>img/matriz/i_cultura-tra.png">
 														<p class="card-title">Cultura tradicional</p>
 													</div>
@@ -488,7 +487,7 @@
 										<div class="flip-card-front dark" data-height-xl="<?=$alto2?>" style="background-image: url('<?=$rutaimagen;?>deporteincluyente.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
-													<div class="card-body">
+													<div class="card-body nopadding">
 														<img src="<?=base_url();?>img/matriz/i_deporte_inc.png">
 														<p class="card-title" class="card-title">Deporte incluyente</p>
 													</div>
@@ -508,7 +507,7 @@
 										<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>bellasartes.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
-													<div class="card-body">
+													<div class="card-body nopadding">
 														<img src="<?=base_url();?>img/matriz/i_bellas_artes.png">
 														<p class="card-title" class="card-title">Bellas artes</p>
 													</div>
@@ -538,7 +537,7 @@
 										<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>hidrica.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
-													<div class="card-body">
+													<div class="card-body nopadding">
 														<img src="<?=base_url();?>img/matriz/i_hidirca.png">
 														<p>Hídrica</p>
 													</div>
@@ -559,7 +558,7 @@
 										<div class="flip-card-front dark" data-height-xl="<?=$alto2?>" style="background-image: url('<?=$rutaimagen;?>movilidadsustentableyconectividadregional.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
-													<div class="card-body">
+													<div class="card-body nopadding">
 														<img src="<?=base_url();?>img/matriz/i_movilidad.png">
 														<p class="card-title" style="font-size: 13px;">Movilidad sustentable y conectividad regional</p>														
 													</div>
@@ -579,7 +578,7 @@
 										<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>energetica.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
-													<div class="card-body">
+													<div class="card-body nopadding">
 														<img src="<?=base_url();?>img/matriz/i_energetica.png">
 														<p class="card-title">Energética</p>
 													</div>
@@ -599,9 +598,9 @@
 										<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>cambioclimaticoysustentabilidad.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
-													<div class="card-body">
+													<div class="card-body nopadding">
 														<img src="<?=base_url();?>img/matriz/i_cambio_cli.png">
-														<p class="card-title mb-0" style="font-size: 11px;">Cambio climático y sustentabilidad</p>														
+														<p class="card-title mb-0" style="font-size: 14px;">Cambio climático y sustentabilidad</p>														
 													</div>
 												</div>
 											</div>
@@ -619,7 +618,7 @@
 										<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>manejointegralderesiduos.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
-													<div class="card-body">
+													<div class="card-body nopadding">
 														<img src="<?=base_url();?>img/matriz/i_manejo.png">
 														<p>Manejo integral de residuos</p>
 													</div>
@@ -639,9 +638,9 @@
 										<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>ordenamientourbanoyterritorial.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
-													<div class="card-body">
+													<div class="card-body nopadding">
 														<img src="<?=base_url();?>img/matriz/i_ordenamiento.png">
-														<p style="font-size: 11px;">Ordenamiento urbano y territorial</p>
+														<p style="font-size: 14px;">Ordenamiento urbano y territorial</p>
 													</div>
 												</div>
 											</div>
@@ -659,7 +658,7 @@
 										<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen?>/consevacionderecursosnaturales.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
-													<div class="card-body">
+													<div class="card-body nopadding">
 														<img src="<?=base_url();?>img/matriz/i_conservacion.png">
 														<p style="font-size: 12px;">Conservación de recursos naturales</p>														
 													</div>
@@ -695,7 +694,7 @@
 							<div class="flip-card-front dark" style="background-image: url('<?=base_url();?>img/ejes/igualdad.jpg')" data-height-xl="<?=$alto;?>">
 								<div class="flip-card-inner">
 									<div class="card nobg noborder text-center">
-										<div class="card-body">
+										<div class="card-body nopadding">
 											<!--<i class="icon-line2-camera h1"></i>-->
 											<img src="<?=base_url();?>img/matriz/i_Igualdad-de-género.png">
 											<p class="card-text t400">Igualdad de genero</p>
@@ -716,7 +715,7 @@
 							<div class="flip-card-front dark" data-height-xl="<?=$alto;?>" style="background-image: url('<?=$rutaimagen?>/gobiernoaustero.jpg');" data-height-xl="<?=$alto;?>">
 								<div class="flip-card-inner">
 									<div class="card nobg noborder text-center">
-										<div class="card-body">
+										<div class="card-body nopadding">
 											<img src="<?=base_url();?>img/matriz/i_gobierno.png">
 											<p class="card-text t400">Gobierno austero, abierto, innovador y eficiente</p>
 										</div>
@@ -736,7 +735,7 @@
 							<div class="flip-card-front dark" data-height-xl="<?=$alto;?>" style="background-image: url('<?=$rutaimagen?>/infraestructura.jpg');">
 								<div class="flip-card-inner">
 									<div class="card nobg noborder text-center">
-										<div class="card-body">
+										<div class="card-body nopadding">
 											<img src="<?=base_url();?>img/matriz/i_infraestructura.png">
 											<p class="card-text t400">Infraestructura y proyectos estratégicos</p>
 										</div>
