@@ -55,6 +55,11 @@
 					============================================= -->
 					<div class="postcontent nobottommargin clearfix">
 
+						<div class="heading-block center">
+						<h3></h3>
+						<span>Conoce algunas de las propuestas que más ciudadanos han compartido a Tu Plan</span>
+					</div>
+
 						<!-- Posts
 						============================================= -->
 						<div id="posts">

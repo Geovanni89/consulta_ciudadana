@@ -89,25 +89,25 @@
 
 						<div class="container clearfix">
 
-							<div class="col_one_fourth nobottommargin center" data-animate="bounceIn">
+							<div class="col_one_third nobottommargin center" data-animate="bounceIn">
 								<img src="<?=base_url();?>public/images/i_participantes.png">
 								<div class="counter counter-lined"><span data-from="100" data-to="<?php echo $numeralia['tot_part']; ?>" data-refresh-interval="50" data-speed="2000"></span></div>
 								<h5>Participantes</h5>
 							</div>
 
-							<div class="col_one_fourth nobottommargin center" data-animate="bounceIn" data-delay="200">
+							<div class="col_one_third nobottommargin center" data-animate="bounceIn" data-delay="200">
 								<img src="<?=base_url();?>public/images/i_propuestas.png">
 								<div class="counter counter-lined"><span data-from="3000" data-to="<?php echo $numeralia['tot_prop']; ?>" data-refresh-interval="100" data-speed="2500"></span></div>
 								<h5>Propuestas recibidas</h5>
 							</div>
-
-							<div class="col_one_fourth nobottommargin center" data-animate="bounceIn" data-delay="400">
+							
+							<!--<div class="col_one_fourth nobottommargin center" data-animate="bounceIn" data-delay="400">
 								<img src="<?=base_url();?>public/images/i_propuestas_aceptadas.png">
 								<div class="counter counter-lined"><span data-from="10" data-to="<?php echo $numeralia['tot_acep']; ?>" data-refresh-interval="25" data-speed="3500"></span></div>
 								<h5>Propuestas aceptadas</h5>
-							</div>
+							</div>-->							
 
-							<div class="col_one_fourth nobottommargin center col_last" data-animate="bounceIn" data-delay="600">
+							<div class="col_one_third nobottommargin center col_last" data-animate="bounceIn" data-delay="600">
 								<img src="<?=base_url();?>public/images/i_votaciones.png">
 								<div class="counter counter-lined"><span data-from="60" data-to="<?php echo $numeralia['tot_vot']; ?>" data-refresh-interval="30" data-speed="2700"></span></div>
 								<h5>Votaciones</h5>

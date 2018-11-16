@@ -39,9 +39,9 @@ class Class_propuestas {
                                 </div>
                                 <ul class="entry-meta clearfix">
                                     <li><a href="javascript:"><i class="icon-comments"></i> '.$total_coment.' '.$text_coment.' </a></li>
-                                    <li><i class="icon-calendar3"></i> '.date_format($fecha,'d/m/Y').'</li>
-                                    <li><a href="javascript:"><i class="icon-checkbox-checked"></i> '.$total_vot.'</a></li>
-                                    <li><a href="javascript:"><i class="icon-user"></i> '.$vprop->vNombre.' '.$vprop->vApellidoPaterno.' '.$vprop->vApellidoMaterno.'</a></li>
+                                    <li><i class="icon-calendar3"></i> '.date_format($fecha,'d/m/Y').'</li>';
+                                    //$propuestas.='<li><a href="javascript:"><i class="icon-checkbox-checked"></i> '.$total_vot.'</a></li>';
+                                    $propuestas.='<li><a href="javascript:"><i class="icon-user"></i> '.$vprop->vNombre.' '.$vprop->vApellidoPaterno.' '.$vprop->vApellidoMaterno.'</a></li>
                                 </ul>
                                 <div class="entry-content">'.substr(strip_tags($vprop->tDescripcion,'<p>'),0,200).'<br>';
                                 $propuestas.='<a target="_blank" href="'.base_url().'C_propuestas/propuesta_sim?id='.$vprop->iIdPropuesta.'" class="btn btn-success">Consultar</a>';
@@ -88,9 +88,9 @@ class Class_propuestas {
                             <div class="team-title"><h4></h4><span>'.$vprop->vTitulo.'</span></div>
                             <ul class="entry-meta clearfix">
                                 <li><a href="javascript:"><i class="icon-comments"></i> '.$total_coment.' '.$text_coment.' </a></li>
-                                <li>'.date_format($fecha,'d/m/Y').'</li>
-                                <li><a href="javascript:"><i class="icon-checkbox-checked"></i> '.$total_vot.'</a></li>
-                                <li><a href="javascript:"><i class="icon-user"></i> '.$vprop->vNombre.' '.$vprop->vApellidoPaterno.' '.$vprop->vApellidoMaterno.'</a></li>
+                                <li>'.date_format($fecha,'d/m/Y').'</li>';
+                                //$propuestas.='<li><a href="javascript:"><i class="icon-checkbox-checked"></i> '.$total_vot.'</a></li>';
+                                $propuestas.='<li><a href="javascript:"><i class="icon-user"></i> '.$vprop->vNombre.' '.$vprop->vApellidoPaterno.' '.$vprop->vApellidoMaterno.'</a></li>
                             </ul>
                             <div class="team-content">'.substr(strip_tags($vprop->tDescripcion,'<p>'),0,200).'</div>
                             <br><a target="_blank" href="'.base_url().'C_propuestas/propuesta_sim?id='.$vprop->iIdPropuesta.'" class="btn btn-success">Consultar</a>                                      

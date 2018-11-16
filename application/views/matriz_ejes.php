@@ -67,12 +67,20 @@
 
 				
 				<div class="container clearfix">					
+					<div class="heading-block center">
+						<h1>¿Quieres enviar una propuesta?</h1>
+						<span>¡Participa! Da clic en el eje al que creas que pertenece y sé parte de Tu Plan Estatal de Desarrollo.</span>
+					</div>
 
-					<div class="">
+					<!--<div class="">
 						<div class="feature-box fbox-center fbox-light fbox-plain">
 							<h3 style="font-size: 24px;color: #1a4a60; font-weight: 1200;"><strong>MATRIZ DE EJES<br>PED 2018-2024</strong></h3>
 						</div>
-					</div>
+					</div>-->
+
+					
+
+
 
 					<div class="row">
 						<!-- Economía --->

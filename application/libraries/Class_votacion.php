@@ -45,6 +45,7 @@ class Class_votacion {
                     <ul class="entry-meta clearfix">
                         <li><i class="icon-calendar3"></i>'.date_format($fecha,'d/m/Y').'</li>
                         <li><a href="#"><i class="icon-comments"></i> '.$total_coment.'</a></li>
+                        <li><a href="javascript:"><i class="icon-user"></i> '.$vres->vNombre.' '.$vres->vApellidoPaterno.' '.$vres->vApellidoMaterno.'</a></li>
                     </ul>
                     <div class="entry-content">
                         <p>'.substr(strip_tags($vres->tDescripcion,'<p>'),0,200).'</p>';
