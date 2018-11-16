@@ -288,7 +288,8 @@ class Sitio extends CI_Controller {
 
 	function matriz_ejes()
 	{
-		$this->load->view('matriz_ejes');
+		$datos['active'] = 6;
+		$this->load->view('matriz_ejes',$datos);
 	}
 
 	function infografia()
@@ -308,7 +309,8 @@ class Sitio extends CI_Controller {
 
 	public function presupuesto()
 	{
-		$this->load->view('presupuesto');
+		$datos['active'] = 7;
+		$this->load->view('presupuesto',$datos);
 	}
 
 }

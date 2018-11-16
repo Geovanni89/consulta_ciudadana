@@ -1,79 +1,84 @@
-<!DOCTYPE html>
-<html dir="ltr" lang="en-US">
-<head>
+<?php 
+/*
+1.-ECONOMÍA
+2.-SOCIALES
+3.-CULTURALES
+4.-AMBIENTALES
+5.-EJE TRANSVERSAL
+*/
+	$alto = 150;
+	$alto2 = 325;
+	$rutaimagen = base_url().'/img/ejes/';
+	$rutaicon = base_url().'img/matriz/';
 
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta name="author" content="SemiColonWeb" />
+//arreglos para pintar la matriz
+$ejes[0] = array('id'=>1,'eje'=>'ECONOMÍA');
+$ejes[1] = array('id'=>2,'eje'=>'SOCIALES');
+$ejes[2] = array('id'=>3,'eje'=>'CULTURALES');
+$ejes[3] = array('id'=>4,'eje'=>'AMBIENTALES');
+$ejes[4] = array('id'=>5,'eje'=>'EJE TRANSVERSAL');
 
-	<!-- Stylesheets
-	============================================= -->
-	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700|Crete+Round:400i" rel="stylesheet" type="text/css" />
-	<link rel="shortcut icon" type="image/png" href="<?=base_url();?>img/favicon.png"/>
-	<link rel="stylesheet" href="<?=base_url();?>public/css/bootstrap.css" type="text/css" />
-	<link rel="stylesheet" href="<?=base_url();?>public/css/style.css?v=1" type="text/css" />
-	<link rel="stylesheet" href="<?=base_url();?>public/css/swiper.css" type="text/css" />
-	<link rel="stylesheet" href="<?=base_url();?>public/css/dark.css" type="text/css" />
-	<link rel="stylesheet" href="<?=base_url();?>public/css/font-icons.css" type="text/css" />
-	<link rel="stylesheet" href="<?=base_url();?>public/css/animate.css" type="text/css" />
-	<link rel="stylesheet" href="<?=base_url();?>public/css/magnific-popup.css" type="text/css" />
+$temas[1] = array('tema'=>'Competividad', 'alto'=>150, 'url' => $rutaimagen.'competividad.jpg','url_icon' => $rutaicon.'i_competitividad.png');
+$temas[1] = array('tema'=>'Comercial y turística', 'alto'=>150, 'url' => $rutaimagen.'comercialyturistica.jpg','url_icon' => $rutaicon.'i_comercial_turistica.png');
+$temas[1] = array('tema'=>'Industrial', 'alto'=>150, 'url' => $rutaimagen.'industrial.jpg','url_icon' => $rutaicon.'i_industrial.png');
+$temas[1] = array('tema'=>'Capital humano', 'alto'=>150, 'url' => $rutaimagen.'capitalhumano.jpg','url_icon' => $rutaicon.'i_Capital-humano.png');
+$temas[1] = array('tema'=>'Seguridad patrimonial', 'alto'=>325, 'url' => $rutaimagen.'seguridadpatrimonial.jpg','url_icon' => $rutaicon.'i_Seguridad-patrimonial.png');
+$temas[1] = array('tema'=>'Ciencia y tecnología', 'alto'=>150, 'url' => $rutaimagen.'cienciaytecnologia.jpg','url_icon' => $rutaicon.'i_Ciencia-y-tecnología.png');
+$temas[1] = array('tema'=>'Empleo y fomento al emprendedurismo', 'alto'=>150, 'url' => $rutaimagen.'empleoyfomentoalemprendedurismo.jpg','url_icon' => $rutaicon.'i_Empleo-y-fomento-al-emprendedurismo.png');
+$temas[2] = array('tema'=>'Alimentaria', 'alto'=>150, 'url' => $rutaimagen.'alimentaria.jpg','url_icon' => $rutaicon.'i_Alimentaria.png');
+$temas[2] = array('tema'=>'Vivienda', 'alto'=>150, 'url' => $rutaimagen.'vivienda.jpg','url_icon' => $rutaicon.'i_Vivienda.png');
+$temas[2] = array('tema'=>'Salud', 'alto'=>150, 'url' => $rutaimagen.'salud.jpg','url_icon' => $rutaicon.'i_Salud.png');
+$temas[2] = array('tema'=>'Desarrollo rural y pesquero', 'alto'=>150, 'url' => $rutaimagen.'desarrolloruralypesquero.jpg','url_icon' => $rutaicon.'i_Desarrollo-rural-y-pesquero.png');
+$temas[2] = array('tema'=>'Seguridad social', 'alto'=>150, 'url' => $rutaimagen.'seguridadsocial.jpg','url_icon' => $rutaicon.'i_Seguridad-social.png');
+$temas[2] = array('tema'=>'Inclusión social', 'alto'=>150, 'url' => $rutaimagen.'inclusionsocial.jpg','url_icon' => $rutaicon.'i_Inclusión-social.png');
+$temas[2] = array('tema'=>'Seguridad y estado de derecho', 'alto'=>150, 'url' => $rutaimagen.'seguridadyestadodederecho.jpg','url_icon' => $rutaicon.'i_Seguridad-y-Estado-de-derecho.png');
+$temas[2] = array('tema'=>'Pueblos indígenas', 'alto'=>150, 'url' => $rutaimagen.'pueblosindigenas.jpg','url_icon' => $rutaicon.'i_Pueblos-indígenas.png');
+$temas[3] = array('tema'=>'Educación universal', 'alto'=>150, 'url' => $rutaimagen.'educacionuniversal.jpg','url_icon' => $rutaicon.'i_Educación_u.png');
+$temas[3] = array('tema'=>'Deporte de alto rendimiento', 'alto'=>325, 'url' => $rutaimagen.'deportedealtorendimiento.jpg','url_icon' => $rutaicon.'i_Deporte_alto.png');
+$temas[3] = array('tema'=>'Educación de calidad', 'alto'=>150, 'url' => $rutaimagen.'educaciondecalidad.jpg','url_icon' => $rutaicon.'i_Educación_c.png');
+$temas[3] = array('tema'=>'Cultura tradicional', 'alto'=>150, 'url' => $rutaimagen.'culturatradicional.jpg','url_icon' => $rutaicon.'i_cultura-tra.png');
+$temas[3] = array('tema'=>'Deporte incluyente', 'alto'=>325, 'url' => $rutaimagen.'deporteincluyente.jpg','url_icon' => $rutaicon.'i_deporte_inc.png');
+$temas[3] = array('tema'=>'Bellas artes', 'alto'=>150, 'url' => $rutaimagen.'bellasartes.jpg','url_icon' => $rutaicon.'i_bellas_artes.png');
+$temas[4] = array('tema'=>'Hídrica', 'alto'=>150, 'url' => $rutaimagen.'hidrica.jpg','url_icon' => $rutaicon.'i_hidirca.png');
+$temas[4] = array('tema'=>'Movilidad sustentable y conectividad regional', 'alto'=>325, 'url' => $rutaimagen.'movilidadsustentableyconectividadregional.jpg','url_icon' => $rutaicon.'i_movilidad.png');
+$temas[4] = array('tema'=>'Energética', 'alto'=>150, 'url' => $rutaimagen.'energetica.jpg','url_icon' => $rutaicon.'i_energetica.png');
+$temas[4] = array('tema'=>'Cambio climático y sustentabilidad', 'alto'=>150, 'url' => $rutaimagen.'cambioclimaticoysustentabilidad.jpg','url_icon' => $rutaicon.'i_cambio_cli.png');
+$temas[4] = array('tema'=>'Manejo integral de residuos', 'alto'=>150, 'url' => $rutaimagen.'manejointegralderesiduos.jpg','url_icon' => $rutaicon.'i_manejo.png');
+$temas[4] = array('tema'=>'Ordenamiento urbano y territorial', 'alto'=>150, 'url' => $rutaimagen.'ordenamientourbanoyterritorial.jpg','url_icon' => $rutaicon.'i_ordenamiento.png');
+$temas[4] = array('tema'=>'Conservación de recursos naturales', 'alto'=>150, 'url' => $rutaimagen.'consevacionderecursosnaturales.jpg','url_icon' => $rutaicon.'i_conservacion.png');
+$temas[5] = array('tema'=>'Equidad de género', 'alto'=>150, 'url' => $rutaimagen.'img/ejes/igualdad.jpg','url_icon' => $rutaicon.'i_Igualdad-de-género.png');
+$temas[5] = array('tema'=>'Gobierno austero, abierto, innovador y eficiente', 'alto'=>150, 'url' => $rutaimagen.'gobiernoaustero.jpg','url_icon' => $rutaicon.'i_gobierno.png');
+$temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>150, 'url' => $rutaimagen.'infraestructura.jpg','url_icon' => $rutaicon.'i_infraestructura.png');
+//==============================================================================================
 
-	<link rel="stylesheet" href="<?=base_url();?>public/css/responsive.css" type="text/css" />
-
-	<link rel="stylesheet" href="<?=base_url();?>public/chosen/chosen.min.css?v=1" type="text/css" />
-	<!--Modal Loading -->
-	<link type="text/css" rel="stylesheet" href="<?=base_url();?>admin/plugins/modal-loading/css/modal-loading.css" />
-	<link type="text/css" rel="stylesheet" href="<?=base_url();?>admin/plugins/modal-loading/css/modal-loading-animate.css" />
-	<!--Modal Loading -->
-	<style type="text/css">
-		.error_chosen{
-			border: 1px solid #EE0000;
-		}
+	switch ($active) {
+		case 6:
+			$flip_efect = 'flip-card';
+			$flip_back = '<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
+							<div class="flip-card-inner">
+								<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+							</div>
+						</div>';
+			break;
 		
-	</style>
+		case 7:
+			$flip_efect = '';
+			$flip_back = '';
+			break;
+	}
+?>
 
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-	<!-- Document Title
-	============================================= -->
-	<title>Participación Ciudadana</title>
-
-</head>
-
-<body class="stretched" data-loader="2" data-animation-in="fadeIn" data-speed-in="1500" data-animation-out="fadeOut" data-speed-out="800">
-
-	<!-- Document Wrapper
-	============================================= -->
-	<div id="wrapper" class="clearfix">
-
-		<div id="home" class="page-section" style="position:absolute;top:0;left:0;width:100%;height:200px;z-index:-2;"></div>
-
-		
-		<!-- Header
-		============================================= -->
-		<?php include('header.php'); ?>
-
-		<div class="clear"></div>
-
-		<!-- Content
-		============================================= -->
-		<?php 
-			$alto = 150;
-			$alto2 = 325;
-			$rutaimagen = base_url().'/img/ejes/';
-		?>
-		<section id="content">
-
-			<div class="content-wrap">
-
-				
-				<div class="container clearfix">					
-
-					<div class="">
+<div class="">
 						<div class="feature-box fbox-center fbox-light fbox-plain">
 							<h3 style="font-size: 24px;color: #1a4a60; font-weight: 1200;"><strong>MATRIZ DE EJES<br>PED 2018-2024</strong></h3>
 						</div>
 					</div>
-
+					<?php /*
+					foreach ($ejes as $v) {
+    					echo "Valor actual es:".$v['eje'];
+					}		
+ 					print_r($ejes); 
+					 print_r($temas); */ ?>
 					<div class="row">
 						<!-- Economía --->
 						<div class="col-lg-3">
@@ -82,7 +87,7 @@
 							<div class="row grid-container" data-layout="masonry" style="overflow: visible">
 
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front" style="background-image: url('<?=$rutaimagen;?>competividad.jpg?v=1.3')" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -93,17 +98,13 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
-											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 						
 
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>comercialyturistica.jpg');">
 											<div class="flip-card-inner">													
 												<div class="card nobg noborder text-center">
@@ -114,16 +115,12 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
-											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>industrial.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -134,16 +131,12 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
-											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>capitalhumano.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -154,16 +147,12 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
-											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto2?>" style="background-image: url('<?=$rutaimagen;?>seguridadpatrimonial.jpg?v=1');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -174,16 +163,12 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto2?>" >
-											<div class="flip-card-inner">												
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>cienciaytecnologia.jpg');">
 											<div class="flip-card-inner">												
 												<div class="card nobg noborder text-center">
@@ -194,16 +179,12 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back no-after bg-danger" data-height-xl="<?=$alto?>">
-											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>empleoyfomentoalemprendedurismo.jpg');">
 											<div class="flip-card-inner">
 												<div class="flip-card-inner">
@@ -216,11 +197,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
-											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 							</div>
@@ -233,7 +210,7 @@
 							<h2 class="text-center" style="color: #4d4d4d;"><b>SOCIALES</b></h2>
 							<div class="row grid-container" data-layout="masonry" style="overflow: visible">
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front dark" style="background-image: url('<?=$rutaimagen;?>alimentaria.jpg')" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -244,17 +221,13 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
-											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 						
 
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>vivienda.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -265,16 +238,12 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back no-after bg-danger" data-height-xl="<?=$alto?>">
-											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>salud.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -285,16 +254,12 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>" >
-											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>desarrolloruralypesquero.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
@@ -305,16 +270,12 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back no-after bg-danger" data-height-xl="<?=$alto?>">
-											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>seguridadsocial.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -325,16 +286,12 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
-											<div class="flip-card-inner">												
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>inclusionsocial.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
@@ -345,16 +302,12 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
-											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>seguridadyestadodederecho.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
@@ -365,16 +318,12 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
-											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>pueblosindigenas.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
@@ -385,11 +334,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back no-after bg-danger" data-height-xl="<?=$alto?>">
-											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 							</div>
@@ -402,7 +347,7 @@
 
 							<div class="row grid-container" data-layout="masonry" style="overflow: visible">
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front dark" style="background-image: url('<?=$rutaimagen;?>educacionuniversal.jpg')" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -413,17 +358,13 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
-											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 						
 
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front dark" data-height-xl="<?=$alto2?>" style="background-image: url('<?=$rutaimagen;?>deportedealtorendimiento.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -434,16 +375,12 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto2?>">
-											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>educaciondecalidad.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -454,16 +391,12 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back no-after bg-danger" data-height-xl="<?=$alto?>">
-											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front dark" style="background-image: url('<?=$rutaimagen;?>culturatradicional.jpg')" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -474,17 +407,13 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
-											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 						
 
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front dark" data-height-xl="<?=$alto2?>" style="background-image: url('<?=$rutaimagen;?>deporteincluyente.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -495,16 +424,12 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto2?>">
-											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>bellasartes.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -515,11 +440,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back no-after bg-danger" data-height-xl="<?=$alto?>">
-											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 
@@ -534,7 +455,7 @@
 							<h2>AMBIENTALES</h2>
 							<div class="row grid-container" data-layout="masonry" style="overflow: visible">
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>hidrica.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -545,17 +466,13 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
-											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 						
 
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front dark" data-height-xl="<?=$alto2?>" style="background-image: url('<?=$rutaimagen;?>movilidadsustentableyconectividadregional.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -566,16 +483,12 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto2?>">
-											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>energetica.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -586,16 +499,12 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
-											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>cambioclimaticoysustentabilidad.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
@@ -606,16 +515,12 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
-											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>manejointegralderesiduos.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -626,16 +531,12 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
-											<div class="flip-card-inner">												
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>ordenamientourbanoyterritorial.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
@@ -646,16 +547,12 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
-											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="flip-card text-center">
+									<div class="<?=$flip_efect;?> text-center">
 										<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen?>/consevacionderecursosnaturales.jpg');">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
@@ -666,11 +563,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
-											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-											</div>
-										</div>
+										<?=$flip_back;?>
 									</div>
 								</div>
 							</div>
@@ -691,7 +584,7 @@
 
 				<div class="row grid-container" data-layout="masonry" style="overflow: visible">
 					<div class="col-lg-4 mb-4">
-						<div class="flip-card text-center top-to-bottom">
+						<div class="<?=$flip_efect;?> text-center">
 							<div class="flip-card-front dark" style="background-image: url('<?=base_url();?>img/ejes/igualdad.jpg')" data-height-xl="<?=$alto;?>">
 								<div class="flip-card-inner">
 									<div class="card nobg noborder text-center">
@@ -703,17 +596,13 @@
 									</div>
 								</div>
 							</div>
-							<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto;?>">
-								<div class="flip-card-inner">
-									<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-								</div>
-							</div>
+							<?=$flip_back;?>
 						</div>
 					</div>
 
 					<div class="col-lg-4 mb-4">
-						<div class="flip-card text-center top-to-bottom">
-							<div class="flip-card-front dark" data-height-xl="<?=$alto;?>" style="background-image: url('<?=$rutaimagen?>/gobiernoaustero.jpg');" data-height-xl="<?=$alto;?>">
+						<div class="<?=$flip_efect;?> text-center">
+							<div class="flip-card-front dark" style="background-image: url('<?=$rutaimagen?>/gobiernoaustero.jpg');" data-height-xl="<?=$alto;?>">
 								<div class="flip-card-inner">
 									<div class="card nobg noborder text-center">
 										<div class="card-body nopadding">
@@ -723,16 +612,12 @@
 									</div>
 								</div>
 							</div>
-							<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto;?>">
-								<div class="flip-card-inner">									
-									<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-								</div>
-							</div>
+							<?=$flip_back;?>
 						</div>
 					</div>
 
 					<div class="col-lg-4 mb-4">
-						<div class="flip-card text-center top-to-bottom">
+						<div class="<?=$flip_efect;?> text-center">
 							<div class="flip-card-front dark" data-height-xl="<?=$alto;?>" style="background-image: url('<?=$rutaimagen?>/infraestructura.jpg');">
 								<div class="flip-card-inner">
 									<div class="card nobg noborder text-center">
@@ -743,110 +628,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto;?>">
-								<div class="flip-card-inner">
-									<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-								</div>
-							</div>
+							<?=$flip_back;?>
 						</div>
 					</div>
 				</div>
-					
-				</div>				
-
-			</div>
-
-			<div class="row">
-				<div class="col-lg-12" id="contenidotema">
-					
-				</div>
-			</div>
-			<br>
-			<br>
-		</section>
-		<!-- Footer
-		============================================= -->
-		<footer id="footer" class="dark">
-
-			<!-- Copyrights
-			============================================= -->
-			<div id="copyrights">
-
-				<div class="container clearfix">
-
-					<div class="col_third_fourth">
-						<div class="col_one_third">
-							
-						</div>
-						<div class="col_one_third">
-							<img src="<?=base_url();?>img/logo_yucatan.png">
-						</div>						
-					</div>					
-
-				</div>
-
-			</div><!-- #copyrights end -->
-
-		</footer><!-- #footer end -->
-
-	</div><!-- #wrapper end -->
-
-	<div class="modal1 mfp-hide" id="myModal1">
-		<div class="block divcenter" style="background-color: #FFF; max-width: 500px;">
-			<div class="feature-box fbox-center fbox-effect nobottomborder nobottommargin" style="padding: 40px;">
-				<div class="fbox-icon">
-					<a href="#"><i class="icon-screen i-alt"></i></a>
-				</div>
-				<h3>Responsive Layout<span class="subtitle">Adapts well on Devices</span></h3>
-			</div>
-			<div class="section center nomargin" style="padding: 30px;">
-				<a href="#" class="button" onClick="$.magnificPopup.close();return false;">Don't Show me Again</a>
-			</div>
-		</div>
-	</div>
-
-	<!-- Go To Top
-	============================================= -->
-	<div id="gotoTop" class="icon-angle-up"></div>
-
-	<!-- External JavaScripts
-	============================================= -->
-	<script src="<?=base_url();?>public/js/jquery.js"></script>
-	<script src="<?=base_url();?>public/js/plugins.js"></script>
-
-	<!-- Footer Scripts
-	============================================= -->
-	<script src="<?=base_url();?>public/js/functions.js"></script>	
-	<script src="<?=base_url();?>public/js/funciones.js?v=1.2"></script>
-
-	<!-- Chosen
-	============================================= -->
-	<script src="<?=base_url();?>public/chosen/chosen.jquery.min.js"></script>
-	<script src="<?=base_url();?>public/chosen/chosen.proto.min.js"></script>
-	<!--Modal Loading -->
-	<script src="<?=base_url();?>admin/plugins/modal-loading/js/modal-loading.js"></script>
-	<!--Modal Loading -->
-	<!-- External JavaScripts
-				============================================= -->
-				
-	<script >
-		function MostrarInfografía(id)
-		{
-			var id = id || 0;
-
-			$( "#contenidotema" ).load( "<?=base_url();?>Sitio/infografia" );
-			$('html, body').animate({
-		        scrollTop: $("#contenidotema").offset().top
-		    }, 1000);
-
-			/*$.post("<?=base_url();?>Sitio/listado_dependiente",{nombrelst:nombrelst,valor:valor},function(resultado,status){
-				
-			});*/
-		}
-		
-	</script>
-	<!-- Footer Scripts
-	============================================= -->
-
-</body>
-</html>
