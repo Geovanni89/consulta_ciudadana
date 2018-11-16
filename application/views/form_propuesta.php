@@ -258,7 +258,7 @@
 			uploadUrl: '<?=base_url();?>C_propuestas/subir?op=2',
 		    maxFileCount: 3,
 		    allowedFileExtensions: "pdf",
-		    maxFileSize: 10240,
+		    maxFileSize: 5250,
 		    uploadAsync: false,
 		    uploadExtraData: function() {
 		    	return {
