@@ -161,7 +161,7 @@
 		                case "0":
 		                	loading.out();
 		                    Notificacion('Su contraseña ha sido cambiada','success');
-		                    setTimeout(function(){ window.location.href = '<?=base_url();?>Sitio/login' ; }, 1500);
+		                    setTimeout(function(){ window.location.href = '<?=base_url();?>Sitio/login?r=1' ; }, 1500);
 		                    break;                    
 		                default:
 		                	loading.out();

@@ -75,12 +75,12 @@
 							</div>
 
 							<div class="col_one_third">
-								<label for="register-form-name">Apellido paterno:<i class="icon icon-asterisk text-danger"></i></label>
+								<label for="register-form-name">Primer apellido:</label>
 								<input type="text" id="apellido_paterno" name="apellido_paterno" value="" class="form-control" maxlength="100" />
 							</div>
 
 							<div class="col_one_third col_last">
-								<label for="register-form-name">Apellido materno:</label>
+								<label for="register-form-name">Segundo apellido:</label>
 								<input type="text" id="apellido_materno" name="apellido_materno" value="" class="form-control" maxlength="100" />
 							</div>
 
@@ -316,9 +316,6 @@
 				},
 			  	rules: {
 			    	nombre: {
-			      		required: true
-			    	},
-			    	apellido_paterno: {
 			      		required: true
 			    	},
 			    	contrasenia: {

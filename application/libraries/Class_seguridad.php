@@ -26,10 +26,12 @@ class Class_seguridad {
                     if($qu->num_rows() > 0)
                     {
                         $du = $qu->row();
+                        $usuario = explode(" ", $du->vNombre);
                         $_SESSION[PREFIJO.'_idusuario'] = $du->idusuario;
                         $_SESSION[PREFIJO.'_correo'] = $du->vCorreo;
                         $_SESSION[PREFIJO.'_idrol'] = $du->idrol;
                         $_SESSION[PREFIJO.'_nombre'] = $du->vNombre.' '.$du->vApellidoPaterno.' '.$du->vApellidoMaterno ;
+                        $_SESSION[PREFIJO.'_usuario'] = trim($usuario[0]);
                         $cod = 0;
                     }else $cod = 101;
                 }else $cod = 500;

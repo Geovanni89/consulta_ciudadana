@@ -130,6 +130,7 @@
 				============================================= -->
 				
 	<script >
+		var get_r = <?php if(isset($_GET['r']) && !empty($_GET['r'])){echo 1;}else{echo 0;}?>;
 		$( "#login-form" ).validate({
 		  	rules: {
 		    	correo: {
@@ -173,9 +174,10 @@
 		                case "0":
 		                    Notificacion('Autentificado','success');
 		                    var url = '<?=base_url();?>';
-		                    if(document.referrer)
+		                    if(document.referrer && get_r == 1)
 		                    {
-		                    	if(document.referrer != '<?=base_url();?>Sitio/registrarse') url = document.referrer;
+		                    	url = document.referrer;
+		                    	
 		                    }
 
 		                    window.location.href = url;
