@@ -320,13 +320,22 @@ class M_propuestas extends CI_Model {
 		}
 	}
 
-	public function datos_correo($idcoment)
-	{
-		$this->db->select('c.vComentario,c.dFecha,p.vTitulo,p.vCodigo,u.iIdUsuario,u.vNombre,u.vApellidoPaterno,u.vApellidoMaterno,u.vCorreo');
-		$this->db->from('Comentario c');
-		$this->db->join('Propuesta p','c.iIdPropuesta = p.iIdPropuesta','INNER');
-		$this->db->join('Usuario u','c.iIdUsuario = u.iIdUsuario','INNER');
-		$this->db->where('c.iIdComentario',$idcoment);
+	public function datos_correo($idcoment=0,$iIdUsuario=0)
+	{		
+		if($idcoment>0)
+		{
+			$this->db->select('c.vComentario,c.dFecha,p.vTitulo,p.vCodigo,u.iIdUsuario,u.vNombre,u.vApellidoPaterno,u.vApellidoMaterno,u.vCorreo');
+			$this->db->from('Comentario c');
+			$this->db->join('Propuesta p','c.iIdPropuesta = p.iIdPropuesta','INNER');
+			$this->db->join('Usuario u','c.iIdUsuario = u.iIdUsuario','INNER');
+			$this->db->where('c.iIdComentario',$idcoment);			
+		}
+		elseif($idcoment==0 && $iIdUsuario>0)
+		{	
+			$this->db->select('u.iIdUsuario,u.vNombre,u.vApellidoPaterno,u.vApellidoMaterno,u.vCorreo');
+			$this->db->from('Usuario u');			
+			$this->db->where('u.iIdUsuario',$iIdUsuario);	
+		}
 
 		$query = $this->db->get();
 		if($query!=false) return $query->result();

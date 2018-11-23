@@ -56,7 +56,7 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 	switch ($active) {
 		case 6:
 			$flip_efect = 'flip-card';
-			$flip_back = '<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto?>">
+			$flip_back = '<div class="flip-card-back bg-info no-after" data-height-xl="<?=$alto?>">
 							<div class="flip-card-inner">
 								<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 							</div>
@@ -93,9 +93,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 							<div class="row grid-container" data-layout="masonry" style="overflow: visible">
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas(1);" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info dark" style="background-image: url('<?=$rutaimagen;?>competividad.jpg?v=1.3')" data-height-xl="<?=$alto?>">-->
-											<div class="flip-card-front bg-primary dark" data-height-xl="<?=$alto?>">
+											<div class="flip-card-front bg-info dark" id="tema_1" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
@@ -111,9 +111,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 						
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas(2);" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>comercialyturistica.jpg');">-->
-											<div class="flip-card-front bg-secondary dark" data-height-xl="<?=$alto?>">
+											<div class="flip-card-front bg-info dark" id="tema_2" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">													
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
@@ -128,9 +128,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas(3);" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>industrial.jpg');">-->
-											<div class="flip-card-front bg-success bg-info dark" data-height-xl="<?=$alto?>">
+											<div class="flip-card-front bg-info dark" id="tema_3" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
@@ -145,9 +145,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas(4);" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>capitalhumano.jpg');">-->
-											<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>">
+											<div class="flip-card-front bg-info dark" id="tema_4" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
@@ -162,9 +162,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas(5);" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info bg-info dark" data-height-xl="<?=$alto2?>" style="background-image: url('<?=$rutaimagen;?>seguridadpatrimonial.jpg?v=1');">-->
-											<div class="flip-card-front bg-warning dark" data-height-xl="<?=$alto2?>">
+											<div class="flip-card-front bg-info dark" id="tema_5" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">												
@@ -179,9 +179,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" id="tema_" onclick="selecciona_temas();" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>cienciaytecnologia.jpg');">-->
-											<div class="flip-card-front bg-danger dark" data-height-xl="<?=$alto?>">
+											<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">												
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
@@ -196,9 +196,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" id="tema_" onclick="selecciona_temas();" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>empleoyfomentoalemprendedurismo.jpg');">-->
-											<div class="flip-card-front bg-light dark" data-height-xl="<?=$alto?>">
+											<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="flip-card-inner">
 													<div class="card nobg noborder text-center">
@@ -223,9 +223,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 							<h2 class="text-center" style="color: #4d4d4d;"><b>SOCIALES</b></h2>
 							<div class="row grid-container" data-layout="masonry" style="overflow: visible">
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" id="tema_" onclick="selecciona_temas();" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info dark" style="background-image: url('<?=$rutaimagen;?>alimentaria.jpg')" data-height-xl="<?=$alto?>">-->
-											<div class="flip-card-front bg-primary dark" data-height-xl="<?=$alto?>">
+											<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
@@ -241,9 +241,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 						
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" id="tema_" onclick="selecciona_temas();" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>vivienda.jpg');">-->
-											<div class="flip-card-front bg-secondary dark" data-height-xl="<?=$alto?>">
+											<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
@@ -258,9 +258,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" id="tema_" onclick="selecciona_temas();" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>salud.jpg');">-->
-											<div class="flip-card-front bg-success dark" data-height-xl="<?=$alto?>">
+											<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
@@ -275,7 +275,7 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" id="tema_" onclick="selecciona_temas();" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>desarrolloruralypesquero.jpg');">-->
 											<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
@@ -292,9 +292,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" id="tema_" onclick="selecciona_temas();" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>seguridadsocial.jpg');">-->
-											<div class="flip-card-front bg-warning dark" data-height-xl="<?=$alto?>">
+											<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
@@ -309,9 +309,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" id="tema_" onclick="selecciona_temas();" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>inclusionsocial.jpg');">-->
-											<div class="flip-card-front bg-danger dark" data-height-xl="<?=$alto?>">
+											<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
 													<div class="card-body nopadding">
@@ -326,9 +326,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" id="tema_" onclick="selecciona_temas();" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>seguridadyestadodederecho.jpg');">-->
-											<div class="flip-card-front bg-light dark" data-height-xl="<?=$alto?>">
+											<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
 													<div class="card-body nopadding">
@@ -343,9 +343,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" id="tema_" onclick="selecciona_temas();" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>pueblosindigenas.jpg');">-->
-											<div class="flip-card-front bg-primary dark" data-height-xl="<?=$alto?>">
+											<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
 													<div class="card-body nopadding">
@@ -368,9 +368,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 
 							<div class="row grid-container" data-layout="masonry" style="overflow: visible">
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" id="tema_" onclick="selecciona_temas();" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info dark" style="background-image: url('<?=$rutaimagen;?>educacionuniversal.jpg')" data-height-xl="<?=$alto?>">-->
-											<div class="flip-card-front bg-secondary dark" data-height-xl="<?=$alto?>">
+											<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
@@ -386,9 +386,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 						
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" id="tema_" onclick="selecciona_temas();" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto2?>" style="background-image: url('<?=$rutaimagen;?>deportedealtorendimiento.jpg');">-->
-											<div class="flip-card-front bg-success dark" data-height-xl="<?=$alto2?>">
+											<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
@@ -403,7 +403,7 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" id="tema_" onclick="selecciona_temas();" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>educaciondecalidad.jpg');">-->
 											<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
@@ -420,9 +420,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" id="tema_" onclick="selecciona_temas();" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info dark" style="background-image: url('<?=$rutaimagen;?>culturatradicional.jpg')" data-height-xl="<?=$alto?>">-->
-											<div class="flip-card-front bg-warning dark" data-height-xl="<?=$alto?>">
+											<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
@@ -438,9 +438,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 						
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" id="tema_" onclick="selecciona_temas();" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto2?>" style="background-image: url('<?=$rutaimagen;?>deporteincluyente.jpg');">-->
-											<div class="flip-card-front bg-danger dark" data-height-xl="<?=$alto2?>">
+											<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
@@ -455,9 +455,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" id="tema_" onclick="selecciona_temas();" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>bellasartes.jpg');">-->
-											<div class="flip-card-front bg-light dark" data-height-xl="<?=$alto?>">
+											<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
@@ -482,9 +482,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 							<h2>AMBIENTALES</h2>
 							<div class="row grid-container" data-layout="masonry" style="overflow: visible">
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" id="tema_" onclick="selecciona_temas();" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>hidrica.jpg');">-->
-											<div class="flip-card-front bg-primary dark" data-height-xl="<?=$alto?>">
+											<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
@@ -500,9 +500,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 						
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" id="tema_" onclick="selecciona_temas();" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto2?>" style="background-image: url('<?=$rutaimagen;?>movilidadsustentableyconectividadregional.jpg');">-->
-											<div class="flip-card-front bg-secondary dark" data-height-xl="<?=$alto2?>">
+											<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
@@ -517,9 +517,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" id="tema_" onclick="selecciona_temas();" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>energetica.jpg');">-->
-											<div class="flip-card-front bg-success dark" data-height-xl="<?=$alto?>">
+											<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
@@ -534,7 +534,7 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" id="tema_" onclick="selecciona_temas();" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>cambioclimaticoysustentabilidad.jpg');">-->
 											<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
@@ -551,9 +551,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" id="tema_" onclick="selecciona_temas();" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>manejointegralderesiduos.jpg');">-->
-											<div class="flip-card-front bg-warning dark" data-height-xl="<?=$alto?>">
+											<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
@@ -568,9 +568,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" id="tema_" onclick="selecciona_temas();" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>ordenamientourbanoyterritorial.jpg');">-->
-											<div class="flip-card-front bg-danger dark" data-height-xl="<?=$alto?>">
+											<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
 													<div class="card-body nopadding">
@@ -585,9 +585,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center">
+									<div class="<?=$flip_efect;?> text-center" id="tema_" onclick="selecciona_temas();" style="cursor: pointer;">
 										<!--<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen?>/consevacionderecursosnaturales.jpg');">-->
-											<div class="flip-card-front bg-light dark" data-height-xl="<?=$alto?>">
+											<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
 													<div class="card-body nopadding">
@@ -618,9 +618,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 
 				<div class="row grid-container" data-layout="masonry" style="overflow: visible">
 					<div class="col-lg-4 mb-4">
-						<div class="<?=$flip_efect;?> text-center">
+						<div class="<?=$flip_efect;?> text-center" id="tema_" onclick="selecciona_temas();" style="cursor: pointer;">
 							<!--<div class="flip-card-front bg-info dark" style="background-image: url('<?=base_url();?>img/ejes/igualdad.jpg')" data-height-xl="<?=$alto;?>">-->
-								<div class="flip-card-front bg-primary dark" data-height-xl="<?=$alto;?>">
+								<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto;?>">
 								<div class="flip-card-inner">
 									<div class="card nobg noborder text-center">
 										<div class="card-body nopadding">
@@ -636,9 +636,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 					</div>
 
 					<div class="col-lg-4 mb-4">
-						<div class="<?=$flip_efect;?> text-center">
+						<div class="<?=$flip_efect;?> text-center" id="tema_" onclick="selecciona_temas();" style="cursor: pointer;">
 							<!--<div class="flip-card-front bg-info dark" style="background-image: url('<?=$rutaimagen?>/gobiernoaustero.jpg');" data-height-xl="<?=$alto;?>">-->
-								<div class="flip-card-front bg-secondary dark" data-height-xl="<?=$alto;?>">
+								<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto;?>">
 								<div class="flip-card-inner">
 									<div class="card nobg noborder text-center">
 										<div class="card-body nopadding">
@@ -653,9 +653,9 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 					</div>
 
 					<div class="col-lg-4 mb-4">
-						<div class="<?=$flip_efect;?> text-center">
+						<div class="<?=$flip_efect;?> text-center" id="tema_" onclick="selecciona_temas();" style="cursor: pointer;">
 							<!--<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto;?>" style="background-image: url('<?=$rutaimagen?>/infraestructura.jpg');">-->
-								<div class="flip-card-front bg-success dark" data-height-xl="<?=$alto;?>">
+								<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto;?>">
 								<div class="flip-card-inner">
 									<div class="card nobg noborder text-center">
 										<div class="card-body nopadding">

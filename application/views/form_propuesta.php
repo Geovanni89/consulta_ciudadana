@@ -68,15 +68,22 @@
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="sel_sect">Selecciona el Sector <i class="icon icon-asterisk text-danger"></i></label>
-									<select class="form-control" id="iIdSector" name="iIdSector" readonly required>
-										<?php echo $select_sec; /* <select class="form-control" id="iIdSector" name="iIdSector" onchange="carga_temas(this.value);" readonly required>*/?>
-									</select>
+									<?php echo $input_sector; ?>
+
+
+
+									<!--<select class="form-control" id="iIdSector" name="iIdSector" readonly required>
+										<?php //echo $select_sec; /* <select class="form-control" id="iIdSector" name="iIdSector" onchange="carga_temas(this.value);" readonly required>*/?>
+									</select>-->
 								</div>
 								<div class="form-group col-md-6">
 									<label for="iIdTema">Selecciona el Tema <i class="icon icon-asterisk text-danger"></i></label>
-									<select class="form-control" id="iIdTema" name="iIdTema" readonly required>
-										<?php echo $select_tema; ?>
-									</select>
+									<?php echo $input_tema; ?>
+
+
+									<!--<select class="form-control" id="iIdTema" name="iIdTema" readonly required>
+										<?php //echo $select_tema; ?>
+									</select>-->
 								</div>
 							</div>
 							<div class="form-group">

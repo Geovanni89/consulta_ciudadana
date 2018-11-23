@@ -103,7 +103,7 @@
 
 					<!-- Sidebar
 					============================================= -->
-					<div class="sidebar nobottommargin col_last clearfix">						
+					<!--<div class="sidebar nobottommargin col_last clearfix">						
 						<div class="sidebar-widgets-wrap">							
 
 							<div class="widget clearfix">
@@ -151,7 +151,7 @@
 
 						</div>
 
-					</div>
+					</div>-->
 					<!-- .sidebar end -->
 
 				</div>

@@ -120,7 +120,8 @@ class Sitio extends CI_Controller {
 		{
 			foreach ($query_sec as $sector)
             {
-                $select_sec .= '<option value="'.$sector->iIdSector.'" selected>'.$sector->vSector.'</option>';
+				$datos['input_sector'] = '<input class="form-control" type="text" readonly value="'.$sector->vSector.'"><input type="hidden" id="iIdSector" name="iIdSector" value="'.$sector->iIdSector.'" required>';
+                //$select_sec .= '<option value="'.$sector->iIdSector.'" selected>'.$sector->vSector.'</option>';
             }
 		}
 		$datos['select_sec'] = $select_sec;
@@ -130,7 +131,8 @@ class Sitio extends CI_Controller {
 		{
 			foreach ($query_tema as $tema)
             {
-                $select_tema .= '<option value="'.$tema->iIdTema.'" selected>'.$tema->vTema.'</option>';
+				$datos['input_tema'] = '<input class="form-control" type="text" readonly value="'.$tema->vTema.'"><input type="hidden" id="iIdTema" name="iIdTema" value="'.$tema->iIdTema.'" required>';
+                //$select_tema .= '<option value="'.$tema->iIdTema.'" selected>'.$tema->vTema.'</option>';
             }
 		}
 		$datos['select_tema'] = $select_tema;
@@ -145,7 +147,7 @@ class Sitio extends CI_Controller {
 		}
 		$datos['select'] = $select;
 		//estas consultas se moveran posteriormente a C_propuestas
-		if(isset($_SESSION[PREFIJO.'_idusuario']))
+		if(isset($_SESSION[PREFIJO.'_idusuario']) && $iIdSector>0 && $iIdTema>0)			
 			$this->load->view('form_propuesta',$datos);
 		else
 			header("Location: ".base_url()."Sitio/matriz_ejes");

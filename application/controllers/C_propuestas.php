@@ -103,8 +103,40 @@ class C_propuestas extends CI_Controller {
 
 		$model = new M_propuestas();
 		$query_prop = $model->inserta_propuesta($datos,'Propuesta',$vCodigo);
-		if($query_prop===false) echo 0;
-		else echo $query_prop;
+		if($query_prop===false)
+			echo 0;
+		else 
+		{
+			//envio de correo
+			$iIdUsuario = $_SESSION[PREFIJO.'_idusuario'];
+
+			$query_correo = $model->datos_correo(0,$iIdUsuario);
+
+			//$propuesta = $query[0]->vTitulo;
+			$nombre = $query_correo[0]->vNombre.' '.$query_correo[0]->vApellidoPaterno.' '.$query_correo[0]->vApellidoMaterno;
+			//$correo = $query_correo[0]->vCorreo;
+			$correo = 'vg.barbosa89@gmail.com';
+			//$codigo = $query[0]->vCodigo;
+			$asunto = 'Propuesta enviada';
+
+			$this->load->library('Class_mail');
+			$mail = new Class_mail();
+			$template = 'templates/propuesta_enviada.html';
+			$mensaje = file_get_contents($template);
+			$mensaje = str_replace("{{var_nombre}}", $nombre, $mensaje);
+			//$mensaje = str_replace("{{var_propuesta}}", $propuesta, $mensaje);
+			//$mensaje = str_replace("{{var_codigo}}", $codigo, $mensaje);
+
+
+			/*if($mail->enviar_correo_gmail($correo,$asunto,$mensaje)) 
+				echo 'correcto';
+			else 
+				echo 'error1';*/
+			$mail->enviar_correo_gmail($correo,$asunto,$mensaje);
+			//envio de correo
+
+			echo $query_prop;
+		} 
 	}
 
 	public function carga_temas()

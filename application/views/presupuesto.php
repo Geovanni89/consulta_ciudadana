@@ -65,8 +65,9 @@
 				<div class="container clearfix">					
 
 					<?php include('plantilla_matriz.php'); ?>
-					<div class="col-lg-12 text-right">
-			<a href="javascript:" onclick="" class="btn btn-block btn-success">Enviar</a></div>
+					
+					<div class="col_one_third"></div>
+					<div class="col_one_third"><a href="javascript:" onclick="envia_temas();" class="btn btn-block btn-success">Enviar</a></div>
 				</div>				
 
 			</div>			
@@ -125,19 +126,53 @@
 				============================================= -->
 				
 	<script >
-		function MostrarInfografía(id)
-		{
-			var id = id || 0;
+		var total_temas = 0;
+		var id_temas = {};
 
-			$( "#contenidotema" ).load( "<?=base_url();?>Sitio/infografia" );
-			$('html, body').animate({
-		        scrollTop: $("#contenidotema").offset().top
-		    }, 1000);
 
-			/*$.post("<?=base_url();?>Sitio/listado_dependiente",{nombrelst:nombrelst,valor:valor},function(resultado,status){
-				
-			});*/
+
+		function selecciona_temas(idtema) {
+			if($('#tema_'+idtema).hasClass('bg-success')!==true) {
+				if(total_temas<3) {
+
+					if(typeof $('#tema_'+idtema).val()!=='undefined')
+					{						
+						id_temas['tema_'+idtema] = idtema;
+						total_temas++;
+					    // the variable is defined
+						$('#tema_'+idtema).removeClass('bg-info').addClass('bg-success');
+					}
+					else toastr.danger('No se ha podido seleccionar el tema', 'Error', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+					
+
+					//toastr.success('Tema seleccionado correctamente', 'Correcto', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+				}
+				else if(idtema>=3)
+					toastr.warning('Ya ha seleccionado el máximo de temas posibles', '¡Advertencia!', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+					
+			}
+			else {
+				if(id_temas['tema_'+idtema]) {
+					$('#tema_'+idtema).removeClass('bg-success').addClass('bg-info');
+					delete id_temas['tema_'+idtema];
+					total_temas--;					
+				}				
+			}
 		}
+
+		function envia_temas() {
+			//var id=[];		
+			if(total_temas==3) {
+				/*$.each(id_temas, function(index,val) {			  
+				  id.push(val);
+				});*/
+				$.post('<?=base_url();?>C_presupuesto/envia_temas',{temas:id_temas}, function(resp){
+					console.log(resp);
+					//toastr.success('Temas enviados correctamente', 'Correcto', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+				});
+			}
+			else toastr.warning('Debe seleccionar 3 temas para continuar', '¡Advertencia!', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+		}	
 		
 	</script>
 	<!-- Footer Scripts
