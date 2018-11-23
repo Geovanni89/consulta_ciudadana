@@ -102,11 +102,11 @@
 							<div class="row">
 								<div class="col-lg-12 bottommargin">
 									<label>Imágenes descriptivas:</label>
-									<small id="" class="form-text text-muted">Puedes subir hasta 5 imagenes en los formatos jpeg o jpg; hasta 1 MB por acrhivo.<br></small><br>
+									<small id="" class="form-text text-muted">Puedes subir hasta 3 imagenes en los formatos jpeg,jpg o png; hasta 1 MB por acrhivo.<br></small><br>
 									<input id="adjuntoFotos" name="adjuntoFotos[]" type="file" class="file" accept="image/*" multiple data-show-caption="true" data-show-preview="true" data-show-upload="false">
 								</div>
 								<div class="col-lg-12 bottommargin">
-									<label>Documentos</label>
+									<label>Documentos adicionales</label>
 									<small id="" class="form-text text-muted">Puedes subir hasta un máximo de 3 documentos en formato pdf, de hasta 3 MB por archivo.</small><br>
 									<input id="adjuntoArchivos" name="adjuntoArchivos[]" type="file" class="file" multiple data-show-caption="true" data-show-preview="true" data-allowed-file-extensions='["pdf"]' data-show-upload="false">
 								</div>
@@ -133,7 +133,7 @@
 							<div class="form-group">
 								<div>
 									<input id="terminos" class="checkbox-style" name="terminos" type="checkbox" onclick="checks(1);">
-									<label for="terminos" class="checkbox-style-3-label checkbox-small">Acepto la Política de privacidad y las condiciones de uso <i class="icon icon-asterisk text-danger"></i></label>
+									<label for="terminos" class="checkbox-style-3-label checkbox-small">Acepto la Política de privacidad y las condiciones de uso</label>
 								</div>
 								<!--<input type="submit" class="btn btn-success" id="guarda_propuesta" onclick="actualizaText();" value="Crear propuesta" disabled/>-->
 								<input type="submit" class="btn btn-success" id="guarda_propuesta" value="Crear propuesta" disabled/>
@@ -227,7 +227,7 @@
 		});
 
 		    /*minImageWidth: 50,
-    minImageHeight: 50*/
+    minImageHeight: 400*/
 		$("#adjuntoFotos").fileinput({
 		    showUpload: false,
 		    layoutTemplates: {
@@ -240,9 +240,10 @@
 		        '</div>',
 			},
 		    uploadUrl: '<?=base_url();?>C_propuestas/subir?op=1',
-		    maxFileCount: 5,
-		    allowedFileExtensions: ["jpg", "png", "gif"],
+		    maxFileCount: 3,
+		    allowedFileExtensions: ["jpg", "png"],
 		    maxFileSize: 1024,
+		    minImageHeight: 400,
 		    uploadAsync: false,
 		    uploadExtraData: function() {
 		    	return {
@@ -265,7 +266,7 @@
 			uploadUrl: '<?=base_url();?>C_propuestas/subir?op=2',
 		    maxFileCount: 3,
 		    allowedFileExtensions: "pdf",
-		    maxFileSize: 5250,
+		    maxFileSize: 3082,
 		    uploadAsync: false,
 		    uploadExtraData: function() {
 		    	return {

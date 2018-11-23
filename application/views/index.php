@@ -79,8 +79,9 @@
 							<span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy 
 							nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, 
 							quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut.</span>
-						</div>						
-
+						</div>
+						<div class="col_one_third"></div>
+						<div class="col_one_third"><a href="<?=base_url();?>Sitio/form_propuesta" class="button button-3d button-xlarge button-rounded button-green">¡Crea tu propuesta! <i class="icon-circle-arrow-right"></i></a></div>						
 						<div class="clear"></div>
 
 					</div>
