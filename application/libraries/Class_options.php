@@ -66,16 +66,18 @@ class Class_options {
     { 
         $model = new M_catalogos();
         $select = '';
+
+        if($opcion0 != '')
+        {
+            if($seleccionado == 0) $select .="<option value=\"0\" selected>$opcion0</option>";
+            else $select .="<option value=\"0\">$opcion0</option>";
+        }
                 
         $query = $model->datos_municipios();
 
         if($query != false)
         {            
-            if($opcion0 != '')
-            {
-                if($seleccionado == 0) $select .="<option value=\"0\" selected>$opcion0</option>";
-                else $select .="<option value=\"0\">$opcion0</option>";
-            }
+            
             
             $query = $query->result();
             foreach ($query as $e)

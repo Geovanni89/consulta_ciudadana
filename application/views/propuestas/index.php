@@ -17,7 +17,7 @@
 			<div class="card">
 				<div class="card-body">
 					<h4 class="card-title">Buscar propuestas</h4>
-					<form action="#" id="formbusqueda">
+					<form action="#" id="formbusqueda" name="formbusqueda" method="POST">
                         <div class="form-body">
                             <div class="row">
                                 <div class="col-md-2">
@@ -60,12 +60,17 @@
                             		<div class="input-group mb-12">
                                         <input type="text" class="form-control" name="fTitulo" id="fTitulo" placeholder="" aria-label="" aria-describedby="basic-addon1">
                                         <div class="input-group-append">
-                                            <button class="btn btn-info" type="button" onclick="Buscar();"><i class="ti-search"></i>&nbsp;Buscar</button>
+                                            <button class="btn btn-info" type="submit" onclick="Buscar(0,event);"><i class="ti-search"></i>&nbsp;Buscar</button>
                                         </div>
                                     </div>
                             	</div>
                             	<div class="col-md-2">
-                        			<button class="btn btn-success" type="button" onclick="CapturarPropuesta(0);" style="margin-top:28px;">Crear propuesta</button>
+                                    <?php 
+                                    if($periodo_activo)
+                                    {
+                        			     echo '<button class="btn btn-success" type="button" onclick="CapturarPropuesta(0);" style="margin-top:28px;">Crear propuesta</button>';
+                                    } 
+                                    ?>
                             	</div>
                             </div>
                            
@@ -83,8 +88,10 @@
 	</div>
 </body>
 <script type="text/javascript">
-	function Buscar(pag)
+	function Buscar(pag,e)
 	{
+        if (!e) { var e = window.event; }
+        e.preventDefault();
 		var pag = pag || 1;
 
 		var variables = $("#formbusqueda").serialize();

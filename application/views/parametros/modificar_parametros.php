@@ -94,7 +94,7 @@
 <!--<script src="<?=base_url();?>admin/assets/libs/jquery-validation/dist/jquery.validate.min.js"></script>-->
 
 <script type="text/javascript">
-	$('#INI_CAP_PRO, #FIN_CAP_PRO, #IN_INT_PRO, #FIN_INT_PRO, #INI_CAP_COM, #FIN_CAP_COM, #INI_VOT, #FIN_VOT').bootstrapMaterialDatePicker({ weekStart: 0, time: false });
+	$('#INI_CAP_PRO, #FIN_CAP_PRO, #INI_INT_PRO, #FIN_INT_PRO, #INI_CAP_COM, #FIN_CAP_COM, #INI_VOT, #FIN_VOT').bootstrapMaterialDatePicker({ weekStart: 0, time: false });
 
 	$( "#form" ).validate({
 	  	rules: {
@@ -109,13 +109,30 @@
 	    	},
 	    	FIN_INT_PRO: {
 	      		required: true
-	    	}
+	    	},
+            INI_CAP_COM: {
+                required: true
+            },
+            FIN_CAP_COM: {
+                required: true
+            },
+            INI_VOT: {
+                required: true
+            },
+            FIN_VOT: {
+                required: true
+            }
+            
 	  	},
 	  	messages: {
 		    INI_CAP_PRO: "Este campo es requerido",
 		    FIN_CAP_PRO: "Este campo es requerido",
 		    INI_INT_PRO: "Este campo es requerido",
-		    FIN_INT_PRO: "Este campo es requerido"		    
+		    FIN_INT_PRO: "Este campo es requerido",
+            INI_CAP_COM: "Este campo es requerido",
+            FIN_CAP_COM: "Este campo es requerido",
+            INI_VOT: "Este campo es requerido",
+            FIN_VOT: "Este campo es requerido"
 	  	},
 	  	submitHandler: function(form){
 	  		EnviarForm(form,'<?=base_url();?>C_parametros/guardar_parametros');

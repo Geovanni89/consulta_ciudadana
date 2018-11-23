@@ -54,34 +54,9 @@
         <header class="topbar">
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <div class="navbar-header">
-                    <?php /* Seccón de logos
-                    <!-- This is for the sidebar toggle which is visible on mobile only -->
                     <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
                         <i class="ti-menu ti-close"></i>
                     </a>
-                    <!-- ============================================================== -->
-                    <!-- Logo -->
-                    <!-- ============================================================== -->
-                    <a class="navbar-brand" href="index.html">
-                        <!-- Logo icon -->
-                        <b class="logo-icon">
-                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                            <!-- Dark Logo icon -->
-                            <img src="../../assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
-                            <!-- Light Logo icon -->
-                            <img src="../../assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
-                        </b>
-                        <!--End Logo icon -->
-                        <!-- Logo text -->
-                        <span class="logo-text">
-                            <!-- dark Logo text -->
-                            <img src="../../assets/images/logo-text.png" alt="homepage" class="dark-logo" />
-                            <!-- Light Logo text -->
-                            <img src="../../assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
-                        </span>
-                    </a>
-                    <!-- ============================================================== -->
-                    <!-- End Logo -->
                     <!-- ============================================================== -->
                     <!-- ============================================================== -->
                     <!-- Toggle which is visible on mobile only -->
@@ -90,7 +65,6 @@
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="ti-more"></i>
                     </a>
-                    */ ?>
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Logo -->
@@ -98,7 +72,6 @@
                 <div class="navbar-collapse collapse" id="navbarSupportedContent">
                     
                     <ul class="navbar-nav float-left mr-auto">
-                       
 
 
                     </ul>
@@ -106,6 +79,22 @@
                     <!-- Right side toggle and nav items -->
                     <!-- ============================================================== -->
                     <ul class="navbar-nav float-right">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="flag-icon flag-icon-us font-18"></i>Jorge Estrella
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right  animated bounceInDown" aria-labelledby="navbarDropdown2">
+                                <a class="dropdown-item" href="#">
+                                    <i class="flag-icon flag-icon-us"></i> English</a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="flag-icon flag-icon-fr"></i> French</a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="flag-icon flag-icon-es"></i> Spanish</a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="flag-icon flag-icon-de"></i> German</a>
+                            </div>
+                        </li>
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->

@@ -98,7 +98,7 @@
 		                <div class="col-md-12">
 		                    <div class="form-group">
 		                    	<label>ÁMBITO DE ACTUACIÓN</label><br>
-                    	        <input type="checkbox"  id="ambitoMed" name="ambitoMed" <?php if($iIdMunicipio == 0 ){ echo 'checked="checked"'; }?>>
+                    	        <input type="checkbox" id="ambitoMed" name="ambitoMed" <?php if($iIdMunicipio == 0 ){ echo 'checked="checked"'; }?> onclick="DeshabilitarMuni(this);">
                                 <label class="" for="customCheck1" style="font-size:12px;">ESTA PROPUESTA NO TIENE UNA UBICACIÓN CONCRETA O NO LA CONOZCO</label>
 		                    </div>
 		                </div>
@@ -108,7 +108,7 @@
 		                <div class="col-md-12">
 		                    <div class="form-group">
 		                    	<small>Seleccione el municipio y coloque un punto.</small>
-		                    	<select name="iIdMunicipio" id="iIdMunicipio" class="form-control" onchange="js_municipio(this.value);">
+		                    	<select name="iIdMunicipio" id="iIdMunicipio" class="form-control" onchange="js_municipio(this.value);" >
 		                    		<?=$op_municipios;?>
 		                    	</select>
 		                    </div>
@@ -119,8 +119,8 @@
 		                <div class="col-md-12">
 		                    <div class="form-group">
 		                    	<div id="map" class="map" style="height:400px;"></div>
-									<input type="hidden" id="nLatDec" name="nLatDec" value="0">
-									<input type="hidden" id="nLongDec" name="nLongDec" value="0">
+									<input type="hidden" id="nLatDec" name="nLatDec" value="<?php if($nLatDec != 0){ echo $nLatDec;}else{ echo 0;} ?>">
+									<input type="hidden" id="nLongDec" name="nLongDec" value="<?php if($nLongDec != 0){ echo $nLongDec;}else{ echo 0;} ?>">
 								</div>                        
 		                    </div>
 		                </div>
@@ -180,8 +180,8 @@
 		            <div class="row">
 		                <div class="col-md-12">
 		                	<input type="submit" class="btn btn-success" id="guarda_propuesta" value="Guardar propuesta"/>
-		                	<input type="button" class="btn btn-success" id="guarda_propuesta" value="Agregar" onclick="Agregar();" />
-		                	<input type="button" class="btn btn-success" id="guarda_propuesta" value="Quitar" onclick="Quitar();" />
+		                	<!--<input type="button" class="btn btn-success" id="guarda_propuesta" value="Agregar" onclick="Agregar();" />
+		                	<input type="button" class="btn btn-success" id="guarda_propuesta" value="Quitar" onclick="Quitar();" />-->
 		                </div>
 		            </div>
 
@@ -482,10 +482,11 @@
 		}
 	}
 
-	function validar()
+	function DeshabilitarMuni(check)
 	{
-		console.log( $('#adjuntoFotos').fileinput('getFilesCount'));
-		//$('#adjuntoFotos').fileinput('upload');
+		
+		if( $(check).is(":checked") ) $("#iIdMunicipio").prop('disabled','disabled');
+		else $("#iIdMunicipio").prop('disabled','');
 	}
 
 	function js_municipio(valor) {

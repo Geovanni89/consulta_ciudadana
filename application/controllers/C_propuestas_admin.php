@@ -13,16 +13,22 @@ class C_propuestas_admin extends CI_Controller {
 
 
     function index_propuestas()
-    {
-    	$op = new Class_options();
-    	$datos['op_sectores'] = $op->options_sectores(0,'Seleccione un sector');
-    	$datos['op_temas'] = $op->options_temas(0,'Seleccione un tema');
-    	$datos['op_estatus_propuestas'] = $op->options_estatus_propuestas(10);
-    	$datos['op_roles'] = $op->options_roles(0,'Seleccione un rol');
+    { 	
+    	/*if(isset($_SESSION[PREFIJO.'_idusuario']) && !empty($_SESSION[PREFIJO.'_idusuario']))
+    	{*/
+	    	$op = new Class_options();
+	    	$datos['op_sectores'] = $op->options_sectores(0,'Seleccione un sector');
+	    	$datos['op_temas'] = $op->options_temas(0,'Seleccione un tema');
+	    	$datos['op_estatus_propuestas'] = $op->options_estatus_propuestas(10);
+	    	$datos['op_roles'] = $op->options_roles(0,'Seleccione un rol');
+	    	$datos['periodo_activo'] = $this->validar_periodo_integracion();	//	Válida el periodo de integración de propuestas
 
-    	$datos['resultado_busqueda'] = $this->listado_propuestas();
+	    	$datos['resultado_busqueda'] = $this->listado_propuestas();
 
-    	$this->load->view('propuestas/index',$datos);
+	    	$this->load->view('propuestas/index',$datos);
+	   	/*
+	    }
+	    else $this->load->view('seguridad/login.php');*/
     }
 
     public function buscar_propuestas()
@@ -43,6 +49,7 @@ class C_propuestas_admin extends CI_Controller {
     public function listado_propuestas($where='', $palabra='', $pag=1)
 	{
 		$qc = $this->mp->carga_propuestas_admin($where,$palabra);
+		$periodo_activo = $this->validar_periodo_integracion();	//	Válida el periodo de integración de propuestas
 		$listado = '';
 
 		if($qc)
@@ -51,8 +58,9 @@ class C_propuestas_admin extends CI_Controller {
 
 			if($paginador['total_registros'] > 0)
 			{ 
-				$listado .= '<p>Puede integrar propuestas, seleccionado otras que se encuentren en estatus "Pendiente de revisión" y haciendo clic en "Crear propuesta"</p>
-               <div class="table-responsive">
+				if($periodo_activo) $listado .= '<p>Puede integrar propuestas, seleccionado otras que se encuentren en estatus "Pendiente de revisión" y haciendo clic en "Crear propuesta"</p>';
+
+               	$listado .= '<div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -68,8 +76,12 @@ class C_propuestas_admin extends CI_Controller {
                             
                             foreach ($paginador['resultado'] as $dc)
                             {	
-                            	$checked = ( isset($_SESSION['checks'][$dc->iIdPropuesta] ) ) ? 'checked':'';
-                            	$inputcheck = ($dc->iEstatus == 1) ? '<input type="checkbox" class="" id="chk'.$dc->iIdPropuesta.'" onclick="GuardarId('.$dc->iIdPropuesta.')" '.$checked.'>':'';
+                            	if($periodo_activo)
+                            	{
+                            		$checked = ( isset($_SESSION['checks'][$dc->iIdPropuesta] ) ) ? 'checked':'';
+                            		$inputcheck = ($dc->iEstatus == 1) ? '<input type="checkbox" class="" id="chk'.$dc->iIdPropuesta.'" onclick="GuardarId('.$dc->iIdPropuesta.')" '.$checked.'>':'';
+                            	}else $inputcheck = '';
+
                                 $listado .= '<tr>
                                     <td>'.$dc->iIdPropuesta.'</td>
                                     <td>'.$inputcheck.$dc->vCodigo.'</td>
@@ -327,132 +339,135 @@ class C_propuestas_admin extends CI_Controller {
 
 	function guardar_propuesta()
 	{
-		if(isset($_POST['iIdPropuesta']))
+		if(isset($_SESSION[PREFIJO.'-idusuario']) && !empty($_SESSION[PREFIJO.'-idusuario']))
 		{
-			$this->load->model('M_seguridad','ms');
-
-			$iIdPropuesta = $this->input->post('iIdPropuesta');
-			$iIdSector = $this->input->post('iIdSector');
-			$mensaje_administrador = $this->input->post('mensajecorreo');
-			$estatus_inicial = $this->input->post('estatus_inicial');
-			$mensaje_administrador = htmlentities($mensaje_administrador, ENT_QUOTES, "UTF-8");
-			$correo_enviado = true;
-
-			$d_propuesta = array(	'vTitulo' => $this->input->post('vTitulo'),
-									'tDescripcion' => base64_decode($this->input->post('tDescripcion')),
-									'iIdTema' => $this->input->post('iIdTema'),
-									'vUrlVideoExterno' => $this->input->post('vUrlVideoExterno'),
-									'nLatDec' => $this->input->post('nLatDec'),
-									'nLongDec' => $this->input->post('nLongDec'),
-									'iIdMunicipio' => $this->input->post('iIdMunicipio')
-									 );
-
-			if($iIdPropuesta == 0)
+			if(isset($_POST['iIdPropuesta']))
 			{
-				//	NUEVA PROPUESTA
-				$this->load->library('Class_mail');
-				$d_propuesta['dFecha'] = date('Y-m-d h:i:s');
-				$d_propuesta['vCodigo'] = '';
-				$d_propuesta['iEstatus'] = 3; //	Es 3 por que es creada por el administrador
-				$d_propuesta['iIdUsuario'] = $_SESSION[PREFIJO.'_idusuario']; //	Administrador que integra la propuesta
+				$this->load->model('M_seguridad','ms');
 
-				$con = $this->ms->iniciar_transaccion();
+				$iIdPropuesta = $this->input->post('iIdPropuesta');
+				$iIdSector = $this->input->post('iIdSector');
+				$mensaje_administrador = $this->input->post('mensajecorreo');
+				$estatus_inicial = $this->input->post('estatus_inicial');
+				$mensaje_administrador = htmlentities($mensaje_administrador, ENT_QUOTES, "UTF-8");
+				$correo_enviado = true;
 
-				//	Guardamos la propuesta
-				$iIdPropuesta = $this->ms->inserta_registro('Propuesta',$d_propuesta,$con);
-				//	Generamos su código y actualizamos
-				$vCodigo = $this->genera_codigo_propuesta($iIdSector,$d_propuesta['iIdTema'],$iIdPropuesta);
-				$where['iIdPropuesta'] = $iIdPropuesta;
-				$aux = $this->ms->actualiza_registro('Propuesta',$where,array('vCodigo' => $vCodigo),$con);
-				//	Guardamos las propuestas integradas
-				if(isset($_SESSION['checks']) && !empty($_SESSION['checks']))
+				$d_propuesta = array(	'vTitulo' => $this->input->post('vTitulo'),
+										'tDescripcion' => base64_decode($this->input->post('tDescripcion')),
+										'iIdTema' => $this->input->post('iIdTema'),
+										'vUrlVideoExterno' => $this->input->post('vUrlVideoExterno'),
+										'nLatDec' => (isset($_POST['ambitoMed'])) ? 0:$this->input->post('nLatDec'),
+										'nLongDec' => (isset($_POST['ambitoMed'])) ? 0:$this->input->post('nLongDec'),
+										'iIdMunicipio' => (isset($_POST['ambitoMed'])) ? 0: $this->input->post('iIdMunicipio')
+										 );
+
+				if($iIdPropuesta == 0)
 				{
-					foreach ($_SESSION['checks'] as $d)
+					//	NUEVA PROPUESTA
+					$this->load->library('Class_mail');
+					$d_propuesta['dFecha'] = date('Y-m-d h:i:s');
+					$d_propuesta['vCodigo'] = '';
+					$d_propuesta['iEstatus'] = 3; //	Es 3 por que es creada por el administrador
+					$d_propuesta['iIdUsuario'] = $_SESSION[PREFIJO.'_idusuario']; //	Administrador que integra la propuesta
+
+					$con = $this->ms->iniciar_transaccion();
+
+					//	Guardamos la propuesta
+					$iIdPropuesta = $this->ms->inserta_registro('Propuesta',$d_propuesta,$con);
+					//	Generamos su código y actualizamos
+					$vCodigo = $this->genera_codigo_propuesta($iIdSector,$d_propuesta['iIdTema'],$iIdPropuesta);
+					$where['iIdPropuesta'] = $iIdPropuesta;
+					$aux = $this->ms->actualiza_registro('Propuesta',$where,array('vCodigo' => $vCodigo),$con);
+					//	Guardamos las propuestas integradas
+					if(isset($_SESSION['checks']) && !empty($_SESSION['checks']))
 					{
-						$datos = array('iIdPropuesta' => $iIdPropuesta,'iIdPropuestaOrigen'=> $d);
-						//	Insertamos la nueva propuesta
-						$aux = $this->ms->inserta_registro('PropuestaOrigen',$datos,$con);
-						//	Actualizamos las porpuestas que la originaron a integradas
-						$aux = $this->ms->actualiza_registro('Propuesta',array('iIdPropuesta' => $d),array('iEstatus' => 2),$con);
-
-						//Enviamos un correo a cada usuario
-						$autor = $this->mp->datos_autor($d);
-						if($autor)
+						foreach ($_SESSION['checks'] as $d)
 						{
-							$template = 'templates/mensaje_integracion.html';
-							$vNombre = htmlentities($autor->vNombre, ENT_QUOTES, "UTF-8");
-							$vTitulo = htmlentities($autor->vTitulo, ENT_QUOTES, "UTF-8");
-							$nuevapropuesta = htmlentities($d_propuesta['vTitulo'], ENT_QUOTES, "UTF-8");
+							$datos = array('iIdPropuesta' => $iIdPropuesta,'iIdPropuestaOrigen'=> $d);
+							//	Insertamos la nueva propuesta
+							$aux = $this->ms->inserta_registro('PropuestaOrigen',$datos,$con);
+							//	Actualizamos las porpuestas que la originaron a integradas
+							$aux = $this->ms->actualiza_registro('Propuesta',array('iIdPropuesta' => $d),array('iEstatus' => 2),$con);
 
-							$mensaje = file_get_contents($template);
-							$mensaje = str_replace('{{var_nombre}}', $vNombre, $mensaje);
-							$mensaje = str_replace('{{var_propuesta_original}}', $vTitulo, $mensaje);
-							$mensaje = str_replace('{{var_nueva_propuesta}}', $nuevapropuesta, $mensaje);
-							$mensaje = str_replace('{{var_codigo}}', $vCodigo, $mensaje);
-							$mensaje = str_replace('{{var_mensaje}}', $mensaje_administrador, $mensaje);
+							//Enviamos un correo a cada usuario
+							$autor = $this->mp->datos_autor($d);
+							if($autor)
+							{
+								$template = 'templates/mensaje_integracion.html';
+								$vNombre = htmlentities($autor->vNombre, ENT_QUOTES, "UTF-8");
+								$vTitulo = htmlentities($autor->vTitulo, ENT_QUOTES, "UTF-8");
+								$nuevapropuesta = htmlentities($d_propuesta['vTitulo'], ENT_QUOTES, "UTF-8");
+
+								$mensaje = file_get_contents($template);
+								$mensaje = str_replace('{{var_nombre}}', $vNombre, $mensaje);
+								$mensaje = str_replace('{{var_propuesta_original}}', $vTitulo, $mensaje);
+								$mensaje = str_replace('{{var_nueva_propuesta}}', $nuevapropuesta, $mensaje);
+								$mensaje = str_replace('{{var_codigo}}', $vCodigo, $mensaje);
+								$mensaje = str_replace('{{var_mensaje}}', $mensaje_administrador, $mensaje);
+								
+								$asunto = utf8_decode('Propuesta integrada');
+
+								$mail = new Class_mail();
+				    			$correo_enviado = $mail->enviar_correo_gmail($autor->vCorreo,$asunto,$mensaje);	
+							}
 							
-							$asunto = utf8_decode('Propuesta integrada');
-
-							$mail = new Class_mail();
-			    			$correo_enviado = $mail->enviar_correo_gmail($autor->vCorreo,$asunto,$mensaje);	
 						}
-						
+
 					}
 
-				}
 
 
-
-				if($this->ms->terminar_transaccion($con))
-				{
-					if(isset($_SESSION['checks'])) unset($_SESSION['checks']);
-					if($correo_enviado)	echo "0-$iIdPropuesta"; //	Los cambios fueron gurdados
-					else echo "*";	//	Los cambios fueron guardados pero los correos no pudieron ser enviados
-				}
-				else echo 'Ha ocurrido un error';
-			}
-			else
-			{
-				//	MODIFICAR PROPUESTA
-				$d_propuesta['iEstatus'] = $this->input->post('iEstatus');
-				$motivo = $this->input->post('vMotivo');
-				$motivo = htmlentities($motivo, ENT_QUOTES, "UTF-8");
-
-				$con = $this->ms->iniciar_transaccion();
-				$aux = $this->ms->actualiza_registro('Propuesta',array('iIdPropuesta' => $iIdPropuesta),$d_propuesta,$con);
-
-
-				if($this->ms->terminar_transaccion($con))
-				{
-
-					if($d_propuesta['iEstatus'] == 0 && $estatus_inicial != $d_propuesta['iEstatus'])
+					if($this->ms->terminar_transaccion($con))
 					{
-						//	Si la propuesta no es viable, enviamos un correo al autor con el motivo
-						
-						$autor = $this->mp->datos_autor($iIdPropuesta);
-						$this->load->library('Class_mail');
-						$mail = new Class_mail();
-						$template = 'templates/propuesta_no_viable.html';
-						$vNombre = htmlentities($autor->vNombre, ENT_QUOTES, "UTF-8");
-						$vTitulo = htmlentities($autor->vTitulo, ENT_QUOTES, "UTF-8");
-						$mensaje = file_get_contents($template);
-						$mensaje = str_replace('{{var_nombre}}', $vNombre, $mensaje);
-						$mensaje = str_replace('{{var_propuesta}}', $vTitulo, $mensaje);
-						$mensaje = str_replace('{{var_codigo}}', $autor->vCodigo, $mensaje);
-						$mensaje = str_replace('{{var_motivo}}', $motivo, $mensaje);
-						
-						$asunto = utf8_decode('Propuesta no viable');
-						$correo_enviado = $mail->enviar_correo_gmail($autor->vCorreo,$asunto,$mensaje);
-
+						if(isset($_SESSION['checks'])) unset($_SESSION['checks']);
 						if($correo_enviado)	echo "0-$iIdPropuesta"; //	Los cambios fueron gurdados
 						else echo "*";	//	Los cambios fueron guardados pero los correos no pudieron ser enviados
 					}
-					else echo '0';
-					
+					else echo 'Ha ocurrido un error';
 				}
-				else echo 'Ha ocurrido un error';
+				else
+				{
+					//	MODIFICAR PROPUESTA
+					$d_propuesta['iEstatus'] = $this->input->post('iEstatus');
+					$motivo = $this->input->post('vMotivo');
+					$motivo = htmlentities($motivo, ENT_QUOTES, "UTF-8");
+
+					$con = $this->ms->iniciar_transaccion();
+					$aux = $this->ms->actualiza_registro('Propuesta',array('iIdPropuesta' => $iIdPropuesta),$d_propuesta,$con);
+
+
+					if($this->ms->terminar_transaccion($con))
+					{
+
+						if($d_propuesta['iEstatus'] == 0 && $estatus_inicial != $d_propuesta['iEstatus'])
+						{
+							//	Si la propuesta no es viable, enviamos un correo al autor con el motivo
+							
+							$autor = $this->mp->datos_autor($iIdPropuesta);
+							$this->load->library('Class_mail');
+							$mail = new Class_mail();
+							$template = 'templates/propuesta_no_viable.html';
+							$vNombre = htmlentities($autor->vNombre, ENT_QUOTES, "UTF-8");
+							$vTitulo = htmlentities($autor->vTitulo, ENT_QUOTES, "UTF-8");
+							$mensaje = file_get_contents($template);
+							$mensaje = str_replace('{{var_nombre}}', $vNombre, $mensaje);
+							$mensaje = str_replace('{{var_propuesta}}', $vTitulo, $mensaje);
+							$mensaje = str_replace('{{var_codigo}}', $autor->vCodigo, $mensaje);
+							$mensaje = str_replace('{{var_motivo}}', $motivo, $mensaje);
+							
+							$asunto = utf8_decode('Propuesta no viable');
+							$correo_enviado = $mail->enviar_correo_gmail($autor->vCorreo,$asunto,$mensaje);
+
+							if($correo_enviado)	echo "0-$iIdPropuesta"; //	Los cambios fueron gurdados
+							else echo "*";	//	Los cambios fueron guardados pero los correos no pudieron ser enviados
+						}
+						else echo '0';
+						
+					}
+					else echo 'Ha ocurrido un error';
+				}
 			}
-		}
+		}else echo '<p>Acceso denegado. Debe iniciar sesión</p>';
 	}
 
 	function listado_dependiente()
@@ -569,6 +584,18 @@ class C_propuestas_admin extends CI_Controller {
 	public function eliminar_adjunto_propuesta()
 	{
 		echo json_encode(true);
+	}
+
+	public function validar_periodo_integracion()
+	{
+		$inicio = $this->mp->valor_parametro('INI_INT_PRO');
+		$fin = $this->mp->valor_parametro('FIN_INT_PRO');
+
+		$hoy = strtotime(date("d-m-Y"));
+		$inicio = strtotime($inicio);
+		$fin = strtotime($fin);
+
+		return ($hoy >= $inicio && $hoy <= $fin) ? true:false;
 	}
 }
 ?>

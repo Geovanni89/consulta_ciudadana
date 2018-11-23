@@ -103,5 +103,15 @@ class M_propuestas_admin extends CI_Model {
 		$query = $this->db->get()->row()->num;
 		return $query;	
 	}
+
+	function valor_parametro($vId)
+	{
+		$this->db->select('vValor');
+		$this->db->from('Parametro');
+		$this->db->where('vId',$vId);
+
+		$query = $this->db->get()->row()->vValor;
+		return $query;		
+	}
 }
 ?>
