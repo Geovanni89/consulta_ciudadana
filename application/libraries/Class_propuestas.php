@@ -98,7 +98,8 @@ class Class_propuestas {
                     </div>
                 </div>';
             }
-        }        
+        }
+        else $propuestas.="<h4>Aún no existen propuestas</h4>";
 
         return $propuestas;
     }
@@ -125,13 +126,13 @@ class Class_propuestas {
                                     <h3><span>'.$vprop->vTitulo.'</span></h3>
                                     <ul class="entry-meta clearfix"><li><i class="icon-calendar3"></i> Desde el '.$vprop->dFecha.'</li></ul>
                                     <p>'.substr(strip_tags($vprop->tDescripcion,'<p>'),0,200).'</p>
-                                    <br><button class="btn btn-success">Votar</button>
+                                    <br><button class="btn btn-success">Consultar</button>
                                 </div>
                             </div>
                         </div>';
             }
         }
-        else $propuesta.="<h4>Aún no existen propuestas votadas</h4>";
+        else $propuesta.="<div class='col_one_third'></div><div class='col_one_third'><h4>Aún no existen propuestas votadas</h4></div>";
         
         return $propuesta;
     }

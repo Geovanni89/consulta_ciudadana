@@ -116,6 +116,7 @@ class M_propuestas extends CI_Model {
 	{
 		$this->db->select('p.iIdPropuesta,p.vTitulo,p.tDescripcion,p.iEstatus,p.vCodigo,p.dFecha,(select count(vp."iIdPropuesta")from "VotoPropuesta" vp where vp."iIdPropuesta" = p."iIdPropuesta") as votos');
 		$this->db->from('Propuesta p');
+		$this->db->where('p.iEstatus',3);
 		$this->db->order_by('votos','DESC');
 		$this->db->limit(3);
 
