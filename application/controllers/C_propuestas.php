@@ -114,8 +114,8 @@ class C_propuestas extends CI_Controller {
 
 			//$propuesta = $query[0]->vTitulo;
 			$nombre = $query_correo[0]->vNombre.' '.$query_correo[0]->vApellidoPaterno.' '.$query_correo[0]->vApellidoMaterno;
-			//$correo = $query_correo[0]->vCorreo;
-			$correo = 'vg.barbosa89@gmail.com';
+			$correo = $query_correo[0]->vCorreo;
+			//$correo = 'vg.barbosa89@gmail.com';
 			//$codigo = $query[0]->vCodigo;
 			$asunto = 'Propuesta enviada';
 
