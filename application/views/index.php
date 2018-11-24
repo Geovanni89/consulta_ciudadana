@@ -677,7 +677,7 @@
 				<section id="section-team" class="page-section topmargin-lg">
 					<div class="heading-block center">
 						<h2><span>Propuestas</span></h2>
-						<span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</span>
+						<span>Propuestas más recientes</span>
 					</div>
 
 					<div class="container clearfix">
@@ -696,7 +696,7 @@
 					
 					<div class="heading-block center">
 						<h2><span>Votaciones</span></h2>
-						<span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</span>
+						<span>3 Propuestas más votadas</span>
 					</div>					
 
 					<div class="container clearfix">						
