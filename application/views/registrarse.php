@@ -29,7 +29,6 @@
 		}
 		
 	</style>
-
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 	<!-- Document Title
@@ -206,6 +205,8 @@
 
 							<div class="clear"></div>
 
+							
+
 							<div class="col_one_third">
 								<label for="register-form-name">Nivel de estudio:<i class="icon icon-asterisk text-danger"></i></label>
 								<select name="id_grado_estudio" id="id_grado_estudio" class="form-control">
@@ -219,14 +220,35 @@
 									<?php echo $op_ocupaciones; ?>
 								</select>
 							</div>
-							
 
+							<div class="clear"></div>
+
+							<div class="col_one_third">
+								<div id="div_captcha"></div>
+							</div>
+
+							<div class="col_one_third" style="margin-top: 28px;">
+								<button class="button button-3d button-black nomargin" id="register-form-submit" name="register-form-submit" value="register">Registrarse</button>
+							</div>
+
+							<!--<div class="col_one_third">
+								<label for="codigo">Código de seguridad</label>
+								<input type="text" class="form-control" id="captcha" name="captcha" maxlength="5" tabindex="3" autocomplete="off" required>
+							</div>
+
+							<div class="col_one_third" style="margin-top: 28px;">
+								<img id="imgCaptcha" src="<?=base_url();?>C_seguridad/captcha" class="img-responsive">
+								<p class="text-left"><a href="#" onclick="refrescar_capcha(event);" style="cursor:pointer; color:#000000;font-weight:bold;"><img src="<?=base_url();?>img/refrescar.png" width="10px" alt="Refrescar captcha" title="Refrescar captcha"/>&nbsp;Nuevo código</a></p>
+							</div>
+
+							<div class="col_one_third col_last">
+							</div> 
 
 							<div class="clear"></div>
 
 							<div class="col_full nobottommargin">
 								<button class="button button-3d button-black nomargin" id="register-form-submit" name="register-form-submit" value="register">Registrarse</button>
-							</div>
+							</div> -->
 
 						</form>
 
@@ -282,14 +304,23 @@
 	<script src="<?=base_url();?>public/chosen/chosen.proto.min.js"></script>
 	<!--Modal Loading -->
 	<script src="<?=base_url();?>admin/plugins/modal-loading/js/modal-loading.js"></script>
+	<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"async defer></script>
 	<!--Modal Loading -->
 	<!-- External JavaScripts
 				============================================= -->
 				
 	<script >
+		var div_captcha;
+		var onloadCallback = function() {
+        div_captcha = grecaptcha.render('div_captcha', {
+	          'sitekey' : '6LcFNH0UAAAAAELpmyqx2cXRiQQDG-Ip-Bk2ukFC'
+	        });
+	    };
+	    
 		$(document).ready(function(){
 			$(".chosen-select").chosen({width: "100%"});
 			$('[data-toggle="tooltip"]').tooltip();
+
 
 			$( "#register-form" ).validate({
 				ignore: [],
@@ -356,6 +387,9 @@
 				 	},
 				 	id_asentamiento2:{
 				 		min: 1	
+				 	},
+				 	captcha: {
+				 		required:true
 				 	}
 
 			  	},
@@ -401,7 +435,11 @@
 				 	},
 				 	id_asentamiento2: {
 				 		min: "Debe seleccionar una colonia"
+				 	},
+				 	captcha: {
+				 		required: "Por favor escriba el código"
 				 	}
+
 				    
 			  	},
 			  	submitHandler: function(form){
@@ -416,6 +454,13 @@
 			  	}
 			});
 		});
+
+		function refrescar_capcha(e)
+	    {
+	    	var num = Math.floor((Math.random() * 1000) + 1);
+	      	$('#imgCaptcha').attr('src','<?=base_url();?>C_seguridad/captcha?n='+num);
+	      	e.preventDefault();
+	    }
 
 		function Determinar_CP(check)
 		{
@@ -526,7 +571,7 @@
 		{
 			var loading;
 			$.ajax({
-		        url: '<?=base_url();?>C_seguridad/guardar_usuario',
+		        url: '<?=base_url();?>C_seguridad/registrar_usuario',
 		        type: 'POST',
 		        async: false,	//	Para obligar al usuario a esperar una respuesta
 		        data: $(form).serialize(),
@@ -543,11 +588,11 @@
 		        },
 		        success: function(htmlcode){
 		        	loading.out();
+		        	grecaptcha.reset(div_captcha);
 		        	var cod = htmlcode.split("-");
 		        	switch(cod[0])
 		            {
 		                case "0":
-		                    //Notificacion('Un correo ha sido enviado para confirmar su cuenta','success');
 		                    window.location.href = '<?=base_url();?>C_seguridad/usuario_registrado';
 		                    break;		                
 		                default:

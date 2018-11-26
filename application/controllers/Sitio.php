@@ -237,7 +237,7 @@ class Sitio extends CI_Controller {
 			}
 			else
 			{
-				echo 'Debe resolver el captcha';
+				echo 'Resulva el captcha para continuar';
 			}
 			
 		}else echo 'Datos insuficientes';

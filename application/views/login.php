@@ -182,6 +182,8 @@
 		        },
 		        success: function(htmlcode){
 		        	var cod = htmlcode.split("-");
+		        	//	Actualizamos el recaptcha
+		        	grecaptcha.reset(div_captcha);
 		        	switch(cod[0])
 		            {
 		                case "0":
@@ -199,7 +201,6 @@
 		                	break;
 		                default:
 		                    Notificacion(cod,'error');
-		                    grecaptcha.reset(div_captcha);
 		                    break;
 		            }
 		        }
