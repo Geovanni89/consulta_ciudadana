@@ -1748,6 +1748,9 @@ pre {
     background-color: #e9ecef;
     opacity: 1; }
 
+  .form-control .error {
+  border-color: #ef6e6e !important; }
+
 select.form-control:not([size]):not([multiple]) {
   height: calc(2.0625rem + 2px); }
 
@@ -11690,6 +11693,11 @@ body .jqstooltip {
 label {
   font-weight: 500; }
 
+.error {
+    color: #ef6e6e !important;
+    border-color: #ef6e6e !important;
+  }
+
 .r-separator .form-group {
   border-bottom: 1px solid #e9ecef; }
   .r-separator .form-group:last-child {
@@ -11710,11 +11718,11 @@ label {
   align-items: center;
   justify-content: flex-end; }
 
-.error .form-control {
-  border-color: #ef6e6e; }
+/*.error .form-control {
+  border-color: #ef6e6e !important; }
 
 .error .help-block {
-  color: #ef6e6e; }
+  color: #ef6e6e; }*/
 
 .validate .form-control {
   border-color: #22c6ab; }

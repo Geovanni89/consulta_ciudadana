@@ -246,9 +246,6 @@
 		    	nombre: {
 		      		required: true
 		    	},
-		    	apellido_paterno: {
-		      		required: true
-		    	},
 		    	contrasenia: {
 		      		required: true
 		    	},
@@ -371,7 +368,9 @@
 	                	if($("#iIdUsuario").val() > 0) Notificacion('Los datos han sido guardados','success');
 	                	else Notificacion('Un correo ha sido enviado para confirmar la cuenta','success');
 	                	Buscar(1);
-	                    break;		                
+	                    break;
+	                case "*":
+	                	$("#modal_login").modal();
 	                default:
 	                    Notificacion(htmlcode,'error');
 	                    break;

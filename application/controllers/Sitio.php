@@ -197,16 +197,31 @@ class Sitio extends CI_Controller {
 	{
 		if(isset($_POST['correo']) && isset($_POST['contrasenia']))
 		{
-			$usuario = $this->input->post('correo');
-			$contrasenia = $this->input->post('contrasenia');
-			$this->load->library('Class_seguridad');
-			$seg = new Class_seguridad();
+			//	Datos Recaptcha Google
+			$secret = '6LcFNH0UAAAAANR1lPEs3ezWT_mUor1PiT60wn_P';
+	    	$response = $_POST["g-recaptcha-response"];
+	    	$remoteip =  $_SERVER['REMOTE_ADDR'];
 
-			$cod = $seg->iniciar_sesion($usuario,$contrasenia);
-			//var_dump($_SESSION['consulta']);
-			                        
-			echo $cod;
-		}else echo 100;
+	    	$url = 'https://www.google.com/recaptcha/api/siteverify';
+
+	    	$captcha = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$response&remoteip=$remoteip");
+			$json = json_decode($captcha);
+			
+			if($json->success)
+			{
+				$usuario = $this->input->post('correo');
+				$contrasenia = $this->input->post('contrasenia');
+				$this->load->library('Class_seguridad');
+				$seg = new Class_seguridad();
+
+				echo $seg->iniciar_sesion($usuario,$contrasenia);
+			}
+			else
+			{
+				echo 'Debe resolver el captcha';
+			}
+			
+		}else echo 'Datos insuficientes';
 	}
 
 	public function cerrar_sesion()

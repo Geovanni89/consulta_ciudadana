@@ -11,6 +11,167 @@ class C_seguridad extends CI_Controller {
         $this->load->library('Class_options');
         $this->load->model('M_seguridad','ms');
     }
+	
+
+    /*public function registrar_usuario()
+    {
+    	if(isset($_POST['captcha']) && !empty($_POST['captcha']))
+    	{
+    		$codigocaptcha = md5($this->input->post('captcha'));
+    		$dia = $this->input->post('dia');
+    		$mes = $this->input->post('mes');
+    		$anio = $this->input->post('anio');
+    		$fecha_nacimiento = $anio.'-'.$mes.'-'.$dia;
+    		$id = 0;
+    		$d_usuario = array(
+    			'vNombre' => trim($this->input->post('nombre')),
+    			'vApellidoPaterno' => trim($this->input->post('apellido_paterno')),
+    			'vApellidoMaterno' => trim($this->input->post('apellido_materno')),
+    			'dFechaNacimiento' => $fecha_nacimiento,
+    			'iGenero' => $this->input->post('genero'),
+    			'iIdGradoEstudio' => $this->input->post('id_grado_estudio'),
+    			'iIdOcupacion' => $this->input->post('id_ocupacion'),
+    			'vCorreo' => $this->input->post('correo'),
+    			'iRegistroCon' => 1,
+    			'iIdAsentamiento' => $this->input->post('id_asentamiento'),
+    			'iIdRol' => 2,	// Público general
+    			'dFechaRegistro' => date('Y-m-d H:i:s'),
+    			'vContrasenia' => SHA1($this->input->post('contrasenia')),
+    			'iEstatus' => 1
+    		);
+
+    		if(isset($_SESSION['codigocaptcha']) && $_SESSION['codigocaptcha'] == $codigocaptcha)
+    		{
+
+    			if(!$this->ms->verificar_existe_correo_usuario($d_usuario['vCorreo']))
+    			{
+	    			//	Registro de usuario
+	    			$token = $this->generar_token();
+	    			$d_usuario['vToken'] = $token;
+
+		    		$con = $this->ms->iniciar_transaccion();
+
+		    		$idusuario = $this->ms->inserta_registro('Usuario',$d_usuario,$con);
+
+		    		if($this->ms->terminar_transaccion($con))
+		    		{
+		    			// Enviar correo de confirmación
+
+		    			$this->load->library('Class_mail');
+						$mail = new Class_mail();
+
+						$template = 'templates/confirmar_correo.html';
+						$mensaje = file_get_contents($template);
+						$nombre = htmlentities($d_usuario['vNombre'], ENT_QUOTES, "UTF-8");
+						$url = base_url().'C_seguridad/confirmar_correo?id='.$idusuario.'&token='.$token;
+						$mensaje = str_replace('{{var_nombre_dest}}', $nombre, $mensaje);
+						$mensaje = str_replace('{{var_url}}', $url, $mensaje);
+						
+						$asunto = utf8_decode('Confirmación de correo');
+
+		    			if($mail->enviar_correo_gmail($d_usuario['vCorreo'],$asunto,$mensaje)) echo '0';		    			
+		    			else echo 'No se ha podido enviar el correo';
+		    		}
+		    		else
+		    		{
+		    			echo 500;
+		    		}
+		    	}
+		    	else
+		    	{
+		    		echo "El correo ya ha sido registrado";
+		    	}
+		    }
+		    else
+		    {
+		    	echo 'El código es incorrecto';
+		    }
+    	}
+    }*/
+
+    public function registrar_usuario()
+    {	
+    	$secret = '6LcFNH0UAAAAANR1lPEs3ezWT_mUor1PiT60wn_P';
+    	$response = $_POST["g-recaptcha-response"];
+    	$remoteip =  $_SERVER['REMOTE_ADDR'];
+
+    	$url = 'https://www.google.com/recaptcha/api/siteverify';
+
+    	$captcha = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$response&remoteip=$remoteip");
+		$json = json_decode($captcha);
+				
+    	if($json->success)
+    	{
+    		$codigocaptcha = md5($this->input->post('captcha'));
+    		$dia = $this->input->post('dia');
+    		$mes = $this->input->post('mes');
+    		$anio = $this->input->post('anio');
+    		$fecha_nacimiento = $anio.'-'.$mes.'-'.$dia;
+    		$id = 0;
+    		$d_usuario = array(
+    			'vNombre' => trim($this->input->post('nombre')),
+    			'vApellidoPaterno' => trim($this->input->post('apellido_paterno')),
+    			'vApellidoMaterno' => trim($this->input->post('apellido_materno')),
+    			'dFechaNacimiento' => $fecha_nacimiento,
+    			'iGenero' => $this->input->post('genero'),
+    			'iIdGradoEstudio' => $this->input->post('id_grado_estudio'),
+    			'iIdOcupacion' => $this->input->post('id_ocupacion'),
+    			'vCorreo' => $this->input->post('correo'),
+    			'iRegistroCon' => 1,
+    			'iIdAsentamiento' => $this->input->post('id_asentamiento'),
+    			'iIdRol' => 2,	// Público general
+    			'dFechaRegistro' => date('Y-m-d H:i:s'),
+    			'vContrasenia' => SHA1($this->input->post('contrasenia')),
+    			'iEstatus' => 1
+    		);
+
+			if(!$this->ms->verificar_existe_correo_usuario($d_usuario['vCorreo']))
+			{
+    			//	Registro de usuario
+    			$token = $this->generar_token();
+    			$d_usuario['vToken'] = $token;
+
+	    		$con = $this->ms->iniciar_transaccion();
+
+	    		$idusuario = $this->ms->inserta_registro('Usuario',$d_usuario,$con);
+
+	    		if($this->ms->terminar_transaccion($con))
+	    		{
+	    			// Enviar correo de confirmación
+
+	    			$this->load->library('Class_mail');
+					$mail = new Class_mail();
+
+					$template = 'templates/confirmar_correo.html';
+					$mensaje = file_get_contents($template);
+					$nombre = htmlentities($d_usuario['vNombre'], ENT_QUOTES, "UTF-8");
+					$url = base_url().'C_seguridad/confirmar_correo?id='.$idusuario.'&token='.$token;
+					$mensaje = str_replace('{{var_nombre_dest}}', $nombre, $mensaje);
+					$mensaje = str_replace('{{var_url}}', $url, $mensaje);
+					
+					$asunto = utf8_decode('Confirmación de correo');
+
+	    			if($mail->enviar_correo_gmail($d_usuario['vCorreo'],$asunto,$mensaje)) echo '0';		    			
+	    			else echo 'No se ha podido enviar el correo';
+	    		}
+	    		else
+	    		{
+	    			echo 500;
+	    		}
+	    	}
+	    	else
+	    	{
+	    		echo "El correo ya ha sido registrado";
+	    	}
+		    
+		    
+    	}
+    	else
+    	{
+    		echo 'Prohibida la entrada a robots';
+    	}
+    }
+
 
     public function guardar_usuario()
     {
@@ -550,5 +711,68 @@ class C_seguridad extends CI_Controller {
 			if($mail->enviar_correo_gmail($correo,$asunto,$mensaje)) echo '0';		    			
 			else echo 'No se ha podido enviar el correo';	
 		}
+	}
+
+	function iniciar_sesion()
+    {
+        $cod = 500;
+    	if(isset($_POST['correo_login']) && isset($_POST['contrasenia_login']) && isset($_POST['id_login']) && !empty($_POST['correo_login']) && !empty($_POST['contrasenia_login']) && !empty($_POST['id_login']))
+    	{
+    		$usuario = $this->input->post('correo_login');
+    		$contrasenia = $this->input->post('contrasenia_login');
+    		$id_login = (int) $this->input->post('id_login');
+            if(true)    //  En caso de requerir un captcha o proceso de verificación
+            {
+                $ms = new M_seguridad();
+                $where['u.vCorreo'] = $usuario;
+                $where['u.vContrasenia'] = sha1($contrasenia);
+                $qu = $ms->consulta_existe_usuario($where);
+                
+                if($qu != false)
+                {
+                    if($qu->num_rows() > 0)
+                    {
+                        $du = $qu->row();
+                        $usuario = explode(" ", $du->vNombre);
+                        $_SESSION[PREFIJO.'_idusuario'] = $du->idusuario;
+                        $_SESSION[PREFIJO.'_correo'] = $du->vCorreo;
+                        $_SESSION[PREFIJO.'_idrol'] = $du->idrol;
+                        $_SESSION[PREFIJO.'_nombre'] = $du->vNombre.' '.$du->vApellidoPaterno.' '.$du->vApellidoMaterno ;
+                        $_SESSION[PREFIJO.'_usuario'] = trim($usuario[0]);
+                        if($du->idusuario != $id_login) $cod = 1;
+                        else  $cod = 0;
+                    }else $cod = 101;
+                }else $cod = 500;
+            }else $cod = 102;
+        }else $cod = 100;
+
+        echo $cod;
+    }
+
+    public function captcha()
+	{
+		if(isset($_SESSION["codigocaptcha"])) unset($_SESSION["codigocaptcha"]);
+		$tmptxt = "";
+		$pattern = "1234567890";
+		//Generamos un código de 5 dígitos
+		for( $i=0; $i<5; $i++)
+		{
+		  $tmptxt .= $pattern{rand(0,9)};
+		}
+
+		$_SESSION["codigocaptcha"] = md5($tmptxt);
+		
+		$bgcaptcha = imagecreatefromgif(base_url()."img/bgcaptcha.gif");
+		$fuente ="fonts/VeraBd.ttf";
+		$colText = imagecolorallocate($bgcaptcha, 0, 0, 0);
+		
+		imagettftext($bgcaptcha,18,0,20,30,$colText,$fuente,$tmptxt);
+		//imagettftext(image, size, angle, x, y, color, fontfile, text)
+				
+		header("Content-type: image/gif");
+		header("Cache-Control: no-cache, must-revalidate"); 
+		header("Expires: Fri, 19 Jan 1994 05:00:00 GMT"); 
+		header("Pragma: no-cache");
+		imagegif($bgcaptcha);
 	}
 }

@@ -16,7 +16,7 @@
     <link href="<?=base_url();?>admin/assets/extra-libs/c3/c3.min.css" rel="stylesheet">
     <link href="<?=base_url();?>admin/assets/libs/toastr/build/toastr.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="<?=base_url();?>admin/dist/css/style.css" rel="stylesheet">
+    <link href="<?=base_url();?>admin/dist/css/style.css?v=0.1.1.4" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>admin/assets/libs/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css">
     <!--Modal Loading -->
     <link type="text/css" rel="stylesheet" href="<?=base_url();?>admin/plugins/modal-loading/css/modal-loading.css" />
@@ -84,16 +84,6 @@
                                 aria-expanded="false">
                                 <i class="flag-icon flag-icon-us font-18"></i>Jorge Estrella
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right  animated bounceInDown" aria-labelledby="navbarDropdown2">
-                                <a class="dropdown-item" href="#">
-                                    <i class="flag-icon flag-icon-us"></i> English</a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="flag-icon flag-icon-fr"></i> French</a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="flag-icon flag-icon-es"></i> Spanish</a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="flag-icon flag-icon-de"></i> German</a>
-                            </div>
                         </li>
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
@@ -113,7 +103,7 @@
                                     </div>
                                     <div class="m-l-10">
                                         <h4 class="m-b-0"><?php echo  $_SESSION[PREFIJO.'_nombre']; ?></h4>
-                                        <p class=" m-b-0"><?php echo  $_SESSION[PREFIJO.'_correo']; ?></p>
+                                        <p class=" m-b-0"><?php echo  $_SESSION[PREFIJO.'_correo']; ?></p>                                        
                                     </div>
                                 </div>                                
                                 
@@ -132,12 +122,7 @@
                 </div>
             </nav>
         </header>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
+        
         <aside class="left-sidebar">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
@@ -145,64 +130,19 @@
                
             </div>
         </aside>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
-        <div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!--<div class="page-breadcrumb">
-                <div class="row">
-                    <div class="col-5 align-self-center">
-                        <h4 class="page-title">Dashboard</h4>
-                        <div class="d-flex align-items-center">
 
-                        </div>
-                    </div>
-                    <div class="col-7 align-self-center">
-                        <div class="d-flex no-block justify-content-end align-items-center">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item">
-                                        <a href="#">Home</a>
-                                    </li>
-                                    <li class="breadcrumb-item active" aria-current="page">Library</li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
+        <div class="page-wrapper">
             
             <div class="container-fluid" id="contenido">
     
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
+            
             <footer class="footer text-center">
                 <a href="www.seplan.yucatan.gob.mx">SEPLAN</a>
             </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
+            
         </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
+        
     </div>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
@@ -302,6 +242,36 @@
         </div>
     </aside>
     <div class="chat-windows"></div>
+    <!-- Modal para login -->
+    <div id="modal_login" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <form name="modal_form_login" id="modal_form_login" action="" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Iniciar sesión</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">CORREO ELECTRÓNICO:</label>
+                            <input type="hidden" name="id_login" id="id_login" value="<?php echo $_SESSION[PREFIJO.'_idusuario']; ?>">
+                            <input type="text" class="form-control" id="correo_login" name="correo_login">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">CONTRASE&Ntilde;A:</label>
+                            <input type="password" class="form-control" id="contrasenia_login" name="contrasenia_login">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <!--<button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>-->
+                    <button type="submit" class="btn btn-danger waves-effect waves-light">INICIAR SESIÓN</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
@@ -358,22 +328,58 @@
     
     <script type="text/javascript">
         var url_sitio = '<?=base_url();?>';
+        $("#modal_login").modal();
+        $( "#modal_form_login" ).validate({
+            rules: {
+                correo_login: {
+                    required: true
+                },
+                contrasenia_login: {
+                    required: true
+                }
+            },
+            messages: {
+                
+                correo_login: "Este campo es requerido",
+                contrasenia_login: "Este campo es requerido"
+            },
+            submitHandler: function(form){
+                Iniciar_sesion(form,'<?=base_url();?>C_seguridad/iniciar_sesion');
 
-        function PonerEfecto()
+            }
+        });
+
+        function Iniciar_sesion(form,url_destino)
         {
-            //$('.preloader').fadeIn();
-            //$('#contenedor').fadeIn();
-            Cargar('','#contenido','POST');
+            $.ajax({
+                url: url_destino,
+                type: 'POST',
+                async: false,   //  Para obligar al usuario a esperar una respuesta
+                data: $(form).serialize(),
+                error: function(XMLHttpRequest, errMsg, exception){
+                    var msg = "Ha fallado la petición al servidor";
+                    alert(msg);
+                },
+                success: function(htmlcode){
+                    $("#modal_login").modal('hide');
+                    var cod = htmlcode.split("-");
 
-        }
-
-         function QuitarEfecto()
-        {
-            //$('.preloader').fadeIn();
-            $('#contenedor').fadeOut();
-            $('#contenedor').removeClass('preloader');
-
-        }
+                    switch(cod[0])
+                    {
+                        case "0":
+                            Notificacion('Autentificado','success');
+                            break;
+                        case "1":
+                            Notificacion('Autentificado','success');
+                            window.location.href = '<?=base_url();?>Sitio/admin';
+                            break;
+                        default:
+                            Notificacion(msg[cod[0]],'error');
+                            break;
+                    }
+                }
+            }); 
+        }        
 
         function Confirmar_cerrar_sesion()
         {
@@ -401,7 +407,6 @@
         function Cargar(pagina,obj,metodo,variables)
         {
             var loading = '<div id="page-loader" class="fade in"><span class="spinner"></span></div>';
-            //var loading = '<div class="preloader"><div class="lds-ripple"><div class="lds-pos"></div><div class="lds-pos"></div></div></div>';
 
             if(typeof(metodo) == "undefined" || metodo == ""){ metodo = "POST";}
             if(typeof(variables) == "undefined" || variables == ""){ variables = "";}
@@ -420,7 +425,6 @@
             });
           
         }
-
     </script>
 </body>
 

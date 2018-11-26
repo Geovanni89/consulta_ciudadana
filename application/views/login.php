@@ -18,6 +18,7 @@
 
 	<link rel="stylesheet" href="<?=base_url();?>public/css/responsive.css" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
 
 	<!-- Document Title
 	============================================= -->
@@ -63,6 +64,10 @@
 									<div class="col_full">
 										<label for="login-form-password">Contraseña:</label>
 										<input type="password" id="contrasenia" name="contrasenia" value="" class="form-control" autocomplete="off" />
+									</div>
+
+									<div class="col_full">
+										<div id="div_captcha"></div>
 									</div>
 
 									<div class="col_full nobottommargin">
@@ -121,7 +126,8 @@
 	============================================= -->
 	<script src="<?=base_url();?>public/js/functions.js"></script>
 	<script src="<?=base_url();?>public/js/funciones.js?v=4"></script>
-
+	<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"async defer></script>
+    
 
 	<script>
 
@@ -131,6 +137,13 @@
 				
 	<script >
 		var get_r = <?php if(isset($_GET['r']) && !empty($_GET['r'])){echo 1;}else{echo 0;}?>;
+		var div_captcha;
+		var onloadCallback = function() {
+	        div_captcha = grecaptcha.render('div_captcha', {
+	          'sitekey' : '6LcFNH0UAAAAAELpmyqx2cXRiQQDG-Ip-Bk2ukFC'
+	        });
+	    };
+
 		$( "#login-form" ).validate({
 		  	rules: {
 		    	correo: {
@@ -179,11 +192,14 @@
 		                    	url = document.referrer;
 		                    	
 		                    }
-
 		                    window.location.href = url;
-		                    break;                    
+		                    break;
+		                case "100":
+		                	Notificacion('Los datos son incorrectos','error');
+		                	break;
 		                default:
-		                    Notificacion(msg[cod[0]],'error');
+		                    Notificacion(cod,'error');
+		                    grecaptcha.reset(div_captcha);
 		                    break;
 		            }
 		        }
