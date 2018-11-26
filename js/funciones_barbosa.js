@@ -1,28 +1,55 @@
 
 function carga_temas(id) {
+
+	loading = new Loading({
+	    discription: 'Cargando...',
+	    defaultApply: true
+	});
+	
 	var funcion = 'C_propuestas/carga_temas';
 	$.post(url_sitio+funcion, {id:id}, function(resp){
 		$('#iIdTema').html(resp);
+		loading.out();
+		if(id=="") {
+			carga_propuestas();
+		}
 	})
 }
 
 function carga_propuestas(id) {
+	loading = new Loading({
+	    discription: 'Cargando...',
+	    defaultApply: true
+	});
+
 	var funcion = 'C_propuestas/carga_propuestas';
 	$.post(url_sitio+funcion, {id:id}, function(resp){
 		$('#iIdPropuesta').html(resp);
+		loading.out();
 	})
 }
 
 function carga_comentarios() {
+	loading = new Loading({
+	    discription: 'Cargando...',
+	    defaultApply: true
+	});
+
 	var funcion = 'C_propuestas/carga_comentarios';
-	var idsector = $('#iIdSector option:selected').val();
-	var idtema = $('#iIdTema option:selected').val();
-	var idprop = $('#iIdPropuesta option:selected').val();
-	if(idprop!="") {
-		$.post(url_sitio+funcion, {iIdPropuesta:idprop}, function(resp){
+	//var idsector = $('#iIdSector option:selected').val();
+	//var idtema = $('#iIdTema option:selected').val();
+	//var idprop = $('#iIdPropuesta option:selected').val();
+	var iEst = $('#iEstatus option:selected').val();
+
+	if(iEst!="") {
+		$.post(url_sitio+funcion, $('#form_comentarios').serialize(), function(resp){
 			$('#contenido_comentarios').html(resp);
+			loading.out();
 		});
-	} else toastr.warning('Debe seleccionar una propuesta', 'Advertencia', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+	} else {
+		loading.out();
+		toastr.warning('Debe seleccionar por lo menos el Estatus de la propuesta', 'Advertencia', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+	}
 
 
 }

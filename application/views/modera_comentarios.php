@@ -6,41 +6,56 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">                            
-                            <form class="form-horizontal">                                
+                            <form id="form_comentarios" class="form-horizontal">                                
                                 <div class="card-body">
                                     <h4 class="card-title">Moderación de comentarios</h4>                                    
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 text-right control-label col-form-label">Sector</label>
-                                        <div class="col-sm-9">
-                                            <select class="form-control" id="iIdSector" onchange="carga_temas(this.value);">
-                                                <option value="">Seleccione un sector</option>
-                                                <?php 
-                                                if($sectores!=false) 
-                                                {
-                                                    foreach ($sectores as $vsec) {
-                                                        echo '<option value="'.$vsec->iIdSector.'">'.$vsec->vSector.'</option>';
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Sector</label>
+                                                <select class="form-control" id="iIdSector" name="iIdSector" onchange="carga_temas(this.value);">
+                                                    <option value="">Sector</option>
+                                                    <?php 
+                                                    if($sectores!=false) 
+                                                    {
+                                                        foreach ($sectores as $vsec) {
+                                                            echo '<option value="'.$vsec->iIdSector.'">'.$vsec->vSector.'</option>';
+                                                        }
                                                     }
-                                                }
-                                                ?>                                                
-                                            </select>
+                                                    ?>                                                
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Tema</label>
+                                                <select class="form-control" id="iIdTema" name="iIdTema" onchange="carga_propuestas(this.value)">
+                                                    <option value="">Temas</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Propuestas</label>
+                                                <select class="form-control" id="iIdPropuesta" name="iIdPropuesta">
+                                                    <option value="">Propuesta</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Rol</label>
+                                                <select name="iEstatus" id="iEstatus" class="form-control">
+                                                    <option value="">Estatus</option>
+                                                    <option value="0">Eliminado</option>
+                                                    <option value="1">Pendiente</option>
+                                                    <option value="2">Aprobado</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 text-right control-label col-form-label">Tema</label>
-                                        <div class="col-sm-9">
-                                            <select class="form-control" id="iIdTema" onchange="carga_propuestas(this.value)">
-                                                <option value="">Seleccione un tema</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 text-right control-label col-form-label">Propuestas</label>
-                                        <div class="col-sm-9">
-                                            <select class="form-control" id="iIdPropuesta">
-                                                <option value="">Seleccione una propuesta</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                    
+                                    
                                 </div>
                                 <hr>
                                 <div class="card-body">

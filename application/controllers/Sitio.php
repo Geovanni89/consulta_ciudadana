@@ -115,69 +115,88 @@ class Sitio extends CI_Controller {
 		$iIdTema = $this->input->get('iIdTema', TRUE);
 		$model = new M_propuestas();
 
-		if($iIdSector>0 && $iIdTema>0)
+		$inicio_cap = $model->consulta_valor_parametros(1);
+		$fin_cap = $model->consulta_valor_parametros(2);
+
+
+		$inicio = $inicio_cap[0]->vValor;
+        $fin = $fin_cap[0]->vValor;
+        $dFecha = date("Y-m-d");    
+
+		if($dFecha>=$inicio && $dFecha<=$fin)
 		{
-			$query_sec = $model->datos_sectores($iIdSector);
-			if($query_sec!=false)
+			if($iIdSector>0 && $iIdTema>0)
 			{
-				foreach ($query_sec as $sector)
+				$query_sec = $model->datos_sectores($iIdSector);
+				if($query_sec!=false)
+				{
+					foreach ($query_sec as $sector)
+		            {
+						$datos['input_sector'] = '<input class="form-control" type="text" readonly value="'.$sector->vSector.'"><input type="hidden" id="iIdSector" name="iIdSector" value="'.$sector->iIdSector.'" required>';
+		                //$select_sec .= '<option value="'.$sector->iIdSector.'" selected>'.$sector->vSector.'</option>';
+		            }
+				}
+				//$datos['select_sec'] = $select_sec;
+
+				$query_tema = $model->datos_temas($iIdSector,$iIdTema);
+				if($query_tema!=false)
+				{
+					foreach ($query_tema as $tema)
+		            {
+						$datos['input_tema'] = '<input class="form-control" type="text" readonly value="'.$tema->vTema.'"><input type="hidden" id="iIdTema" name="iIdTema" value="'.$tema->iIdTema.'" required>';
+		                //$select_tema .= '<option value="'.$tema->iIdTema.'" selected>'.$tema->vTema.'</option>';
+
+		            }
+				}
+				//$datos['select_tema'] = $select_tema;		
+			}
+			else
+			{
+				$query_sec = $model->datos_sectores();
+				if($query_sec!=false)
+				{
+					$select_sec .= '<select class="form-control" id="iIdSector" name="iIdSector" onchange="carga_temas(this.value);" required><option value="">Sector</option>';
+					foreach ($query_sec as $sector)
+		            {					
+		                $select_sec .= '<option value="'.$sector->iIdSector.'">'.$sector->vSector.'</option>';
+		            }
+		            $select_sec .='</select>';
+				}
+				$datos['input_sector'] = $select_sec;
+
+				$datos['input_tema']=  '<select class="form-control" id="iIdTema" name="iIdTema" required><option value="">Temas</option></select>';					
+			}
+			
+			$query_mun = $model->datos_municipios();
+			if($query_mun!=false)
+			{
+				foreach ($query_mun as $municipio)
 	            {
-					$datos['input_sector'] = '<input class="form-control" type="text" readonly value="'.$sector->vSector.'"><input type="hidden" id="iIdSector" name="iIdSector" value="'.$sector->iIdSector.'" required>';
-	                //$select_sec .= '<option value="'.$sector->iIdSector.'" selected>'.$sector->vSector.'</option>';
+	                $select .= '<option value="'.$municipio->iIdMunicipio.'">'.$municipio->vMunicipio.'</option>';
 	            }
 			}
-			//$datos['select_sec'] = $select_sec;
-
-			$query_tema = $model->datos_temas($iIdSector,$iIdTema);
-			if($query_tema!=false)
-			{
-				foreach ($query_tema as $tema)
-	            {
-					$datos['input_tema'] = '<input class="form-control" type="text" readonly value="'.$tema->vTema.'"><input type="hidden" id="iIdTema" name="iIdTema" value="'.$tema->iIdTema.'" required>';
-	                //$select_tema .= '<option value="'.$tema->iIdTema.'" selected>'.$tema->vTema.'</option>';
-
-	            }
-			}
-			//$datos['select_tema'] = $select_tema;		
+			$datos['select'] = $select;
+			//estas consultas se moveran posteriormente a C_propuestas
+			if(isset($_SESSION[PREFIJO.'_idusuario']))			
+				$this->load->view('form_propuesta',$datos);
+			else
+				header("Location: ".base_url()."Sitio/login");
 		}
 		else
 		{
-			$query_sec = $model->datos_sectores();
-			if($query_sec!=false)
-			{
-				$select_sec .= '<select class="form-control" id="iIdSector" name="iIdSector" onchange="carga_temas(this.value);" required><option value="">Sector</option>';
-				foreach ($query_sec as $sector)
-	            {					
-	                $select_sec .= '<option value="'.$sector->iIdSector.'">'.$sector->vSector.'</option>';
-	            }
-	            $select_sec .='</select>';
-			}
-			$datos['input_sector'] = $select_sec;
-
-			$datos['input_tema']=  '<select class="form-control" id="iIdTema" name="iIdTema" required><option value="">Temas</option></select>';					
+			header("Location: ".base_url()."Sitio/captura");
 		}
-		
-		$query_mun = $model->datos_municipios();
-		if($query_mun!=false)
-		{
-			foreach ($query_mun as $municipio)
-            {
-                $select .= '<option value="'.$municipio->iIdMunicipio.'">'.$municipio->vMunicipio.'</option>';
-            }
-		}
-		$datos['select'] = $select;
-		//estas consultas se moveran posteriormente a C_propuestas
-		if(isset($_SESSION[PREFIJO.'_idusuario']))			
-			$this->load->view('form_propuesta',$datos);
-		else
-			header("Location: ".base_url()."Sitio/login");
 	}
 
 	public function test()
 	{
 		$prueba = new M_prueba();
 		var_dump($prueba->datos_tabla());
-		
+	}
+
+	public function captura()
+	{
+		$this->load->view('captura');
 	}
 
 	public function login()
