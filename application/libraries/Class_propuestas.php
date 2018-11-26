@@ -28,7 +28,7 @@ class Class_propuestas {
                 $total_vot = $model->total_vot($vprop->iIdPropuesta);
 
                 if(isset($query_img[0])) $urlImg = $query_img[0]->vRutaAdjunto;
-                else $urlImg = "public/images/blog/standard/17.jpg";
+                else $urlImg = "img/si_860.jpg";
 
                 $propuestas.='<div class="entry clearfix">
                                 <div class="entry-image">
@@ -77,7 +77,7 @@ class Class_propuestas {
 
                 //carga la imagen de la propuesta
                 if(isset($query_img[0])) $urlImg = $query_img[0]->vRutaAdjunto;
-                else $urlImg = "public/images/team/3.jpg";
+                else $urlImg = "img/si_450.jpg";
 
                 $propuestas.='<div class="col-lg-6 bottommargin">
                     <div class="team team-list clearfix">
@@ -115,7 +115,7 @@ class Class_propuestas {
                 
                 $query_img = $model->carga_adjuntos($vprop->iIdPropuesta,1);
                 if(isset($query_img[0])) $urlImg = $query_img[0]->vRutaAdjunto;
-                else $urlImg = "public/images/services/mayapan.jpg";
+                else $urlImg = "img/si_400.jpg";
 
                 $propuesta.= '<div class="col-md-4 nobottommargin">
                             <div class="feature-box media-box">

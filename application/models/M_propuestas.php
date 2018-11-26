@@ -156,7 +156,7 @@ class M_propuestas extends CI_Model {
 	{
 		$this->db->select('p.iIdPropuesta,p.vTitulo');
 		$this->db->from('Propuesta p');
-		$this->db->where('p.iEstatus>',1);
+		$this->db->where('p.iEstatus',3);
 		$this->db->where('p.iIdTema',$iIdTema);
 		$this->db->order_by('dFecha','DESC');
 
@@ -165,12 +165,22 @@ class M_propuestas extends CI_Model {
 		else return false;
 	}
 
-	public function carga_coment_admin($iIdPropuesta)
+	public function carga_coment_admin($iIdSector=0,$iIdTema=0,$iIdPropuesta=0,$iEstatus)
 	{
-		$this->db->select('iIdComentario,vComentario,dFecha');
+		/*$this->db->select('iIdComentario,vComentario,dFecha');
 		$this->db->from('Comentario');
-		$this->db->where('iEstatus',1);
-		$this->db->where('iIdPropuesta',$iIdPropuesta);
+		$this->db->where('iEstatus',$iEstatus);*/
+
+
+
+		$this->db->select('c.iIdComentario,c.vComentario,c.dFecha,c.iEstatus,c.iIdPropuesta,p.iIdTema,t.iIdSector');
+		$this->db->from('Comentario c');
+		$this->db->join('Propuesta p','c.iIdPropuesta = p.iIdPropuesta','INNER');
+		$this->db->join('Tema t','p.iIdTema = t.iIdTema','INNER');
+		if($iIdSector>0) $this->db->where('t.iIdSector',$iIdSector);
+		if($iIdTema>0) $this->db->where('p.iIdTema',$iIdTema);
+		if($iIdPropuesta>0) $this->db->where('c.iIdPropuesta',$iIdPropuesta);
+		$this->db->where('c.iEstatus',$iEstatus);
 
 		$query = $this->db->get();
 		if($query!=false) return $query->result();
@@ -386,6 +396,19 @@ class M_propuestas extends CI_Model {
 		$query = $this->db->get();
 
 		if($query!=false) return $query->num_rows();
+		else return false;
+	}
+	//---------------------consulta de parametros-------------------------
+
+	public function consulta_valor_parametros($iIdParametro)
+	{
+		$this->db->select('p.iIdParametro, p.vValor, p.vId, p.vDescripcion');
+		$this->db->from('Parametro p');		
+		$this->db->where('p.iActivo',1);
+		$this->db->where('p.iIdParametro',$iIdParametro);
+		$query =  $this->db->get();
+
+		if($query!=false) return $query->result();
 		else return false;
 	}
 

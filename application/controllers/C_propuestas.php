@@ -43,6 +43,8 @@ class C_propuestas extends CI_Controller {
 			$datos['video'] = $query_prop[0]->vUrlVideoExterno;
 			$datos['img'] = $model->carga_adjuntos($iIdPropuesta,1);
 			$datos['pdf'] = $model->carga_adjuntos($iIdPropuesta,2);
+			$datos['inicio_voto'] = $model->consulta_valor_parametros(7);
+			$datos['fin_voto'] = $model->consulta_valor_parametros(8);
 			$datos['apoyo'] = $query_existe;
 			$datos['comentarios'] = $query_coment;
 			$datos['total_coment'] = $total_coment;
@@ -143,13 +145,16 @@ class C_propuestas extends CI_Controller {
 	{
 		$select = '<option value="">Temas</option>';
 		$id_sec = $this->input->post('id', TRUE);
-		$model = new M_propuestas();
-		$query_tem = $model->datos_temas($id_sec);
-		if($query_tem!=false)
+		if($id_sec>0)
 		{
-			foreach ($query_tem as $tema) {
-				$select .= '<option value="'.$tema->iIdTema.'">'.$tema->vTema.'</option>';
-			}
+			$model = new M_propuestas();
+			$query_tem = $model->datos_temas($id_sec);
+			if($query_tem!=false)
+			{
+				foreach ($query_tem as $tema) {
+					$select .= '<option value="'.$tema->iIdTema.'">'.$tema->vTema.'</option>';
+				}
+			}			
 		}
 		echo $select;
 	}
@@ -459,23 +464,30 @@ class C_propuestas extends CI_Controller {
 	public function carga_propuestas()
 	{
 		$id_tema = $this->input->post('id', TRUE);
-		$model = new M_propuestas();
-		$query_prop = $model->carga_prop_admin($id_tema);
-		echo '<option value="">Seleccione una propuesta</option>';
-		if($query_prop!=false) 
+		if($id_tema>0) 
 		{
-			foreach ($query_prop as $vprop) {
-				echo '<option value="'.$vprop->iIdPropuesta.'">'.$vprop->vTitulo.'</option>';
-			}
+			$model = new M_propuestas();
+			$query_prop = $model->carga_prop_admin($id_tema);
+			echo '<option value="">Seleccione una propuesta</option>';
+			if($query_prop!=false) 
+			{
+				foreach ($query_prop as $vprop) {
+					echo '<option value="'.$vprop->iIdPropuesta.'">'.$vprop->vTitulo.'</option>';
+				}
+			}			
 		}
+		else echo '<option value="">Propuesta</option>';
 	}
 
 	public function carga_comentarios()
-	{
+	{		
+		$iIdSector = $this->input->post('iIdSector', TRUE);
+		$iIdTema = $this->input->post('iIdTema', TRUE);
 		$iIdPropuesta = $this->input->post('iIdPropuesta', TRUE);
-		
+		$iEstatus = $this->input->post('iEstatus', TRUE);
+
 		$model = new M_propuestas();
-		$query_coment = $model->carga_coment_admin($iIdPropuesta);
+		$query_coment = $model->carga_coment_admin($iIdSector,$iIdTema,$iIdPropuesta,$iEstatus);
 		//print_r($query_coment);
 		echo '<div class="col-12">
                 <div class="card">                    
@@ -494,14 +506,17 @@ class C_propuestas extends CI_Controller {
                             {
                             	foreach ($query_coment as $vcom) {
                             		echo '<tr><th scope="row">'.$vcom->iIdComentario.'</th><td>'.$vcom->vComentario.'</td><td>'.$vcom->dFecha.'</td>
-                            		<td><div class="row">
-                            		<div class="col-md-2"><a href="javascript:" title="Aceptar comentario" onclick="modera_coment(1,'.$vcom->iIdComentario.');">
-                            			<li class="fa fa-check"></li>
-                            		</a></div>
-                            		<div class="col-md-2"><a href="javascript:" title="Eliminar comentario" onclick="modera_coment(0,'.$vcom->iIdComentario.');">
-                            			<li class="fa fa-times"></li>
-                            		</a></div>
-                            		</div></td></tr>';
+                            		<td><div class="row">';
+                            		if($iEstatus == 1 || $iEstatus == 0)
+                            		echo '<div class="col-md-2"><a href="javascript:" title="Aceptar comentario" onclick="modera_coment(1,'.$vcom->iIdComentario.');">
+	                            			<li class="fa fa-check"></li>
+	                            		</a></div>';
+
+                            		if($iEstatus == 1 || $iEstatus == 2)
+                            		echo '<div class="col-md-2"><a href="javascript:" title="Eliminar comentario" onclick="modera_coment(0,'.$vcom->iIdComentario.');">
+	                            			<li class="fa fa-times"></li>
+	                            		</a></div>';
+                            		echo '</div></td></tr>';
                             	}
                             }
                             else echo '<tr><td colspan="4">Sin resultados</td></tr>';

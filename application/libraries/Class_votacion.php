@@ -16,6 +16,14 @@ class Class_votacion {
         $propuestas = "";
         $model = new M_votacion();
         $vota = $model->carga_propuestas();
+        $inicio_voto = $model->consulta_valor_parametros(7);
+        $fin_voto = $model->consulta_valor_parametros(8);
+
+
+        $inicio = $inicio_voto[0]->vValor;
+        $fin = $fin_voto[0]->vValor;
+        $dFecha = date("Y-m-d");
+
         if($vota!=false)
         {
             foreach ($vota as $vres) {
@@ -33,7 +41,7 @@ class Class_votacion {
                 else $apoyo = -1;
 
                 if(isset($query_img[0])) $urlImg = $query_img[0]->vRutaAdjunto;
-                else $urlImg = "public/images/blog/small/17.jpg";
+                else $urlImg = "img/si_400.jpg";
 
                 $propuestas.='<div class="entry clearfix">
                     <div class="entry-image">
@@ -51,18 +59,33 @@ class Class_votacion {
                         <p>'.substr(strip_tags($vres->tDescripcion,'<p>'),0,200).'</p>';
                         
 
-                        if($apoyo==0)
-                        {
-                            $propuestas.='<div class="row" id="div_apoyo_'.$vres->iIdPropuesta.'"><div class="col-md-6"><button id="apoyar_prop" type="button" class="btn btn-outline-success btn-lg btn-block" onclick="apoya_propuesta('.$vres->iIdPropuesta.',1);">A favor</button></div>
-                                                    <div class="col-md-6"><button id="apoyar_prop_dislike" type="button" class="btn btn-outline-danger btn-lg btn-block" onclick="apoya_propuesta('.$vres->iIdPropuesta.',0);">En contra</button></div></div>';
-                        }
-                        elseif($apoyo==1)
-                        {
-                            $propuestas.='<div class="col-md-12"><button id="apoyar_prop" type="button" class="btn btn-outline-warning btn-lg btn-block">Usted ya ha apoyado esta propuesta</button></div>';
-                        }
-                        elseif($apoyo==-1)
+                        
+
+
+                        if($apoyo==-1)
                         {
                             $propuestas.='<div class="col-md-12"><div class="style-msg errormsg" id="error_sesion"><div class="sb-msg"><i class="icon-remove"></i>Para poder votar por esta propuesta debe <a href="'.base_url().'Sitio/login">iniciar sesión</a> o <a href="'.base_url().'Sitio/registrarse">Registrarse</a></div></div></div>';
+                        }
+                        else
+                        {
+                            $inicio = $inicio_voto[0]->vValor;
+                            $fin = $fin_voto[0]->vValor;
+                            $dFecha = date("Y-m-d");                            
+
+                            if($dFecha>=$inicio && $dFecha<=$fin)
+                            {
+                                if($apoyo==0)
+                                {
+                                    $propuestas.='<div class="row" id="div_apoyo_'.$vres->iIdPropuesta.'"><div class="col-md-6"><button id="apoyar_prop" type="button" class="btn btn-outline-success btn-lg btn-block" onclick="apoya_propuesta('.$vres->iIdPropuesta.',1);">A favor</button></div>
+                                                            <div class="col-md-6"><button id="apoyar_prop_dislike" type="button" class="btn btn-outline-danger btn-lg btn-block" onclick="apoya_propuesta('.$vres->iIdPropuesta.',0);">En contra</button></div></div>';
+                                }
+                                elseif($apoyo==1)
+                                {
+                                    $propuestas.='<div class="col-md-12"><button id="apoyar_prop" type="button" class="btn btn-outline-warning btn-lg btn-block">Usted ya ha apoyado esta propuesta</button></div>';
+                                }
+                            }
+                            elseif($dFecha<$inicio) $propuestas.='<div class="col-md-12"><div class="style-msg errormsg" id="error_sesion"><div class="sb-msg"><i class="icon-remove"></i>Aún no inicia el periodo de votaciones</div></div></div>';
+                            elseif($dFecha>$fin) $propuestas.='<div class="col-md-12"><div class="style-msg errormsg" id="error_sesion"><div class="sb-msg"><i class="icon-remove"></i>El período de votaciones ha concluido</div></div></div>';
                         }
 
 

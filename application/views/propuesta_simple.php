@@ -115,16 +115,32 @@
 										<div class="clearfix bottommargin-sm">
 											<div class="row" id="div_btn_apoyo">
 											
+												<?php 
+													
+
+													
+												?>	
+
 											<?php
 											if(isset($_SESSION[PREFIJO.'_idusuario']))
 											{
+												$inicio = $inicio_voto[0]->vValor;
+												$fin = $fin_voto[0]->vValor;
+												$dFecha = date("Y-m-d");
 												echo '<input type="hidden" name="valida_sesion" id="valida_sesion" value="1">';
 
-												if($apoyo>0)
-													echo '<div class="col-md-12"><button id="apoyar_prop" type="button" class="btn btn-outline-warning btn-lg btn-block">Usted ya ha apoyado esta propuesta</button></div>';
-												else
-													echo '<div class="col-md-6"><button id="apoyar_prop" type="button" class="btn btn-outline-success btn-lg btn-block" onclick="apoya_propuesta('.$iIdPropuesta.',1);">A favor</button></div>
-													<div class="col-md-6"><button id="apoyar_prop_dislike" type="button" class="btn btn-outline-danger btn-lg btn-block" onclick="apoya_propuesta('.$iIdPropuesta.',0);">En contra</button></div>';
+												if($dFecha>=$inicio && $dFecha<=$fin) 
+												{
+													if($apoyo>0)
+														echo '<div class="col-md-12"><button id="apoyar_prop" type="button" class="btn btn-outline-warning btn-lg btn-block">Usted ya ha apoyado esta propuesta</button></div>';
+													else
+														echo '<div class="col-md-6"><button id="apoyar_prop" type="button" class="btn btn-outline-success btn-lg btn-block" onclick="apoya_propuesta('.$iIdPropuesta.',1);">A favor</button></div>
+														<div class="col-md-6"><button id="apoyar_prop_dislike" type="button" class="btn btn-outline-danger btn-lg btn-block" onclick="apoya_propuesta('.$iIdPropuesta.',0);">En contra</button></div>';
+												}
+												elseif($dFecha<$inicio) echo '<div class="col-md-12"><div id="error_sesion" class="style-msg2 errormsg"><div class="msgtitle">Votaciones</div><div class="sb-msg"><ul><li>Aún no inicia el periodo de votaciones</li></ul></div></div></div>';
+												elseif($dFecha>$fin) echo '<div class="col-md-12"><div id="error_sesion" class="style-msg2 errormsg"><div class="msgtitle">Votaciones</div><div class="sb-msg"><ul><li>El período de votaciones ha concluido</li></ul></div></div></div>';
+
+
 											}
 											else echo '<div class="col-md-12"><div id="error_sesion" class="style-msg2 errormsg"><div class="msgtitle">Inicio de sesión</div><div class="sb-msg"><ul><li>Para poder apoyar una propuesta debe <a href="'.base_url().'Sitio/login">iniciar sesión</a> o <a href="'.base_url().'Sitio/registrarse">Registrarse</a></li></ul></div></div></div>';
 											?>					
@@ -509,7 +525,7 @@
 		function responder(idcoment,nombre) {
 			var resp_act = document.getElementById('idresp_com').value;
 			var valido = document.getElementById('valida_sesion');
-			console.log(valido);
+			//console.log(valido);
 			if(resp_act!="") {				
 				document.getElementById("li_comentario_"+resp_act).style.boxShadow = "";
 			}

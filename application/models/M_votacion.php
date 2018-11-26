@@ -57,6 +57,20 @@ class M_votacion extends CI_Model {
 		if($query!=false) return $query->num_rows();
 		else return false;
 	}
+
+	//---------------------consulta de parametros-------------------------
+
+	public function consulta_valor_parametros($iIdParametro)
+	{
+		$this->db->select('p.iIdParametro, p.vValor, p.vId, p.vDescripcion');
+		$this->db->from('Parametro p');		
+		$this->db->where('p.iActivo',1);
+		$this->db->where('p.iIdParametro',$iIdParametro);
+		$query =  $this->db->get();
+		
+		if($query!=false) return $query->result();
+		else return false;
+	}
 }
 
 ?>
