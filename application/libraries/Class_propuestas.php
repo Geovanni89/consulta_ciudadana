@@ -76,13 +76,17 @@ class Class_propuestas {
                 $total_vot = $model->total_vot($vprop->iIdPropuesta);
 
                 //carga la imagen de la propuesta
-                if(isset($query_img[0])) $urlImg = $query_img[0]->vRutaAdjunto;
+                if(isset($query_img[0]))  
+                {
+                    $urlImg = str_replace("imagenes", "imagenes/thumbnail", $query_img[0]->vRutaAdjunto);
+                     //$urlImg = $query_img[0]->vRutaAdjunto;
+                }
                 else $urlImg = "img/si_450.jpg";
 
                 $propuestas.='<div class="col-lg-6 bottommargin">
                     <div class="team team-list clearfix">
                         <div class="team-image">
-                            <img src="'.base_url().$urlImg.'" alt="John Doe">
+                            <img src="'.base_url().''.$urlImg.'" alt="John Doe">
                         </div>
                         <div class="team-desc">
                             <div class="team-title"><h4></h4><span>'.$vprop->vTitulo.'</span></div>
