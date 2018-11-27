@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="<?=base_url();?>admin/assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?=base_url();?>admin/assets/images/favicon_2.png">
     <title>Consulta ciudadana</title>
     <!-- Custom CSS -->
     <link href="<?=base_url();?>admin/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">

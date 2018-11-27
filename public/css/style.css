@@ -8164,6 +8164,18 @@ body:not(.device-touch) .button.button-full strong {
 	text-shadow: 1px 1px 1px rgba(255,255,255,0.6);
 }
 
+.style-msg .sb-msg a,
+.style-msg .errormsg a,
+.style-msg2.errormsg a{
+    color: #0037ff !important;
+}
+
+.style-msg .sb-msg a:hover,
+.style-msg .errormsg a:hover,
+.style-msg2.errormsg a:hover {
+    font-weight: bold;
+}
+
 .style-msg2 .msgtitle {
 	background: rgba(0,0,0,0.15);
 	border-top: none;

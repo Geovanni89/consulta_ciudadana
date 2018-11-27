@@ -8,7 +8,7 @@
 	<!-- Stylesheets
 	============================================= -->
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700|Crete+Round:400i" rel="stylesheet" type="text/css" />
-	<link rel="shortcut icon" type="image/png" href="<?=base_url();?>img/favicon.png"/>
+	<link rel="shortcut icon" type="image/png" href="<?=base_url();?>img/favicon_2.png"/>
 	<link rel="stylesheet" href="<?=base_url();?>public/css/bootstrap.css" type="text/css" />
 	<link rel="stylesheet" href="<?=base_url();?>public/css/style.css" type="text/css" />
 	<link rel="stylesheet" href="<?=base_url();?>public/css/dark.css" type="text/css" />
@@ -142,7 +142,7 @@
 
 
 											}
-											else echo '<div class="col-md-12"><div id="error_sesion" class="style-msg2 errormsg"><div class="msgtitle">Inicio de sesión</div><div class="sb-msg"><ul><li>Para poder apoyar una propuesta debe <a href="'.base_url().'Sitio/login">iniciar sesión</a> o <a href="'.base_url().'Sitio/registrarse">Registrarse</a></li></ul></div></div></div>';
+											else echo '<div class="col-md-12"><div id="error_sesion" class="style-msg2 errormsg"><div class="msgtitle">Inicio de sesión</div><div class="sb-msg"><ul><li>Para poder apoyar una propuesta debe <a href="'.base_url().'Sitio/login?r=1">iniciar sesión</a> o <a href="'.base_url().'Sitio/registrarse">Registrarse</a></li></ul></div></div></div>';
 											?>					
 											</div>		
 										</div>
@@ -355,7 +355,7 @@
 												{
 													echo '<button name="enviaComentario" type="button" id="enviaComentario" tabindex="5" onclick="envia_comentario();" class="button button-3d nomargin">Publicar comentario</button>';
 												}
-												else echo '<div class="col-md-12"><div id="error_sesion" class="style-msg2 errormsg"><div class="msgtitle">Inicio de sesión</div><div class="sb-msg"><ul><li>Para poder comentar la propuesta debe <a href="'.base_url().'Sitio/login">iniciar sesión</a> o <a href="'.base_url().'Sitio/registrarse">Registrarse</a></li></ul></div></div></div>';
+												else echo '<div class="col-md-12"><div id="error_sesion" class="style-msg2 errormsg"><div class="msgtitle">Inicio de sesión</div><div class="sb-msg"><ul><li>Para poder comentar la propuesta debe <a href="'.base_url().'Sitio/login?r=1">iniciar sesión</a> o <a href="'.base_url().'Sitio/registrarse">Registrarse</a></li></ul></div></div></div>';
 											?>													
 											</div>
 

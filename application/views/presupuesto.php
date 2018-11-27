@@ -8,7 +8,7 @@
 	<!-- Stylesheets
 	============================================= -->
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700|Crete+Round:400i" rel="stylesheet" type="text/css" />
-	<link rel="shortcut icon" type="image/png" href="<?=base_url();?>img/favicon.png"/>
+	<link rel="shortcut icon" type="image/png" href="<?=base_url();?>img/favicon_2.png"/>
 	<link rel="stylesheet" href="<?=base_url();?>public/css/bootstrap.css" type="text/css" />
 	<link rel="stylesheet" href="<?=base_url();?>public/css/style.css?v=1" type="text/css" />
 	<link rel="stylesheet" href="<?=base_url();?>public/css/swiper.css" type="text/css" />
@@ -140,7 +140,7 @@
 						id_temas['tema_'+idtema] = idtema;
 						total_temas++;
 					    // the variable is defined
-						$('#tema_'+idtema).removeClass('bg-info').addClass('bg-success');
+						$('#tema_'+idtema).removeClass('bg-secondary').addClass('bg-primary');
 					}
 					else toastr.danger('No se ha podido seleccionar el tema', 'Error', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
 					
@@ -153,7 +153,7 @@
 			}
 			else {
 				if(id_temas['tema_'+idtema]) {
-					$('#tema_'+idtema).removeClass('bg-success').addClass('bg-info');
+					$('#tema_'+idtema).removeClass('bg-primary').addClass('bg-secondary');
 					delete id_temas['tema_'+idtema];
 					total_temas--;					
 				}				
