@@ -97,7 +97,12 @@ class M_propuestas extends CI_Model {
 		$this->db->from('Propuesta p');
 		$this->db->join('Usuario u','p.iIdUsuario = u.iIdUsuario','INNER');		
 		
-		if($ad==1) $this->db->where('p.iEstatus',1);
+		if($ad==1) 
+		{ 
+			//$this->db->where('p.iEstatus',1); $this->db->where('p.iEstatus',2); 
+			$estatus = array(1,2);
+			$this->db->where_in('p.iEstatus', $estatus);
+		}
 		else $this->db->where('p.iEstatus',3);
 
 		if($iIdPropuesta>0) $this->db->where('p.iIdPropuesta',$iIdPropuesta);
