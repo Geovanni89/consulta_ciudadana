@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="<?=base_url();?>admin/assets/images/favicon_2.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?=base_url();?>img/favicon_2.png">
     <title>Consulta ciudadana</title>
     <!-- Custom CSS -->
     <link href="<?=base_url();?>admin/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
@@ -327,8 +327,14 @@
     <script src="<?=base_url();?>js/funciones_barbosa.js"></script>
     
     <script type="text/javascript">
+        $(document).ready(function(){
+            <?php if ($modulo_inicial != ''){ ?>
+            Cargar('<?=$modulo_inicial;?>','#contenido');
+            <?php } ?>
+        });
+
         var url_sitio = '<?=base_url();?>';
-        $("#modal_login").modal();
+        //$("#modal_login").modal();
         $( "#modal_form_login" ).validate({
             rules: {
                 correo_login: {
