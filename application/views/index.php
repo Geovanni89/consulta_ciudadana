@@ -147,7 +147,8 @@
 
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front" style="background-image: url('<?=$rutaimagen;?>competividad.jpg?v=1.3')" data-height-xl="<?=$alto?>">
+												<!--<div id="tema_" class="flip-card-front" style="background-image: url('<?=$rutaimagen;?>competividad.jpg?v=1.3')" data-height-xl="<?=$alto?>">-->
+													<div id="tema_1" class="flip-card-front" data-height-xl="<?=$alto?>">
 													<div class="flip-card-inner">
 														<div class="card nobg noborder text-center">
 															<div class="card-body">
@@ -163,7 +164,8 @@
 
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>comercialyturistica.jpg');">
+												<!--<div id="tema_" class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>comercialyturistica.jpg');">-->
+													<div id="tema_2" class="flip-card-front dark" data-height-xl="<?=$alto?>">
 													<div class="flip-card-inner">													
 														<div class="card nobg noborder text-center">
 															<div class="card-body">
@@ -178,7 +180,8 @@
 
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>industrial.jpg');">
+												<!--<div id="tema_" class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>industrial.jpg');">-->
+													<div id="tema_3" class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>">
 													<div class="flip-card-inner">
 														<div class="card nobg noborder text-center">
 															<div class="card-body">
@@ -193,7 +196,8 @@
 
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>capitalhumano.jpg');">
+												<!--<div id="tema_" class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>capitalhumano.jpg');">-->
+													<div id="tema_4" class="flip-card-front dark" data-height-xl="<?=$alto?>">
 													<div class="flip-card-inner">
 														<div class="card nobg noborder text-center">
 															<div class="card-body">
@@ -208,7 +212,8 @@
 
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto2?>" style="background-image: url('<?=$rutaimagen;?>seguridadpatrimonial.jpg?v=1');">
+												<!--<div id="tema_" class="flip-card-front bg-info dark" data-height-xl="<?=$alto2?>" style="background-image: url('<?=$rutaimagen;?>seguridadpatrimonial.jpg?v=1');">-->
+													<div id="tema_5" class="flip-card-front bg-info dark" data-height-xl="<?=$alto2?>">
 													<div class="flip-card-inner">
 														<div class="card nobg noborder text-center">
 															<div class="card-body">												
@@ -223,7 +228,8 @@
 
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>cienciaytecnologia.jpg');">
+												<!--<div id="tema_" class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>cienciaytecnologia.jpg');">-->
+													<div id="tema_6" class="flip-card-front dark" data-height-xl="<?=$alto?>">
 													<div class="flip-card-inner">												
 														<div class="card nobg noborder text-center">
 															<div class="card-body">
@@ -238,7 +244,8 @@
 
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>empleoyfomentoalemprendedurismo.jpg');">
+												<!--<div id="tema_" class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>empleoyfomentoalemprendedurismo.jpg');">-->
+													<div id="tema_7" class="flip-card-front dark" data-height-xl="<?=$alto?>">
 													<div class="flip-card-inner">
 														<div class="flip-card-inner">
 															<div class="card nobg noborder text-center">
@@ -263,7 +270,8 @@
 									<div class="row grid-container" data-layout="masonry" style="overflow: visible">
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front dark" style="background-image: url('<?=$rutaimagen;?>alimentaria.jpg')" data-height-xl="<?=$alto?>">
+												<!--<div id="tema_" class="flip-card-front dark" style="background-image: url('<?=$rutaimagen;?>alimentaria.jpg')" data-height-xl="<?=$alto?>">-->
+													<div id="tema_8" class="flip-card-front dark" data-height-xl="<?=$alto?>">
 													<div class="flip-card-inner">
 														<div class="card nobg noborder text-center">
 															<div class="card-body">
@@ -279,7 +287,8 @@
 
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>vivienda.jpg');">
+												<!--<div id="tema_" class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>vivienda.jpg');">-->
+													<div id="tema_9" class="flip-card-front dark" data-height-xl="<?=$alto?>">
 													<div class="flip-card-inner">
 														<div class="card nobg noborder text-center">
 															<div class="card-body">
@@ -294,7 +303,8 @@
 
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>salud.jpg');">
+												<!--<div id="tema_" class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>salud.jpg');">-->
+													<div id="tema_10" class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>">
 													<div class="flip-card-inner">
 														<div class="card nobg noborder text-center">
 															<div class="card-body">
@@ -309,7 +319,8 @@
 
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>desarrolloruralypesquero.jpg');">
+												<!--<div id="tema_" class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>desarrolloruralypesquero.jpg');">-->
+													<div id="tema_11" class="flip-card-front dark" data-height-xl="<?=$alto?>">
 													<div class="flip-card-inner">
 														<div class="card nobg noborder">
 															<div class="card-body">
@@ -324,7 +335,8 @@
 
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>seguridadsocial.jpg');">
+												<!--<div id="tema_" class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>seguridadsocial.jpg');">-->
+													<div id="tema_12" class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>">
 													<div class="flip-card-inner">
 														<div class="card nobg noborder text-center">
 															<div class="card-body">
@@ -339,7 +351,8 @@
 
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>inclusionsocial.jpg');">
+												<!--<div id="tema_" class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>inclusionsocial.jpg');">-->
+													<div id="tema_13" class="flip-card-front dark" data-height-xl="<?=$alto?>">
 													<div class="flip-card-inner">
 														<div class="card nobg noborder">
 															<div class="card-body">
@@ -354,7 +367,8 @@
 
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>seguridadyestadodederecho.jpg');">
+												<!--<div id="tema_" class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>seguridadyestadodederecho.jpg');">-->
+													<div id="tema_14" class="flip-card-front dark" data-height-xl="<?=$alto?>">
 													<div class="flip-card-inner">
 														<div class="card nobg noborder">
 															<div class="card-body">
@@ -369,7 +383,8 @@
 
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>pueblosindigenas.jpg');">
+												<!--<div id="tema_" class="flip-card-front" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>pueblosindigenas.jpg');">-->
+													<div id="tema_15" class="flip-card-front" data-height-xl="<?=$alto?>">
 													<div class="flip-card-inner">
 														<div class="card nobg noborder">
 															<div class="card-body">
@@ -392,7 +407,8 @@
 									<div class="row grid-container" data-layout="masonry" style="overflow: visible">
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front dark" style="background-image: url('<?=$rutaimagen;?>educacionuniversal.jpg')" data-height-xl="<?=$alto?>">
+												<!--<div id="tema_" class="flip-card-front dark" style="background-image: url('<?=$rutaimagen;?>educacionuniversal.jpg')" data-height-xl="<?=$alto?>">-->
+													<div id="tema_16" class="flip-card-front dark" data-height-xl="<?=$alto?>">
 													<div class="flip-card-inner">
 														<div class="card nobg noborder text-center">
 															<div class="card-body">
@@ -408,7 +424,8 @@
 
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front dark" data-height-xl="<?=$alto2?>" style="background-image: url('<?=$rutaimagen;?>deportedealtorendimiento.jpg');">
+												<!--<div id="tema_" class="flip-card-front dark" data-height-xl="<?=$alto2?>" style="background-image: url('<?=$rutaimagen;?>deportedealtorendimiento.jpg');">-->
+													<div id="tema_17" class="flip-card-front dark" data-height-xl="<?=$alto2?>">
 													<div class="flip-card-inner">
 														<div class="card nobg noborder text-center">
 															<div class="card-body">
@@ -423,7 +440,8 @@
 
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>educaciondecalidad.jpg');">
+												<!--<div id="tema_" class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>educaciondecalidad.jpg');">-->
+													<div id="tema_18" class="flip-card-front dark" data-height-xl="<?=$alto?>">
 													<div class="flip-card-inner">
 														<div class="card nobg noborder text-center">
 															<div class="card-body">
@@ -438,7 +456,8 @@
 
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front dark" style="background-image: url('<?=$rutaimagen;?>culturatradicional.jpg')" data-height-xl="<?=$alto?>">
+												<!--<div id="tema_" class="flip-card-front dark" style="background-image: url('<?=$rutaimagen;?>culturatradicional.jpg')" data-height-xl="<?=$alto?>">-->
+													<div id="tema_19" class="flip-card-front dark" data-height-xl="<?=$alto?>">
 													<div class="flip-card-inner">
 														<div class="card nobg noborder text-center">
 															<div class="card-body">
@@ -454,7 +473,8 @@
 
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front dark" data-height-xl="<?=$alto2?>" style="background-image: url('<?=$rutaimagen;?>deporteincluyente.jpg');">
+												<!--<div id="tema_" class="flip-card-front dark" data-height-xl="<?=$alto2?>" style="background-image: url('<?=$rutaimagen;?>deporteincluyente.jpg');">-->
+													<div id="tema_20" class="flip-card-front dark" data-height-xl="<?=$alto2?>">
 													<div class="flip-card-inner">
 														<div class="card nobg noborder text-center">
 															<div class="card-body">
@@ -469,7 +489,8 @@
 
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>bellasartes.jpg');">
+												<!--<div id="tema_" class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>bellasartes.jpg');">-->
+													<div id="tema_21" class="flip-card-front dark" data-height-xl="<?=$alto?>">
 													<div class="flip-card-inner">
 														<div class="card nobg noborder text-center">
 															<div class="card-body">
@@ -494,7 +515,8 @@
 									<div class="row grid-container" data-layout="masonry" style="overflow: visible">
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>hidrica.jpg');">
+												<!--<div id="tema_" class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>hidrica.jpg');">-->
+													<div id="tema_22" class="flip-card-front dark" data-height-xl="<?=$alto?>">
 													<div class="flip-card-inner">
 														<div class="card nobg noborder text-center">
 															<div class="card-body">
@@ -510,7 +532,8 @@
 
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front dark" data-height-xl="<?=$alto2?>" style="background-image: url('<?=$rutaimagen;?>movilidadsustentableyconectividadregional.jpg');">
+												<!--<div id="tema_" class="flip-card-front dark" data-height-xl="<?=$alto2?>" style="background-image: url('<?=$rutaimagen;?>movilidadsustentableyconectividadregional.jpg');">-->
+													<div id="tema_23" class="flip-card-front dark" data-height-xl="<?=$alto2?>">
 													<div class="flip-card-inner">
 														<div class="card nobg noborder text-center">
 															<div class="card-body">
@@ -525,7 +548,8 @@
 
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>energetica.jpg');">
+												<!--<div id="tema_" class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>energetica.jpg');">-->
+													<div id="tema_24" class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>">
 													<div class="flip-card-inner">
 														<div class="card nobg noborder text-center">
 															<div class="card-body">
@@ -540,7 +564,8 @@
 
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>cambioclimaticoysustentabilidad.jpg');">
+												<!--<div id="tema_" class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>cambioclimaticoysustentabilidad.jpg');">-->
+													<div id="tema_25" class="flip-card-front dark" data-height-xl="<?=$alto?>">
 													<div class="flip-card-inner">
 														<div class="card nobg noborder">
 															<div class="card-body">
@@ -555,7 +580,8 @@
 
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>manejointegralderesiduos.jpg');">
+												<!--<div id="tema_" class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>manejointegralderesiduos.jpg');">-->
+													<div id="tema_26" class="flip-card-front bg-info dark" data-height-xl="<?=$alto?>">
 													<div class="flip-card-inner">
 														<div class="card nobg noborder text-center">
 															<div class="card-body">
@@ -570,7 +596,8 @@
 
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>ordenamientourbanoyterritorial.jpg');">
+												<!--<div id="tema_" class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>ordenamientourbanoyterritorial.jpg');">-->
+													<div id="tema_27" class="flip-card-front dark" data-height-xl="<?=$alto?>">
 													<div class="flip-card-inner">
 														<div class="card nobg noborder">
 															<div class="card-body">
@@ -585,7 +612,8 @@
 
 										<div class="col-lg-6 mb-4">
 											<div class="text-center">
-												<div class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen?>/consevacionderecursosnaturales.jpg');">
+												<!--<div id="tema_" class="flip-card-front dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen?>/consevacionderecursosnaturales.jpg');">-->
+													<div id="tema_28" class="flip-card-front dark" data-height-xl="<?=$alto?>">
 													<div class="flip-card-inner">
 														<div class="card nobg noborder">
 															<div class="card-body">
@@ -616,7 +644,8 @@
 						<div class="row grid-container" data-layout="masonry" style="overflow: visible">
 							<div class="col-lg-4 mb-4">
 								<div class="text-center">
-									<div class="flip-card-front dark" style="background-image: url('<?=base_url();?>img/ejes/igualdad.jpg')" data-height-xl="<?=$alto;?>">
+									<!--<div id="tema_" class="flip-card-front dark" style="background-image: url('<?=base_url();?>img/ejes/igualdad.jpg')" data-height-xl="<?=$alto;?>">-->
+										<div id="tema_29" class="flip-card-front dark" data-height-xl="<?=$alto;?>">
 										<div class="flip-card-inner">
 											<div class="card nobg noborder text-center">
 												<div class="card-body">
@@ -632,7 +661,8 @@
 
 							<div class="col-lg-4 mb-4">
 								<div class="text-center">
-									<div class="flip-card-front dark" data-height-xl="<?=$alto;?>" style="background-image: url('<?=$rutaimagen?>/gobiernoaustero.jpg');" data-height-xl="<?=$alto;?>">
+									<!--<div id="tema_" class="flip-card-front dark" data-height-xl="<?=$alto;?>" style="background-image: url('<?=$rutaimagen?>/gobiernoaustero.jpg');" data-height-xl="<?=$alto;?>">-->
+										<div id="tema_30" class="flip-card-front dark" data-height-xl="<?=$alto;?>">
 										<div class="flip-card-inner">
 											<div class="card nobg noborder text-center">
 												<div class="card-body">
@@ -647,7 +677,8 @@
 
 							<div class="col-lg-4 mb-4">
 								<div class="text-center">
-									<div class="flip-card-front dark" data-height-xl="<?=$alto;?>" style="background-image: url('<?=$rutaimagen?>/infraestructura.jpg');">
+									<!--<div id="tema_" class="flip-card-front dark" data-height-xl="<?=$alto;?>" style="background-image: url('<?=$rutaimagen?>/infraestructura.jpg');">-->
+										<div id="tema_31" class="flip-card-front dark" data-height-xl="<?=$alto;?>">
 										<div class="flip-card-inner">
 											<div class="card nobg noborder text-center">
 												<div class="card-body">
@@ -754,7 +785,16 @@
 
 
 	<script>
+		var imagenes = ['competividad.jpg','comercialyturistica.jpg','industrial.jpg','capitalhumano.jpg','seguridadpatrimonial.jpg?','cienciaytecnologia.jpg','empleoyfomentoalemprendedurismo.jpg','alimentaria.jpg','vivienda.jpg','salud.jpg','desarrolloruralypesquero.jpg','seguridadsocial.jpg','inclusionsocial.jpg','seguridadyestadodederecho.jpg','pueblosindigenas.jpg','educacionuniversal.jpg','deportedealtorendimiento.jpg','educaciondecalidad.jpg','culturatradicional.jpg','deporteincluyente.jpg','bellasartes.jpg','hidrica.jpg','movilidadsustentableyconectividadregional.jpg','energetica.jpg','cambioclimaticoysustentabilidad.jpg','manejointegralderesiduos.jpg','ordenamientourbanoyterritorial.jpg','consevacionderecursosnaturales.jpg','igualdad.jpg','gobiernoaustero.jpg','infraestructura.jpg'];
 
+		$(document).ready(function() {
+			console.log( "ready!" );
+			for (var i = 0; i < imagenes.length; i++) {
+				$("#tema_"+(i+1)).css("background-image", "url('img/ejes/"+imagenes[i]+"')");
+			}			
+
+			//$('myOjbect').css('background-image', 'url("' + imageUrl + '")');
+		});
 	</script>
 
 </body>
