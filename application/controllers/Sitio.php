@@ -336,7 +336,9 @@ class Sitio extends CI_Controller {
 			
 			$this->load->library('Class_seguridad');
 			$ms = new Class_seguridad();
-			$datos['menu'] = $ms->pintar_menu($idusuario);
+			$aux = $ms->pintar_menu($idusuario);
+			$datos['menu'] = $aux['menu'];
+			$datos['modulo_inicial'] = $aux['modulo_inicial'];;
 			$this->load->view('admin',$datos);
 
 		}else $this->load->view('index');

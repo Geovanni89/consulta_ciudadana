@@ -16,7 +16,7 @@
 		<div class="col-12">
 			<div class="card">
 				<div class="card-body">
-					<h4 class="card-title">Buscar propuestas</h4>
+					<h4 class="card-title">Buscar usuarios</h4>
 					<form action="#" id="formbusqueda">
                         <div class="form-body">
                             <div class="row">

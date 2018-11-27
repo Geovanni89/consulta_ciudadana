@@ -43,7 +43,8 @@ class Class_seguridad {
 
     function pintar_menu($idusuario)
     {
-        $str = '';
+        $resp = array('menu'=>'','modulo_inicial'=>'');
+        $str = $modulo_inicial = '';
         $id_permiso_ant = 0;
         $modseguridad =  new M_seguridad();
         $menu = $modseguridad->traer_menu_sistema($idusuario, 0);
@@ -61,13 +62,14 @@ class Class_seguridad {
                     $submenu = $modseguridad->traer_menu_sistema($idusuario, $padre->iIdPermiso);
                     if($submenu != false && $submenu->num_rows() > 0)
                     {
-                        $submenu = $submenu->result();                        
+                        $submenu = $submenu->result();
                         $str .=  '<li class="sidebar-item">
                                             <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="'.$padre->vImagen.'"></i><span class="hide-menu">'.$padre->vPermiso.'</span></a>
                                                 <ul aria-expanded="false" class="collapse  first-level">
                                         ';
                         foreach ($submenu as $hijo)
                         {
+                            if($modulo_inicial == '') $modulo_inicial = base_url().$hijo->vUrl;
                             $str .=  '<li class="sidebar-item" style="cursor:pointer;"><a onclick="Cargar(\''.base_url().$hijo->vUrl.'\',\'#contenido\');" class="sidebar-link"><i class="'.$hijo->vImagen.'"></i><span class="hide-menu"><i class=""></i>'.$hijo->vPermiso.'</span></a></li>';
                         }
                                 
@@ -76,7 +78,8 @@ class Class_seguridad {
                     }
                     else
                     {
-                         $str .= '<li class="sidebar-item">
+                        if($modulo_inicial == '') $modulo_inicial = base_url().$padre->vUrl;
+                        $str .= '<li class="sidebar-item">
                                 <a class="sidebar-link  waves-effect waves-dark" onclick="Cargar(\''.base_url().$padre->vUrl.'\',\'#contenido\');" aria-expanded="false"><i class="'.$padre->vImagen.'"></i><span class="hide-menu">'.$padre->vPermiso.'</span></a>
                             </li>';
                     }
@@ -87,7 +90,11 @@ class Class_seguridad {
 
             }
         }
-        return $str;
+
+        $resp['menu'] = $str;
+        $resp['modulo_inicial'] = $modulo_inicial;
+
+        return $resp;
     }
     
     function verifica_permiso($permiso, $id_usuario=0, $id_rol=0)

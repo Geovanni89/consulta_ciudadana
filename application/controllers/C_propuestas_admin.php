@@ -66,7 +66,7 @@ class C_propuestas_admin extends CI_Controller {
                                 <tr>
                                     <th width="50px">ID</th>
                                     <th>Código</th>
-                                    <th>Título</th>
+                                    <th>Título <i class="mdi mdi-lead-pencil" style="align:right !important;"></i></th>
                                     <th>Estatus</th>
                                     <th>Rol</th>                                    
                                     <th width="200px"></th>
@@ -339,7 +339,7 @@ class C_propuestas_admin extends CI_Controller {
 
 	function guardar_propuesta()
 	{
-		if(isset($_SESSION[PREFIJO.'-idusuario']) && !empty($_SESSION[PREFIJO.'-idusuario']))
+		if(isset($_SESSION[PREFIJO.'_idusuario']) && !empty($_SESSION[PREFIJO.'_idusuario']))
 		{
 			if(isset($_POST['iIdPropuesta']))
 			{
