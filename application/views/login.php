@@ -72,8 +72,8 @@
 
 									<div class="col_full nobottommargin">
 										<button class="button button-3d button-black nomargin" id="login-form-submit" name="login-form-submit" value="login">Iniciar sesión</button>
-										<a href="<?=base_url();?>C_seguridad/recuperar_contrasenia" class="fright"><b>¿Olvidó su contraseña?</b></a><br>
-										<a href="<?=base_url();?>Sitio/registrarse" class="fright"><b>Regístrese</b></a>
+										<a href="<?=base_url();?>C_seguridad/recuperar_contrasenia" class="fright" style="color:#1ABC9C;"><b>¿Olvidó su contraseña?</b></a><br>
+										<a href="<?=base_url();?>Sitio/registrarse" class="fright" style="color:#1ABC9C;"><b>Regístrese</b></a>
 									</div>
 
 								</form>
@@ -196,7 +196,7 @@
 		                    }
 		                    window.location.href = url;
 		                    break;
-		                case "100":
+		                case "101":
 		                	Notificacion('Los datos son incorrectos','error');
 		                	break;
 		                default:

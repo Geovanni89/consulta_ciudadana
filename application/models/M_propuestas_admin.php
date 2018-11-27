@@ -20,7 +20,8 @@ class M_propuestas_admin extends CI_Model {
 		$this->db->join('Sector s','s.iIdSector = t.iIdSector','INNER');
 		
 		if($where != '') $this->db->where($where);
-		if($palabra != '') $this->db->where("p.vTitulo LIKE '%$palabra%'");
+		if($palabra != '') $this->db->where('p."vTitulo" ILIKE \'%'.$palabra.'%\'');
+		//if($palabra != '') $this->db->ilike("p.vTitulo",$palabra);
 		$this->db->order_by('p.dFecha','DESC');		
 
 		$query = $this->db->get();
