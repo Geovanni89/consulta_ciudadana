@@ -90,13 +90,16 @@ class M_propuestas extends CI_Model {
 		}
 	}
 
-	public function carga_propuestas($iIdPropuesta=0,$pagina=0,$lim=0)
+	public function carga_propuestas($iIdPropuesta=0,$pagina=0,$lim=0,$ad=0)
 	{
 		$lim_inf = 5;
 		$this->db->select('p.iIdPropuesta,p.vTitulo,p.tDescripcion,p.nLatDec,p.nLongDec,p.dFecha,u.iIdUsuario,u.vNombre,u.vApellidoPaterno,u.vApellidoMaterno,p.vCodigo,p.vUrlVideoExterno');
 		$this->db->from('Propuesta p');
-		$this->db->join('Usuario u','p.iIdUsuario = u.iIdUsuario','INNER');
-		$this->db->where('p.iEstatus',3);
+		$this->db->join('Usuario u','p.iIdUsuario = u.iIdUsuario','INNER');		
+		
+		if($ad==1) $this->db->where('p.iEstatus',1);
+		else $this->db->where('p.iEstatus',3);
+
 		if($iIdPropuesta>0) $this->db->where('p.iIdPropuesta',$iIdPropuesta);
 		$this->db->order_by('dFecha','DESC');
 

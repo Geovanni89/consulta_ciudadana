@@ -17,6 +17,7 @@ class C_propuestas extends CI_Controller {
 	public function propuesta_sim()
 	{
 		$iIdPropuesta = $this->input->get('id', TRUE);
+		$ad = $this->input->get('ad', TRUE);
 		$model = new M_propuestas();
 		if(isset($_SESSION[PREFIJO.'_idusuario']))
 		{
@@ -25,7 +26,7 @@ class C_propuestas extends CI_Controller {
 			$query_existe = $model->ver_apoyo($iIdPropuesta,$iIdUsuario);
 		}
 		else $query_existe = 0;
-		$query_prop = $model->carga_propuestas($iIdPropuesta);
+		$query_prop = $model->carga_propuestas($iIdPropuesta,0,0,$ad);
 		$query_coment = $model->carga_comentarios($iIdPropuesta);
 		$total_coment = $model->total_comentarios($iIdPropuesta);
 
@@ -542,7 +543,7 @@ class C_propuestas extends CI_Controller {
 		$query_coment = $model->actualiza_comentario($datos,$idcoment);
 		if($query_coment!=false)
 		{
-			$model = new M_propuestas();
+			//$model = new M_propuestas();
 			$query = $model->datos_correo($idcoment);
 			if($op==0)
 			{
