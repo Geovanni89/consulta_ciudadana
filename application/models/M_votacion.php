@@ -27,6 +27,7 @@ class M_votacion extends CI_Model {
 		$this->db->from('PropuestaAdjunto');
 		$this->db->where('iIdPropuesta',$iIdPropuesta);
 		$this->db->where('iTipo',$tipo);
+		$this->db->where('iActivo',1);
 		$this->db->order_by('dFecha','ASC');
 
 		$query = $this->db->get();
