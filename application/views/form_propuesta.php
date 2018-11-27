@@ -187,6 +187,7 @@
 	==============================================-->
 	<script src="<?=base_url();?>admin/plugins/modal-loading/js/modal-loading.js"></script>
 
+	<!--<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.js"></script>-->
 
 	<!-- Footer Scripts
 	============================================= -->
@@ -323,7 +324,11 @@
 						CKEDITOR.instances.vDescripcion.updateElement();
 					},
 					minlength: 18
+				},
+				vUrlVideoExterno: {
+					pattern: /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/
 				}
+
 			},
 			messages: {
 				iIdSector: "Debe seleccionar un Sector",
@@ -338,7 +343,8 @@
 					minlength: "La propuesta debe contener un mínimo de 10 caracteres",
 					
 				},
-				vUrlVideoExterno: "Inserte una URL válida",	
+				vUrlVideoExterno: "Debe ser una URL de Youtube"
+				,
 				iIdMunicipio: "Debe seleccionar un municipio"
 
 			},
