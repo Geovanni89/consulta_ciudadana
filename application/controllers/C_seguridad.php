@@ -168,7 +168,7 @@ class C_seguridad extends CI_Controller {
     	}
     	else
     	{
-    		echo 'Prohibida la entrada a robots';
+    		echo 'Resulva el captcha para continuar';
     	}
     }
 
