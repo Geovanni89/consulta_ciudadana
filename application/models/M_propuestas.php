@@ -421,6 +421,77 @@ class M_propuestas extends CI_Model {
 		else return false;
 	}
 
+	//------------------busqueda de propuestas -----------
+	public function busqueda_prop($pagina=0,$orden=0,$sector=0,$tema=0,$palabra="")
+	{
+		$lim_inf = 5;
+		/*
+			select p."iIdPropuesta", p."tDescripcion", p."iIdTema", p."vTitulo",p."dFecha", t."iIdTema", t."vTema", t."iIdSector", p."iIdUsuario", u."iIdUsuario", u."vNombre", u."vApellidoPaterno", u."vApellidoMaterno"
+			from "Propuesta" p
+			inner join "Tema" t on p."iIdTema" = t."iIdTema"
+			inner join "Usuario" u on p."iIdUsuario" = u."iIdUsuario"
+			where p."iEstatus" = 3
+		*/
+		$this->db->select('p.iIdPropuesta, p.tDescripcion, p.iIdTema, p.vTitulo, p.dFecha, t.vTema, t."iIdSector, p.vCodigo, p.iIdUsuario, u.vNombre, u.vApellidoPaterno, u.vApellidoMaterno, (select count(vp."iIdPropuesta")from "VotoPropuesta" vp where vp."iIdPropuesta" = p."iIdPropuesta") as votos');
+		$this->db->from('Propuesta p');
+		$this->db->join('Tema t','p.iIdTema = t.iIdTema','INNER');
+		$this->db->join('Usuario" u','p.iIdUsuario = u.iIdUsuario','INNER');
+		$this->db->where('p.iEstatus',3);
+		if($sector>0) $this->db->where('t.iIdSector',$sector);
+		if($tema>0) $this->db->where('p.iIdTema',$tema);
+		if($palabra!="") $this->db->where('p."vTitulo" ILIKE \'%'.$palabra.'%\'');
+		switch ($orden) {
+			case 1:
+				$this->db->order_by('votos','ASC');
+				break;
+			case 2:
+				$this->db->order_by('votos','DESC');
+				break;
+			case 3:
+				$this->db->order_by('p.dFecha','DESC');
+				break;
+			case 4:
+				$this->db->order_by('p.dFecha','ASC');
+				break;
+			default:
+				$this->db->order_by('p.vTitulo','ASC');
+				break;
+		}
+		/*
+		if($pagina==0){
+			$this->db->limit(5);
+		}
+		else 
+		{*/
+		$limit = $pagina*$lim_inf;
+		$this->db->limit($lim_inf,$limit);
+		//}
+
+
+		$query = $this->db->get();
+		if($query!=false) 
+		{
+			return $query->result();;
+		}
+		else return false;
+	}
+
+	public function busqueda_total($sector=0,$tema=0,$palabra="")
+	{
+		$this->db->select('p.iIdPropuesta');
+		$this->db->from('Propuesta p');
+		$this->db->join('Tema t','p.iIdTema = t.iIdTema','INNER');
+		$this->db->join('Usuario" u','p.iIdUsuario = u.iIdUsuario','INNER');
+		if($sector>0) $this->db->where('t.iIdSector',$sector);
+		if($tema>0) $this->db->where('p.iIdTema',$tema);
+		if($palabra!="") $this->db->where('p."vTitulo" ILIKE \'%'.$palabra.'%\'');
+		$this->db->where('p.iEstatus',3);
+
+		$query = $this->db->get();
+		if($query!=false) return $query->num_rows();
+		else return false;
+	}
+
 }
 
 ?>

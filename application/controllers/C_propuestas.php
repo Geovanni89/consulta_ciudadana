@@ -29,6 +29,7 @@ class C_propuestas extends CI_Controller {
 		$query_prop = $model->carga_propuestas($iIdPropuesta,0,0,$ad);
 		$query_coment = $model->carga_comentarios($iIdPropuesta);
 		$total_coment = $model->total_comentarios($iIdPropuesta);
+		$datos['sectores'] = $model->datos_sectores();
 
 		if($query_prop!=false) 
 		{
@@ -135,7 +136,7 @@ class C_propuestas extends CI_Controller {
 				echo 'correcto';
 			else 
 				echo 'error1';*/
-			$mail->enviar_correo_gmail($correo,$asunto,$mensaje);
+			$mail->enviar_correo($correo,$asunto,$mensaje);
 			//envio de correo
 
 			echo $query_prop;
@@ -405,23 +406,26 @@ class C_propuestas extends CI_Controller {
 									<p>'.$vresp->vComentario.'</p>									
 									<a class="comment-reply-link" href="javascript:" onclick="responder('.$vresp->iIdComentario.',\''.$vresp->vNombre.'\');"><i class="icon-reply"></i></a>
 									<div class="row">';
-									if($vresp->iLike=="")
+									if(isset($_SESSION[PREFIJO.'_idusuario']))
 									{
-										echo '<div class="col-"><a id="like_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(1,'.$vresp->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a></div>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<div class="col-"><a id="dislike_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(0,'.$vresp->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a></div>';	
-									}
-									elseif($vresp->iLike==0)
-									{
-										echo '<div class="col-"><a id="like_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(1,'.$vresp->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a></div>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<div class="col-"><a class="btn-like" id="dislike_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(0,'.$vresp->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a></div>';
-									}
-									elseif($vresp->iLike==1)
-									{
-										echo '<div class="col-"><a class="btn-like" id="like_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(1,'.$vresp->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a></div>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<div class="col-"><a id="dislike_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(0,'.$vresp->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a></div>';
+										if($vresp->iLike=="")
+										{
+											echo '<div class="col-"><a id="like_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(1,'.$vresp->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a></div>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<div class="col-"><a id="dislike_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(0,'.$vresp->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a></div>';	
+										}
+										elseif($vresp->iLike==0)
+										{
+											echo '<div class="col-"><a id="like_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(1,'.$vresp->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a></div>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<div class="col-"><a class="btn-like" id="dislike_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(0,'.$vresp->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a></div>';
+										}
+										elseif($vresp->iLike==1)
+										{
+											echo '<div class="col-"><a class="btn-like" id="like_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(1,'.$vresp->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a></div>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<div class="col-"><a id="dislike_'.$vresp->iIdComentario.'" href="javascript:" onclick="like(0,'.$vresp->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a></div>';
+										}
 									}
 
 									if($vresp->respuestas > 0)
@@ -563,7 +567,7 @@ class C_propuestas extends CI_Controller {
 				$mensaje = str_replace("{{var_codigo}}", $codigo, $mensaje);
 
 
-				if($mail->enviar_correo_gmail($correo,$asunto,$mensaje)) 
+				if($mail->enviar_correo($correo,$asunto,$mensaje)) 
 					echo 'correcto';
 				else 
 					echo 'error1';
@@ -572,5 +576,134 @@ class C_propuestas extends CI_Controller {
 		}
 		else echo "error2";
 	}
-	
+
+	//------------------------busqueda de propuestas
+	public function busqueda_selector()
+	{
+		$prueba = "";
+		$sector = $this->input->post('sel_search_sector', TRUE);
+		$prueba.= 'sector: '.$sector;
+		$tema = $this->input->post('sel_search_tema', TRUE);
+		$prueba.= 'tema: '.$tema;
+		$orden = $this->input->post('ordenamiento', TRUE);
+		$prueba.= 'orden: '.$orden;
+		$palabra = $this->input->post('input_palabras', TRUE);
+		$prueba.= 'palabra: '.$palabra;
+		$pagina = $this->input->post('pagina', TRUE);
+		$prueba.= 'pagina: '.$pagina;
+
+		$model = new M_propuestas();
+
+		$query = $model->busqueda_prop($pagina,$orden,$sector,$tema,$palabra);
+		$total_prop = $model->busqueda_total($sector,$tema,$palabra);
+
+		$propuestas="";
+		$paginador="";
+
+		if($query!=false)
+        { 
+            foreach ($query as $vprop) {              
+                $fecha = new DateTime($vprop->dFecha);
+                $query_img = $model->carga_adjuntos($vprop->iIdPropuesta,1);
+                $total_coment = $model->total_comentarios($vprop->iIdPropuesta);
+                $text_coment = ($total_coment>1)? "Comentarios":"Comentario";
+
+                //carga el total de votaciones de la propuesta
+                $total_vot = $model->total_vot($vprop->iIdPropuesta);
+                //fecha e inicio de votaciones
+                $inicio_voto = $model->consulta_valor_parametros(7);
+                $fin_voto = $model->consulta_valor_parametros(8);
+
+                if(isset($query_img[0])) $urlImg = $query_img[0]->vRutaAdjunto;
+                else $urlImg = "img/si_860.jpg";                
+
+                $propuestas.='<div class="card" style="margin-top: 3%; margin-bottom: 2%;">
+                    <div class="entry clearfix card-body">
+                                <div class="entry-image">
+                                    <a href="'.base_url().$urlImg.'" data-lightbox="image"><img class="image_fade" src="'.base_url().$urlImg.'" alt="Standard Post with Image"></a>
+                                </div>
+                                <div class="entry-title">
+                                    <h2><a target="_blank" href="'.base_url().'C_propuestas/propuesta_sim?id='.$vprop->iIdPropuesta.'">'.$vprop->vTitulo.'</a> <span>Clave: '.$vprop->vCodigo.'</span></h2>
+                                </div>
+                                <div class="tagcloud">
+									<a href="javascript:">'.$vprop->vTema.'</a>									
+								</div><br><br>
+                                <ul class="entry-meta clearfix">
+                                    <li><a href="javascript:"><i class="icon-comments"></i> '.$total_coment.' '.$text_coment.' </a></li>
+                                    <li><i class="icon-calendar3"></i> '.date_format($fecha,'d/m/Y').'</li>';
+                                    //$propuestas.='<li><a href="javascript:"><i class="icon-checkbox-checked"></i> '.$total_vot.'</a></li>';
+                                    $propuestas.='<li><a href="javascript:"><i class="icon-user"></i> '.$vprop->vNombre.' '.$vprop->vApellidoPaterno.' '.$vprop->vApellidoMaterno.'</a></li>
+                                </ul>
+                                <div class="entry-content">'.substr(strip_tags($vprop->tDescripcion,'<p>'),0,200).'<br>';
+                                /*if(isset($_SESSION[PREFIJO.'_idusuario']))
+                                    $propuestas.='<a href="javascript:" onclick="propuesta_simple('.$vprop->iIdPropuesta.');" class="btn btn-success">Apoyar</a>';
+                                else $propuestas.='<div class="style-msg errormsg"><div class="sb-msg"><i class="icon-remove"></i>Inicie sesión para apoyar la propuesta</div></div>'; */
+
+                                $propuestas.='</div>
+                            </div>';
+
+                            if(isset($_SESSION[PREFIJO.'_idusuario']))
+                            {
+                                $iIdUsuario = $_SESSION[PREFIJO.'_idusuario'];
+                                $apoyo = $model->ver_apoyo($vprop->iIdPropuesta,$iIdUsuario);
+                            }
+                            else $apoyo = -1;
+
+                            $propuestas.='<div class="row" style="margin-bottom: 2%;">
+                                <div class="col-md-8" style="border-right: 2px dotted #9a9a9a; " id="div_apoyo_'.$vprop->iIdPropuesta.'">';
+                                if($apoyo==-1)
+                                {
+                                    $propuestas.='<div class="col-md-12"><div class="style-msg errormsg" id="error_sesion"><div class="sb-msg"><i class="icon-remove"></i>Para poder votar por esta propuesta debe <a href="'.base_url().'Sitio/login?r=1">iniciar sesión</a> o <a href="'.base_url().'Sitio/registrarse">Registrarse</a></div></div></div>';
+                                }
+                                else
+                                {
+                                    $inicio = $inicio_voto[0]->vValor;
+                                    $fin = $fin_voto[0]->vValor;
+                                    $dFecha = date("Y-m-d");                            
+
+                                    if($dFecha>=$inicio && $dFecha<=$fin)
+                                    {
+                                        if($apoyo==0)
+                                        {
+                                            $propuestas.='<div class="row"><div class="col-md-6">
+                                                <button id="apoyar_prop" type="button" class="btn btn-outline-primary btn-lg btn-block" onclick="apoya_propuesta('.$vprop->iIdPropuesta.',1);">A favor <i class="icon-like"></i></button>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button id="apoyar_prop_dislike" type="button" class="btn btn-outline-danger btn-lg btn-block" onclick="apoya_propuesta('.$vprop->iIdPropuesta.',0);">En contra <i class="icon-like icon-rotate-180"></i></button>
+                                            </div></div>';
+                                        }
+                                        elseif($apoyo==1)
+                                        {
+                                            $propuestas.='<div class="col-md-12"><button id="apoyar_prop" type="button" class="btn btn-outline-warning btn-lg btn-block">Usted ya ha apoyado esta propuesta</button></div>';
+                                        }
+                                    }
+                                    elseif($dFecha<$inicio) $propuestas.='<div class="col-md-12"><div class="style-msg errormsg" id="error_sesion"><div class="sb-msg"><i class="icon-remove"></i>Aún no inicia el periodo de votaciones</div></div></div>';
+                                    elseif($dFecha>$fin) $propuestas.='<div class="col-md-12"><div class="style-msg errormsg" id="error_sesion"><div class="sb-msg"><i class="icon-remove"></i>El período de votaciones ha concluido</div></div></div>';
+                                }                                    
+                                $propuestas.='</div>
+                                <div class="col-md-3">
+                                    <a target="_blank" href="'.base_url().'C_propuestas/propuesta_sim?id='.$vprop->iIdPropuesta.'" class="btn btn-outline-secondary btn-lg btn-block">Consultar <i class="icon-search"></i></a>
+                                </div>
+                            </div>';
+                        $propuestas.='</div>';
+            }
+        }
+        else $propuestas.='<h1>Sin propuestas</h1>';
+
+        if($total_prop>0)
+		{
+			$paginador.='<li id="previous" class="page-item disabled"><a class="page-link" href="javascript:">&laquo;</a></li>';
+			$total_pag = floor($total_prop/5);											
+			$total = (floor($total_prop/5) > 5) ? 4 : floor($total_prop/5);
+			for ($i=0; $i <= $total; $i++) { 
+				$paginador.='<li id="pg_'.$i.'" class="page-item"><a class="page-link" onclick="pagina_propuesta('.$i.')" href="javascript:">'.($i+1).'</a></li>';
+			}												
+			if($total_pag <= 5)
+				$paginador.='<li id="next" class="page-item disabled"><a class="page-link" href="javascript:">&raquo;</a></li>';
+			else
+				$paginador.='<li id="next" class="page-item"><a class="page-link" onclick="paginador(\'sig\',0,4,'.$total_pag.')" href="javascript:">&raquo;</a></li>';												
+		}
+
+        echo $propuestas.'_separador_'.$paginador.'_separador_'.$total_prop.'_separador_'.$total_pag.'_separador_'.$prueba;
+	}
 }

@@ -57,7 +57,7 @@
 		<!-- Content
 		============================================= -->
 		
-		<section id="content">
+		<section id="content" onmouseover="carga_imagenes();">
 
 			<div class="content-wrap">
 				
@@ -125,21 +125,17 @@
 	<!-- External JavaScripts
 				============================================= -->
 				
-	<script>
-		var imagenes = ['competividad.jpg','comercialyturistica.jpg','industrial.jpg','capitalhumano.jpg','seguridadpatrimonial.jpg?','cienciaytecnologia.jpg','empleoyfomentoalemprendedurismo.jpg','alimentaria.jpg','vivienda.jpg','salud.jpg','desarrolloruralypesquero.jpg','seguridadsocial.jpg','inclusionsocial.jpg','seguridadyestadodederecho.jpg','pueblosindigenas.jpg','educacionuniversal.jpg','deportedealtorendimiento.jpg','educaciondecalidad.jpg','culturatradicional.jpg','deporteincluyente.jpg','bellasartes.jpg','hidrica.jpg','movilidadsustentableyconectividadregional.jpg','energetica.jpg','cambioclimaticoysustentabilidad.jpg','manejointegralderesiduos.jpg','ordenamientourbanoyterritorial.jpg','consevacionderecursosnaturales.jpg','igualdad.jpg','gobiernoaustero.jpg','infraestructura.jpg'];
-
-		$(document).ready(function() {
-			console.log( "ready!" );
-			for (var i = 0; i < imagenes.length; i++) {
-				$("#tema_"+(i+1)).css("background-image", "url('../img/ejes/"+imagenes[i]+"')");
-			}			
-
-			//$('myOjbect').css('background-image', 'url("' + imageUrl + '")');
-		});
+	<script>		
 
 		var total_temas = 0;
 		var id_temas = {};
 
+		function carga_imagenes() {			
+
+			for (var i = 0; i < imagenes.length; i++) {
+				$("#tema_"+(i+1)).css("background-image", "url('../img/ejes/"+imagenes[i]+"')");
+			}		
+		}
 
 
 		function selecciona_temas(idtema) {
