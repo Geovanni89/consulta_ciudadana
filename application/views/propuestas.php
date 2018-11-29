@@ -136,7 +136,12 @@
 												if($sectores!=false) 
 												{
 													foreach ($sectores as $vsec) {
-														echo '<option value="'.$vsec->iIdSector.'">'.$vsec->vSector.'</option>';
+														if($iIdSector==$vsec->iIdSector)
+															$selected = 'selected';
+														else 
+															$selected = '';
+
+														echo '<option value="'.$vsec->iIdSector.'" '.$selected.'>'.$vsec->vSector.'</option>';
 													}
 												}
 											?>
@@ -145,7 +150,21 @@
 									<div class="form-group">
 										<label for="exampleFormControlSelect1">Temas</label>
 										<select class="form-control" id="sel_search_tema" name="sel_search_tema" onchange="busqueda_selector(this.value,2);">
-											<option value="">Temas</option>										
+											<option value="">Temas</option>
+											<?php 
+												var_dump($temas);
+												if($temas!='')
+												{	
+													foreach ($temas as $vtem) {
+														if($iIdTema==$vtem->iIdTema)
+															$selected_t = 'selected';
+														else 
+															$selected_t = '';
+
+														echo '<option value="'.$vtem->iIdTema.'" '.$selected_t.'>'.$vtem->vTema.'</option>';
+													}
+												}
+											?>									
 										</select>
 									</div>
 									<div class="form-group">

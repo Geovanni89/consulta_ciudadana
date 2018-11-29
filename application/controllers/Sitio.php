@@ -25,6 +25,7 @@ class Sitio extends CI_Controller {
         session_start();
         $this->load->helper('url');
         $this->load->model('M_propuestas');
+        $this->load->model('M_presupuesto');
         $this->load->library('Class_propuestas');
         $this->load->library('Class_votacion');
     }
@@ -98,10 +99,28 @@ class Sitio extends CI_Controller {
 
 	public function propuestas()
 	{
+		$iIdSector = $this->input->get('iIdSector', TRUE);
+		$iIdTema = $this->input->get('iIdTema', TRUE);
 		$prop = new Class_propuestas();
-		$datos['propuestas'] = $prop->carga_propuestas();
-		$datos['total'] = $prop->total_propuestas();
+
+		$datos['propuestas'] = $prop->carga_propuestas(0,$iIdSector,$iIdTema);
+		$datos['total'] = $prop->total_propuestas($iIdSector,$iIdTema);
 		$datos['sectores'] = $prop->datos_sectores();
+		if(isset($iIdSector) && $iIdSector>0) {
+
+			$datos['iIdSector'] = $iIdSector;			
+			$datos['temas'] = $prop->datos_temas($iIdSector);
+			$datos['iIdTema'] = (isset($iIdTema)) ? $iIdTema : 0 ;
+
+		}
+		else
+		{
+			$datos['iIdSector'] = 0;
+			$datos['temas'] = '';
+			$datos['iIdTema'] = 0;
+		}
+
+
 		$datos['active'] = 2;
 		$this->load->view('propuestas',$datos);
 	}
@@ -368,8 +387,15 @@ class Sitio extends CI_Controller {
 
 	public function presupuesto()
 	{
-		$datos['active'] = 7;
-		$this->load->view('presupuesto',$datos);
+		if(isset($_SESSION[PREFIJO.'_idusuario']))
+		{
+			$iIdUsuario = $_SESSION[PREFIJO.'_idusuario'];
+			$model = new M_presupuesto();
+			$datos['existe'] = $model->pres_ususario($iIdUsuario);
+		}
+		else $datos['existe'] = -1;
+			$datos['active'] = 7;
+			$this->load->view('presupuesto',$datos);
 	}
 
 	public function encuestas()

@@ -10,13 +10,14 @@ class Class_propuestas {
         $CI->load->model('M_propuestas'); 
     }
 
-    function carga_propuestas($pagina=0)
+    function carga_propuestas($pagina=0,$iIdSector=0,$iIdTema=0)
     {
         $propuestas = "";
         $model = new M_propuestas();
-        $query_prop = $model->carga_propuestas(0,$pagina);
+        //$query_prop = $model->carga_propuestas(0,$pagina);
+        $query_prop = $model->busqueda_prop($pagina,0,$iIdSector,$iIdTema);
         if($query_prop!=false)
-        {     
+        { 
             foreach ($query_prop as $vprop) {              
                 $fecha = new DateTime($vprop->dFecha);
                 $query_img = $model->carga_adjuntos($vprop->iIdPropuesta,1);
@@ -32,14 +33,17 @@ class Class_propuestas {
                 if(isset($query_img[0])) $urlImg = $query_img[0]->vRutaAdjunto;
                 else $urlImg = "img/si_860.jpg";                
 
-                $propuestas.='<div class="card" style="margin-top: 3%;">
+                $propuestas.='<div class="card" style="margin-top: 3%; margin-bottom: 2%;">
                     <div class="entry clearfix card-body">
                                 <div class="entry-image">
                                     <a href="'.base_url().$urlImg.'" data-lightbox="image"><img class="image_fade" src="'.base_url().$urlImg.'" alt="Standard Post with Image"></a>
                                 </div>
                                 <div class="entry-title">
-                                    <h2><a target="_blank" href="'.base_url().'C_propuestas/propuesta_sim?id='.$vprop->iIdPropuesta.'">'.$vprop->vTitulo.'</a></h2>
+                                    <h2><a target="_blank" href="'.base_url().'C_propuestas/propuesta_sim?id='.$vprop->iIdPropuesta.'">'.$vprop->vTitulo.'</a> <span>Clave: '.$vprop->vCodigo.'</span></h2>
                                 </div>
+                                <div class="tagcloud">
+                                    <a href="javascript:">'.$vprop->vTema.'</a>                                 
+                                </div><br><br>
                                 <ul class="entry-meta clearfix">
                                     <li><a href="javascript:"><i class="icon-comments"></i> '.$total_coment.' '.$text_coment.' </a></li>
                                     <li><i class="icon-calendar3"></i> '.date_format($fecha,'d/m/Y').'</li>';
@@ -61,8 +65,8 @@ class Class_propuestas {
                             }
                             else $apoyo = -1;
 
-                            $propuestas.='<div class="row" >
-                                <div class="col-md-8" id="div_apoyo_'.$vprop->iIdPropuesta.'">';
+                            $propuestas.='<div class="row" style="margin-bottom: 2%;">
+                                <div class="col-md-8" style="border-right: 2px dotted #9a9a9a; " id="div_apoyo_'.$vprop->iIdPropuesta.'">';
                                 if($apoyo==-1)
                                 {
                                     $propuestas.='<div class="col-md-12"><div class="style-msg errormsg" id="error_sesion"><div class="sb-msg"><i class="icon-remove"></i>Para poder votar por esta propuesta debe <a href="'.base_url().'Sitio/login?r=1">iniciar sesión</a> o <a href="'.base_url().'Sitio/registrarse">Registrarse</a></div></div></div>';
@@ -77,12 +81,12 @@ class Class_propuestas {
                                     {
                                         if($apoyo==0)
                                         {
-                                            $propuestas.='<div class="col-md-12">
-                                                <button id="apoyar_prop" type="button" class="btn btn-outline-success btn-lg btn-block" onclick="apoya_propuesta('.$vprop->iIdPropuesta.',1);">A favor <i class="icon-like"></i></button>
+                                            $propuestas.='<div class="row"><div class="col-md-6">
+                                                <button id="apoyar_prop" type="button" class="btn btn-outline-primary btn-lg btn-block" onclick="apoya_propuesta('.$vprop->iIdPropuesta.',1);">A favor <i class="icon-like"></i></button>
                                             </div>
-                                            <div class="col-md-12">
+                                            <div class="col-md-6">
                                                 <button id="apoyar_prop_dislike" type="button" class="btn btn-outline-danger btn-lg btn-block" onclick="apoya_propuesta('.$vprop->iIdPropuesta.',0);">En contra <i class="icon-like icon-rotate-180"></i></button>
-                                            </div>';
+                                            </div></div>';
                                         }
                                         elseif($apoyo==1)
                                         {
@@ -93,8 +97,8 @@ class Class_propuestas {
                                     elseif($dFecha>$fin) $propuestas.='<div class="col-md-12"><div class="style-msg errormsg" id="error_sesion"><div class="sb-msg"><i class="icon-remove"></i>El período de votaciones ha concluido</div></div></div>';
                                 }                                    
                                 $propuestas.='</div>
-                                <div class="col-md-4">
-                                    <a target="_blank" href="'.base_url().'C_propuestas/propuesta_sim?id='.$vprop->iIdPropuesta.'" class="btn btn-outline-success btn-lg btn-block">Consultar <i class="icon-search"></i></a>
+                                <div class="col-md-3">
+                                    <a target="_blank" href="'.base_url().'C_propuestas/propuesta_sim?id='.$vprop->iIdPropuesta.'" class="btn btn-outline-secondary btn-lg btn-block">Consultar <i class="icon-search"></i></a>
                                 </div>
                             </div>';
                         $propuestas.='</div>';
@@ -162,6 +166,13 @@ class Class_propuestas {
         return $query;
     }
 
+    function datos_temas($iIdSector)
+    {
+        $model = new M_propuestas();
+        $query = $model->datos_temas($iIdSector);
+        return $query;
+    }
+
     function prop_votos()
     {
         $model = new M_propuestas();
@@ -206,13 +217,14 @@ class Class_propuestas {
         return $total;
     }
 
-    function total_propuestas()
+    function total_propuestas($iIdSector=0,$iIdTema=0)
     {
         $model = new M_propuestas();
-        $query_total = $model->total_propuestas();
+        //$query_total = $model->total_propuestas();
+        $query_total = $model->busqueda_total($iIdSector,$iIdTema);
         if($query_total!=false) return $query_total;
         else return false;
-    }
+    }    
 
    
 }

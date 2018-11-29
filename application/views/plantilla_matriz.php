@@ -52,7 +52,7 @@
 
 								<div class="col-lg-6 mb-4">
 									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(1);"':''; echo $cursor;?> >										
-											<div class="flip-card-front bg-secondary dark bg-tema-1" id="tema_1" data-height-xl="<?=$alto2?>">
+											<div class="flip-card-front bg-secondary dark" id="tema_1" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
@@ -265,7 +265,7 @@
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(11);"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_11" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -285,7 +285,7 @@
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(12);"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_12" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
@@ -305,7 +305,7 @@
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(13);"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_13" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -325,7 +325,7 @@
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(14);"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_14" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
@@ -345,7 +345,7 @@
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(15);"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_15" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
@@ -374,7 +374,7 @@
 
 							<div class="row grid-container" data-layout="masonry" style="overflow: visible">
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(16);"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_16" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -395,7 +395,7 @@
 						
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(17);"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_17" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -415,7 +415,7 @@
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(18);"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_18" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -435,7 +435,7 @@
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(19);"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_19" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -456,7 +456,7 @@
 						
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(20);"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_20" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -476,7 +476,7 @@
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(21);"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_21" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -506,7 +506,7 @@
 							<h2>AMBIENTALES</h2>
 							<div class="row grid-container" data-layout="masonry" style="overflow: visible">
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(22);"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_22" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -527,7 +527,7 @@
 						
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(23);"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_23" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -547,7 +547,7 @@
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(24);"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_24" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -567,7 +567,7 @@
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(25);"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_25" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
@@ -587,7 +587,7 @@
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(26);"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_26" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
@@ -607,7 +607,7 @@
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(27);"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_27" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
@@ -627,7 +627,7 @@
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(28);"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_28" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
@@ -647,7 +647,7 @@
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(29);"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_29" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
@@ -667,7 +667,7 @@
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(30);"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_30" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
@@ -702,8 +702,11 @@
 				</div>
 
 				<div class="row grid-container" data-layout="masonry" style="overflow: visible">
+					<div class="col-lg-1 mb-4">						
+					</div>
+
 					<div class="col-lg-2 mb-4">
-						<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >							
+						<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(31);"':''; echo $cursor;?> >							
 								<div class="flip-card-front bg-secondary dark" id="tema_31" data-height-xl="<?=$alto;?>">
 								<div class="flip-card-inner">
 									<div class="card nobg noborder text-center">
@@ -724,7 +727,7 @@
 					</div>
 
 					<div class="col-lg-2 mb-4">
-						<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >							
+						<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(32);"':''; echo $cursor;?> >							
 								<div class="flip-card-front bg-secondary dark" id="tema_32" data-height-xl="<?=$alto;?>">
 								<div class="flip-card-inner">
 									<div class="card nobg noborder text-center">
@@ -744,7 +747,7 @@
 					</div>
 
 					<div class="col-lg-2 mb-4">
-						<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >							
+						<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(33);"':''; echo $cursor;?> >							
 								<div class="flip-card-front bg-secondary dark" id="tema_33" data-height-xl="<?=$alto;?>">
 								<div class="flip-card-inner">
 									<div class="card nobg noborder text-center">
@@ -764,7 +767,7 @@
 					</div>
 
 					<div class="col-lg-2 mb-4">
-						<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >							
+						<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(34);"':''; echo $cursor;?> >							
 								<div class="flip-card-front bg-secondary dark" id="tema_34" data-height-xl="<?=$alto;?>">
 								<div class="flip-card-inner">
 									<div class="card nobg noborder text-center">
@@ -784,7 +787,7 @@
 					</div>
 
 					<div class="col-lg-2 mb-4">
-						<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >							
+						<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(35);"':''; echo $cursor;?> >							
 								<div class="flip-card-front bg-secondary dark" id="tema_35" data-height-xl="<?=$alto;?>">
 								<div class="flip-card-inner">
 									<div class="card nobg noborder text-center">

@@ -67,7 +67,15 @@
 					<?php include('plantilla_matriz.php'); ?>
 					
 					<div class="col_one_third"></div>
-					<div class="col_one_third"><a href="javascript:" onclick="envia_temas();" class="btn btn-block btn-success">Enviar</a></div>
+					<div class="col_one_third" id="btn_enviot">
+						<?php
+							if($existe==0) echo '<a href="javascript:" onclick="envia_temas();" class="btn btn-block btn-success">Enviar</a>';
+							elseif($existe==-1) echo '<div class="style-msg errormsg">
+							<div class="sb-msg"><i class="icon-remove"></i> Para poder apoyar una propuesta debe <a href="'.base_url().'Sitio/login?r=1">iniciar sesión</a> o <a href="'.base_url().'Sitio/registrarse">Registrarse</a>.</div>
+								</div>';
+							else echo '<div class="style-msg successmsg"><div class="sb-msg"><i class="icon-thumbs-up"></i> Usted ya ha participado en este proceso.</div></div>';
+						?>						
+					</div>
 				</div>				
 
 			</div>			
@@ -134,12 +142,13 @@
 
 			for (var i = 0; i < imagenes.length; i++) {
 				$("#tema_"+(i+1)).css("background-image", "url('../img/ejes/"+imagenes[i]+"')");
-			}		
+			}
+			$('#content').removeAttr("onmouseover")	;
 		}
 
 
 		function selecciona_temas(idtema) {
-			if($('#tema_'+idtema).hasClass('bg-success')!==true) {
+			if($('#tema_'+idtema).hasClass('bg-primary')!==true) {
 				if(total_temas<3) {
 
 					if(typeof $('#tema_'+idtema).val()!=='undefined')
@@ -148,6 +157,7 @@
 						total_temas++;
 					    // the variable is defined
 						$('#tema_'+idtema).removeClass('bg-secondary').addClass('bg-primary');
+						$('#tema_'+idtema).css("background-image", "");
 					}
 					else toastr.danger('No se ha podido seleccionar el tema', 'Error', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
 					
@@ -161,21 +171,22 @@
 			else {
 				if(id_temas['tema_'+idtema]) {
 					$('#tema_'+idtema).removeClass('bg-primary').addClass('bg-secondary');
+					$('#tema_'+idtema).css("background-image", "url('../img/ejes/"+imagenes[idtema-1]+"')");				
 					delete id_temas['tema_'+idtema];
 					total_temas--;					
 				}				
 			}
 		}
 
-		function envia_temas() {
-			//var id=[];		
-			if(total_temas==3) {
-				/*$.each(id_temas, function(index,val) {			  
-				  id.push(val);
-				});*/
+		function envia_temas() {		
+			if(total_temas==3) {				
 				$.post('<?=base_url();?>C_presupuesto/envia_temas',{temas:id_temas}, function(resp){
 					console.log(resp);
-					//toastr.success('Temas enviados correctamente', 'Correcto', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+					if(resp==1) {
+						toastr.success('Temas enviados correctamente', 'Correcto', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+						$('#btn_enviot').html('<div class="style-msg successmsg"><div class="sb-msg"><i class="icon-thumbs-up"></i> Agradecemos su participación en este proceso.</div></div>');						
+					}
+					else toastr.danger('Los temas no se guardaron correctamente', 'Error!', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
 				});
 			}
 			else toastr.warning('Debe seleccionar 3 temas para continuar', '¡Advertencia!', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });

@@ -582,15 +582,10 @@ class C_propuestas extends CI_Controller {
 	{
 		$prueba = "";
 		$sector = $this->input->post('sel_search_sector', TRUE);
-		$prueba.= 'sector: '.$sector;
 		$tema = $this->input->post('sel_search_tema', TRUE);
-		$prueba.= 'tema: '.$tema;
 		$orden = $this->input->post('ordenamiento', TRUE);
-		$prueba.= 'orden: '.$orden;
 		$palabra = $this->input->post('input_palabras', TRUE);
-		$prueba.= 'palabra: '.$palabra;
 		$pagina = $this->input->post('pagina', TRUE);
-		$prueba.= 'pagina: '.$pagina;
 
 		$model = new M_propuestas();
 
@@ -704,6 +699,7 @@ class C_propuestas extends CI_Controller {
 				$paginador.='<li id="next" class="page-item"><a class="page-link" onclick="paginador(\'sig\',0,4,'.$total_pag.')" href="javascript:">&raquo;</a></li>';												
 		}
 
-        echo $propuestas.'_separador_'.$paginador.'_separador_'.$total_prop.'_separador_'.$total_pag.'_separador_'.$prueba;
+        //echo $propuestas.'_separador_'.$paginador.'_separador_'.$total_prop.'_separador_'.$total_pag.'_separador_'.$prueba;
+        echo $propuestas.'_separador_'.$paginador;
 	}
 }
