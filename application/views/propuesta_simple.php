@@ -283,7 +283,8 @@
 													<p>'.$vcom->vComentario.'</p>
 													<a class="comment-reply-link" href="javascript:" onclick="responder('.$vcom->iIdComentario.',\''.$vcom->vNombre.'\');"><i class="icon-reply"></i></a>
 													<div class="row">';
-													
+												if(isset($_SESSION[PREFIJO.'_idusuario']))
+												{
 													if($vcom->iLike=="")
 													{
 														echo '<div class="col-"><a id="like_'.$vcom->iIdComentario.'" href="javascript:" onclick="like(1,'.$vcom->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a></div>
@@ -294,14 +295,15 @@
 													{
 														echo '<div class="col-"><a id="like_'.$vcom->iIdComentario.'" href="javascript:" onclick="like(1,'.$vcom->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a></div>
 														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-														<div class="col-"><a class="btn-like" id="dislike_'.$vcom->iIdComentario.'" href="javascript:" onclick="like(0,'.$vcom->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a></div>';
+														<div class="col-"><a class="btn-like" id="dislike_'.$vcom->iIdComentario.'" href="javascript:"><i class="icon-thumbs-down"></i> No me gusta</a></div>';
 													}
 													elseif($vcom->iLike==1)
 													{
-														echo '<div class="col-"><a class="btn-like" id="like_'.$vcom->iIdComentario.'" href="javascript:" onclick="like(1,'.$vcom->iIdComentario.')"><i class="icon-thumbs-up"></i> Me gusta</a></div>
+														echo '<div class="col-"><a class="btn-like" id="like_'.$vcom->iIdComentario.'" href="javascript:"><i class="icon-thumbs-up"></i> Me gusta</a></div>
 														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 														<div class="col-"><a id="dislike_'.$vcom->iIdComentario.'" href="javascript:" onclick="like(0,'.$vcom->iIdComentario.')"><i class="icon-thumbs-down"></i> No me gusta</a></div>';
 													}
+												}
 
 													
 												if($vcom->respuestas > 0)
@@ -373,23 +375,41 @@
 
 					<!-- Sidebar
 					============================================= -->
-					<!--<div class="sidebar nobottommargin col_last clearfix">						
+					<div class="sidebar nobottommargin col_last clearfix">						
 						<div class="sidebar-widgets-wrap">							
 
 							<div class="widget clearfix">
 
-								<h4>Categorías</h4>
-								<div class="tagcloud">
-									<a href="#">general</a>
-									<a href="#">videos</a>
-									<a href="#">music</a>
-									<a href="#">media</a>
-									<a href="#">photography</a>
-									<a href="#">parallax</a>
-									<a href="#">ecommerce</a>
-									<a href="#">terms</a>
-									<a href="#">coupons</a>
-									<a href="#">modern</a>
+								<h4>Selectores</h4>
+								<div class="form-group">
+									<label for="exampleFormControlSelect1">Sector</label>
+									<select class="form-control" id="busqueda_sector">
+										<option value="">Sector</option>
+										<?php 
+											if($sectores!=false) 
+											{
+												foreach ($sectores as $vsec) {
+													echo '<option value="'.$vsec->iIdSector.'">'.$vsec->vSector.'</option>';
+												}
+											}
+										?>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="exampleFormControlSelect1">Temas</label>
+									<select class="form-control" id="busqueda_tema">
+										<option value="">Temas</option>										
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="exampleFormControlSelect1">Orden</label>
+									<select class="form-control" id="ordenamiento">
+										<option value="">Orden</option>
+										<option value="1">Votadas (de menor a mayor)</option>
+										<option value="2">Votadas (de mayor a menor)</option>
+										<option value="3">Más recientes</option>
+										<option value="4">Más antiguas</option>										
+									</select>
 								</div>
 							</div>
 
@@ -403,25 +423,16 @@
 
 							<div class="widget clearfix">
 
-								<h4>Tendencias</h4>
+								<h4>Palabras clave</h4>
 								<div class="tagcloud">
-									<a href="#">general</a>
-									<a href="#">videos</a>
-									<a href="#">music</a>
-									<a href="#">media</a>
-									<a href="#">photography</a>
-									<a href="#">parallax</a>
-									<a href="#">ecommerce</a>
-									<a href="#">terms</a>
-									<a href="#">coupons</a>
-									<a href="#">modern</a>
+									<input class="form-control mb-2" id="busqueda_palabras" type="text" placeholder="Ejemplo: Presupuesto">
 								</div>
 
 							</div>
 
 						</div>
 
-					</div>-->
+					</div>
 					<!-- .sidebar end -->
 
 				</div>
@@ -588,9 +599,17 @@
 				var res = obj['res'];
 
 				if(res==true) {
-					$('#'+btn_reac+comentario).addClass('btn-like');
-					if($('#'+btn_reac_op+comentario).hasClass("btn-like")==true)
-						$('#'+btn_reac_op+comentario).removeClass('btn-like');
+
+					//onclick="like(0,'.$vcom->iIdComentario.')"
+					//onclick="like(0,'.$vcom->iIdComentario.')"
+
+					$('#'+btn_reac+comentario).addClass('btn-like').removeAttr("onclick");;
+					if($('#'+btn_reac_op+comentario).hasClass("btn-like")==true) {
+						$('#'+btn_reac_op+comentario).removeClass('btn-like');	
+						if(btn_reac_op=='like_') $('#'+btn_reac_op+comentario).attr( "onclick","like(1,"+comentario+")");
+						else if(btn_reac_op=='dislike_') $('#'+btn_reac_op+comentario).attr( "onclick","like(0,"+comentario+")");
+
+					}
 				}
 				else console.log('error');
 			});

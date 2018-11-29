@@ -8,65 +8,23 @@
 */
 	$alto = 150;
 	$alto2 = 325;
-	$rutaimagen = base_url().'/img/ejes/';
-	$rutaicon = base_url().'img/matriz/';
-
-//arreglos para pintar la matriz
-$ejes[0] = array('id'=>1,'eje'=>'ECONOMÍA');
-$ejes[1] = array('id'=>2,'eje'=>'SOCIALES');
-$ejes[2] = array('id'=>3,'eje'=>'CULTURALES');
-$ejes[3] = array('id'=>4,'eje'=>'AMBIENTALES');
-$ejes[4] = array('id'=>5,'eje'=>'EJE TRANSVERSAL');
-
-
-
-$temas[1] = array('tema'=>'Competividad', 'alto'=>150, 'url' => $rutaimagen.'competividad.jpg','url_icon' => $rutaicon.'i_competitividad.png');
-$temas[1] = array('tema'=>'Comercial y turística', 'alto'=>150, 'url' => $rutaimagen.'comercialyturistica.jpg','url_icon' => $rutaicon.'i_comercial_turistica.png');
-$temas[1] = array('tema'=>'Industrial', 'alto'=>150, 'url' => $rutaimagen.'industrial.jpg','url_icon' => $rutaicon.'i_industrial.png');
-$temas[1] = array('tema'=>'Capital humano', 'alto'=>150, 'url' => $rutaimagen.'capitalhumano.jpg','url_icon' => $rutaicon.'i_Capital-humano.png');
-$temas[1] = array('tema'=>'Seguridad patrimonial', 'alto'=>325, 'url' => $rutaimagen.'seguridadpatrimonial.jpg','url_icon' => $rutaicon.'i_Seguridad-patrimonial.png');
-$temas[1] = array('tema'=>'Ciencia y tecnología', 'alto'=>150, 'url' => $rutaimagen.'cienciaytecnologia.jpg','url_icon' => $rutaicon.'i_Ciencia-y-tecnología.png');
-$temas[1] = array('tema'=>'Empleo y fomento al emprendedurismo', 'alto'=>150, 'url' => $rutaimagen.'empleoyfomentoalemprendedurismo.jpg','url_icon' => $rutaicon.'i_Empleo-y-fomento-al-emprendedurismo.png');
-$temas[2] = array('tema'=>'Alimentaria', 'alto'=>150, 'url' => $rutaimagen.'alimentaria.jpg','url_icon' => $rutaicon.'i_Alimentaria.png');
-$temas[2] = array('tema'=>'Vivienda', 'alto'=>150, 'url' => $rutaimagen.'vivienda.jpg','url_icon' => $rutaicon.'i_Vivienda.png');
-$temas[2] = array('tema'=>'Salud', 'alto'=>150, 'url' => $rutaimagen.'salud.jpg','url_icon' => $rutaicon.'i_Salud.png');
-$temas[2] = array('tema'=>'Desarrollo rural y pesquero', 'alto'=>150, 'url' => $rutaimagen.'desarrolloruralypesquero.jpg','url_icon' => $rutaicon.'i_Desarrollo-rural-y-pesquero.png');
-$temas[2] = array('tema'=>'Seguridad social', 'alto'=>150, 'url' => $rutaimagen.'seguridadsocial.jpg','url_icon' => $rutaicon.'i_Seguridad-social.png');
-$temas[2] = array('tema'=>'Inclusión social', 'alto'=>150, 'url' => $rutaimagen.'inclusionsocial.jpg','url_icon' => $rutaicon.'i_Inclusión-social.png');
-$temas[2] = array('tema'=>'Seguridad y estado de derecho', 'alto'=>150, 'url' => $rutaimagen.'seguridadyestadodederecho.jpg','url_icon' => $rutaicon.'i_Seguridad-y-Estado-de-derecho.png');
-$temas[2] = array('tema'=>'Pueblos indígenas', 'alto'=>150, 'url' => $rutaimagen.'pueblosindigenas.jpg','url_icon' => $rutaicon.'i_Pueblos-indígenas.png');
-$temas[3] = array('tema'=>'Educación universal', 'alto'=>150, 'url' => $rutaimagen.'educacionuniversal.jpg','url_icon' => $rutaicon.'i_Educación_u.png');
-$temas[3] = array('tema'=>'Deporte de alto rendimiento', 'alto'=>325, 'url' => $rutaimagen.'deportedealtorendimiento.jpg','url_icon' => $rutaicon.'i_Deporte_alto.png');
-$temas[3] = array('tema'=>'Educación de calidad', 'alto'=>150, 'url' => $rutaimagen.'educaciondecalidad.jpg','url_icon' => $rutaicon.'i_Educación_c.png');
-$temas[3] = array('tema'=>'Cultura tradicional', 'alto'=>150, 'url' => $rutaimagen.'culturatradicional.jpg','url_icon' => $rutaicon.'i_cultura-tra.png');
-$temas[3] = array('tema'=>'Deporte incluyente', 'alto'=>325, 'url' => $rutaimagen.'deporteincluyente.jpg','url_icon' => $rutaicon.'i_deporte_inc.png');
-$temas[3] = array('tema'=>'Bellas artes', 'alto'=>150, 'url' => $rutaimagen.'bellasartes.jpg','url_icon' => $rutaicon.'i_bellas_artes.png');
-$temas[4] = array('tema'=>'Hídrica', 'alto'=>150, 'url' => $rutaimagen.'hidrica.jpg','url_icon' => $rutaicon.'i_hidirca.png');
-$temas[4] = array('tema'=>'Movilidad sustentable y conectividad regional', 'alto'=>325, 'url' => $rutaimagen.'movilidadsustentableyconectividadregional.jpg','url_icon' => $rutaicon.'i_movilidad.png');
-$temas[4] = array('tema'=>'Energética', 'alto'=>150, 'url' => $rutaimagen.'energetica.jpg','url_icon' => $rutaicon.'i_energetica.png');
-$temas[4] = array('tema'=>'Cambio climático y sustentabilidad', 'alto'=>150, 'url' => $rutaimagen.'cambioclimaticoysustentabilidad.jpg','url_icon' => $rutaicon.'i_cambio_cli.png');
-$temas[4] = array('tema'=>'Manejo integral de residuos', 'alto'=>150, 'url' => $rutaimagen.'manejointegralderesiduos.jpg','url_icon' => $rutaicon.'i_manejo.png');
-$temas[4] = array('tema'=>'Ordenamiento urbano y territorial', 'alto'=>150, 'url' => $rutaimagen.'ordenamientourbanoyterritorial.jpg','url_icon' => $rutaicon.'i_ordenamiento.png');
-$temas[4] = array('tema'=>'Conservación de recursos naturales', 'alto'=>150, 'url' => $rutaimagen.'consevacionderecursosnaturales.jpg','url_icon' => $rutaicon.'i_conservacion.png');
-$temas[5] = array('tema'=>'Equidad de género', 'alto'=>150, 'url' => $rutaimagen.'img/ejes/igualdad.jpg','url_icon' => $rutaicon.'i_Igualdad-de-género.png');
-$temas[5] = array('tema'=>'Gobierno austero, abierto, innovador y eficiente', 'alto'=>150, 'url' => $rutaimagen.'gobiernoaustero.jpg','url_icon' => $rutaicon.'i_gobierno.png');
-$temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>150, 'url' => $rutaimagen.'infraestructura.jpg','url_icon' => $rutaicon.'i_infraestructura.png');
 //==============================================================================================
 
 	switch ($active) {
+		case 1:
+			$flip_efect = '';			
+			$cursor = '';
+			$titulo = '<div class=""><div class="feature-box fbox-center fbox-light fbox-plain"><h3 style="font-size: 24px;color: #1a4a60; font-weight: 1200;"><strong>MATRIZ DE EJES<br>PED 2018-2024</strong></h3></div></div>';
+			break;
 		case 6:
-			$flip_efect = 'flip-card';
-			$flip_back = '<div class="flip-card-back bg-info no-after" data-height-xl="<?=$alto?>">
-							<div class="flip-card-inner">
-								<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-							</div>
-						</div>';
+			$flip_efect = 'flip-card';			
+			$cursor = '';
 			$titulo = '<div class="heading-block center"><h1>¿Quieres enviar una propuesta?</h1><span>¡Participa! Da clic en el eje al que creas que pertenece y sé parte de Tu Plan Estatal de Desarrollo.</span></div>';
 			break;
 		
 		case 7:
-			$flip_efect = '';
-			$flip_back = '';
+			$flip_efect = '';			
+			$cursor = 'style="cursor: pointer;"';
 			$titulo = '<div class="heading-block center"><h2></h2><span>Selecciona los tres temas que consideras deberían tener mayor presupuesto en los próximos años. </span></div>';
 			break;
 	}
@@ -93,124 +51,167 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 							<div class="row grid-container" data-layout="masonry" style="overflow: visible">
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas(1);" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary dark" style="background-image: url('<?=$rutaimagen;?>competividad.jpg?v=1.3')" data-height-xl="<?=$alto?>">-->
-											<div class="flip-card-front bg-secondary dark bg-tema-1" id="tema_1" data-height-xl="<?=$alto?>">
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(1);"':''; echo $cursor;?> >										
+											<div class="flip-card-front bg-secondary dark bg-tema-1" id="tema_1" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
-														<img src="<?=base_url();?>img/matriz/i_competitividad.png" class="h1">
-														<p style="font-size: 14px">Competividad</p>
+														<img src="<?=base_url();?>img/matriz/i_des_comercial.png" class="h1">
+														<p style="font-size: 14px">Desarrollo comercial y fortalecimiento de la demanda interna</p>
 													</div>
 												</div>
 											</div>
 										</div>
-										<?=$flip_back;?>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
 									</div>
 								</div>
 						
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas(2);" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>comercialyturistica.jpg');">-->
-											<div class="flip-card-front bg-secondary dark" id="tema_2" data-height-xl="<?=$alto?>">
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(2);"':''; echo $cursor;?> >										
+											<div class="flip-card-front bg-secondary dark" id="tema_2" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">													
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
-														<img src="<?=base_url();?>img/matriz/i_comercial_turistica.png">
-														<p style="font-size: 14px">Comercial y turística</p>
+														<img src="<?=base_url();?>img/matriz/i_competitividad.png">
+														<p style="font-size: 14px">Competitividad e Inversión Extranjeta</p>
 													</div>
 												</div>
 											</div>
 										</div>
-										<?=$flip_back;?>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas(3);" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>industrial.jpg');">-->
-											<div class="flip-card-front bg-secondary dark" id="tema_3" data-height-xl="<?=$alto?>">
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(3);"':''; echo $cursor;?> >										
+											<div class="flip-card-front bg-secondary dark" id="tema_3" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
-														<img src="<?=base_url();?>img/matriz/i_industrial.png">
-														<p style="font-size: 14px;">Industrial</p>
+														<img src="<?=base_url();?>img/matriz/i_capital_hum.png">
+														<p style="font-size: 14px;">Capital humano generador de desarrollo y trabajo decente</p>
 													</div>
 												</div>
 											</div>
 										</div>
-										<?=$flip_back;?>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas(4);" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>capitalhumano.jpg');">-->
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(4);"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_4" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
-														<img src="<?=base_url();?>img/matriz/i_Capital-humano.png">
-														<p style="font-size: 14px;">Capital humano</p>
+														<img src="<?=base_url();?>img/matriz/i_desarrollo-agri.png">
+														<p style="font-size: 14px;">Desarrollo agrícola</p>
 													</div>
 												</div>
 											</div>
 										</div>
-										<?=$flip_back;?>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas(5);" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary bg-info dark" data-height-xl="<?=$alto2?>" style="background-image: url('<?=$rutaimagen;?>seguridadpatrimonial.jpg?v=1');">-->
-											<div class="flip-card-front bg-secondary dark" id="tema_5" data-height-xl="<?=$alto2?>">
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(5);"':''; echo $cursor;?> >										
+											<div class="flip-card-front bg-secondary dark" id="tema_5" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">												
-														<img src="<?=base_url();?>img/matriz/i_Seguridad-patrimonial.png">
-														<p style="font-size: 14px;">Seguridad patrimonial</p>
+														<img src="<?=base_url();?>img/matriz/i_desarrollo-pesquero.png">
+														<p style="font-size: 14px;">Desarrollo pesquero</p>
 													</div>
 												</div>
 											</div>
 										</div>
-										<?=$flip_back;?>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas();" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>cienciaytecnologia.jpg');">-->
-											<div class="flip-card-front bg-secondary dark" id="tema_6" data-height-xl="<?=$alto?>">
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(6);"':''; echo $cursor;?> >										
+											<div class="flip-card-front bg-secondary dark" id="tema_6" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">												
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
-														<img src="<?=base_url();?>img/matriz/i_Ciencia-y-tecnología.png">
-														<p style="font-size: 14px;">Ciencia y tecnología</p>
+														<img src="<?=base_url();?>img/matriz/i_fomento_emp.png">
+														<p style="font-size: 14px;">Fomento empresarial y al emprendedurismo</p>
 													</div>
 												</div>
 											</div>
 										</div>
-										<?=$flip_back;?>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas();" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>empleoyfomentoalemprendedurismo.jpg');">-->
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(7);"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_7" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="flip-card-inner">
 													<div class="card nobg noborder text-center">
 														<div class="card-body nopadding">
-															<img src="<?=base_url();?>img/matriz/i_Empleo-y-fomento-al-emprendedurismo.png">
-															<p style="font-size: 14px;">Empleo y <br>fomento al emprendedurismo</p>
+															<img src="<?=base_url();?>img/matriz/i_imp_turistica.png">
+															<p style="font-size: 14px;">Impulso al turismo</p>
 														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-										<?=$flip_back;?>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
+									</div>
+								</div>
+
+								<div class="col-lg-6 mb-4">
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(8);"':''; echo $cursor;?> >										
+											<div class="flip-card-front bg-secondary dark" id="tema_8" data-height-xl="<?=$alto?>">
+											<div class="flip-card-inner">
+												<div class="flip-card-inner">
+													<div class="card nobg noborder text-center">
+														<div class="card-body nopadding">
+															<img src="<?=base_url();?>img/matriz/i_industrial.png">
+															<p style="font-size: 14px;">Industrial</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
 									</div>
 								</div>
 							</div>
@@ -223,78 +224,89 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 							<h2 class="text-center" style="color: #4d4d4d;"><b>SOCIALES</b></h2>
 							<div class="row grid-container" data-layout="masonry" style="overflow: visible">
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas();" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary dark" style="background-image: url('<?=$rutaimagen;?>alimentaria.jpg')" data-height-xl="<?=$alto?>">-->
-											<div class="flip-card-front bg-secondary dark" id="tema_8" data-height-xl="<?=$alto?>">
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(9);"':''; echo $cursor;?> >										
+											<div class="flip-card-front bg-secondary dark" id="tema_9" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
-														<img src="<?=base_url();?>img/matriz/i_Alimentaria.png">
-														<p style="font-size: 14px;">Alimentaria</p>
+														<img src="<?=base_url();?>img/matriz/i_Educación_int.png">
+														<p style="font-size: 14px;">Educación integral de calidad</p>
 													</div>
 												</div>
 											</div>
 										</div>
-										<?=$flip_back;?>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
 									</div>
 								</div>
 						
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas();" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>vivienda.jpg');">-->
-											<div class="flip-card-front bg-secondary dark" id="tema_9" data-height-xl="<?=$alto?>">
-											<div class="flip-card-inner">
-												<div class="card nobg noborder text-center">
-													<div class="card-body nopadding">
-														<img src="<?=base_url();?>img/matriz/i_Vivienda.png">
-														<p class="card-title">Vivienda</p>
-													</div>
-												</div>
-											</div>
-										</div>
-										<?=$flip_back;?>
-									</div>
-								</div>
-
-								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas();" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>salud.jpg');">-->
-											<div class="flip-card-front bg-secondary dark" id="tema_10" data-height-xl="<?=$alto?>">
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas(10);"':''; echo $cursor;?> >										
+											<div class="flip-card-front bg-secondary dark" id="tema_10" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
 														<img src="<?=base_url();?>img/matriz/i_Salud.png">
-														<p class="card-title">Salud</p>
+														<p class="card-title">Salud y bienestar</p>
 													</div>
 												</div>
 											</div>
 										</div>
-										<?=$flip_back;?>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas();" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>desarrolloruralypesquero.jpg');">-->
-											<div class="flip-card-front bg-secondary dark" id="tema_11" data-height-xl="<?=$alto?>">
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+											<div class="flip-card-front bg-secondary dark" id="tema_11" data-height-xl="<?=$alto2?>">
+											<div class="flip-card-inner">
+												<div class="card nobg noborder text-center">
+													<div class="card-body nopadding">
+														<img src="<?=base_url();?>img/matriz/i_Inclusión-social.png">
+														<p class="card-title">Inclusión social y atención a grupos vulnerables</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
+									</div>
+								</div>
+
+								<div class="col-lg-6 mb-4">
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+											<div class="flip-card-front bg-secondary dark" id="tema_12" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
 													<div class="card-body nopadding">
-														<img src="<?=base_url();?>img/matriz/i_Desarrollo-rural-y-pesquero.png">
-														<p class="card-title mb-0">Desarrollo rural y pesquero</p>
+														<img src="<?=base_url();?>img/matriz/i_hambre_alimentaria.png">
+														<p class="card-title mb-0">Hambre cero</p>
 													</div>
 												</div>
 											</div>
 										</div>
-										<?=$flip_back;?>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas();" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>seguridadsocial.jpg');">-->
-											<div class="flip-card-front bg-secondary dark" id="tema_12" data-height-xl="<?=$alto?>">
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+											<div class="flip-card-front bg-secondary dark" id="tema_13" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
@@ -304,60 +316,54 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 												</div>
 											</div>
 										</div>
-										<?=$flip_back;?>
-									</div>
-								</div>
-
-								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas();" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>inclusionsocial.jpg');">-->
-											<div class="flip-card-front bg-secondary dark" id="tema_13" data-height-xl="<?=$alto?>">
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
 											<div class="flip-card-inner">
-												<div class="card nobg noborder">
-													<div class="card-body nopadding">
-														<img src="<?=base_url();?>img/matriz/i_Inclusión-social.png">
-														<p>Inclusión social</p>
-													</div>
-												</div>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
-										</div>
-										<?=$flip_back;?>
+										</div>'; ?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas();" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>seguridadyestadodederecho.jpg');">-->
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_14" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
 													<div class="card-body nopadding">
-														<img src="<?=base_url();?>img/matriz/i_Seguridad-y-Estado-de-derecho.png">
-														<p style="font-size: 14px;">Seguridad y estado de derecho</p>														
+														<img src="<?=base_url();?>img/matriz/i_pueblos_indigenas.png">
+														<p>Pueblos indígenas</p>
 													</div>
 												</div>
 											</div>
 										</div>
-										<?=$flip_back;?>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas();" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>pueblosindigenas.jpg');">-->
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_15" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
 													<div class="card-body nopadding">
-														<img src="<?=base_url();?>img/matriz/i_Pueblos-indígenas.png">
-														<p>Pueblos indígenas</p>														
+														<img src="<?=base_url();?>img/matriz/i_acceso_Vivienda.png">
+														<p style="font-size: 14px;">Accesso a la vivienda</p>														
 													</div>
 												</div>
 											</div>
 										</div>
-										<?=$flip_back;?>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
 									</div>
 								</div>
+
 							</div>
 						</div>
 						<!-- Sociales --->
@@ -368,61 +374,69 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 
 							<div class="row grid-container" data-layout="masonry" style="overflow: visible">
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas();" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary dark" style="background-image: url('<?=$rutaimagen;?>educacionuniversal.jpg')" data-height-xl="<?=$alto?>">-->
-											<div class="flip-card-front bg-secondary dark" id="tema_16" data-height-xl="<?=$alto?>">
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+											<div class="flip-card-front bg-secondary dark" id="tema_16" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
-														<img src="<?=base_url();?>img/matriz/i_Educación_u.png">
-														<p class="card-title">Educación universal</p>
+														<img src="<?=base_url();?>img/matriz/i_acceso_universal.png">
+														<p class="card-title">Acceso universal a la cultura</p>
 													</div>
 												</div>
 											</div>
 										</div>
-										<?=$flip_back;?>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
 									</div>
 								</div>
 						
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas();" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary dark" data-height-xl="<?=$alto2?>" style="background-image: url('<?=$rutaimagen;?>deportedealtorendimiento.jpg');">-->
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_17" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
-														<img src="<?=base_url();?>img/matriz/i_Deporte_alto.png">
-														<p class="card-title" style="font-size: 14px;">Deporte de alto rendimiento</p>
+														<img src="<?=base_url();?>img/matriz/i_fomento_dep.png">
+														<p class="card-title" style="font-size: 14px;">Fomento al deporte</p>
 													</div>
 												</div>
 											</div>
 										</div>
-										<?=$flip_back;?>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas();" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>educaciondecalidad.jpg');">-->
-											<div class="flip-card-front bg-secondary dark" id="tema_18" data-height-xl="<?=$alto?>">
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+											<div class="flip-card-front bg-secondary dark" id="tema_18" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
-														<img src="<?=base_url();?>img/matriz/i_Educación_c.png">
-														<p class="card-title">Educación de calidad</p>
+														<img src="<?=base_url();?>img/matriz/i_educacion_art.png">
+														<p class="card-title">Educación artística y cultural</p>
 													</div>
 												</div>
 											</div>
 										</div>
-										<?=$flip_back;?>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas();" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary dark" style="background-image: url('<?=$rutaimagen;?>culturatradicional.jpg')" data-height-xl="<?=$alto?>">-->
-											<div class="flip-card-front bg-secondary dark" id="tema_19" data-height-xl="<?=$alto?>">
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+											<div class="flip-card-front bg-secondary dark" id="tema_19" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
@@ -432,32 +446,18 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 												</div>
 											</div>
 										</div>
-										<?=$flip_back;?>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
 									</div>
 								</div>
 						
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas();" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary dark" data-height-xl="<?=$alto2?>" style="background-image: url('<?=$rutaimagen;?>deporteincluyente.jpg');">-->
-											<div class="flip-card-front bg-secondary dark" id="tema_20" data-height-xl="<?=$alto2?>">
-											<div class="flip-card-inner">
-												<div class="card nobg noborder text-center">
-													<div class="card-body nopadding">
-														<img src="<?=base_url();?>img/matriz/i_deporte_inc.png">
-														<p class="card-title" class="card-title">Deporte incluyente</p>
-													</div>
-												</div>
-											</div>
-										</div>
-										<?=$flip_back;?>
-									</div>
-								</div>
-
-								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas();" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>bellasartes.jpg');">-->
-											<div class="flip-card-front bg-secondary dark" id="tema_21" data-height-xl="<?=$alto?>">
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+											<div class="flip-card-front bg-secondary dark" id="tema_20" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
@@ -467,7 +467,31 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 												</div>
 											</div>
 										</div>
-										<?=$flip_back;?>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
+									</div>
+								</div>
+
+								<div class="col-lg-6 mb-4">
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+											<div class="flip-card-front bg-secondary dark" id="tema_21" data-height-xl="<?=$alto?>">
+											<div class="flip-card-inner">
+												<div class="card nobg noborder text-center">
+													<div class="card-body nopadding">
+														<img src="<?=base_url();?>img/matriz/i_Patrimonio_historico.png">
+														<p class="card-title" class="card-title">Patrimonio histórico</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
 									</div>
 								</div>
 
@@ -482,111 +506,128 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 							<h2>AMBIENTALES</h2>
 							<div class="row grid-container" data-layout="masonry" style="overflow: visible">
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas();" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>hidrica.jpg');">-->
-											<div class="flip-card-front bg-secondary dark" id="tema_22" data-height-xl="<?=$alto?>">
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+											<div class="flip-card-front bg-secondary dark" id="tema_22" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
-														<img src="<?=base_url();?>img/matriz/i_hidirca.png">
-														<p>Hídrica</p>
+														<img src="<?=base_url();?>img/matriz/i_agua.png">
+														<p>Agua limpia y saneamiento</p>
 													</div>
 												</div>
 											</div>
 										</div>
-										<?=$flip_back;?>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
 									</div>
 								</div>
 						
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas();" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary dark" data-height-xl="<?=$alto2?>" style="background-image: url('<?=$rutaimagen;?>movilidadsustentableyconectividadregional.jpg');">-->
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_23" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
-														<img src="<?=base_url();?>img/matriz/i_movilidad.png">
-														<p class="card-title" style="font-size: 13px;">Movilidad sustentable y conectividad regional</p>														
+														<img src="<?=base_url();?>img/matriz/i_energia.png">
+														<p class="card-title" style="font-size: 13px;">Energía asequible y no contaminante</p>														
 													</div>
 												</div>
 											</div>
 										</div>
-										<?=$flip_back;?>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas();" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>energetica.jpg');">-->
-											<div class="flip-card-front bg-secondary dark" id="tema_24" data-height-xl="<?=$alto?>">
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+											<div class="flip-card-front bg-secondary dark" id="tema_24" data-height-xl="<?=$alto2?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
-														<img src="<?=base_url();?>img/matriz/i_energetica.png">
-														<p class="card-title">Energética</p>
+														<img src="<?=base_url();?>img/matriz/i_vida_sub.png">
+														<p class="card-title">Vida submarina y ecosistemas terrestres</p>
 													</div>
 												</div>
 											</div>
 										</div>
-										<?=$flip_back;?>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas();" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>cambioclimaticoysustentabilidad.jpg');">-->
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_25" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
 													<div class="card-body nopadding">
-														<img src="<?=base_url();?>img/matriz/i_cambio_cli.png">
-														<p class="card-title mb-0" style="font-size: 14px;">Cambio climático y sustentabilidad</p>														
+														<img src="<?=base_url();?>img/matriz/i_accion_clima.png">
+														<p class="card-title mb-0" style="font-size: 14px;">Acción por el clima</p>														
 													</div>
 												</div>
 											</div>
 										</div>
-										<?=$flip_back;?>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas();" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary bg-info dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>manejointegralderesiduos.jpg');">-->
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_26" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder text-center">
 													<div class="card-body nopadding">
-														<img src="<?=base_url();?>img/matriz/i_manejo.png">
-														<p>Manejo integral de residuos</p>
+														<img src="<?=base_url();?>img/matriz/i_derecho_ciu.png">
+														<p>Derecho a la ciudad</p>
 													</div>
 												</div>
 											</div>
 										</div>
-										<?=$flip_back;?>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas();" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen;?>ordenamientourbanoyterritorial.jpg');">-->
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_27" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
 													<div class="card-body nopadding">
-														<img src="<?=base_url();?>img/matriz/i_ordenamiento.png">
-														<p style="font-size: 14px;">Ordenamiento urbano y territorial</p>
+														<img src="<?=base_url();?>img/matriz/i_ciudades_com.png">
+														<p style="font-size: 14px;">Ciudades y comunidades sostenibles</p>
 													</div>
 												</div>
 											</div>
 										</div>
-										<?=$flip_back;?>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
 									</div>
 								</div>
 
 								<div class="col-lg-6 mb-4">
-									<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas();" style="cursor: pointer;">
-										<!--<div class="flip-card-front bg-secondary dark" data-height-xl="<?=$alto?>" style="background-image: url('<?=$rutaimagen?>/consevacionderecursosnaturales.jpg');">-->
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
 											<div class="flip-card-front bg-secondary dark" id="tema_28" data-height-xl="<?=$alto?>">
 											<div class="flip-card-inner">
 												<div class="card nobg noborder">
@@ -597,7 +638,51 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 												</div>
 											</div>
 										</div>
-										<?=$flip_back;?>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
+									</div>
+								</div>
+
+								<div class="col-lg-6 mb-4">
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+											<div class="flip-card-front bg-secondary dark" id="tema_29" data-height-xl="<?=$alto?>">
+											<div class="flip-card-inner">
+												<div class="card nobg noborder">
+													<div class="card-body nopadding">
+														<img src="<?=base_url();?>img/matriz/i_movilidad.png">
+														<p style="font-size: 12px;">Movilidad sustentable</p>														
+													</div>
+												</div>
+											</div>
+										</div>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
+									</div>
+								</div>
+
+								<div class="col-lg-6 mb-4">
+									<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >										
+											<div class="flip-card-front bg-secondary dark" id="tema_30" data-height-xl="<?=$alto?>">
+											<div class="flip-card-inner">
+												<div class="card nobg noborder">
+													<div class="card-body nopadding">
+														<img src="<?=base_url();?>img/matriz/i_manejo.png">
+														<p style="font-size: 12px;">Manejo integral de residuos</p>														
+													</div>
+												</div>
+											</div>
+										</div>
+										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
 									</div>
 								</div>
 							</div>
@@ -617,28 +702,70 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 				</div>
 
 				<div class="row grid-container" data-layout="masonry" style="overflow: visible">
-					<div class="col-lg-4 mb-4">
-						<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas();" style="cursor: pointer;">
-							<!--<div class="flip-card-front bg-secondary dark" style="background-image: url('<?=base_url();?>img/ejes/igualdad.jpg')" data-height-xl="<?=$alto;?>">-->
-								<div class="flip-card-front bg-secondary dark" id="tema_29" data-height-xl="<?=$alto;?>">
+					<div class="col-lg-2 mb-4">
+						<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >							
+								<div class="flip-card-front bg-secondary dark" id="tema_31" data-height-xl="<?=$alto;?>">
 								<div class="flip-card-inner">
 									<div class="card nobg noborder text-center">
 										<div class="card-body nopadding">
 											<!--<i class="icon-line2-camera h1"></i>-->
-											<img src="<?=base_url();?>img/matriz/i_Igualdad-de-género.png">
-											<p class="card-text t400">Equidad de género</p>
+											<img src="<?=base_url();?>img/matriz/i_Igualdad-de-genero.png">
+											<p class="card-text t400">Igualdad de género</p>
 										</div>
 									</div>
 								</div>
 							</div>
-							<?=$flip_back;?>
+							<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
 						</div>
 					</div>
 
-					<div class="col-lg-4 mb-4">
-						<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas();" style="cursor: pointer;">
-							<!--<div class="flip-card-front bg-secondary dark" style="background-image: url('<?=$rutaimagen?>/gobiernoaustero.jpg');" data-height-xl="<?=$alto;?>">-->
-								<div class="flip-card-front bg-secondary dark" id="tema_30" data-height-xl="<?=$alto;?>">
+					<div class="col-lg-2 mb-4">
+						<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >							
+								<div class="flip-card-front bg-secondary dark" id="tema_32" data-height-xl="<?=$alto;?>">
+								<div class="flip-card-inner">
+									<div class="card nobg noborder text-center">
+										<div class="card-body nopadding">
+											<img src="<?=base_url();?>img/matriz/i_innovacion-Ciencia.png">
+											<p class="card-text t400">Innovación, ciencia y tecnología</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
+						</div>
+					</div>
+
+					<div class="col-lg-2 mb-4">
+						<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >							
+								<div class="flip-card-front bg-secondary dark" id="tema_33" data-height-xl="<?=$alto;?>">
+								<div class="flip-card-inner">
+									<div class="card nobg noborder text-center">
+										<div class="card-body nopadding">
+											<img src="<?=base_url();?>img/matriz/i_paz_just.png">
+											<p class="card-text t400">Paz, justicia e instituciones sólidas</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
+						</div>
+					</div>
+
+					<div class="col-lg-2 mb-4">
+						<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >							
+								<div class="flip-card-front bg-secondary dark" id="tema_34" data-height-xl="<?=$alto;?>">
 								<div class="flip-card-inner">
 									<div class="card nobg noborder text-center">
 										<div class="card-body nopadding">
@@ -648,14 +775,17 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 									</div>
 								</div>
 							</div>
-							<?=$flip_back;?>
+							<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
 						</div>
 					</div>
 
-					<div class="col-lg-4 mb-4">
-						<div class="<?=$flip_efect;?> text-center" onclick="selecciona_temas();" style="cursor: pointer;">
-							<!--<div class="flip-card-front bg-secondary dark" data-height-xl="<?=$alto;?>" style="background-image: url('<?=$rutaimagen?>/infraestructura.jpg');">-->
-								<div class="flip-card-front bg-secondary dark" id="tema_31" data-height-xl="<?=$alto;?>">
+					<div class="col-lg-2 mb-4">
+						<div class="<?=$flip_efect;?> text-center"  <?php echo ($active==7) ? 'onclick="selecciona_temas();"':''; echo $cursor;?> >							
+								<div class="flip-card-front bg-secondary dark" id="tema_35" data-height-xl="<?=$alto;?>">
 								<div class="flip-card-inner">
 									<div class="card nobg noborder text-center">
 										<div class="card-body nopadding">
@@ -665,7 +795,16 @@ $temas[5] = array('tema'=>'Infraestructura y proyectos estratégicos', 'alto'=>1
 									</div>
 								</div>
 							</div>
-							<?=$flip_back;?>
+							<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+											<div class="flip-card-inner">
+												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+											</div>
+										</div>'; ?>
 						</div>
 					</div>
 				</div>
+
+<script>
+	var imagenes = ['desarrollo_comercial.jpg','competividad.jpg','capital_humano.jpg','desarrrollo_agri.jpg','desarrollo_pesq.jpg','fomento_emp.jpg','impulso_turismo.jpg','industrial.jpg','educacion_integral.jpg','salud.jpg','inclusion-social.jpg','hambre_cero.jpg','seguridad_social.jpg','pueblos_indigenas.jpg','acceso_vivienda.jpg','acceso_universal.jpg','fomento_deporte.jpg','Educacion_artistica.jpg','cultura_tradicion.jpg','bellas_artes.jpg','patrimonio.jpg','agua.jpg','energia.jpg','vida_sub.jpg','accion_clima.jpg','derecho_ciu.jpg','ciudades_comu.jpg','Conservacion.jpg','movilidad_sustentable.jpg','manejo_integral.jpg','igualdad_genero.jpg','innovacion_ciencia.jpg','paz_justicia.jpg','gobierno.jpg','infraestructura.jpg'];		
+		
+</script>

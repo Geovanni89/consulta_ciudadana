@@ -101,6 +101,7 @@ class Sitio extends CI_Controller {
 		$prop = new Class_propuestas();
 		$datos['propuestas'] = $prop->carga_propuestas();
 		$datos['total'] = $prop->total_propuestas();
+		$datos['sectores'] = $prop->datos_sectores();
 		$datos['active'] = 2;
 		$this->load->view('propuestas',$datos);
 	}
@@ -355,7 +356,7 @@ class Sitio extends CI_Controller {
 		$this->load->view('infografia');
 	}
 
-	public function votaciones() 
+	/*public function votaciones() 
 	{
 		$vota = new Class_votacion();
 
@@ -363,7 +364,7 @@ class Sitio extends CI_Controller {
 		$datos['prop_vota'] = $vota->carga_propuestas();
 		
 		$this->load->view('votaciones',$datos);
-	}
+	}*/
 
 	public function presupuesto()
 	{

@@ -16,6 +16,9 @@
 	<link rel="stylesheet" href="<?=base_url();?>public/css/animate.css" type="text/css" />
 	<link rel="stylesheet" href="<?=base_url();?>public/css/magnific-popup.css" type="text/css" />
 
+	<link type="text/css" rel="stylesheet" href="<?=base_url();?>admin/plugins/modal-loading/css/modal-loading.css" />
+	<link type="text/css" rel="stylesheet" href="<?=base_url();?>admin/plugins/modal-loading/css/modal-loading-animate.css" />
+
 	<link rel="stylesheet" href="<?=base_url();?>public/css/responsive.css" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -103,55 +106,63 @@
 
 					<!-- Sidebar
 					============================================= -->
-					<!--<div class="sidebar nobottommargin col_last clearfix">						
+					<form id="form_busqueda" action="#">
+					<div class="sidebar nobottommargin col_last clearfix">
 						<div class="sidebar-widgets-wrap">							
 
 							<div class="widget clearfix">
 
-								<h4>Categorías</h4>
+								<h4>Palabras clave</h4>
 								<div class="tagcloud">
-									<a href="#">general</a>
-									<a href="#">videos</a>
-									<a href="#">music</a>
-									<a href="#">media</a>
-									<a href="#">photography</a>
-									<a href="#">parallax</a>
-									<a href="#">ecommerce</a>
-									<a href="#">terms</a>
-									<a href="#">coupons</a>
-									<a href="#">modern</a>
+									<input class="form-control mb-2" id="input_palabras" name="input_palabras" onchange="busqueda_selector(this.value,4);" type="text" placeholder="Presupuesto">
 								</div>
+
 							</div>
 
 						</div>
 						<hr>
 					</div>
 
-
-					<div class="sidebar nobottommargin col_last clearfix">
+					<div class="sidebar nobottommargin col_last clearfix">						
 						<div class="sidebar-widgets-wrap">							
+								<div class="widget clearfix">
 
-							<div class="widget clearfix">
+									<h4>Búsqueda avanzada</h4>
+									<div class="form-group">
+										<label for="exampleFormControlSelect1">Sector</label>										
+										<select class="form-control" id="sel_search_sector" name="sel_search_sector" onchange="busqueda_selector(this.value,1);">
+											<option value="">Sector</option>
+											<?php 
+												if($sectores!=false) 
+												{
+													foreach ($sectores as $vsec) {
+														echo '<option value="'.$vsec->iIdSector.'">'.$vsec->vSector.'</option>';
+													}
+												}
+											?>
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="exampleFormControlSelect1">Temas</label>
+										<select class="form-control" id="sel_search_tema" name="sel_search_tema" onchange="busqueda_selector(this.value,2);">
+											<option value="">Temas</option>										
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="exampleFormControlSelect1">Orden</label>
+										<select class="form-control" id="ordenamiento" name="ordenamiento" onchange="busqueda_selector(this.value,3);">
+											<option value="">Orden</option>
+											<option value="1">Votadas (de menor a mayor)</option>
+											<option value="2">Votadas (de mayor a menor)</option>
+											<option value="3">Más recientes</option>
+											<option value="4">Más antiguas</option>										
+										</select>
+									</div>
+								</div>								
 
-								<h4>Tendencias</h4>
-								<div class="tagcloud">
-									<a href="#">general</a>
-									<a href="#">videos</a>
-									<a href="#">music</a>
-									<a href="#">media</a>
-									<a href="#">photography</a>
-									<a href="#">parallax</a>
-									<a href="#">ecommerce</a>
-									<a href="#">terms</a>
-									<a href="#">coupons</a>
-									<a href="#">modern</a>
-								</div>
-
-							</div>
-
-						</div>
-
-					</div>-->
+						</div>						
+					</div>					
+					</form>
 					<!-- .sidebar end -->
 
 				</div>
@@ -172,6 +183,9 @@
 	============================================= -->
 	<script src="<?=base_url();?>public/js/jquery.js"></script>
 	<script src="<?=base_url();?>public/js/plugins.js"></script>
+	<!-- Loader 
+	============================================= -->
+	<script src="<?=base_url();?>admin/plugins/modal-loading/js/modal-loading.js"></script>
 	
 	<!-- Footer Scripts
 	============================================= -->
@@ -182,48 +196,94 @@
 			$('#pg_0').addClass('active');
 		})();
 
+		$(document).keypress(
+		  function(event){
+		    if (event.which == '13') {
+		      event.preventDefault();
+		    }
+		});
+
 		var map;
 		var pagina_actual = 0;		
 		var image = '<?=base_url();?>img/logo_vertical_2.png';
 
-		/*function propuesta_simple(idProp) {
-			$.post('<?=base_url();?>C_propuestas/propuesta_sim', {iIdPropuesta:idProp},function(resp){
-				if(resp!="error")
-				{
-					$('#posts').addClass('animated fadeOut')
-					.empty()
-					.html(resp)
-					.addClass('fadeIn')
-					.removeClass('fadeOut');
-					SEMICOLON.initialize.goToTop();
-					SEMICOLON.widget.tabs();
-					SEMICOLON.widget.loadFlexSlider();
-					window.scrollTo(0,0);
-					$('#container_paginador').empty();					
-				} else {
-					alert("Error al cargar la propuesta");
+		function busqueda_selector(id,op) {
+			loading = new Loading({
+                discription: 'Cargando propuestas',
+                defaultApply: true
+            });
+			$.post('<?=base_url();?>C_propuestas/busqueda_selector', $('#form_busqueda').serialize(), function(resp){
+				var result = resp.split('_separador_');
+				$('#posts').html(result[0]);
+				$('#paginador').html(result[1]);
+				console.log('total propuestas: '+result[2]+'\n total paginas: '+result[3]+'\n pruebas: '+result[4]);
+				if(op==1) {
+					$.post('<?=base_url();?>C_propuestas/carga_temas', {id:id}, function(resp_tema){
+						$('#sel_search_tema').html(resp_tema);						
+					});	
 				}
+				$('#pg_0').addClass('active');				
+				loading.out();
 			});
-		}*/
+		}
+
+		//-------------Apoya propuestas
+		function apoya_propuesta(id,op) {
+			loading = new Loading({
+                discription: 'Cargando propuestas',
+                defaultApply: true
+            });
+
+			$.post('<?=base_url();?>C_propuestas/apoyar_propuesta',{id:id,op:op}, function(resp){
+				loading.out();
+				switch(resp)
+				{
+					case 'correcto' :  
+						toastr.success('Operación completa', 'Correcto', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+						$('#div_apoyo_'+id).empty().html('<div class="col-md-12"><button id="apoyar_prop" type="button" class="btn btn-outline-warning btn-lg btn-block">Usted ya ha apoyado esta propuesta</button></div>');
+						break;
+					case 'error' :  
+						toastr.error('No se pudo completar la operación', '¡Error!', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+						break;
+					case 'error1' :  
+						toastr.warning('Usted ya ha apoyado esta propuesta', '¡Advertencia!', { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000 });
+						break;
+				}
+
+			});
+		}
+		//------------Fin apoya propuestas
 
 		function pagina_propuesta(pagina) {
+			loading = new Loading({
+                discription: 'Cargando propuestas',
+                defaultApply: true
+            });
 
-			$.post('<?=base_url();?>C_propuestas/pagina_prop',{pagina:pagina}, function(resp){
+	            var sector =  $('#sel_search_sector').val();
+	            var tema =  $('#sel_search_tema').val();
+	            var orden =  $('#ordenamiento').val();
+	            var palabra =  $('#input_palabras').val();	            
+
+			$.post('<?=base_url();?>C_propuestas/busqueda_selector', {sel_search_sector:sector,sel_search_tema:tema,ordenamiento:orden,input_palabras:palabra,pagina:pagina}, function(resp){
 				$('#pg_'+pagina_actual).removeClass('active')
 				$('#pg_'+pagina).addClass('active');
 				pagina_actual = pagina;
-				$('#posts').empty().html(resp);
+				
+				var result = resp.split('_separador_');
+				$('#posts').html(result[0]);
+				//$('#paginador').html(result[1]);
+				console.log('total propuestas: '+result[2]+'\n total paginas: '+result[3]+'\n pruebas: '+result[4]);
+				loading.out();
 			});
 		}
 
 		function paginador(op,lim_i,lim_s,total) {
 			if(op=='sig') pagina = pagina_actual+1;
 			if(op=='ant') pagina = pagina_actual-1;
-
 			$.post('<?=base_url();?>C_propuestas/paginador',{op:op,lim_i:lim_i,lim_s:lim_s,total:total}, function(resp){
 				$('#paginador').empty().html(resp);
-				pagina_propuesta(pagina);
-
+				pagina_propuesta(pagina);				
 			});
 
 		}
