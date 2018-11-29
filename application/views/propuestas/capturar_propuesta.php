@@ -25,7 +25,7 @@
 		            <div class="row">
 		                <div class="col-md-6">
 		                    <div class="form-group">
-		                    	<label>SELECCIONA EL SECTOR</label>
+		                    	<label>SELECCIONA EL SECTOR<i class="icon icon-asterisk text-danger"></i></label>
 		                    	<input type="hidden" id="iIdPropuesta" name="iIdPropuesta" value="<?=$iIdPropuesta;?>">
 		                        <select name="iIdSector" id="iIdSector" class="form-control" onchange="CargarListado('temas', 'iIdSector', 'iIdTema');">
 		                        	<?=$op_sectores; ?>
@@ -34,7 +34,7 @@
 		                </div>
 		                <div class="col-md-6">
 		                    <div class="form-group">
-		                    	<label>SELECCIONA EL TEMA</label>
+		                    	<label>SELECCIONA EL TEMA<i class="icon icon-asterisk text-danger"></i></label>
 		                        <select name="iIdTema" id="iIdTema" class="form-control">
 		                        	<?=$op_temas; ?>
 		                        </select>
@@ -45,7 +45,7 @@
 		            <div class="row">
 		                <div class="col-md-12">
 		                    <div class="form-group">
-		                    	<label>TITULO PROPUESTA</label>
+		                    	<label>TITULO PROPUESTA<i class="icon icon-asterisk text-danger"></i></label>
 		                        <input type="vTitulo" name="vTitulo" class="form-control" value="<?=$vTitulo;?>">
 		                    </div>
 		                </div>
@@ -54,7 +54,7 @@
 		            <div class="row">
 		                <div class="col-md-12">
 		                    <div class="form-group">
-		                    	<label>RESUMEN DE LA PROPUESTA</label><br>
+		                    	<label>RESUMEN DE LA PROPUESTA<i class="icon icon-asterisk text-danger"></i></label><br>
 		                    	<small>(Máximo 200 caracteres)</small>
 		                        <textarea name="tDescripcion" id="tDescripcion">
 		                        	<?=$tDescripcion;?>
@@ -97,8 +97,8 @@
 		            <div class="row">
 		                <div class="col-md-12">
 		                    <div class="form-group">
-		                    	<label>ÁMBITO DE ACTUACIÓN</label><br>
-                    	        <input type="checkbox" id="ambitoMed" name="ambitoMed" <?php if($iIdMunicipio == 0 ){ echo 'checked="checked"'; }?> onclick="DeshabilitarMuni(this);">
+		                    	<label>ÁMBITO DE ACTUACIÓN<i class="icon icon-asterisk text-danger"></i></label><br>
+                    	        <input type="checkbox" id="ambitoMed" name="ambitoMed" <?php if($iIdMunicipio == 0 ){ echo 'checked="checked"'; }?> onclick="DeshabilitarMuni();">
                                 <label class="" for="customCheck1" style="font-size:12px;">ESTA PROPUESTA NO TIENE UNA UBICACIÓN CONCRETA O NO LA CONOZCO</label>
 		                    </div>
 		                </div>
@@ -166,7 +166,7 @@
 	            	<div class="row">
 		                <div class="col-md-12">
 		                    <div class="form-group">
-		                    	<label>Mensaje para los autores</label><br>
+		                    	<label>Mensaje para los autores<i class="icon icon-asterisk text-danger"></i></label><br>
 		                    	<small>Escriba un breve mensaje para autores de las propuestas integradas, este será enviado por correo a c/u</small>
 		                    	<textarea class="form-control" name="mensajecorreo" id='mensajecorreo' placeholder="Escriba su mensaje"></textarea>
 		                    </div>
@@ -214,6 +214,7 @@
 	var image = '<?=base_url();?>img/logo_vertical_2.png';
 
 	$(document).ready(function(){
+		DeshabilitarMuni();
 		CKEDITOR.replace( 'tDescripcion' );
 		initMap();
 
@@ -482,10 +483,10 @@
 		}
 	}
 
-	function DeshabilitarMuni(check)
+	function DeshabilitarMuni()
 	{
 		
-		if( $(check).is(":checked") ) $("#iIdMunicipio").prop('disabled','disabled');
+		if( $("#ambitoMed").is(":checked") ) $("#iIdMunicipio").prop('disabled','disabled');
 		else $("#iIdMunicipio").prop('disabled','');
 	}
 
@@ -498,6 +499,11 @@
 		map.setCenter(coordenadas);
 		marker.setPosition(coordenadas);
 		map.setZoom(11);
+	}
+
+	function Ver(id)
+	{
+		var win = window.open('<?=base_url();?>C_propuestas/propuesta_sim?ad=1&id='+id, '_blank');
 	}
 </script>
 </html>

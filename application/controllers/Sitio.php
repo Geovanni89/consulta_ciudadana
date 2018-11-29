@@ -371,4 +371,10 @@ class Sitio extends CI_Controller {
 		$this->load->view('presupuesto',$datos);
 	}
 
+	public function encuestas()
+	{
+		$datos['active'] = 8;
+		$this->load->view('encuestas',$datos);
+	}
+
 }

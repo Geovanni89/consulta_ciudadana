@@ -51,10 +51,11 @@
 
 				<ul>
 					<li <?php if(isset($active) && $active == 1) echo 'class="current"'; ?>><a href="<?=base_url();?>"><div>Inicio</div></a></li>
-					<li <?php if(isset($active) && $active == 6) echo 'class="current"'; ?>><a href="<?=base_url();?>Sitio/matriz_ejes"><div>¿Cómo estamos?</div></a></li>
+					<li <?php if(isset($active) && $active == 6) echo 'class="current"'; ?>><a href="<?=base_url();?>Sitio/matriz_ejes"><div>Participa</div></a></li>
 					<li <?php if(isset($active) && $active == 2) echo 'class="current"'; ?>><a href="<?=base_url();?>Sitio/propuestas"><div>Propuestas</div></a></li>
 					<li <?php if(isset($active) && $active == 3) echo 'class="current"'; ?>><a href="<?=base_url();?>Sitio/votaciones"><div>Votaciones</div></a></li>
 					<li <?php if(isset($active) && $active == 7) echo 'class="current"'; ?>><a href="<?=base_url();?>Sitio/presupuesto"><div>Presupuesto ciudadano</div></a></li>
+					<li <?php if(isset($active) && $active == 8) echo 'class="current"'; ?>><a href="<?=base_url();?>Sitio/encuestas"><div>Encuestas</div></a></li>
 					<?php if(!isset($_SESSION[PREFIJO.'_idusuario']) || empty($_SESSION[PREFIJO.'_idusuario']))
 					{ ?>
 					<li <?php if(isset($active) && $active == 4) echo 'class="current"'; ?>><a href="<?=base_url();?>Sitio/login"><div>Entrar</div></a></li>

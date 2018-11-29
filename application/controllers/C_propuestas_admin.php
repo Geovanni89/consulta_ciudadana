@@ -68,7 +68,7 @@ class C_propuestas_admin extends CI_Controller {
                                     <th>Código</th>
                                     <th>Título <i class="mdi mdi-lead-pencil" style="align:right !important;"></i></th>
                                     <th>Estatus</th>
-                                    <th>Rol</th>                                    
+                                    <th>Autor</th>                                    
                                     <th width="200px"></th>
                                 </tr>
                             </thead>
@@ -87,7 +87,7 @@ class C_propuestas_admin extends CI_Controller {
                                     <td>'.$inputcheck.$dc->vCodigo.'</td>
                                     <td>'.$dc->vTitulo.'</td>
                                     <td>'.$this->estatus_propuesta($dc->iEstatus).'</td>
-                                    <td>'.$dc->vRol.'</td>
+                                    <td>'.$dc->vCorreo.'</td>
                                     <td width="200px" align="center">';
                                     $listado .= '<button type="button" class="btn waves-effect waves-light btn-outline-dark" onclick="CapturarPropuesta(\''.$dc->iIdPropuesta.'\');"><i class="mdi mdi-lead-pencil"></i>&nbsp;Editar</button>';
                         		$listado .= '</td>
@@ -169,12 +169,13 @@ class C_propuestas_admin extends CI_Controller {
 						if($qp->num_rows() > 0)
 						{
 							$qp = $qp->result();
-							$tabla .= '<table class="table table-striped">
+							$tabla .= '<table class="table table-hover table-bordered">
 			                            <thead>
 			                                <tr>
 			                                    <th>Código</th>
 			                                    <th>Título</th>
-			                                    <th width="100px"></th>
+			                                    <th>Autor</th>
+			                                    <th width="200px"></th>
 			                                </tr>
 			                            </thead>
 			                            <tbody>';
@@ -182,8 +183,9 @@ class C_propuestas_admin extends CI_Controller {
 							{
 								$tabla .= '<tr id="'.$d->iIdPropuesta.'">
 											<td>'.$d->vCodigo.'<input type="hidden" name="p'.$d->iIdPropuesta.'" value="'.$d->iIdPropuesta.'"></td>
-											<td>'.$d->vTitulo.'</td>
-											<td><button type="button" class="btn waves-effect waves-light btn-outline-dark" onclick="Elim(\''.$d->iIdPropuesta.'\');"><i class="mdi mdi-delete"></i>&nbsp;Eliminar</button></td>
+											<td><a href="'.base_url().'C_propuestas/propuesta_sim?ad=1&id='.$d->iIdPropuesta.'" target="_blank">'.$d->vTitulo.'</a></td>
+											<td>'.$d->vCorreo.'</td>
+											<td><button type="button" class="btn waves-effect waves-light btn-outline-dark" onclick="Ver(\''.$d->iIdPropuesta.'\');"><i class="fas fa-search"></i></button>&nbsp;<button type="button" class="btn waves-effect waves-light btn-outline-dark" onclick="Elim(\''.$d->iIdPropuesta.'\');"><i class="mdi mdi-delete"></i></button></td>
 										</tr>';
 							}
 
@@ -282,7 +284,8 @@ class C_propuestas_admin extends CI_Controller {
 		                                <tr>
 		                                    <th>Código</th>
 		                                    <th>Título</th>
-		                                    <th width="100px"></th>
+		                                    <th>Autor</th>
+		                                    <th width="200px"></th>
 		                                </tr>
 		                            </thead>
 		                            <tbody>';
@@ -290,8 +293,9 @@ class C_propuestas_admin extends CI_Controller {
 						{
 							$tabla .= '<tr id="'.$d->iIdPropuesta.'">
 										<td>'.$d->vCodigo.'<input type="hidden" name="p'.$d->iIdPropuesta.'" value="'.$d->iIdPropuesta.'"></td>
-										<td>'.$d->vTitulo.'</td>
-										<td><button type="button" class="btn waves-effect waves-light btn-outline-dark" onclick="Elim(\''.$d->iIdPropuesta.'\');"><i class="mdi mdi-delete"></i>&nbsp;Eliminar</button></td>
+										<td><a href="'.base_url().'C_propuestas/propuesta_sim?ad=1&id='.$d->iIdPropuesta.'" target="_blank">'.$d->vTitulo.'</a></td>
+										<td>'.$d->vCorreo.'</td>
+										<td><button type="button" class="btn waves-effect waves-light btn-outline-dark" onclick="Ver(\''.$d->iIdPropuesta.'\');"><i class="fas fa-search"></i></button></td>
 									</tr>';
 						}
 
@@ -552,6 +556,7 @@ class C_propuestas_admin extends CI_Controller {
 					$aux = $this->ms->inserta_registro('PropuestaAdjunto',$datos);
 
 					move_uploaded_file($nombreTemp, $vRutaAdjunto);
+					if($tipo==1) $min = $this->genera_miniatura($vRutaAdjunto);
 				}
 			}
 
@@ -579,6 +584,28 @@ class C_propuestas_admin extends CI_Controller {
 			echo json_encode(true);
 			
 		}
+	}
+
+	private function genera_miniatura($nombre)
+	{
+		$this->load->library('image_lib');
+		$config['image_library'] = 'GD2';
+		$config['source_image'] = 'archivos/imagenes/'.$nombre;
+		$config['new_image'] = 'archivos/imagenes/thumbnail/'.$nombre;
+		$config['create_thumb'] = FALSE;
+		$config['maintain_ratio'] = TRUE;
+		$config['width']         = 450;
+		$config['height']       = 550;	
+
+
+
+		$this->image_lib->clear();
+       	$this->image_lib->initialize($config);
+       	$this->image_lib->resize();
+		if(!$this->image_lib->resize()) $resp = "error_miniatura";
+		else $resp = "correcto_miniatura";
+		//echo $this->image_lib->display_errors();
+		return $resp;
 	}
 
 	public function eliminar_adjunto_propuesta()
