@@ -17,15 +17,23 @@
 			$titulo = '<div class=""><div class="feature-box fbox-center fbox-light fbox-plain"><h3 style="font-size: 24px;color: #1a4a60; font-weight: 1200;"><strong>MATRIZ DE EJES<br>PED 2018-2024</strong></h3></div></div>';
 			break;
 		case 6:
-			$flip_efect = 'flip-card';			
+			$flip_efect = 'flip-card';
 			$cursor = '';
 			$titulo = '<div class="heading-block center"><h1>¿Quieres enviar una propuesta?</h1><span>¡Participa! Da clic en el eje al que creas que pertenece y sé parte de Tu Plan Estatal de Desarrollo.</span></div>';
+			$onclick="MostrarInfografía(this);";
 			break;
 		
 		case 7:
 			$flip_efect = '';			
 			$cursor = 'style="cursor: pointer;"';
 			$titulo = '<div class="heading-block center"><h2></h2><span>Selecciona los tres temas que consideras deberían tener mayor presupuesto en los próximos años. </span></div>';
+			break;
+
+		case 8:
+			$flip_efect = 'flip-card';			
+			$cursor = 'style="cursor: pointer;"';
+			$titulo = '<div class="heading-block center"><h2></h2><span>Selecciona los tres temas que consideras deberían tener mayor presupuesto en los próximos años. </span></div>';
+			$onclick = 'MostrarEncuesta(this);';
 			break;
 	}
 ?>
@@ -62,9 +70,10 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+										<?php if(!isset($onclick)) $onclick='';
+										if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
 											<div class="flip-card-inner">
-												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
+												<button type="button" class="btn btn-outline-light mt-2" onclick="'.$onclick.'" id="1"><i class="icon icon-search"></i></button>
 											</div>
 										</div>'; ?>
 									</div>
@@ -83,7 +92,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -103,7 +112,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -123,7 +132,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -143,7 +152,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -163,7 +172,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -185,7 +194,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -207,7 +216,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -235,7 +244,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -256,7 +265,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -276,7 +285,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -296,7 +305,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -316,7 +325,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -336,7 +345,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -356,7 +365,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -385,7 +394,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -406,7 +415,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -426,7 +435,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -446,7 +455,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -467,7 +476,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -487,7 +496,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -517,7 +526,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -538,7 +547,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -558,7 +567,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto2.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -578,7 +587,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -598,7 +607,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -618,7 +627,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -638,7 +647,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -658,7 +667,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -678,7 +687,7 @@
 												</div>
 											</div>
 										</div>
-										<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+										<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -718,7 +727,7 @@
 									</div>
 								</div>
 							</div>
-							<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+							<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -738,7 +747,7 @@
 									</div>
 								</div>
 							</div>
-							<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+							<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -758,7 +767,7 @@
 									</div>
 								</div>
 							</div>
-							<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+							<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -778,7 +787,7 @@
 									</div>
 								</div>
 							</div>
-							<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+							<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>
@@ -798,7 +807,7 @@
 									</div>
 								</div>
 							</div>
-							<?php if($active==6) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
+							<?php if($active==6 || $active==8) echo '<div class="flip-card-back bg-info no-after" data-height-xl="'.$alto.'">
 											<div class="flip-card-inner">
 												<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
 											</div>

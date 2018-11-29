@@ -23,7 +23,7 @@ class C_encuestas extends CI_Controller {
 		{
 			
 			$datos['iIdEncuesta'] = $qencuesta->iIdEncuesta;
-			$encuesta = $qencuesta->vTitulo;
+			$datos['nombre_encuesta'] = $qencuesta->vTitulo;
 
 			$qpreg = $this->me->trae_preguntas($datos['iIdEncuesta']);
 			if($qpreg)

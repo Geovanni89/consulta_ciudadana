@@ -66,86 +66,9 @@
 			<div class="content-wrap">
 
 				
-				<div class="container clearfix">					
-					<div class="heading-block center">						
-						<h2>Selecciona el tema para participar en la encuesta.</h2>
-					</div>
-
-					<!--<div class="">
-						<div class="feature-box fbox-center fbox-light fbox-plain">
-							<h3 style="font-size: 24px;color: #1a4a60; font-weight: 1200;"><strong>MATRIZ DE EJES<br>PED 2018-2024</strong></h3>
-						</div>
-					</div>-->					
-
-					<div class="fancy-title title-center title-dotted-border topmargin-sm">
-					<h3 style="color: #4d4d4d;"><b>EJE TRANSVERSAL</b></h3>
+				<div class="container clearfix" onmouseover="carga_imagenes();">					
+					<?php include('plantilla_matriz.php'); ?>
 				</div>
-
-				<div class="row grid-container" data-layout="masonry" style="overflow: visible">
-					<div class="col-lg-4 mb-4">
-						<div class="flip-card text-center top-to-bottom">
-							<div class="flip-card-front dark" style="background-image: url('<?=base_url();?>img/ejes/igualdad.jpg')" data-height-xl="<?=$alto;?>">
-								<div class="flip-card-inner">
-									<div class="card nobg noborder text-center">
-										<div class="card-body nopadding">
-											<!--<i class="icon-line2-camera h1"></i>-->
-											<img src="<?=base_url();?>img/matriz/i_Igualdad-de-género.png">
-											<p class="card-text t400">Equidad de género</p>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto;?>">
-								<div class="flip-card-inner">
-									<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarEncuesta(1);"><i class="icon icon-search"></i></button>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-4 mb-4">
-						<div class="flip-card text-center top-to-bottom">
-							<div class="flip-card-front dark" data-height-xl="<?=$alto;?>" style="background-image: url('<?=$rutaimagen?>/gobiernoaustero.jpg');" data-height-xl="<?=$alto;?>">
-								<div class="flip-card-inner">
-									<div class="card nobg noborder text-center">
-										<div class="card-body nopadding">
-											<img src="<?=base_url();?>img/matriz/i_gobierno.png">
-											<p class="card-text t400">Gobierno austero, abierto, innovador y eficiente</p>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto;?>">
-								<div class="flip-card-inner">									
-									<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-4 mb-4">
-						<div class="flip-card text-center top-to-bottom">
-							<div class="flip-card-front dark" data-height-xl="<?=$alto;?>" style="background-image: url('<?=$rutaimagen?>/infraestructura.jpg');">
-								<div class="flip-card-inner">
-									<div class="card nobg noborder text-center">
-										<div class="card-body nopadding">
-											<img src="<?=base_url();?>img/matriz/i_infraestructura.png">
-											<p class="card-text t400">Infraestructura y proyectos estratégicos</p>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="flip-card-back bg-danger no-after" data-height-xl="<?=$alto;?>">
-								<div class="flip-card-inner">
-									<button type="button" class="btn btn-outline-light mt-2" onclick="MostrarInfografía(0);"><i class="icon icon-search"></i></button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-					
-				</div>				
-
 			</div>
 
 			<div class="row">
@@ -223,9 +146,17 @@
 				============================================= -->
 				
 	<script >
-		function MostrarEncuesta(id)
-		{
-			var id = id || 0;
+		function carga_imagenes() {			
+
+			for (var i = 0; i < imagenes.length; i++) {
+				$("#tema_"+(i+1)).css("background-image", "url('../img/ejes/"+imagenes[i]+"')");
+			}
+			$('#content').removeAttr("onmouseover")	;
+		}
+
+		function MostrarEncuesta(element)
+		{		
+			var id = element.id;//id || 0;
 
 			$( "#encuesta" ).load( "<?=base_url();?>C_encuestas/mostrar_encuesta?tema="+id);
 			$('html, body').animate({

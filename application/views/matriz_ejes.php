@@ -154,9 +154,9 @@
 			}		
 		}
 
-		function MostrarInfografía(id)
+		function MostrarInfografía(elemento)
 		{
-			var id = id || 0;
+			var id = elemento.id;//id || 0;
 
 			$( "#contenidotema" ).load( "<?=base_url();?>Sitio/infografia" );
 			$('html, body').animate({

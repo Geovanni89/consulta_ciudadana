@@ -16,6 +16,9 @@
 			<div class="col_full nobottommargin">
 				<div class="card">
 				<div class="card-body">
+					<div class="fancy-title title-bottom-border">
+						<h3><?php echo $nombre_encuesta; ?></h3>
+					</div>
 					<form id="formencuesta" method="POST" action="<?=base_url();?>C_encuestas/guardar_respuestas">
 						<input type="hidden" name="iIdUsuario" id="iIdUsuario" value="1">
 						<input type="hidden" name="iIdEncuesta" id="iIdEncuesta" value="<?=$iIdEncuesta;?>">

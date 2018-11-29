@@ -82,7 +82,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
-                                <i class="flag-icon flag-icon-us font-18"></i>Jorge Estrella
+                                <i class="flag-icon flag-icon-us font-18"></i><?php echo  $_SESSION[PREFIJO.'_usuario']; ?>
                             </a>
                         </li>
                         <!-- ============================================================== -->
