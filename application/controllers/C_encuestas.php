@@ -18,6 +18,7 @@ class C_encuestas extends CI_Controller {
 		$qencuesta = $this->me->trae_encuesta('Tema',$iIdTema);
 		$iIdUsuario = (isset($_SESSION[PREFIJO.'_idusuario'])) ? $_SESSION[PREFIJO.'_idusuario']:0;
 		$str = '';
+		$datos['contestado'] = 0;
 
 		if($qencuesta)
 		{
@@ -39,6 +40,7 @@ class C_encuestas extends CI_Controller {
 							$resp = $resp->result();
 							foreach ($resp as $r)
 							{
+								if(trim($r->resp_us) != '') $datos['contestado'] = 1;
 								$str .= $this->elemento_form($p->iIdPregunta,$r->iIdRespuesta,$r->iTipoElemento,$r->vRespuesta,$r->resp_us);
 							}
 						}
@@ -147,7 +149,8 @@ class C_encuestas extends CI_Controller {
 				var_dump($value);*/
 			}
 
-			if($this->ms->terminar_transaccion($con));
+			if($this->ms->terminar_transaccion($con)) echo '0';
+			else echo 'Error!!!';
 
 		}else echo 'Error!!';
 	}

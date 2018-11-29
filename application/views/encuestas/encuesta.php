@@ -25,6 +25,7 @@
 				        <?php echo $encuesta; ?>				          
 				        <div class="clear"></div>
 				        <br>
+				        <?php if($contestado == 0) { ?>
 			            <div class="row">
 			                <div class="col-md-12">
 			                	<input type="submit" class="btn btn-success" id="guarda_propuesta" value="Guardar"/>
@@ -32,6 +33,7 @@
 			                	<input type="button" class="btn btn-success" id="guarda_propuesta" value="Quitar" onclick="Quitar();" />-->
 			                </div>
 			            </div>
+			        <?php } ?>
 
 				        
 				    </form>
@@ -43,6 +45,12 @@
 </body>
 <script type="text/javascript">
 	$(document).ready(function(){
+		<?php if($contestado == 1)
+		{
+			echo "$('#formencuesta input').attr('readonly', 'readonly');";
+			echo "$('#formencuesta :input').attr('disabled', true);";
+		}
+		?>
 		$('#formencuesta').validate({
 			/*rules: {
 				iIdSector:{
@@ -106,16 +114,39 @@
 	           
 	        },
 			success: function(data) {
-				
+				switch(data)
+	            {
+	                case "0":
+	                    Notificacion('Gracias por sus respuestas','success');
+	                    MostrarE(1);
+	                    break;		                
+	                default:
+	                    Notificacion('Ha ocurrido un error al guardar las respuestas','error');
+	                    break;
+	            }
 				
 			},
 			fail: function() {
 				
-			    console.log("error");
-			 }
+				Notificacion('Ha ocurrido un error al guardar las respuestas','error');
+			}
 
 		});	
 		
+	}
+
+	function MostrarE(id)
+	{		
+		var id = id || 0;
+
+		$( "#encuesta" ).load( "<?=base_url();?>C_encuestas/mostrar_encuesta?tema="+id);
+		$('html, body').animate({
+	        scrollTop: $("#encuesta").offset().top
+	    }, 1000);
+
+		/*$.post("<?=base_url();?>Sitio/listado_dependiente",{nombrelst:nombrelst,valor:valor},function(resultado,status){
+			
+		});*/
 	}
 
 	
