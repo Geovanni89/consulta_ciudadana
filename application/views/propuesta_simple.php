@@ -374,7 +374,7 @@
 					</div><!-- .postcontent end -->
 
 					<!-- Sidebar
-					============================================= -->
+					============================================= 
 					<div class="sidebar nobottommargin col_last clearfix">						
 						<div class="sidebar-widgets-wrap">							
 
@@ -385,13 +385,13 @@
 									<label for="exampleFormControlSelect1">Sector</label>
 									<select class="form-control" id="busqueda_sector">
 										<option value="">Sector</option>
-										<?php 
+										<?php /*
 											if($sectores!=false) 
 											{
 												foreach ($sectores as $vsec) {
 													echo '<option value="'.$vsec->iIdSector.'">'.$vsec->vSector.'</option>';
 												}
-											}
+											}*/
 										?>
 									</select>
 								</div>
@@ -433,7 +433,7 @@
 						</div>
 
 					</div>
-					<!-- .sidebar end -->
+					.sidebar end -->
 
 				</div>
 

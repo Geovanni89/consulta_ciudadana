@@ -133,15 +133,17 @@ class M_propuestas extends CI_Model {
 		else return false;
 	}
 
-	public function carga_comentarios($iIdPropuesta,$iIdComentario=0)
+	public function carga_comentarios($iIdPropuesta,$iIdComentario=0,$iIdUsuario=0)
 	{
 		$this->db->select('(select count(c2."iIdComentario") from "Comentario" c2 where c2."iIdReplicaDe" = c."iIdComentario" and c2."iEstatus" > 1) as respuestas, cl.iLike,c.iIdComentario,c.vComentario,c.iIdPropuesta,c.iIdReplicaDe,c.dFecha,u.iIdUsuario,u.vNombre,u.vApellidoPaterno,u.vApellidoMaterno');
 		$this->db->from('Comentario c');
 		$this->db->join('Usuario u','c.iIdUsuario = u.iIdUsuario','INNER');
-		$this->db->join('ComentarioLike cl','c.iIdComentario = cl.iIdCometario','LEFT');
+		$this->db->join('ComentarioLike cl','c.iIdComentario = cl.iIdCometario and cl."iIdUsuario" = '.$iIdUsuario,'LEFT');
 		$this->db->where('c.iIdPropuesta',$iIdPropuesta);
-		$this->db->where('c.iEstatus >',1);
+		$this->db->where('c.iEstatus',2);
 		$this->db->where('c.iIdReplicaDe',0);
+
+		//--------------------------------------------------------		
 
 		$query = $this->db->get();
 		if($query!=false) return $query->result();
@@ -308,13 +310,13 @@ class M_propuestas extends CI_Model {
 		}
 	}
 
-	public function carga_respuestas($iIdComentario)
+	public function carga_respuestas($iIdComentario,$iIdUsuario=0)
 	{
-		$this->db->select('(select count(c2."iIdComentario") from "Comentario" c2 where c2."iIdReplicaDe" = c."iIdComentario") as respuestas, cl.iLike,c.iIdComentario,c.vComentario,c.iIdPropuesta,c.iIdReplicaDe,c.dFecha,u.iIdUsuario,u.vNombre,u.vApellidoPaterno,u.vApellidoMaterno');
+		$this->db->select('(select count(c2."iIdComentario") from "Comentario" c2 where c2."iIdReplicaDe" = c."iIdComentario" and c2."iEstatus" > 1) as respuestas, cl.iLike,c.iIdComentario,c.vComentario,c.iIdPropuesta,c.iIdReplicaDe,c.dFecha,u.iIdUsuario,u.vNombre,u.vApellidoPaterno,u.vApellidoMaterno');
 		$this->db->from('Comentario c');
 		$this->db->join('Usuario u','c.iIdUsuario = u.iIdUsuario','INNER');
-		$this->db->join('ComentarioLike cl','c.iIdComentario = cl.iIdCometario','LEFT');
-		$this->db->where('c.iEstatus >',1);
+		$this->db->join('ComentarioLike cl','c.iIdComentario = cl.iIdCometario and cl."iIdUsuario" = '.$iIdUsuario,'LEFT');
+		$this->db->where('c.iEstatus',2);
 		$this->db->where('c.iIdReplicaDe',$iIdComentario);
 
 		$query = $this->db->get();

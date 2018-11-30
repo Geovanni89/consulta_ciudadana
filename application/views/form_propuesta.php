@@ -88,16 +88,16 @@
 							</div>
 							<div class="form-group">
 								<label for="vTitulo">Titulo propuesta <i class="icon icon-asterisk text-danger"></i></label>
+								<small id="vTituloHelp" class="form-text text-muted">(Máximo 200 caracteres)</small>
 								<input type="text" class="form-control" id="vTitulo" name="vTitulo" required>
 							</div>
 							<div class="form-group">
 								<label for="vDescripcion">Resumen de la propuesta <i class="icon icon-asterisk text-danger"></i></label>
-								<small id="descnHelp" class="form-text text-muted">(Máximo 200 caracteres)</small>
 								<textarea class="form-control" id="vDescripcion" name="vDescripcion" rows="5"></textarea>
 							</div>
 							<div class="form-group">
 								<label for="vUrlVideoExterno">Enlace video externo</label>
-								<input type="url" class="form-control" id="vUrlVideoExterno" name="vUrlVideoExterno" placeholder="http://example.com">
+								<input type="url" class="form-control" id="vUrlVideoExterno" name="vUrlVideoExterno" placeholder="https://www.youtube.com/watch?v=2NrJczORV6k">
 							</div>
 							<div class="row">
 								<div class="col-lg-12 bottommargin">

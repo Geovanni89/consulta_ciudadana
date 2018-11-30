@@ -27,7 +27,7 @@ class C_propuestas extends CI_Controller {
 		}
 		else $query_existe = 0;
 		$query_prop = $model->carga_propuestas($iIdPropuesta,0,0,$ad);
-		$query_coment = $model->carga_comentarios($iIdPropuesta);
+		$query_coment = $model->carga_comentarios($iIdPropuesta,0,$iIdUsuario);		
 		$total_coment = $model->total_comentarios($iIdPropuesta);
 		$datos['sectores'] = $model->datos_sectores();
 
@@ -386,9 +386,12 @@ class C_propuestas extends CI_Controller {
 
 	public function respuestas()
 	{
+		if(isset($_SESSION[PREFIJO.'_idusuario'])) $iIdUsuario = $_SESSION[PREFIJO.'_idusuario'];
+		else $iIdUsuario = 0;
+
 		$iIdComentario = $this->input->post('iIdComentario', TRUE);
 		$model = new M_propuestas();
-		$resp = $model->carga_respuestas($iIdComentario);
+		$resp = $model->carga_respuestas($iIdComentario,$iIdUsuario);
 		if($resp!=false) 
 		{
 			foreach ($resp as $vresp) {

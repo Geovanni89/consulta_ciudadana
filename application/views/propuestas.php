@@ -113,8 +113,15 @@
 							<div class="widget clearfix">
 
 								<h4>Palabras clave</h4>
+								<div class="input-group">									
+								  	<input class="form-control" id="input_palabras" name="input_palabras" onchange="busqueda_selector(this.value,4);" type="text" placeholder="Buscar...">
+								  	<div class="input-group-prepend">
+								    	<span class="input-group-text" id="basic-addon1"><i class="icon-search"></i></span>
+								  	</div>
+								</div>
+
 								<div class="tagcloud">
-									<input class="form-control mb-2" id="input_palabras" name="input_palabras" onchange="busqueda_selector(this.value,4);" type="text" placeholder="Presupuesto">
+									
 								</div>
 
 							</div>
