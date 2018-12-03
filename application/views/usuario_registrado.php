@@ -62,7 +62,7 @@
 				
 				<div class="heading-block center">
 					<h1>Usuario registrado</h1>
-					<span>Se le ha enviado un mensaje de conformación al correo proporcionado. Por favor revise su bandeja de correo.</span>
+					<span>Se le ha enviado un mensaje de confirmación al correo proporcionado. Por favor revise su bandeja de correo.</span>
 				</div>		
 
 			</div>			

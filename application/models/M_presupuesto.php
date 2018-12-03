@@ -38,6 +38,26 @@ class M_presupuesto extends CI_Model {
 		else return false;
 	}
 
+	public function propuestas_tema()
+	{
+		/*
+		select t."iIdTema", t."vTema", t."iIdSector", (select count(p."iIdPropuesta")
+		from "Propuesta" p
+		where p."iEstatus" = 3
+		and p."iIdTema" = t."iIdTema") as total_propuestas
+		from "Tema" t;
+		*/
+
+		$this->db->select('t.iIdTema, t.vTema, t.iIdSector, (select count(p."iIdPropuesta") from "Propuesta" p where p."iEstatus" = 3 and p."iIdTema" = t."iIdTema") as total_propuestas');
+		$this->db->from('Tema t');
+		$this->db->where('t.iActivo',1);
+		$this->db->order_by('t.iIdTema','ASC');
+
+		$query = $this->db->get();
+		if($query!=false) return $query->result();
+		else return false;
+	}
+
 
 }
 

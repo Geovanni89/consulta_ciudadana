@@ -10811,7 +10811,7 @@ blockquote.float-right {
 .flip-card-front.no-after:after,
 .flip-card-back.no-after:after { content: none }
 
-.flip-card-front:after,
+/*.flip-card-front:after,
 .flip-card-back:after {
 	position: absolute;
 	top: 0;
@@ -10821,12 +10821,95 @@ blockquote.float-right {
 	height: 100%;
 	content: "";
 	display: block;
-	opacity: 0.6;
-	background-color: #000;
+	opacity: attr(data-content);
+	background-color: #08225d;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	border-radius: 6px;
+}*/
+
+/*prueba de opacidad*/
+.after_1:after{
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+	content: "";
+	display: block;
+	opacity: .6;
+	background-color: #0d60f7;
 	-webkit-backface-visibility: hidden;
 	backface-visibility: hidden;
 	border-radius: 6px;
 }
+
+.after_2:after{
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+	content: "";
+	display: block;
+	opacity: .7;
+	background-color: #0d60f7;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	border-radius: 6px;
+}
+
+.after_3:after{
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+	content: "";
+	display: block;
+	opacity: .8;
+	background-color: #0d60f7;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	border-radius: 6px;
+}
+
+.after_4:after{
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+	content: "";
+	display: block;
+	opacity: .9;
+	background-color: #0d60f7;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	border-radius: 6px;
+}
+
+.after_5:after{
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+	content: "";
+	display: block;
+	opacity: 1;
+	background-color: #0d60f7;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	border-radius: 6px;
+}
+
+/*prueba de opacidad*/
 
 .flip-card:hover .flip-card-front,
 .flip-card:hover .flip-card-back {

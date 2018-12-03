@@ -136,7 +136,7 @@
 									<label for="terminos" class="checkbox-style-3-label checkbox-small">Acepto la Política de privacidad y las condiciones de uso</label>
 								</div>
 								<!--<input type="submit" class="btn btn-success" id="guarda_propuesta" onclick="actualizaText();" value="Crear propuesta" disabled/>-->
-								<input type="submit" class="btn btn-success" id="guarda_propuesta" value="Crear propuesta" disabled/>
+								<input type="submit" class="btn btn-success" id="guarda_propuesta" value="Enviar propuesta" disabled/>
 							</div>
 						</form>
 
