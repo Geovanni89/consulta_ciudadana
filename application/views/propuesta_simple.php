@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
 <head>
@@ -75,6 +76,7 @@
 									============================================= -->
 									<div class="entry-title">
 										<h2><?php echo $vTitulo;?></h2>
+										<h3><?php echo $iIdPropuesta; ?></h3>
 									</div><!-- .entry-title end -->
 
 									<!-- Entry Meta

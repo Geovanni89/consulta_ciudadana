@@ -406,6 +406,8 @@ class Sitio extends CI_Controller {
 
 	public function encuestas()
 	{
+		$model = new M_presupuesto();
+		$datos['prop_temas'] = $model->propuestas_tema();
 		$datos['active'] = 8;
 		$this->load->view('encuestas',$datos);
 	}

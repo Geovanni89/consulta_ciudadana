@@ -48,7 +48,7 @@ class M_presupuesto extends CI_Model {
 		from "Tema" t;
 		*/
 
-		$this->db->select('t.iIdTema, t.vTema, t.iIdSector, (select count(p."iIdPropuesta") from "Propuesta" p where p."iEstatus" = 3 and p."iIdTema" = t."iIdTema") as total_propuestas');
+		$this->db->select('t.iIdTema, t.vTema, t.iIdSector, (select count(p."iIdPropuesta") from "Propuesta" p where p."iEstatus" = 1 and p."iIdTema" = t."iIdTema") as total_propuestas');
 		$this->db->from('Tema t');
 		$this->db->where('t.iActivo',1);
 		$this->db->order_by('t.iIdTema','ASC');

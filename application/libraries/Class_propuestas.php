@@ -195,7 +195,7 @@ class Class_propuestas {
                                     <h3><span>'.$vprop->vTitulo.'</span></h3>
                                     <ul class="entry-meta clearfix"><li><i class="icon-calendar3"></i> Desde el '.$vprop->dFecha.'</li></ul>
                                     <p>'.substr(strip_tags($vprop->tDescripcion,'<p>'),0,200).'</p>
-                                    <br><a target="_blank" href="'.base_url().'/C_propuestas/propuesta_sim?id='.$vprop->iIdPropuesta.'" class="btn btn-success">Consultar</a>
+                                    <br><a target="_blank" href="'.base_url().'C_propuestas/propuesta_sim?id='.$vprop->iIdPropuesta.'" class="btn btn-success">Consultar</a>
                                 </div>
                             </div>
                         </div>';

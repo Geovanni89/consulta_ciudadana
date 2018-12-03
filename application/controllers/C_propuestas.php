@@ -25,7 +25,12 @@ class C_propuestas extends CI_Controller {
 			$iIdUsuario = $_SESSION[PREFIJO.'_idusuario'];
 			$query_existe = $model->ver_apoyo($iIdPropuesta,$iIdUsuario);
 		}
-		else $query_existe = 0;
+		else 
+		{
+			$query_existe = 0;
+			$iIdUsuario = 0;
+			
+		} 
 		$query_prop = $model->carga_propuestas($iIdPropuesta,0,0,$ad);
 		$query_coment = $model->carga_comentarios($iIdPropuesta,0,$iIdUsuario);		
 		$total_coment = $model->total_comentarios($iIdPropuesta);
