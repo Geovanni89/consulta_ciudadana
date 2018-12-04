@@ -138,16 +138,7 @@
 		var total_temas = 0;
 		var id_temas = {};
 
-		setInterval(function(){ console.log("Hello"); }, 3000);
-
-		function carga_imagenes() {			
-
-			for (var i = 0; i < imagenes.length; i++) {
-				$("#tema_"+(i+1)).css("background-image", "url('../img/ejes/"+imagenes[i]+"')");
-			}
-			$('#content').removeAttr("onmouseover")	;
-		}
-
+		//setInterval(function(){ console.log("Hello"); }, 3000);		
 
 		function selecciona_temas(idtema) {
 			if($('#tema_'+idtema).hasClass('bg-primary')!==true) {

@@ -226,14 +226,7 @@
 	<script src="<?=base_url();?>public/js/functions.js"></script>
 
 
-	<script>
-				
-		function carga_imagenes() {			
-
-			for (var i = 0; i < imagenes.length; i++) {
-				$("#tema_"+(i+1)).css("background-image", "url('img/ejes/"+imagenes[i]+"')");
-			}		
-		}
+	<script>		
 		
 	</script>
 
