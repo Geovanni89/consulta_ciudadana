@@ -62,11 +62,13 @@ class Sitio extends CI_Controller {
 	public function index()
 	{
 		$prop = new Class_propuestas();
+		$model = new M_presupuesto();
 
 		$datos['active'] = 1;
 		$datos['prop_index'] = $prop->prop_index();
 		$datos['numeralia'] = $prop->num_index();
 		$datos['votos'] = $prop->prop_votos();
+		$datos['prop_temas'] = $model->propuestas_tema();
 		/*if(isset($_SESSION[PREFIJO.'_idrol']) && !empty($_SESSION[PREFIJO.'_idrol']))
 		{
 			$idrol = (int)$_SESSION[PREFIJO.'_idrol'];
@@ -366,6 +368,8 @@ class Sitio extends CI_Controller {
 
 	function matriz_ejes()
 	{
+		$model = new M_presupuesto();
+		$datos['prop_temas'] = $model->propuestas_tema();
 		$datos['active'] = 6;
 		$this->load->view('matriz_ejes',$datos);
 	}
@@ -387,19 +391,23 @@ class Sitio extends CI_Controller {
 
 	public function presupuesto()
 	{
+		$model = new M_presupuesto();
 		if(isset($_SESSION[PREFIJO.'_idusuario']))
 		{
 			$iIdUsuario = $_SESSION[PREFIJO.'_idusuario'];
-			$model = new M_presupuesto();
 			$datos['existe'] = $model->pres_ususario($iIdUsuario);
 		}
 		else $datos['existe'] = -1;
-			$datos['active'] = 7;
-			$this->load->view('presupuesto',$datos);
+
+		$datos['active'] = 7;
+		$datos['prop_temas'] = $model->propuestas_tema();
+		$this->load->view('presupuesto',$datos);
 	}
 
 	public function encuestas()
 	{
+		$model = new M_presupuesto();
+		$datos['prop_temas'] = $model->propuestas_tema();
 		$datos['active'] = 8;
 		$this->load->view('encuestas',$datos);
 	}

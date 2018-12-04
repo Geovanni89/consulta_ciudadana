@@ -52,3 +52,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'sitio/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+
+// enrutamiento personalizado
+
+$route['propuestas/ind'] = 'C_propuestas/propuesta_sim/';
+$route['vota'] = 'Sitio/propuestas';
+$route['presupuesto'] = 'Sitio/presupuesto';
+$route['participa'] = 'Sitio/matriz_ejes';
+$route['encuestas'] = 'Sitio/encuestas';
+$route['login'] = 'Sitio/login';
+$route['registro'] = 'Sitio/registrarse';
