@@ -75,8 +75,7 @@
 									<!-- Entry Title
 									============================================= -->
 									<div class="entry-title">
-										<h2><?php echo $vTitulo;?></h2>
-										<h3><?php echo $iIdPropuesta; ?></h3>
+										<h2><?php echo $vTitulo;?></h2>		
 									</div><!-- .entry-title end -->
 
 									<!-- Entry Meta

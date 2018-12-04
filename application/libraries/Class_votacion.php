@@ -48,7 +48,7 @@ class Class_votacion {
                         <a href="'.base_url().$urlImg.'" data-lightbox="image"><img class="image_fade" src="'.base_url().$urlImg.'" alt="Standard Post with Image"></a>
                     </div>
                     <div class="entry-title">
-                        <h2><a target="_blank" href="'.base_url().'C_propuestas/propuesta_sim?id='.$vres->iIdPropuesta.'">'.$vres->vTitulo.'</a></h2>
+                        <h2><a target="_blank" href="'.base_url().'propuestas/ind?id='.$vres->iIdPropuesta.'">'.$vres->vTitulo.'</a></h2>
                     </div>
                     <ul class="entry-meta clearfix">
                         <li><i class="icon-calendar3"></i>'.date_format($fecha,'d/m/Y').'</li>

@@ -56,7 +56,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 // enrutamiento personalizado
 
-//$route['propuesta/individual'] = 'C_propuestas/propuesta_sim/id/92';
+$route['propuestas/ind'] = 'C_propuestas/propuesta_sim/';
 $route['vota'] = 'Sitio/propuestas';
 $route['presupuesto'] = 'Sitio/presupuesto';
 $route['participa'] = 'Sitio/matriz_ejes';
