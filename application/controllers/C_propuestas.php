@@ -25,7 +25,12 @@ class C_propuestas extends CI_Controller {
 			$iIdUsuario = $_SESSION[PREFIJO.'_idusuario'];
 			$query_existe = $model->ver_apoyo($iIdPropuesta,$iIdUsuario);
 		}
-		else $query_existe = 0;
+		else 
+		{
+			$query_existe = 0;
+			$iIdUsuario = 0;
+			
+		} 
 		$query_prop = $model->carga_propuestas($iIdPropuesta,0,0,$ad);
 		$query_coment = $model->carga_comentarios($iIdPropuesta,0,$iIdUsuario);		
 		$total_coment = $model->total_comentarios($iIdPropuesta);
@@ -50,7 +55,7 @@ class C_propuestas extends CI_Controller {
 			$datos['apoyo'] = $query_existe;
 			$datos['comentarios'] = $query_coment;
 			$datos['total_coment'] = $total_coment;
-			$datos['url_actual'] = base_url().'C_propuestas/propuesta_sim?id='.$iIdPropuesta;
+			$datos['url_actual'] = base_url().'propuestas/ind?id='.$iIdPropuesta;
 			//$datos['url_actual'] = 'http://siegy.yucatan.gob.mx/';
 			$this->load->view('propuesta_simple',$datos);
 		} 
@@ -621,7 +626,7 @@ class C_propuestas extends CI_Controller {
                                     <a href="'.base_url().$urlImg.'" data-lightbox="image"><img class="image_fade" src="'.base_url().$urlImg.'" alt="Standard Post with Image"></a>
                                 </div>
                                 <div class="entry-title">
-                                    <h2><a target="_blank" href="'.base_url().'C_propuestas/propuesta_sim?id='.$vprop->iIdPropuesta.'">'.$vprop->vTitulo.'</a> <span>Clave: '.$vprop->vCodigo.'</span></h2>
+                                    <h2><a target="_blank" href="'.base_url().'propuestas/ind?id='.$vprop->iIdPropuesta.'">'.$vprop->vTitulo.'</a> <span>Clave: '.$vprop->vCodigo.'</span></h2>
                                 </div>
                                 <div class="tagcloud">
 									<a href="javascript:">'.$vprop->vTema.'</a>									
@@ -680,7 +685,7 @@ class C_propuestas extends CI_Controller {
                                 }                                    
                                 $propuestas.='</div>
                                 <div class="col-md-3">
-                                    <a target="_blank" href="'.base_url().'C_propuestas/propuesta_sim?id='.$vprop->iIdPropuesta.'" class="btn btn-outline-secondary btn-lg btn-block">Consultar <i class="icon-search"></i></a>
+                                    <a target="_blank" href="'.base_url().'propuestas/ind?id='.$vprop->iIdPropuesta.'" class="btn btn-outline-secondary btn-lg btn-block">Consultar <i class="icon-search"></i></a>
                                 </div>
                             </div>';
                         $propuestas.='</div>';

@@ -39,7 +39,7 @@ class Class_propuestas {
                                     <a href="'.base_url().$urlImg.'" data-lightbox="image"><img class="image_fade" src="'.base_url().$urlImg.'" alt="Standard Post with Image"></a>
                                 </div>
                                 <div class="entry-title">
-                                    <h2><a target="_blank" href="'.base_url().'C_propuestas/propuesta_sim?id='.$vprop->iIdPropuesta.'">'.$vprop->vTitulo.'</a> <span>Clave: '.$vprop->vCodigo.'</span></h2>
+                                    <h2><a target="_blank" href="'.base_url().'propuestas/ind?id='.$vprop->iIdPropuesta.'">'.$vprop->vTitulo.'</a> <span>Clave: '.$vprop->vCodigo.'</span></h2>
                                 </div>
                                 <div class="tagcloud">
                                     <a href="javascript:">'.$vprop->vTema.'</a>                                 
@@ -98,7 +98,7 @@ class Class_propuestas {
                                 }                                    
                                 $propuestas.='</div>
                                 <div class="col-md-3">
-                                    <a target="_blank" href="'.base_url().'C_propuestas/propuesta_sim?id='.$vprop->iIdPropuesta.'" class="btn btn-outline-secondary btn-lg btn-block">Consultar <i class="icon-search"></i></a>
+                                    <a target="_blank" href="'.base_url().'propuestas/ind?id='.$vprop->iIdPropuesta.'" class="btn btn-outline-secondary btn-lg btn-block">Consultar <i class="icon-search"></i></a>
                                 </div>
                             </div>';
                         $propuestas.='</div>';
@@ -148,7 +148,7 @@ class Class_propuestas {
                                 $propuestas.='<li><a href="javascript:"><i class="icon-user"></i> '.$vprop->vNombre.' '.$vprop->vApellidoPaterno.' '.$vprop->vApellidoMaterno.'</a></li>
                             </ul>
                             <div class="team-content">'.substr(strip_tags($vprop->tDescripcion,'<p>'),0,200).'</div>
-                            <br><a target="_blank" href="'.base_url().'C_propuestas/propuesta_sim?id='.$vprop->iIdPropuesta.'" class="btn btn-success">Consultar</a>                                      
+                            <br><a target="_blank" href="'.base_url().'propuestas/ind?id='.$vprop->iIdPropuesta.'" class="btn btn-success">Consultar</a>                                      
                         </div>
                     </div>
                 </div>';
@@ -195,7 +195,7 @@ class Class_propuestas {
                                     <h3><span>'.$vprop->vTitulo.'</span></h3>
                                     <ul class="entry-meta clearfix"><li><i class="icon-calendar3"></i> Desde el '.$vprop->dFecha.'</li></ul>
                                     <p>'.substr(strip_tags($vprop->tDescripcion,'<p>'),0,200).'</p>
-                                    <br><a target="_blank" href="'.base_url().'/C_propuestas/propuesta_sim?id='.$vprop->iIdPropuesta.'" class="btn btn-success">Consultar</a>
+                                    <br><a target="_blank" href="'.base_url().'propuestas/ind?id='.$vprop->iIdPropuesta.'" class="btn btn-success">Consultar</a>
                                 </div>
                             </div>
                         </div>';

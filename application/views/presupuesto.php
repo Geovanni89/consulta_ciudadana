@@ -138,6 +138,8 @@
 		var total_temas = 0;
 		var id_temas = {};
 
+		setInterval(function(){ console.log("Hello"); }, 3000);
+
 		function carga_imagenes() {			
 
 			for (var i = 0; i < imagenes.length; i++) {

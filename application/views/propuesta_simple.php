@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
 <head>
@@ -74,7 +75,7 @@
 									<!-- Entry Title
 									============================================= -->
 									<div class="entry-title">
-										<h2><?php echo $vTitulo;?></h2>
+										<h2><?php echo $vTitulo;?></h2>		
 									</div><!-- .entry-title end -->
 
 									<!-- Entry Meta
