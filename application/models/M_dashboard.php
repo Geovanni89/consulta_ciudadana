@@ -22,5 +22,23 @@ class M_dashboard extends CI_Model {
 		return $this->db->query($sql);
 	}
 
+	function propuestas_puntos()
+	{
+		$sql = 'SELECT p."iIdPropuesta",p."vTitulo", p."tDescripcion", p."nLatDec", p."nLongDec", p."iEstatus", 
+				COALESCE((SELECT pa."vRutaAdjunto" FROM "PropuestaAdjunto" pa WHERE pa."iIdPropuesta" = p."iIdPropuesta" AND pa."iTipo" = 1 LIMIT 1),\' \') as ruta
+				FROM "Propuesta" p
+				WHERE "iEstatus" != 0 AND "iIdMunicipio" > 0';
+		return $this->db->query($sql);
+	}
+
+	function ConsultaAvancesPorMunicipio()
+	{
+		$sql = 'SELECT COUNT(p."iIdPropuesta") as avance, p."iIdMunicipio" as municipioid
+				FROM "Propuesta" p
+				WHERE "iEstatus" != 0 AND "iIdMunicipio" > 0
+				GROUP BY "iIdMunicipio"';
+		return $this->db->query($sql);
+	}
+
 }
 ?>

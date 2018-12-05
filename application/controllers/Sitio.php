@@ -96,7 +96,35 @@ class Sitio extends CI_Controller {
 					break;
 			}
 
-		}else*/ $this->load->view('index',$datos);
+		}else*/ 
+		//.--  Datos para los mapas
+		$this->load->model('M_dashboard','md');
+		$datos['puntos'] = array();
+		//	Datos para el mapa left
+		$puntos = $this->md->propuestas_puntos();
+		if($puntos)
+		{
+			$datos['puntos'] = $puntos->result();			
+		}
+		//	Datos para el mapa de calor
+		$dmap1 = $this->md->ConsultaAvancesPorMunicipio();
+		if($dmap1 != false)
+		{
+			if($dmap1->num_rows() > 0)
+			{
+				$dmap1 = $dmap1->result();
+				$data = '';
+				foreach ($dmap1 as $fila)
+				{
+					if($data != '') $data .= ',';
+					$data .= '{"name": "'.$fila->municipioid.'","value": '.$fila->avance.'}';
+				}
+				$datos['dm1'] = $data;
+			} 
+			else $datos['dm1'] = 0;
+		}else $datos['dm1'] = false;
+
+		$this->load->view('index',$datos);
 	}
 
 	public function propuestas()
@@ -404,12 +432,44 @@ class Sitio extends CI_Controller {
 		$this->load->view('presupuesto',$datos);
 	}
 
-	public function encuestas()
+	public function encuestas2()
 	{
 		$model = new M_presupuesto();
 		$datos['prop_temas'] = $model->propuestas_tema();
 		$datos['active'] = 8;
 		$this->load->view('encuestas',$datos);
+	}
+
+	public function encuestas()
+	{
+		$this->load->model('M_dashboard','md');
+		$datos['puntos'] = array();
+		//	Datos para el mapa left
+		$puntos = $this->md->propuestas_puntos();
+		if($puntos)
+		{
+			$datos['puntos'] = $puntos->result();			
+		}
+		//	Datos para el mapa de calor
+		$dmap1 = $this->md->ConsultaAvancesPorMunicipio();
+		if($dmap1 != false)
+		{
+			if($dmap1->num_rows() > 0)
+			{
+				$dmap1 = $dmap1->result();
+				$data = '';
+				foreach ($dmap1 as $fila)
+				{
+					if($data != '') $data .= ',';
+					$data .= '{"name": "'.$fila->municipioid.'","value": '.$fila->avance.'}';
+				}
+				$datos['dm1'] = $data;
+			} 
+			else $datos['dm1'] = 0;
+		}else $datos['dm1'] = false;
+		
+		$datos['active'] = 8;
+		$this->load->view('mapa',$datos);
 	}
 
 }
