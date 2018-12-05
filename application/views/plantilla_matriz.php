@@ -9,7 +9,7 @@
 foreach ($prop_temas as $vprop) {
 	
 	$total = $vprop->total_propuestas;
-	if($total==0) $bg_after[$vprop->iIdTema] = '';
+	if($total==0) $bg_after[$vprop->iIdTema] = 'after_0';
 	elseif($total > 0 && $total <= 5) $bg_after[$vprop->iIdTema] = 'after_1';
 	elseif($total >= 6 && $total <= 15) $bg_after[$vprop->iIdTema] = 'after_2';
 	elseif($total >= 16 && $total <= 24) $bg_after[$vprop->iIdTema] = 'after_3';

@@ -10829,6 +10829,23 @@ blockquote.float-right {
 }*/
 
 /*prueba de opacidad*/
+
+.after_0:after{
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+	content: "";
+	display: block;
+	opacity: .6;
+	background-color: #000;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	border-radius: 6px;
+}
+
 .after_1:after{
 	position: absolute;
 	top: 0;
