@@ -238,6 +238,7 @@
 	<script src="<?=base_url();?>public/highmaps/highmaps.js"></script>
 	<!-- Librerías para los mapas -->
 
+<<<<<<< HEAD
 	<script>
 				
 		function carga_imagenes() {			
@@ -743,6 +744,9 @@
 
 	});
 	
+=======
+	<script>		
+>>>>>>> 73b6f7c3380a6e08d79dfb8519719c0639102bda
 		
 	</script>
 
