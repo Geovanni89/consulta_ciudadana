@@ -432,7 +432,7 @@ class Sitio extends CI_Controller {
 		$this->load->view('presupuesto',$datos);
 	}
 
-	public function encuestas2()
+	public function encuestas()
 	{
 		$model = new M_presupuesto();
 		$datos['prop_temas'] = $model->propuestas_tema();
@@ -440,7 +440,7 @@ class Sitio extends CI_Controller {
 		$this->load->view('encuestas',$datos);
 	}
 
-	public function encuestas()
+	/*public function encuestas()
 	{
 		$this->load->model('M_dashboard','md');
 		$datos['puntos'] = array();
@@ -470,6 +470,6 @@ class Sitio extends CI_Controller {
 		
 		$datos['active'] = 8;
 		$this->load->view('mapa',$datos);
-	}
+	}*/
 
 }
