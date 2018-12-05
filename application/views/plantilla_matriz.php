@@ -829,4 +829,10 @@ foreach ($prop_temas as $vprop) {
 <script>
 	var imagenes = ['desarrollo_comercial.jpg','competividad.jpg','capital_humano.jpg','desarrrollo_agri.jpg','desarrollo_pesq.jpg','fomento_emp.jpg','impulso_turismo.jpg','industrial.jpg','educacion_integral.jpg','salud.jpg','inclusion-social.jpg','hambre_cero.jpg','seguridad_social.jpg','pueblos_indigenas.jpg','acceso_vivienda.jpg','acceso_universal.jpg','fomento_deporte.jpg','Educacion_artistica.jpg','cultura_tradicion.jpg','bellas_artes.jpg','patrimonio.jpg','agua.jpg','energia.jpg','vida_sub.jpg','accion_clima.jpg','derecho_ciu.jpg','ciudades_comu.jpg','Conservacion.jpg','movilidad_sustentable.jpg','manejo_integral.jpg','igualdad_genero.jpg','innovacion_ciencia.jpg','paz_justicia.jpg','gobierno.jpg','infraestructura.jpg'];		
 		
+	function carga_imagenes() {
+		for (var i = 0; i < imagenes.length; i++) {
+			$("#tema_"+(i+1)).css("background-image", "url('img/ejes/"+imagenes[i]+"')");
+		}
+		$('#content').removeAttr("onmouseover")	;
+	}
 </script>

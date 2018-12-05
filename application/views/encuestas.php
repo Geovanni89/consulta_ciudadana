@@ -145,15 +145,7 @@
 	<!-- External JavaScripts
 				============================================= -->
 				
-	<script >
-		function carga_imagenes() {			
-
-			for (var i = 0; i < imagenes.length; i++) {
-				$("#tema_"+(i+1)).css("background-image", "url('../img/ejes/"+imagenes[i]+"')");
-			}
-			$('#content').removeAttr("onmouseover")	;
-		}
-
+	<script>
 		function MostrarEncuesta(element)
 		{		
 			var id = element.id;//id || 0;
