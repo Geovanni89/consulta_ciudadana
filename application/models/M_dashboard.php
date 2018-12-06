@@ -33,10 +33,13 @@ class M_dashboard extends CI_Model {
 
 	function ConsultaAvancesPorMunicipio()
 	{
-		$sql = 'SELECT COUNT(p."iIdPropuesta") as avance, p."iIdMunicipio" as municipioid
-				FROM "Propuesta" p
-				WHERE "iEstatus" != 0 AND "iIdMunicipio" > 0
-				GROUP BY "iIdMunicipio"';
+		$sql = 'SELECT m."vMunicipio" municipio, t.avance, m."iIdMunicipio" municipioid, l."nLatDec" lat, l."nLongDec" lng
+				FROM "Municipio" m
+				INNER JOIN (SELECT COUNT(p."iIdPropuesta") as avance, p."iIdMunicipio"
+										FROM "Propuesta" p
+										WHERE p."iEstatus" != 0 AND p."iIdMunicipio" > 0
+										GROUP BY p."iIdMunicipio") AS t ON t."iIdMunicipio" = m."iIdMunicipio"
+				INNER JOIN "Localidad" l on l."iIdMunicipio" = m."iIdMunicipio" AND l."vClaveInegi" = \'0001\'';
 		return $this->db->query($sql);
 	}
 

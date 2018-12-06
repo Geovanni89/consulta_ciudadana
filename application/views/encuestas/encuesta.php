@@ -28,7 +28,10 @@
 				        <?php if($contestado == 0) { ?>
 			            <div class="row">
 			                <div class="col-md-12">
-			                	<input type="submit" class="btn btn-success" id="guarda_propuesta" value="Guardar"/>
+			                	<?php 
+			                	if(isset($_SESSION[PREFIJO.'_idusuario'])) echo '<input type="submit" class="btn btn-success" id="guarda_propuesta" value="Guardar"/>';
+			                	else  echo '<div class="style-msg errormsg"><div class="sb-msg"><i class="icon-remove"></i><a href="'.base_url().'Sitio/login?r=1">Inicie sesión</a> o <a href="'.base_url().'Sitio/registrarse">Regístrese</a> para crear una propuesta sobre este tema</div></div>';;
+			                	?>
 			                	<!--<input type="button" class="btn btn-success" id="guarda_propuesta" value="Agregar" onclick="Agregar();" />
 			                	<input type="button" class="btn btn-success" id="guarda_propuesta" value="Quitar" onclick="Quitar();" />-->
 			                </div>
@@ -45,7 +48,7 @@
 </body>
 <script type="text/javascript">
 	$(document).ready(function(){
-		<?php if($contestado == 1)
+		<?php if( ($contestado == 1) || !isset($_SESSION[PREFIJO.'_idusuario']))
 		{
 			echo "$('#formencuesta input').attr('readonly', 'readonly');";
 			echo "$('#formencuesta :input').attr('disabled', true);";

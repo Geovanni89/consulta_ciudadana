@@ -117,7 +117,7 @@ class Sitio extends CI_Controller {
 				foreach ($dmap1 as $fila)
 				{
 					if($data != '') $data .= ',';
-					$data .= '{"name": "'.$fila->municipioid.'","value": '.$fila->avance.'}';
+					$data .= '{"name": "'.$fila->municipio.'","id": "'.$fila->municipioid.'","value": '.$fila->avance.', "lat":'.$fila->lat.', "lng":'.$fila->lng.' }';
 				}
 				$datos['dm1'] = $data;
 			} 
